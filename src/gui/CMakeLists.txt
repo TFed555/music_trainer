@@ -9,10 +9,6 @@ add_library(gui STATIC
     ExerciseWidget.h
     intervalblockwidget.h intervalblockwidget.cpp intervalblockwidget.ui
     mainmenuwidget.h mainmenuwidget.cpp mainmenuwidget.ui
-
-
-
-
 )
 
 target_link_libraries(gui PUBLIC
