@@ -1,0 +1,42 @@
+{
+	"backtrace" : 0,
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : 
+		[
+			"src/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			}
+		]
+	},
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 0,
+			"id" : "music_module::@90cd5cccf28a4741b8b4"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "log_module::@c50f4de1a1e2d0ee20d5"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "gui::@7675e61a69a6135e3026"
+		}
+	],
+	"id" : "trainer_1_autogen_timestamp_deps::@145eef247bfb46b6828c",
+	"isGeneratorProvided" : true,
+	"name" : "trainer_1_autogen_timestamp_deps",
+	"paths" : 
+	{
+		"build" : "src",
+		"source" : "src"
+	},
+	"sources" : [],
+	"type" : "UTILITY"
+}
