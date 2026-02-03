@@ -3,8 +3,9 @@
 
 #include <QMainWindow>
 #include <QStackedWidget>
-#include "mainmenuwidget.h"
-#include "intervalblockwidget.h"
+#include "./blocks/mainmenuwidget.h"
+#include "./blocks/intervalblockwidget.h"
+#include "./exercises/intervalexercisewidget.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -19,15 +20,14 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
 private slots:
-    void showMainMenu();
-    void showIntervalBlock();
+    void openIntervalExercise(int id);
 
 private:
     Ui::MainWindow *ui;
     QStackedWidget* stack;
     MainMenuWidget* mainMenu;
     IntervalBlockWidget* intervalBlock;
+    IntervalExerciseWidget *intervalExercise;
 };
 #endif // MAINWINDOW_H

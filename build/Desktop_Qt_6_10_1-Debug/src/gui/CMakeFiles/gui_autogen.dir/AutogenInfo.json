@@ -12,21 +12,27 @@
 	"HEADERS" : 
 	[
 		[
-			"/home/tatyana/trainer_1/src/gui/ExerciseWidget.h",
+			"/home/tatyana/trainer_1/src/gui/blocks/intervalblockwidget.h",
 			"MU",
-			"EWIEGA46WW/moc_ExerciseWidget.cpp",
+			"D3G6ITIJG5/moc_intervalblockwidget.cpp",
 			null
 		],
 		[
-			"/home/tatyana/trainer_1/src/gui/intervalblockwidget.h",
+			"/home/tatyana/trainer_1/src/gui/blocks/mainmenuwidget.h",
 			"MU",
-			"EWIEGA46WW/moc_intervalblockwidget.cpp",
+			"D3G6ITIJG5/moc_mainmenuwidget.cpp",
 			null
 		],
 		[
-			"/home/tatyana/trainer_1/src/gui/mainmenuwidget.h",
+			"/home/tatyana/trainer_1/src/gui/exercises/ExerciseWidget.h",
 			"MU",
-			"EWIEGA46WW/moc_mainmenuwidget.cpp",
+			"HXCOXTH5YJ/moc_ExerciseWidget.cpp",
+			null
+		],
+		[
+			"/home/tatyana/trainer_1/src/gui/exercises/intervalexercisewidget.h",
+			"MU",
+			"HXCOXTH5YJ/moc_intervalexercisewidget.cpp",
 			null
 		],
 		[
@@ -101,8 +107,21 @@
 	"SETTINGS_FILE" : "/home/tatyana/trainer_1/build/Desktop_Qt_6_10_1-Debug/src/gui/CMakeFiles/gui_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
-		[ "/home/tatyana/trainer_1/src/gui/intervalblockwidget.cpp", "MU", null ],
-		[ "/home/tatyana/trainer_1/src/gui/mainmenuwidget.cpp", "MU", null ],
+		[
+			"/home/tatyana/trainer_1/src/gui/blocks/intervalblockwidget.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/tatyana/trainer_1/src/gui/blocks/mainmenuwidget.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/tatyana/trainer_1/src/gui/exercises/intervalexercisewidget.cpp",
+			"MU",
+			null
+		],
 		[ "/home/tatyana/trainer_1/src/gui/mainwindow.cpp", "MU", null ]
 	],
 	"UIC_OPTIONS" : [],

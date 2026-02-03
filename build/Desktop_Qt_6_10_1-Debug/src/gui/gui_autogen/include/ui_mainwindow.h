@@ -67,6 +67,9 @@ public:
 
         retranslateUi(MainWindow);
 
+        stackedWidget->setCurrentIndex(1);
+
+
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
 

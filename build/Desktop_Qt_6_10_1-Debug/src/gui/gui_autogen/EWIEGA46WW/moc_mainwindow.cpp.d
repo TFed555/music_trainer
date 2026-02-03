@@ -1,5 +1,8 @@
 /home/tatyana/trainer_1/build/Desktop_Qt_6_10_1-Debug/src/gui/gui_autogen/EWIEGA46WW/moc_mainwindow.cpp: /home/tatyana/trainer_1/src/gui/mainwindow.h \
   /home/tatyana/trainer_1/build/Desktop_Qt_6_10_1-Debug/src/gui/gui_autogen/moc_predefs.h \
+  /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/QObject \
+  /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/QTime \
+  /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/QVector \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/q17memory.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/q20functional.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/q20iterator.h \
@@ -23,6 +26,7 @@
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qbytearrayalgorithms.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qbytearraylist.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qbytearrayview.h \
+  /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qcalendar.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qchar.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qcheckedint_impl.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qcompare.h \
@@ -37,6 +41,7 @@
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qcontiguouscache.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qdarwinhelpers.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qdatastream.h \
+  /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qdatetime.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qdebug.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qendian.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qexceptionhandling.h \
@@ -56,6 +61,7 @@
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qlatin1stringview.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qline.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qlist.h \
+  /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qlocale.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qlogging.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qmalloc.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qmap.h \
@@ -124,6 +130,7 @@
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qutf8stringview.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qvariant.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qvarlengtharray.h \
+  /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qvector.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qversiontagging.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qxptype_traits.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qyieldcpu.h \
@@ -164,8 +171,12 @@
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtWidgets/qtwidgetsexports.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtWidgets/qwidget.h \
-  /home/tatyana/trainer_1/src/gui/intervalblockwidget.h \
-  /home/tatyana/trainer_1/src/gui/mainmenuwidget.h \
+  /home/tatyana/trainer_1/src/audio/audio.h \
+  /home/tatyana/trainer_1/src/audio/generators/GeneratedAudio.h \
+  /home/tatyana/trainer_1/src/audio/generators/IGenerator.h \
+  /home/tatyana/trainer_1/src/gui/blocks/intervalblockwidget.h \
+  /home/tatyana/trainer_1/src/gui/blocks/mainmenuwidget.h \
+  /home/tatyana/trainer_1/src/gui/exercises/intervalexercisewidget.h \
   /usr/include/alloca.h \
   /usr/include/asm-generic/errno-base.h \
   /usr/include/asm-generic/errno.h \
@@ -183,6 +194,8 @@
   /usr/include/c++/13/bits/allocator.h \
   /usr/include/c++/13/bits/atomic_base.h \
   /usr/include/c++/13/bits/atomic_lockfree_defines.h \
+  /usr/include/c++/13/bits/basic_ios.h \
+  /usr/include/c++/13/bits/basic_ios.tcc \
   /usr/include/c++/13/bits/basic_string.h \
   /usr/include/c++/13/bits/basic_string.tcc \
   /usr/include/c++/13/bits/char_traits.h \
@@ -204,9 +217,12 @@
   /usr/include/c++/13/bits/hashtable_policy.h \
   /usr/include/c++/13/bits/invoke.h \
   /usr/include/c++/13/bits/ios_base.h \
+  /usr/include/c++/13/bits/istream.tcc \
   /usr/include/c++/13/bits/list.tcc \
   /usr/include/c++/13/bits/locale_classes.h \
   /usr/include/c++/13/bits/locale_classes.tcc \
+  /usr/include/c++/13/bits/locale_facets.h \
+  /usr/include/c++/13/bits/locale_facets.tcc \
   /usr/include/c++/13/bits/localefwd.h \
   /usr/include/c++/13/bits/memory_resource.h \
   /usr/include/c++/13/bits/memoryfwd.h \
@@ -214,6 +230,7 @@
   /usr/include/c++/13/bits/nested_exception.h \
   /usr/include/c++/13/bits/new_allocator.h \
   /usr/include/c++/13/bits/node_handle.h \
+  /usr/include/c++/13/bits/ostream.tcc \
   /usr/include/c++/13/bits/ostream_insert.h \
   /usr/include/c++/13/bits/parse_numbers.h \
   /usr/include/c++/13/bits/postypes.h \
@@ -226,6 +243,7 @@
   /usr/include/c++/13/bits/shared_ptr_atomic.h \
   /usr/include/c++/13/bits/shared_ptr_base.h \
   /usr/include/c++/13/bits/specfun.h \
+  /usr/include/c++/13/bits/sstream.tcc \
   /usr/include/c++/13/bits/std_abs.h \
   /usr/include/c++/13/bits/std_function.h \
   /usr/include/c++/13/bits/stl_algo.h \
@@ -278,6 +296,7 @@
   /usr/include/c++/13/cstring \
   /usr/include/c++/13/ctime \
   /usr/include/c++/13/cwchar \
+  /usr/include/c++/13/cwctype \
   /usr/include/c++/13/debug/assertions.h \
   /usr/include/c++/13/debug/debug.h \
   /usr/include/c++/13/exception \
@@ -290,7 +309,10 @@
   /usr/include/c++/13/ext/type_traits.h \
   /usr/include/c++/13/functional \
   /usr/include/c++/13/initializer_list \
+  /usr/include/c++/13/ios \
   /usr/include/c++/13/iosfwd \
+  /usr/include/c++/13/iostream \
+  /usr/include/c++/13/istream \
   /usr/include/c++/13/iterator \
   /usr/include/c++/13/limits \
   /usr/include/c++/13/list \
@@ -299,6 +321,7 @@
   /usr/include/c++/13/new \
   /usr/include/c++/13/numeric \
   /usr/include/c++/13/optional \
+  /usr/include/c++/13/ostream \
   /usr/include/c++/13/pstl/execution_defs.h \
   /usr/include/c++/13/pstl/glue_algorithm_defs.h \
   /usr/include/c++/13/pstl/glue_memory_defs.h \
@@ -306,6 +329,7 @@
   /usr/include/c++/13/pstl/pstl_config.h \
   /usr/include/c++/13/ratio \
   /usr/include/c++/13/set \
+  /usr/include/c++/13/sstream \
   /usr/include/c++/13/stdexcept \
   /usr/include/c++/13/streambuf \
   /usr/include/c++/13/string \
@@ -342,6 +366,7 @@
   /usr/include/linux/limits.h \
   /usr/include/locale.h \
   /usr/include/pthread.h \
+  /usr/include/rtaudio/RtAudio.h \
   /usr/include/sched.h \
   /usr/include/stdc-predef.h \
   /usr/include/stdint.h \
@@ -351,6 +376,7 @@
   /usr/include/strings.h \
   /usr/include/time.h \
   /usr/include/wchar.h \
+  /usr/include/wctype.h \
   /usr/include/x86_64-linux-gnu/asm/errno.h \
   /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h \
   /usr/include/x86_64-linux-gnu/bits/byteswap.h \
@@ -415,6 +441,7 @@
   /usr/include/x86_64-linux-gnu/bits/waitflags.h \
   /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
   /usr/include/x86_64-linux-gnu/bits/wchar.h \
+  /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h \
   /usr/include/x86_64-linux-gnu/bits/wordsize.h \
   /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h \
@@ -422,6 +449,8 @@
   /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h \
