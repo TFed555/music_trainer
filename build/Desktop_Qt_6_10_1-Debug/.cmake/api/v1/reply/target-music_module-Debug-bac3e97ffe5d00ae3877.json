@@ -128,11 +128,11 @@
 	"dependencies" : 
 	[
 		{
-			"id" : "music_module_autogen_timestamp_deps::@90cd5cccf28a4741b8b4"
-		},
-		{
 			"backtrace" : 0,
 			"id" : "music_module_autogen::@90cd5cccf28a4741b8b4"
+		},
+		{
+			"id" : "music_module_autogen_timestamp_deps::@90cd5cccf28a4741b8b4"
 		}
 	],
 	"id" : "music_module::@90cd5cccf28a4741b8b4",

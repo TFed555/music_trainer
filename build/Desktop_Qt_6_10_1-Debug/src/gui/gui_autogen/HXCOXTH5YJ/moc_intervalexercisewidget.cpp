@@ -38,10 +38,20 @@ template <> constexpr inline auto IntervalExerciseWidget::qt_create_metaobjectda
 {
     namespace QMC = QtMocConstants;
     QtMocHelpers::StringRefStorage qt_stringData {
-        "IntervalExerciseWidget"
+        "IntervalExerciseWidget",
+        "inputFinished",
+        "",
+        "requestSetMode",
+        "NoteTilesWidget::Mode"
     };
 
     QtMocHelpers::UintData qt_methods {
+        // Signal 'inputFinished'
+        QtMocHelpers::SignalData<void()>(1, 2, QMC::AccessPublic, QMetaType::Void),
+        // Signal 'requestSetMode'
+        QtMocHelpers::SignalData<void(NoteTilesWidget::Mode)>(3, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 4, 2 },
+        }}),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -63,10 +73,19 @@ Q_CONSTINIT const QMetaObject IntervalExerciseWidget::staticMetaObject = { {
 void IntervalExerciseWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     auto *_t = static_cast<IntervalExerciseWidget *>(_o);
-    (void)_t;
-    (void)_c;
-    (void)_id;
-    (void)_a;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: _t->inputFinished(); break;
+        case 1: _t->requestSetMode((*reinterpret_cast<std::add_pointer_t<NoteTilesWidget::Mode>>(_a[1]))); break;
+        default: ;
+        }
+    }
+    if (_c == QMetaObject::IndexOfMethod) {
+        if (QtMocHelpers::indexOfMethod<void (IntervalExerciseWidget::*)()>(_a, &IntervalExerciseWidget::inputFinished, 0))
+            return;
+        if (QtMocHelpers::indexOfMethod<void (IntervalExerciseWidget::*)(NoteTilesWidget::Mode )>(_a, &IntervalExerciseWidget::requestSetMode, 1))
+            return;
+    }
 }
 
 const QMetaObject *IntervalExerciseWidget::metaObject() const
@@ -85,6 +104,30 @@ void *IntervalExerciseWidget::qt_metacast(const char *_clname)
 int IntervalExerciseWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QWidget::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 2)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 2;
+    }
+    if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 2)
+            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
+        _id -= 2;
+    }
     return _id;
+}
+
+// SIGNAL 0
+void IntervalExerciseWidget::inputFinished()
+{
+    QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
+}
+
+// SIGNAL 1
+void IntervalExerciseWidget::requestSetMode(NoteTilesWidget::Mode _t1)
+{
+    QMetaObject::activate<void>(this, &staticMetaObject, 1, nullptr, _t1);
 }
 QT_WARNING_POP

@@ -1,6 +1,10 @@
 /home/tatyana/trainer_1/build/Desktop_Qt_6_10_1-Debug/src/gui/gui_autogen/EWIEGA46WW/moc_mainwindow.cpp: /home/tatyana/trainer_1/src/gui/mainwindow.h \
   /home/tatyana/trainer_1/build/Desktop_Qt_6_10_1-Debug/src/gui/gui_autogen/moc_predefs.h \
+  /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/QList \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/QObject \
+  /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/QRect \
+  /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/QSize \
+  /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/QSizeF \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/QTime \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/QVector \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/q17memory.h \
@@ -11,6 +15,7 @@
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/q20utility.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/q23type_traits.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/q23utility.h \
+  /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qabstracteventdispatcher.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qalgorithms.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qalloc.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qanystringview.h \
@@ -21,6 +26,7 @@
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qatomic.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qatomic_cxx11.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qbasicatomic.h \
+  /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qbasictimer.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qbindingstorage.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qbytearray.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qbytearrayalgorithms.h \
@@ -39,11 +45,16 @@
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qcontainerinfo.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qcontainertools_impl.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qcontiguouscache.h \
+  /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qcoreapplication.h \
+  /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qcoreapplication_platform.h \
+  /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qcoreevent.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qdarwinhelpers.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qdatastream.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qdatetime.h \
+  /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qdeadlinetimer.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qdebug.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qendian.h \
+  /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qeventloop.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qexceptionhandling.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qflags.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qfloat16.h \
@@ -55,6 +66,7 @@
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qglobalstatic.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qhash.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qhashfunctions.h \
+  /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qiodevice.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qiodevicebase.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qiterable.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qiterator.h \
@@ -71,6 +83,7 @@
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qmetatype.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qminmax.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qnamespace.h \
+  /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qnativeinterface.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qnumeric.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qobject.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qobject_impl.h \
@@ -127,6 +140,7 @@
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qtversionchecks.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qtypeinfo.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qtypes.h \
+  /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qurl.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qutf8stringview.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qvariant.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qvarlengtharray.h \
@@ -134,30 +148,47 @@
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qversiontagging.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qxptype_traits.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtCore/qyieldcpu.h \
+  /home/tatyana/Qt/6.10.1/gcc_64/include/QtGui/QMouseEvent \
+  /home/tatyana/Qt/6.10.1/gcc_64/include/QtGui/QPainter \
+  /home/tatyana/Qt/6.10.1/gcc_64/include/QtGui/QTransform \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtGui/qaction.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtGui/qbitmap.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtGui/qbrush.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtGui/qcolor.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtGui/qcursor.h \
+  /home/tatyana/Qt/6.10.1/gcc_64/include/QtGui/qevent.h \
+  /home/tatyana/Qt/6.10.1/gcc_64/include/QtGui/qeventpoint.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtGui/qfont.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtGui/qfontinfo.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtGui/qfontmetrics.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtGui/qfontvariableaxis.h \
+  /home/tatyana/Qt/6.10.1/gcc_64/include/QtGui/qguiapplication.h \
+  /home/tatyana/Qt/6.10.1/gcc_64/include/QtGui/qguiapplication_platform.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtGui/qicon.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtGui/qimage.h \
+  /home/tatyana/Qt/6.10.1/gcc_64/include/QtGui/qinputdevice.h \
+  /home/tatyana/Qt/6.10.1/gcc_64/include/QtGui/qinputmethod.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtGui/qkeysequence.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtGui/qpaintdevice.h \
+  /home/tatyana/Qt/6.10.1/gcc_64/include/QtGui/qpainter.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtGui/qpalette.h \
+  /home/tatyana/Qt/6.10.1/gcc_64/include/QtGui/qpen.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtGui/qpixelformat.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtGui/qpixmap.h \
+  /home/tatyana/Qt/6.10.1/gcc_64/include/QtGui/qpointingdevice.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtGui/qpolygon.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtGui/qregion.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtGui/qrgb.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtGui/qrgba64.h \
+  /home/tatyana/Qt/6.10.1/gcc_64/include/QtGui/qscreen.h \
+  /home/tatyana/Qt/6.10.1/gcc_64/include/QtGui/qscreen_platform.h \
+  /home/tatyana/Qt/6.10.1/gcc_64/include/QtGui/qtextoption.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtGui/qtgui-config.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtGui/qtguiexports.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtGui/qtguiglobal.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtGui/qtransform.h \
+  /home/tatyana/Qt/6.10.1/gcc_64/include/QtGui/qvector2d.h \
+  /home/tatyana/Qt/6.10.1/gcc_64/include/QtGui/qvectornd.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtGui/qwindowdefs.h \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtWidgets/QMainWindow \
   /home/tatyana/Qt/6.10.1/gcc_64/include/QtWidgets/QStackedWidget \
@@ -176,6 +207,7 @@
   /home/tatyana/trainer_1/src/audio/generators/IGenerator.h \
   /home/tatyana/trainer_1/src/gui/blocks/intervalblockwidget.h \
   /home/tatyana/trainer_1/src/gui/blocks/mainmenuwidget.h \
+  /home/tatyana/trainer_1/src/gui/common/notetileswidget.h \
   /home/tatyana/trainer_1/src/gui/exercises/intervalexercisewidget.h \
   /usr/include/alloca.h \
   /usr/include/asm-generic/errno-base.h \

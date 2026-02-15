@@ -30,7 +30,7 @@ public slots:
 signals:
     void playbackFinished();
     void err(const QString& msg);
-    void notePlayed(const QString& info);
+    void notePlayed(GeneratedAudio& info);
 private:
     static int playbackCallback(void *outputBuffer, void *inputBuffer, unsigned int nBufferFrames,
                                 double streamTime, RtAudioStreamStatus status, void *userData);

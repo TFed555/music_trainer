@@ -24,6 +24,12 @@
 			null
 		],
 		[
+			"/home/tatyana/trainer_1/src/gui/common/notetileswidget.h",
+			"MU",
+			"P66WHCG54J/moc_notetileswidget.cpp",
+			null
+		],
+		[
 			"/home/tatyana/trainer_1/src/gui/exercises/ExerciseWidget.h",
 			"MU",
 			"HXCOXTH5YJ/moc_ExerciseWidget.cpp",
@@ -114,6 +120,11 @@
 		],
 		[
 			"/home/tatyana/trainer_1/src/gui/blocks/mainmenuwidget.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/tatyana/trainer_1/src/gui/common/notetileswidget.cpp",
 			"MU",
 			null
 		],

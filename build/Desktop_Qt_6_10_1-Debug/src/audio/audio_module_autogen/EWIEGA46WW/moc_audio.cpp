@@ -45,6 +45,7 @@ template <> constexpr inline auto AudioProcessor::qt_create_metaobjectdata<qt_me
         "err",
         "msg",
         "notePlayed",
+        "GeneratedAudio&",
         "info",
         "playAudio",
         "QList<float>",
@@ -61,15 +62,15 @@ template <> constexpr inline auto AudioProcessor::qt_create_metaobjectdata<qt_me
             { QMetaType::QString, 4 },
         }}),
         // Signal 'notePlayed'
-        QtMocHelpers::SignalData<void(const QString &)>(5, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { QMetaType::QString, 6 },
+        QtMocHelpers::SignalData<void(GeneratedAudio &)>(5, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 6, 7 },
         }}),
         // Slot 'playAudio'
-        QtMocHelpers::SlotData<bool(const QVector<float> &, double)>(7, 2, QMC::AccessPublic, QMetaType::Bool, {{
-            { 0x80000000 | 8, 9 }, { QMetaType::Double, 10 },
+        QtMocHelpers::SlotData<bool(const QVector<float> &, double)>(8, 2, QMC::AccessPublic, QMetaType::Bool, {{
+            { 0x80000000 | 9, 10 }, { QMetaType::Double, 11 },
         }}),
         // Slot 'stopPlayback'
-        QtMocHelpers::SlotData<void()>(11, 2, QMC::AccessPublic, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(12, 2, QMC::AccessPublic, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -95,7 +96,7 @@ void AudioProcessor::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
         switch (_id) {
         case 0: _t->playbackFinished(); break;
         case 1: _t->err((*reinterpret_cast<std::add_pointer_t<QString>>(_a[1]))); break;
-        case 2: _t->notePlayed((*reinterpret_cast<std::add_pointer_t<QString>>(_a[1]))); break;
+        case 2: _t->notePlayed((*reinterpret_cast<std::add_pointer_t<GeneratedAudio&>>(_a[1]))); break;
         case 3: { bool _r = _t->playAudio((*reinterpret_cast<std::add_pointer_t<QList<float>>>(_a[1])),(*reinterpret_cast<std::add_pointer_t<double>>(_a[2])));
             if (_a[0]) *reinterpret_cast<bool*>(_a[0]) = std::move(_r); }  break;
         case 4: _t->stopPlayback(); break;
@@ -119,7 +120,7 @@ void AudioProcessor::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
             return;
         if (QtMocHelpers::indexOfMethod<void (AudioProcessor::*)(const QString & )>(_a, &AudioProcessor::err, 1))
             return;
-        if (QtMocHelpers::indexOfMethod<void (AudioProcessor::*)(const QString & )>(_a, &AudioProcessor::notePlayed, 2))
+        if (QtMocHelpers::indexOfMethod<void (AudioProcessor::*)(GeneratedAudio & )>(_a, &AudioProcessor::notePlayed, 2))
             return;
     }
 }
@@ -168,7 +169,7 @@ void AudioProcessor::err(const QString & _t1)
 }
 
 // SIGNAL 2
-void AudioProcessor::notePlayed(const QString & _t1)
+void AudioProcessor::notePlayed(GeneratedAudio & _t1)
 {
     QMetaObject::activate<void>(this, &staticMetaObject, 2, nullptr, _t1);
 }

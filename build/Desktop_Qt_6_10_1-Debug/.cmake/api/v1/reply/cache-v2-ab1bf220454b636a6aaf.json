@@ -7407,7 +7407,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/usr/local"
+			"value" : "/tmp"
 		},
 		{
 			"name" : "__pkg_config_arguments_RTAUDIO",

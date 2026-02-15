@@ -13,7 +13,8 @@ void AudioProcessor::play(float durationSec) {
     auto result = generator->generate(sampleRate, durationSec);
     playAudio(result.samples, sampleRate);
     playbackLog.append({QDateTime::currentDateTime(), result.desc});
-    emit notePlayed(result.desc);
+    qDebug() << playbackLog.last().timestamp << " " << playbackLog.last().desc;
+    emit notePlayed(result);
 }
 
 bool AudioProcessor::playAudio(const QVector<float>& m_audioData, double sampleRate)

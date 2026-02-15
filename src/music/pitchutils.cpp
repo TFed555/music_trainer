@@ -7,11 +7,9 @@ namespace MusicTheory {
     }
 
     QString midiToNote(int midi) {
-        static const char* noteNames[] = { "A", "A#", "B", "C", "C#", "D", "D#",
-                                          "E", "E#", "F", "F#", "G", "G#"};
         int noteNum = midi % 12;
         int octaveNum = midi / 12 - 1;
-
-        return QString("%1 %2").arg(noteNames[noteNum]).arg(octaveNum);
+        return QString("%1").arg(noteNames[noteNum]);
+        // return QString("%1 %2").arg(noteNames[noteNum]).arg(octaveNum);
     }
 }

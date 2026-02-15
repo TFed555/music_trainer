@@ -13,6 +13,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -20,32 +21,40 @@ QT_BEGIN_NAMESPACE
 class Ui_IntervalExerciseWidget
 {
 public:
+    QWidget *verticalLayoutWidget;
+    QVBoxLayout *verticalLayout;
+    QPushButton *startBtn;
+    QPushButton *stopBtn;
     QWidget *horizontalLayoutWidget;
     QHBoxLayout *horizontalLayout;
-    QPushButton *stopBtn;
-    QPushButton *playBtn;
 
     void setupUi(QWidget *IntervalExerciseWidget)
     {
         if (IntervalExerciseWidget->objectName().isEmpty())
             IntervalExerciseWidget->setObjectName("IntervalExerciseWidget");
-        IntervalExerciseWidget->resize(400, 300);
+        IntervalExerciseWidget->resize(567, 396);
+        verticalLayoutWidget = new QWidget(IntervalExerciseWidget);
+        verticalLayoutWidget->setObjectName("verticalLayoutWidget");
+        verticalLayoutWidget->setGeometry(QRect(150, 20, 231, 121));
+        verticalLayout = new QVBoxLayout(verticalLayoutWidget);
+        verticalLayout->setObjectName("verticalLayout");
+        verticalLayout->setContentsMargins(0, 0, 0, 0);
+        startBtn = new QPushButton(verticalLayoutWidget);
+        startBtn->setObjectName("startBtn");
+
+        verticalLayout->addWidget(startBtn);
+
+        stopBtn = new QPushButton(verticalLayoutWidget);
+        stopBtn->setObjectName("stopBtn");
+
+        verticalLayout->addWidget(stopBtn);
+
         horizontalLayoutWidget = new QWidget(IntervalExerciseWidget);
         horizontalLayoutWidget->setObjectName("horizontalLayoutWidget");
-        horizontalLayoutWidget->setGeometry(QRect(50, 110, 311, 80));
+        horizontalLayoutWidget->setGeometry(QRect(30, 180, 491, 191));
         horizontalLayout = new QHBoxLayout(horizontalLayoutWidget);
         horizontalLayout->setObjectName("horizontalLayout");
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        stopBtn = new QPushButton(horizontalLayoutWidget);
-        stopBtn->setObjectName("stopBtn");
-
-        horizontalLayout->addWidget(stopBtn);
-
-        playBtn = new QPushButton(horizontalLayoutWidget);
-        playBtn->setObjectName("playBtn");
-
-        horizontalLayout->addWidget(playBtn);
-
 
         retranslateUi(IntervalExerciseWidget);
 
@@ -55,8 +64,8 @@ public:
     void retranslateUi(QWidget *IntervalExerciseWidget)
     {
         IntervalExerciseWidget->setWindowTitle(QCoreApplication::translate("IntervalExerciseWidget", "Form", nullptr));
-        stopBtn->setText(QCoreApplication::translate("IntervalExerciseWidget", "\320\241\321\202\320\260\321\200\321\202", nullptr));
-        playBtn->setText(QCoreApplication::translate("IntervalExerciseWidget", "\320\241\321\202\320\276\320\277", nullptr));
+        startBtn->setText(QCoreApplication::translate("IntervalExerciseWidget", "\320\241\321\202\320\260\321\200\321\202", nullptr));
+        stopBtn->setText(QCoreApplication::translate("IntervalExerciseWidget", "\320\241\321\202\320\276\320\277", nullptr));
     } // retranslateUi
 
 };

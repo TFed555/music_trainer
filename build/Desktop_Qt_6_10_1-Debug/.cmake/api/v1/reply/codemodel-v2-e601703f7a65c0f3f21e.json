@@ -173,7 +173,7 @@
 				{
 					"directoryIndex" : 5,
 					"id" : "gui::@7675e61a69a6135e3026",
-					"jsonFile" : "target-gui-Debug-a02dca4fe3d451abc62f.json",
+					"jsonFile" : "target-gui-Debug-925c5e59dbe11b0736ce.json",
 					"name" : "gui",
 					"projectIndex" : 0
 				},
@@ -215,7 +215,7 @@
 				{
 					"directoryIndex" : 3,
 					"id" : "music_module::@90cd5cccf28a4741b8b4",
-					"jsonFile" : "target-music_module-Debug-c52819e03f8ab0b9ae45.json",
+					"jsonFile" : "target-music_module-Debug-bac3e97ffe5d00ae3877.json",
 					"name" : "music_module",
 					"projectIndex" : 0
 				},
