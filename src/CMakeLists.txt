@@ -16,6 +16,7 @@ add_subdirectory(audio)
 add_subdirectory(music)
 add_subdirectory(log)
 add_subdirectory(gui)
+add_subdirectory(core)
 
 set(PROJECT_SOURCES
         main.cpp

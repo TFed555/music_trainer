@@ -27,7 +27,7 @@ bool AudioProcessor::playAudio(const QVector<float>& m_audioData, double sampleR
     }
 
     if (audio.getDeviceCount() < 1) {
-        emit err("No audio devices found");
+        emit err("No audio devices");
         return false;
     }
 

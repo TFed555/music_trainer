@@ -1,5 +1,0 @@
-music_module_autogen/timestamp: \
-	/home/tatyana/trainer_1/src/music/CMakeLists.txt \
-	/home/tatyana/trainer_1/src/music/pitchutils.cpp \
-	/home/tatyana/trainer_1/src/music/pitchutils.h \
-	/home/tatyana/Qt/Tools/CMake/bin/cmake

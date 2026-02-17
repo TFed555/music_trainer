@@ -1,6 +1,6 @@
 #include "intervalexercisewidget.h"
 #include "ui_intervalexercisewidget.h"
-#include "../../audio/generators/IntervalGenerator.h"
+#include "../../audio/generators/generatorfactory.h"
 #include "../music/pitchutils.h"
 
 IntervalExerciseWidget::IntervalExerciseWidget(QWidget *parent)
@@ -53,6 +53,11 @@ void IntervalExerciseWidget::playTone() {
     userAnswer.clear();
     noteCounter = 0;
     emit requestSetMode(NoteTilesWidget::Mode::Input);
-    processor->setGenerator(std::make_unique<IntervalGenerator>());
+    GeneratorParams params;
+
+    auto gen = GeneratorFactory::instance()
+                   .create(GeneratorType::Interval, params);
+
+    processor->setGenerator(std::move(gen));
     processor->play(2.0f);
 }

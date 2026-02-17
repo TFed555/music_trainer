@@ -23,7 +23,8 @@ set(ALL_SOURCES
 add_library(${AUDIO_MODULE_NAME} STATIC ${ALL_SOURCES}
     generators/IntervalGenerator.h
     generators/IntervalGenerator.cpp
-    generators/GeneratedAudio.h)
+    generators/GeneratedAudio.h
+    generators/generatorfactory.h generators/generatorfactory.cpp)
 
 set_target_properties(${AUDIO_MODULE_NAME} PROPERTIES
     AUTOMOC ON

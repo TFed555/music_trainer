@@ -1,4 +1,10 @@
 build-*/
+build/
+*/build/
+
 debug/
 release/
 
+.qtcreator/
+*.user
+*.autosave

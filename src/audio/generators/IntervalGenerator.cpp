@@ -1,6 +1,23 @@
 #include "IntervalGenerator.h"
+#include "generatorfactory.h"
 #include "../music/pitchutils.h"
 #include <random>
+#include <QDebug>
+
+namespace {
+bool registered = [] {
+    GeneratorFactory::instance().registerGenerator(
+        GeneratorType::Interval,
+        [](GeneratorParams p) {
+            return std::make_unique<IntervalGenerator>();
+        }
+        );
+    return true;
+}();
+}
+
+void forceLinkIntervalGenerator() {}
+
 
 GeneratedAudio IntervalGenerator::generate(int sampleRate, float durationSec) {
     int totalSamples = durationSec * sampleRate;

@@ -1,4 +1,0 @@
-log_module_autogen/timestamp: \
-	/home/tatyana/trainer_1/src/log/CMakeLists.txt \
-	/home/tatyana/trainer_1/src/log/logger.h \
-	/home/tatyana/Qt/Tools/CMake/bin/cmake
