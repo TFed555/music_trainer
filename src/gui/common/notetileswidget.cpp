@@ -6,9 +6,16 @@
 NoteTilesWidget::NoteTilesWidget(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::NoteTilesWidget)
+    , processor(new AudioProcessor(this))
+    , notePlayer(processor)
 {
     ui->setupUi(this);
     setNotes();
+    connect(this, &NoteTilesWidget::noteSelected,
+            this, [this](int idx, const QString& noteName){
+        int midi = MusicTheory::noteToMidi(noteName);
+        notePlayer.playMidi(midi);
+    });
 }
 
 NoteTilesWidget::~NoteTilesWidget()

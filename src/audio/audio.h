@@ -22,7 +22,7 @@ public:
     AudioProcessor(QObject *parent = nullptr);
     ~AudioProcessor();
     void setGenerator(std::unique_ptr<IGenerator> gen) { generator = std::move(gen);};
-    void play(float durationSec);
+    void playGenerated(float durationSec);
 
 public slots:
     bool playAudio(const QVector<float>& audioData, double sampleRate);

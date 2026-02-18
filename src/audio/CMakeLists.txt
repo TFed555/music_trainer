@@ -15,16 +15,35 @@ set(AUDIO_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/audio.h
 )
 
+set(PLAYBACK_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/playback/noteplayer.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/playback/noteplayer.cpp
+)
+
+set(GENERATOR_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/generators/IntervalGenerator.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/generators/IntervalGenerator.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/generators/GeneratedAudio.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/generators/generatorfactory.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/generators/generatorfactory.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/generators/notegenerator.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/generators/notegenerator.cpp
+)
+
+set (DSP_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/dsp/oscillator.h
+)
+
 set(ALL_SOURCES
     ${AUDIO_SOURCES}
     ${GENERATOR_SOURCES}
+    ${PLAYBACK_SOURCES}
+    ${DSP_SOURCES}
 )
 
 add_library(${AUDIO_MODULE_NAME} STATIC ${ALL_SOURCES}
-    generators/IntervalGenerator.h
-    generators/IntervalGenerator.cpp
-    generators/GeneratedAudio.h
-    generators/generatorfactory.h generators/generatorfactory.cpp)
+    dsp/oscillator.cpp
+)
 
 set_target_properties(${AUDIO_MODULE_NAME} PROPERTIES
     AUTOMOC ON
@@ -34,6 +53,8 @@ set_target_properties(${AUDIO_MODULE_NAME} PROPERTIES
 target_include_directories(${AUDIO_MODULE_NAME} PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/generators
+    ${CMAKE_CURRENT_SOURCE_DIR}/playback
+    ${CMAKE_CURRENT_SOURCE_DIR}/dsp
     ${RTAUDIO_INCLUDE_DIRS}
 )
 

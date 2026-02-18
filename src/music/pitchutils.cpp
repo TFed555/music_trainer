@@ -12,4 +12,14 @@ namespace MusicTheory {
         return QString("%1").arg(noteNames[noteNum]);
         // return QString("%1 %2").arg(noteNames[noteNum]).arg(octaveNum);
     }
+
+    int noteToMidi(QString note) {
+        for (int i = 0; i < 13; i++) {
+            if (noteNames[i] == note) return i * 12;
+        }
+    }
+
+    double midiToFreq(int midi) {
+        return std::pow(2.0, (midi-69)/12.0)*440.0;
+    }
 }

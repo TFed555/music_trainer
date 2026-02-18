@@ -7,7 +7,7 @@ AudioProcessor::~AudioProcessor() {
     stopPlayback();
 }
 
-void AudioProcessor::play(float durationSec) {
+void AudioProcessor::playGenerated(float durationSec) {
     if (!generator) return;
     // setSampleRate();
     auto result = generator->generate(sampleRate, durationSec);

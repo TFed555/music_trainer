@@ -2,6 +2,8 @@
 #include "ui_intervalexercisewidget.h"
 #include "../../audio/generators/generatorfactory.h"
 #include "../music/pitchutils.h"
+#include <QEventLoop>
+#include <QTimer>
 
 IntervalExerciseWidget::IntervalExerciseWidget(QWidget *parent)
     : QWidget(parent)
@@ -37,6 +39,10 @@ IntervalExerciseWidget::IntervalExerciseWidget(QWidget *parent)
         if (correctAnswer.size() == 2)
             emit requestSetMode(NoteTilesWidget::Mode::Result);
             tiles->highlight(correctAnswer);
+            QEventLoop loop;
+            QTimer::singleShot(2000, &loop, &QEventLoop::quit);
+            loop.exec();
+            emit requestSetMode(NoteTilesWidget::Mode::Input);
     });
     connect(this, &IntervalExerciseWidget::requestSetMode,
             tiles, &NoteTilesWidget::setMode,
@@ -59,5 +65,5 @@ void IntervalExerciseWidget::playTone() {
                    .create(GeneratorType::Interval, params);
 
     processor->setGenerator(std::move(gen));
-    processor->play(2.0f);
+    processor->playGenerated(2.0f);
 }

@@ -1,6 +1,7 @@
 #ifndef NOTETILESWIDGET_H
 #define NOTETILESWIDGET_H
 
+#include "../audio/playback/noteplayer.h"
 #include <QWidget>
 #include <QPainter>
 #include <QMouseEvent>
@@ -41,6 +42,8 @@ private:
     int selectedIndex = -1;
     QSet<int> highlightedIndexes;
     Mode mode = Mode::Input;
+    AudioProcessor* processor;
+    NotePlayer notePlayer;
 };
 
 #endif // NOTETILESWIDGET_H
