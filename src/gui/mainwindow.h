@@ -29,5 +29,9 @@ private:
     MainMenuWidget* mainMenu;
     IntervalBlockWidget* intervalBlock;
     IntervalExerciseWidget *intervalExercise;
+    SampleLoader sampleLoader;
+    SampleRepository sampleRepository;
+    AudioProcessor* audio;
+    NotePlayer* notePlayer;
 };
 #endif // MAINWINDOW_H

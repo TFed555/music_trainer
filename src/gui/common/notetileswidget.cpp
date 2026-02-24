@@ -3,18 +3,17 @@
 #include "../../music/pitchutils.h"
 
 
-NoteTilesWidget::NoteTilesWidget(QWidget *parent)
+NoteTilesWidget::NoteTilesWidget(NotePlayer* notePlayer, QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::NoteTilesWidget)
     , processor(new AudioProcessor(this))
-    , notePlayer(processor)
 {
     ui->setupUi(this);
     setNotes();
     connect(this, &NoteTilesWidget::noteSelected,
-            this, [this](int idx, const QString& noteName){
+            this, [this, notePlayer](int idx, const QString& noteName){
         int midi = MusicTheory::noteToMidi(noteName);
-        notePlayer.playMidi(midi);
+        notePlayer->playMidi(midi);
     });
 }
 

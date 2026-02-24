@@ -30,19 +30,13 @@ set(GENERATOR_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/generators/notegenerator.cpp
 )
 
-set (DSP_SOURCES
-    ${CMAKE_CURRENT_SOURCE_DIR}/dsp/oscillator.h
-)
-
 set(ALL_SOURCES
     ${AUDIO_SOURCES}
     ${GENERATOR_SOURCES}
     ${PLAYBACK_SOURCES}
-    ${DSP_SOURCES}
 )
 
 add_library(${AUDIO_MODULE_NAME} STATIC ${ALL_SOURCES}
-    dsp/oscillator.cpp
 )
 
 set_target_properties(${AUDIO_MODULE_NAME} PROPERTIES
@@ -54,7 +48,6 @@ target_include_directories(${AUDIO_MODULE_NAME} PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/generators
     ${CMAKE_CURRENT_SOURCE_DIR}/playback
-    ${CMAKE_CURRENT_SOURCE_DIR}/dsp
     ${RTAUDIO_INCLUDE_DIRS}
 )
 

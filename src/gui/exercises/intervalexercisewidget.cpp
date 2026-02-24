@@ -5,12 +5,13 @@
 #include <QEventLoop>
 #include <QTimer>
 
-IntervalExerciseWidget::IntervalExerciseWidget(QWidget *parent)
-    : QWidget(parent)
+IntervalExerciseWidget::IntervalExerciseWidget(NotePlayer* player, QWidget *parent)
+    : notePlayer(player)
+    , QWidget(parent)
     , ui(new Ui::IntervalExerciseWidget)
 {
     ui->setupUi(this);
-    auto* tiles = new NoteTilesWidget(this);
+    auto* tiles = new NoteTilesWidget(notePlayer, this);
     ui->horizontalLayout->addWidget(tiles);
 
     processor = new AudioProcessor(this);

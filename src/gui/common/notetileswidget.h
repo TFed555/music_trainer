@@ -20,7 +20,7 @@ class NoteTilesWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit NoteTilesWidget(QWidget *parent = nullptr);
+    explicit NoteTilesWidget(NotePlayer* notePlayer, QWidget *parent = nullptr);
     ~NoteTilesWidget();
     enum class Mode {
         Input,
@@ -43,7 +43,6 @@ private:
     QSet<int> highlightedIndexes;
     Mode mode = Mode::Input;
     AudioProcessor* processor;
-    NotePlayer notePlayer;
 };
 
 #endif // NOTETILESWIDGET_H

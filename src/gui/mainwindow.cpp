@@ -4,11 +4,17 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+    , sampleLoader()
+    , sampleRepository(&sampleLoader)
+    , audio(new AudioProcessor(this))
+    , notePlayer(new NotePlayer(audio, &sampleRepository))
+
 {
+
     ui->setupUi(this);
     mainMenu = new MainMenuWidget(this);
     intervalBlock = new IntervalBlockWidget(this);
-    intervalExercise = new IntervalExerciseWidget(this);
+    intervalExercise = new IntervalExerciseWidget(notePlayer, this);
 
     stack = ui->stackedWidget;
     stack->addWidget(mainMenu);

@@ -80,4 +80,12 @@ target_link_libraries(trainer_1 PRIVATE
     log_module
     audio_module
     music_module
+    core
+    ${CMAKE_CURRENT_SOURCE_DIR}/../assets   
+)
+
+add_custom_command(TARGET trainer_1 POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_CURRENT_SOURCE_DIR}/../assets
+        $<TARGET_FILE_DIR:trainer_1>/assets
 )

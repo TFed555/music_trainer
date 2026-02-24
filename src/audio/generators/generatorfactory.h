@@ -2,7 +2,7 @@
 #define GENERATORFACTORY_H
 #pragma once
 #include "IGenerator.h"
-#include "../../core/registryfactory.h"
+#include "../../core/factory/registryfactory.h"
 
 enum GeneratorType {
     Interval,
