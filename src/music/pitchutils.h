@@ -13,8 +13,8 @@ QString midiToNote(int midi);
 
 int noteToMidi(QString note);
 
-static const char* noteNames[] = { "A", "A#", "B", "C", "C#", "D", "D#",
-                                  "E", "E#", "F", "F#", "G", "G#"};
+static const char* noteNames[] = { "C", "C#", "D", "D#", "E",
+                                  "F", "F#", "G", "G#", "A", "A#", "B" };
 
 }
 

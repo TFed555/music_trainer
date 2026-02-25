@@ -14,7 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     mainMenu = new MainMenuWidget(this);
     intervalBlock = new IntervalBlockWidget(this);
-    intervalExercise = new IntervalExerciseWidget(notePlayer, this);
+    intervalExercise = new IntervalExerciseWidget(notePlayer, audio, this);
 
     stack = ui->stackedWidget;
     stack->addWidget(mainMenu);

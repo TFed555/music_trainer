@@ -4,6 +4,7 @@
 
 #include "../audio.h"
 #include "../core/data/samples/samplerepository.h"
+#include <samplerate.h>
 
 class NotePlayer {
 public:

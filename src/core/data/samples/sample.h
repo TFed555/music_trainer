@@ -5,6 +5,7 @@
 
 struct Sample {
     QVector<float> data;
+    int nearestMidi;
     int sampleRate;
 };
 

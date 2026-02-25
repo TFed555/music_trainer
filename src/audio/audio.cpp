@@ -17,6 +17,10 @@ void AudioProcessor::playGenerated(float durationSec) {
     emit notePlayed(result);
 }
 
+void AudioProcessor::playSample(Sample sample) {
+    playAudio(sample.data, sample.sampleRate);
+}
+
 bool AudioProcessor::playAudio(const QVector<float>& m_audioData, double sampleRate)
 {
     stopPlayback();

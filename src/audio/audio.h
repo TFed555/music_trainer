@@ -6,6 +6,7 @@
 #include <QVector>
 #include <QTime>
 #include "generators/IGenerator.h"
+#include "../core/data/samples/sample.h"
 
 #include <memory>
 
@@ -18,11 +19,13 @@ class AudioProcessor : public QObject
 {
 
     Q_OBJECT
+    Q_DISABLE_COPY(AudioProcessor)
 public:
     AudioProcessor(QObject *parent = nullptr);
     ~AudioProcessor();
     void setGenerator(std::unique_ptr<IGenerator> gen) { generator = std::move(gen);};
     void playGenerated(float durationSec);
+    void playSample(Sample sample);
 
 public slots:
     bool playAudio(const QVector<float>& audioData, double sampleRate);

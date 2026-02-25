@@ -23,7 +23,7 @@ NoteTilesWidget::~NoteTilesWidget()
 }
 
 void NoteTilesWidget::setNotes() {
-    notes.resize(13);
+    notes.resize(12);
     for (int i = 0; i < notes.size(); i++) {
         notes[i].name = MusicTheory::noteNames[i];
     }

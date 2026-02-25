@@ -14,9 +14,14 @@ namespace MusicTheory {
     }
 
     int noteToMidi(QString note) {
-        for (int i = 0; i < 13; i++) {
-            if (noteNames[i] == note) return i * 12;
+        int noteIndex;
+        for (size_t i = 0; i < 12; i++) {
+            if (note == noteNames[i]) {
+                noteIndex = i; break;
+            }
         }
+
+        return 5 * 12 + noteIndex;
     }
 
     double midiToFreq(int midi) {

@@ -14,7 +14,9 @@ class IntervalExerciseWidget : public QWidget //переделать на нас
     Q_OBJECT
 
 public:
-    explicit IntervalExerciseWidget(NotePlayer* notePlayer, QWidget *parent = nullptr);
+    explicit IntervalExerciseWidget(NotePlayer* notePlayer,
+                                    AudioProcessor* proc, //временно
+                                    QWidget *parent = nullptr);
     ~IntervalExerciseWidget();
 
     void playTone();

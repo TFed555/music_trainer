@@ -11,7 +11,7 @@ public:
 
     Sample getSample(int midi);
 private:
-    std::unique_ptr<SampleLoader> loader;
+    SampleLoader* loader;
 };
 
 #endif // SAMPLEREPOSITORY_H

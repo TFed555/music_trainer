@@ -8,7 +8,8 @@ class SampleLoader
 {
 public:
     explicit SampleLoader();
-    Sample loadSample(QString path, int midi);
+    ~SampleLoader();
+    Sample loadSample(const char *path, int midi);
 };
 
 #endif // SAMPLELOADER_H
