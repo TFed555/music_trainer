@@ -6,7 +6,7 @@
 class IGenerator {
 public:
     virtual ~IGenerator() = default;
-    virtual GeneratedAudio generate(int sampleRate, float durationSec) = 0;
+    virtual GeneratedAudio generate() = 0;
 };
 
 #endif

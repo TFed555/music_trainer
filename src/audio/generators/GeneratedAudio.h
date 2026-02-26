@@ -4,7 +4,6 @@
 #include <QVector>
 
 struct GeneratedAudio {
-    QVector<float> samples;
     QString desc;
     QVector<int> midiNotes;
 };

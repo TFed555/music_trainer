@@ -5,9 +5,8 @@
 #include <QEventLoop>
 #include <QTimer>
 
-IntervalExerciseWidget::IntervalExerciseWidget(NotePlayer* player, AudioProcessor* proc, QWidget *parent)
+IntervalExerciseWidget::IntervalExerciseWidget(NotePlayer* player, QWidget *parent)
     : notePlayer(player)
-    , processor(proc)
     , QWidget(parent)
     , ui(new Ui::IntervalExerciseWidget)
 {
@@ -15,14 +14,13 @@ IntervalExerciseWidget::IntervalExerciseWidget(NotePlayer* player, AudioProcesso
     auto* tiles = new NoteTilesWidget(notePlayer, this);
     ui->horizontalLayout->addWidget(tiles);
 
-    // processor = new AudioProcessor(this);
-    connect(processor, &AudioProcessor::playbackFinished,
+    connect(notePlayer, &NotePlayer::playbackFinished,
             this, []() { qDebug() << "Playback finished"; });
-    connect(processor, &AudioProcessor::err,
+    connect(notePlayer, &NotePlayer::error,
             this, [](const QString& msg) { qDebug() << "Error:" << msg; });
     connect(ui->startBtn, &QPushButton::clicked, this, &IntervalExerciseWidget::playTone);
-    connect(ui->stopBtn, &QPushButton::clicked, processor, &AudioProcessor::stopPlayback);
-    connect(processor, &AudioProcessor::notePlayed,
+    connect(ui->stopBtn, &QPushButton::clicked, notePlayer, &NotePlayer::stop);
+    connect(notePlayer, &NotePlayer::notesPlayed,
             this, [this](const GeneratedAudio& result) {
                 qDebug() << "Played:" << result.desc;
                 correctAnswer.append(MusicTheory::midiToNote(result.midiNotes[0]));
@@ -61,11 +59,5 @@ void IntervalExerciseWidget::playTone() {
     userAnswer.clear();
     noteCounter = 0;
     emit requestSetMode(NoteTilesWidget::Mode::Input);
-    GeneratorParams params;
-
-    auto gen = GeneratorFactory::instance()
-                   .create(GeneratorType::Interval, params);
-
-    processor->setGenerator(std::move(gen));
-    processor->playGenerated(2.0f);
+    notePlayer->playExercise(GeneratorType::Interval);
 }

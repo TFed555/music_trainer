@@ -20,6 +20,7 @@ set(PLAYBACK_SOURCES
 set(GENERATOR_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/generators/IntervalGenerator.h
     ${CMAKE_CURRENT_SOURCE_DIR}/generators/IntervalGenerator.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/generators/IGenerator.h
     ${CMAKE_CURRENT_SOURCE_DIR}/generators/GeneratedAudio.h
     ${CMAKE_CURRENT_SOURCE_DIR}/generators/generatorfactory.h
     ${CMAKE_CURRENT_SOURCE_DIR}/generators/generatorfactory.cpp

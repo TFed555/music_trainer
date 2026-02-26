@@ -15,7 +15,6 @@ class IntervalExerciseWidget : public QWidget //переделать на нас
 
 public:
     explicit IntervalExerciseWidget(NotePlayer* notePlayer,
-                                    AudioProcessor* proc, //временно
                                     QWidget *parent = nullptr);
     ~IntervalExerciseWidget();
 
@@ -27,7 +26,6 @@ signals:
     void requestSetMode(NoteTilesWidget::Mode);
 private:
     Ui::IntervalExerciseWidget *ui;
-    AudioProcessor *processor;
     NotePlayer* notePlayer;
     NoteTilesWidget *tiles;
     int noteCounter = 0;

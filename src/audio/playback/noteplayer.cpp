@@ -3,7 +3,13 @@
 
 NotePlayer::NotePlayer(AudioProcessor* proc, SampleRepository* sampleRepo)
     : processor(proc), sampleRepository{sampleRepo}
-{}
+{
+    connect(processor, &AudioProcessor::playbackFinished,
+            this, &NotePlayer::playbackFinished);
+
+    connect(processor, &AudioProcessor::err,
+            this, &NotePlayer::error);
+}
 
 QVector<float> resample(const QVector<float>& in, double ratio) {
     QVector<float> out((in.size() / ratio) + 1);
@@ -28,4 +34,32 @@ void NotePlayer::playMidi(int midi, float durationSec) {
     QVector<float> resampledData = resample(buffer.data, ratio);
     buffer.data = resampledData;
     processor->playSample(buffer);
+}
+
+void NotePlayer::playExercise(GeneratorType type) {
+    GeneratorParams params;
+
+    auto gen = GeneratorFactory::instance()
+                   .create(type, params);
+
+    setGenerator(std::move(gen));
+    auto result = generator->generate();
+    QVector<int> midiNotes = result.midiNotes;
+    QVector<Sample> samples;
+    double ratio;
+    for (size_t i = 0; i < midiNotes.size(); i++) {
+        Sample buffer = sampleRepository->getSample(midiNotes[i]);
+        ratio = std::pow(2.0, (buffer.nearestMidi - midiNotes[i])/12.0);
+        QVector<float> resampledData = resample(buffer.data, ratio);
+        buffer.data = resampledData;
+        samples.append(buffer);
+    }
+    processor->playGenerated(samples);
+    playbackLog.append({QDateTime::currentDateTime(), result.desc});
+    qDebug() << playbackLog.last().timestamp << " " << playbackLog.last().desc;
+    emit notesPlayed(result);
+}
+
+void NotePlayer::stop() {
+    processor->stopPlayback();
 }

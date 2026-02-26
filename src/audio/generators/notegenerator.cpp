@@ -2,6 +2,6 @@
 #include "generatorfactory.h"
 #include <QDebug>
 
-GeneratedAudio NoteGenerator::generate(int sampleRate, float durationSec) {
+GeneratedAudio NoteGenerator::generate() {
 
 }

@@ -1,5 +1,6 @@
 #include "audio.h"
 #include <QDebug>
+#include <QTimer>
 
 AudioProcessor::AudioProcessor(QObject *parent) : QObject(parent){}
 
@@ -7,14 +8,28 @@ AudioProcessor::~AudioProcessor() {
     stopPlayback();
 }
 
-void AudioProcessor::playGenerated(float durationSec) {
-    if (!generator) return;
-    // setSampleRate();
-    auto result = generator->generate(sampleRate, durationSec);
-    playAudio(result.samples, sampleRate);
-    playbackLog.append({QDateTime::currentDateTime(), result.desc});
-    qDebug() << playbackLog.last().timestamp << " " << playbackLog.last().desc;
-    emit notePlayed(result);
+bool AudioProcessor::playGenerated(QVector<Sample> samples) {
+    if (samples.isEmpty()) return false;
+    playlist = samples;
+    playlistIdx = 0;
+    connect(this, &AudioProcessor::playbackStopped,
+            this, &AudioProcessor::playNextSample,
+            Qt::UniqueConnection);
+
+    playNextSample();
+    return true;
+}
+
+void AudioProcessor::playNextSample() {
+    if (playlistIdx >= playlist.size()) {
+        disconnect(this, &AudioProcessor::playbackStopped,
+                   this, &AudioProcessor::playNextSample);
+        return;
+    }
+    Sample s = playlist[playlistIdx++];
+    QTimer::singleShot(200, this, [this, s]() {
+        playAudio(s.data, s.sampleRate);
+    });
 }
 
 void AudioProcessor::playSample(Sample sample) {
@@ -113,7 +128,7 @@ void AudioProcessor::stopPlayback() {
             audioBuffer.clear();
             currentFrame = 0;
 
-            emit playbackFinished();
+            emit playbackStopped();
             qDebug() << "Playback stopped";
         }
         catch(RtAudioError &e) {

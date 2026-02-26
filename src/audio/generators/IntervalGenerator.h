@@ -6,7 +6,7 @@
 
 class IntervalGenerator : public IGenerator {
 public:
-    GeneratedAudio generate(int sampleRate, float durationSec) override;
+    GeneratedAudio generate() override;
 };
 
 #endif // INTERVALGENERATOR_H

@@ -19,52 +19,23 @@ bool registered = [] {
 void forceLinkIntervalGenerator() {}
 
 
-GeneratedAudio IntervalGenerator::generate(int sampleRate, float durationSec) {
-    int totalSamples = durationSec * sampleRate;
-
-    QVector<float> buffer;
-    buffer.reserve(totalSamples);
-
+GeneratedAudio IntervalGenerator::generate() {
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_real_distribution<> baseFreqDist(130.81, 523.25);
+    std::uniform_real_distribution<> midiDist(60, 71);
 
-    double baseFreq = baseFreqDist(gen);
+    int firstMidi = midiDist(gen);
 
     std::uniform_int_distribution<> intervalDist(1,12);
     int semitones = intervalDist(gen);
 
     double intervalRatio = std::pow(2.0, semitones/12.0);
-    double secondFreq = baseFreq * intervalRatio;
-
-    int firstMidiNote = MusicTheory::freqToMidi(baseFreq);
-    int secondMidiNote = MusicTheory::freqToMidi(secondFreq);
-
-    double phase = 0.0;
-
-    double inc1 = 2.0 * M_PI * baseFreq / sampleRate;
-    for (int i = 0; i < sampleRate; ++i) {
-        buffer.append(std::sin(phase));
-        phase += inc1;
-    }
-
-    int silenceRate = sampleRate * 0.01;
-    for (int i = 0; i < silenceRate; ++i) {
-        buffer.append(0.0f);
-    }
-
-    phase = 0.0;
-    double inc2 = 2.0 * M_PI * secondFreq / sampleRate;
-    for (int i = 0; i < sampleRate; ++i) {
-        buffer.append(std::sin(phase));
-        phase += inc2;
-    }
+    int secondMidi = 60+((firstMidi-60+semitones) % 12);
 
     GeneratedAudio res;
-    res.samples = buffer;
-    res.midiNotes.append(firstMidiNote);
-    res.midiNotes.append(secondMidiNote);
-    res.desc = QString("%1 -> %2").arg(MusicTheory::midiToNote(firstMidiNote)).arg(MusicTheory::midiToNote(secondMidiNote));
+    res.midiNotes.append(firstMidi);
+    res.midiNotes.append(secondMidi);
+    res.desc = QString("%1 -> %2").arg(MusicTheory::midiToNote(firstMidi)).arg(MusicTheory::midiToNote(secondMidi));
 
     return res;
 }

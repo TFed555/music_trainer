@@ -7,7 +7,7 @@
 class NoteGenerator : public IGenerator
 {
 public:
-    GeneratedAudio generate(int sampleRate, float durationSec) override;
+    GeneratedAudio generate() override;
 };
 
 #endif // NOTEGENERATOR_H
