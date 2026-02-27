@@ -1,3 +1,6 @@
 #include "intervalrecognisecontroller.h"
 
-IntervalRecogniseController::IntervalRecogniseController() {}
+IntervalRecogniseController::IntervalRecogniseController() {
+    notePlayer =
+}
+

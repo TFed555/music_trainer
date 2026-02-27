@@ -10,6 +10,7 @@ class IntervalRecogniseWidget : public IntervalExerciseWidget
 public:
     explicit IntervalRecogniseWidget(QObject *parent = nullptr);
 private:
+    IntervalExerciseWidget* widget;
     IntervalRecogniseController* controller;
     int noteCounter = 0;
 };

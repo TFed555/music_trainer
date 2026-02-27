@@ -2,12 +2,11 @@
 #define INTERVALRECOGNISECONTROLLER_H
 
 #include "iexercisecontroller.h"
-#include "../../audio/playback/noteplayer.h"
 
 class IntervalRecogniseController : public IExerciseController
 {
 public:
-    IntervalRecogniseController();
+    explicit IntervalRecogniseController();
 
     void start() override;
     void stop() override;

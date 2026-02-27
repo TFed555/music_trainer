@@ -6,10 +6,6 @@
 #include <QMouseEvent>
 #include "../core/controllers/tilescontroller.h"
 
-struct Note {
-    QString name;
-    int midi;
-};
 
 namespace Ui {
 class NoteTilesWidget;

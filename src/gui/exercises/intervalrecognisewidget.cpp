@@ -8,5 +8,7 @@ IntervalRecogniseWidget::IntervalRecogniseWidget(QObject *parent)
 
     connect(widget, &IntervalExerciseWidget::start, controller, &IntervalRecogniseController::start);
 
-    connect(widget, &IntervalExerciseWidget::start, controller, &IntervalRecogniseController::start);
+    connect(widget, &IntervalExerciseWidget::stop, controller, &IntervalRecogniseController::stop);
+
+    // connect(widget, &IntervalExerciseWidget::backClicked, );
 }
