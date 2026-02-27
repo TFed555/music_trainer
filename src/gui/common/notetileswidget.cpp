@@ -1,32 +1,23 @@
 #include "notetileswidget.h"
 #include "ui_notetileswidget.h"
-#include "../../music/pitchutils.h"
 
-
-NoteTilesWidget::NoteTilesWidget(NotePlayer* notePlayer, QWidget *parent)
+NoteTilesWidget::NoteTilesWidget(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::NoteTilesWidget)
-    , processor(new AudioProcessor(this))
+    , controller(new TilesController)
 {
     ui->setupUi(this);
-    setNotes();
+    notes = controller->setNotes();
     connect(this, &NoteTilesWidget::noteSelected,
-            this, [this, notePlayer](int idx, const QString& noteName){
-        int midi = MusicTheory::noteToMidi(noteName);
-        notePlayer->playMidi(midi);
+            this, [this](const QString& noteName){
+
+        controller->playTile(noteName);
     });
 }
 
 NoteTilesWidget::~NoteTilesWidget()
 {
     delete ui;
-}
-
-void NoteTilesWidget::setNotes() {
-    notes.resize(12);
-    for (int i = 0; i < notes.size(); i++) {
-        notes[i].name = MusicTheory::noteNames[i];
-    }
 }
 
 void NoteTilesWidget::paintEvent(QPaintEvent* event) {
@@ -63,7 +54,7 @@ void NoteTilesWidget::mousePressEvent(QMouseEvent* event) {
     int index = event->pos().x() / tileWidth;
     if (index >= 0 && index < notes.size()) {
         selectedIndex = index;
-        emit noteSelected(index, notes[index].name);
+        emit noteSelected(notes[index].name);
         update();
     }
 }

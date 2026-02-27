@@ -5,15 +5,14 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
-    , sampleLoader()
-    , sampleRepository(&sampleLoader)
-    , audio(new AudioProcessor(this))
-    , notePlayer(new NotePlayer(audio, &sampleRepository))
+    // , sampleLoader()
+    // , sampleRepository(&sampleLoader)
+    // , audio(new AudioProcessor(this))
+    // , notePlayer(new NotePlayer(audio, &sampleRepository))
 
 {
     ui->setupUi(this);
     mainMenu = new MainMenuWidget(this);
-    intervalExercise = new IntervalExerciseWidget(notePlayer, this);
 
     stack = ui->stackedWidget;
     stack->addWidget(mainMenu);
@@ -25,16 +24,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     for (auto* block : blocks) addBlock(block);
 
-    stack->addWidget(intervalExercise);
-
     connect(mainMenu, &MainMenuWidget::intervalClicked,
             this, [=](){ stack->setCurrentWidget(blocks[0]); });
-
-    connect(intervalExercise, &IntervalExerciseWidget::backClicked,
-            this, [this](){
-            stack->setCurrentWidget(previousWidget);
-    });
-
 }
 
 MainWindow::~MainWindow()
@@ -45,19 +36,16 @@ MainWindow::~MainWindow()
 void MainWindow::addBlock(IBlockWidget* block) {
     stack->addWidget(block);
 
-    connect(block, &IntervalBlockWidget::backClicked,
+    connect(block, &IBlockWidget::backClicked,
             this, [=](){ stack->setCurrentWidget(mainMenu); });
 
-    connect(block, &IntervalBlockWidget::exerciseSelected,
-            this, &MainWindow::openExercise);
+    connect(block, &IBlockWidget::exerciseSelected,
+            this, [this](QWidget* exercise) {
+        stack->setCurrentWidget(exercise);
+    });
 
+    connect(block, &IBlockWidget::exerciseBackClicked,
+            this, [=]() { stack->setCurrentWidget(block); });
 }
 
-void MainWindow::openExercise(IBlockWidget* block, int id)
-{
-    previousWidget = block;
-    if (id == 1) {
-        stack->setCurrentWidget(intervalExercise);
-    }
-}
 

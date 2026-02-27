@@ -1,10 +1,10 @@
 #ifndef NOTETILESWIDGET_H
 #define NOTETILESWIDGET_H
 
-#include "../audio/playback/noteplayer.h"
 #include <QWidget>
 #include <QPainter>
 #include <QMouseEvent>
+#include "../core/controllers/tilescontroller.h"
 
 struct Note {
     QString name;
@@ -20,7 +20,7 @@ class NoteTilesWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit NoteTilesWidget(NotePlayer* notePlayer, QWidget *parent = nullptr);
+    explicit NoteTilesWidget(QWidget *parent = nullptr);
     ~NoteTilesWidget();
     enum class Mode {
         Input,
@@ -35,14 +35,14 @@ protected:
     void setNotes();
     void mousePressEvent(QMouseEvent* event) override;
 signals:
-    void noteSelected(int index, const QString& noteName);
+    void noteSelected(const QString& noteName);
 private:
     Ui::NoteTilesWidget *ui;
-    QVector<Note> notes;
+    TilesController* controller;
     int selectedIndex = -1;
     QSet<int> highlightedIndexes;
     Mode mode = Mode::Input;
-    AudioProcessor* processor;
+    QVector<Note> notes;
 };
 
 #endif // NOTETILESWIDGET_H

@@ -12,7 +12,8 @@ public:
     virtual ~IBlockWidget() {};
 signals:
     void backClicked();
-    void exerciseSelected(IBlockWidget* self, int exerciseId);
+    void exerciseSelected(QWidget* exercise);
+    void exerciseBackClicked();
 };
 
 #endif // IBLOCKWIDGET_H

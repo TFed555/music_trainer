@@ -2,6 +2,7 @@
 #define INTERVALBLOCKWIDGET_H
 
 #include "IBlockWidget.h"
+#include "../exercises/IExerciseWidget.h"
 
 namespace Ui {
 class IntervalBlockWidget;
@@ -16,6 +17,7 @@ public:
     ~IntervalBlockWidget();
 private:
     Ui::IntervalBlockWidget *ui;
+    QVector<IExerciseWidget*> exercises;
 };
 
 #endif // INTERVALBLOCKWIDGET_H
