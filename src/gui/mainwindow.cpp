@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
+#include "./blocks/intervalblockwidget.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -10,26 +11,29 @@ MainWindow::MainWindow(QWidget *parent)
     , notePlayer(new NotePlayer(audio, &sampleRepository))
 
 {
-
     ui->setupUi(this);
     mainMenu = new MainMenuWidget(this);
-    intervalBlock = new IntervalBlockWidget(this);
     intervalExercise = new IntervalExerciseWidget(notePlayer, this);
 
     stack = ui->stackedWidget;
     stack->addWidget(mainMenu);
-    stack->addWidget(intervalBlock);
     stack->setCurrentWidget(mainMenu);
+
+    blocks = {
+        new IntervalBlockWidget(this)
+    };
+
+    for (auto* block : blocks) addBlock(block);
+
     stack->addWidget(intervalExercise);
 
     connect(mainMenu, &MainMenuWidget::intervalClicked,
-            this, [=](){ stack->setCurrentWidget(intervalBlock); });
+            this, [=](){ stack->setCurrentWidget(blocks[0]); });
 
-    connect(intervalBlock, &IntervalBlockWidget::backClicked,
-            this, [=](){ stack->setCurrentWidget(mainMenu); });
-
-    connect(intervalBlock, &IntervalBlockWidget::exerciseSelected,
-            this, &MainWindow::openIntervalExercise);
+    connect(intervalExercise, &IntervalExerciseWidget::backClicked,
+            this, [this](){
+            stack->setCurrentWidget(previousWidget);
+    });
 
 }
 
@@ -38,9 +42,22 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::openIntervalExercise(int id)
+void MainWindow::addBlock(IBlockWidget* block) {
+    stack->addWidget(block);
+
+    connect(block, &IntervalBlockWidget::backClicked,
+            this, [=](){ stack->setCurrentWidget(mainMenu); });
+
+    connect(block, &IntervalBlockWidget::exerciseSelected,
+            this, &MainWindow::openExercise);
+
+}
+
+void MainWindow::openExercise(IBlockWidget* block, int id)
 {
+    previousWidget = block;
     if (id == 1) {
         stack->setCurrentWidget(intervalExercise);
     }
 }
+

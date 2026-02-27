@@ -24,6 +24,7 @@ public:
 signals:
     void inputFinished();
     void requestSetMode(NoteTilesWidget::Mode);
+    void backClicked();
 private:
     Ui::IntervalExerciseWidget *ui;
     NotePlayer* notePlayer;

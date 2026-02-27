@@ -20,6 +20,9 @@ IntervalExerciseWidget::IntervalExerciseWidget(NotePlayer* player, QWidget *pare
             this, [](const QString& msg) { qDebug() << "Error:" << msg; });
     connect(ui->startBtn, &QPushButton::clicked, this, &IntervalExerciseWidget::playTone);
     connect(ui->stopBtn, &QPushButton::clicked, notePlayer, &NotePlayer::stop);
+    connect(ui->backBtn, &QPushButton::clicked, this, [this] (){
+                    emit backClicked();
+            });
     connect(notePlayer, &NotePlayer::notesPlayed,
             this, [this](const GeneratedAudio& result) {
                 qDebug() << "Played:" << result.desc;

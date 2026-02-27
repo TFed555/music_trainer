@@ -1,22 +1,19 @@
 #ifndef INTERVALBLOCKWIDGET_H
 #define INTERVALBLOCKWIDGET_H
 
-#include <QWidget>
+#include "IBlockWidget.h"
 
 namespace Ui {
 class IntervalBlockWidget;
 }
 
-class IntervalBlockWidget : public QWidget
+class IntervalBlockWidget : public IBlockWidget
 {
     Q_OBJECT
 
 public:
     explicit IntervalBlockWidget(QWidget *parent = nullptr);
     ~IntervalBlockWidget();
-signals:
-    void backClicked();
-    void exerciseSelected(int exerciseId);
 private:
     Ui::IntervalBlockWidget *ui;
 };
