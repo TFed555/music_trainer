@@ -3,7 +3,7 @@
 
 #include <QString>
 
-namespace MusicTheory {
+namespace MusicUtils {
 
 int freqToMidi(double freq);
 

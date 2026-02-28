@@ -41,9 +41,8 @@ void NotePlayer::playExercise(GeneratorType type) {
 
     auto gen = GeneratorFactory::instance()
                    .create(type, params);
-
+    auto result = gen->generate();
     setGenerator(std::move(gen));
-    auto result = generator->generate();
     QVector<int> midiNotes = result.midiNotes;
     QVector<Sample> samples;
     double ratio;

@@ -1,7 +1,7 @@
 #include "pitchutils.h"
 #include <cmath>
 
-namespace MusicTheory {
+namespace MusicUtils {
     int freqToMidi(double freq) {
         return static_cast<int>(std::round(12 * std::log2(freq/440) + 69));
     }

@@ -8,7 +8,6 @@ add_library(gui STATIC
     mainwindow.cpp
     mainwindow.h
     mainwindow.ui
-    exercises/IExerciseWidget.h
     blocks/intervalblockwidget.h 
     blocks/intervalblockwidget.cpp 
     blocks/intervalblockwidget.ui
@@ -18,7 +17,6 @@ add_library(gui STATIC
     exercises/intervalexercisewidget.h exercises/intervalexercisewidget.cpp exercises/intervalexercisewidget.ui
     common/notetileswidget.h common/notetileswidget.cpp common/notetileswidget.ui
     blocks/IBlockWidget.h
-    exercises/intervalrecognisewidget.h exercises/intervalrecognisewidget.cpp
 )
 
 target_link_libraries(gui PUBLIC

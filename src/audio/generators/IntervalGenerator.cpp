@@ -35,7 +35,7 @@ GeneratedAudio IntervalGenerator::generate() {
     GeneratedAudio res;
     res.midiNotes.append(firstMidi);
     res.midiNotes.append(secondMidi);
-    res.desc = QString("%1 -> %2").arg(MusicTheory::midiToNote(firstMidi)).arg(MusicTheory::midiToNote(secondMidi));
+    res.desc = QString("%1 -> %2").arg(MusicUtils::midiToNote(firstMidi)).arg(MusicUtils::midiToNote(secondMidi));
 
     return res;
 }

@@ -2,6 +2,7 @@
 #define IBLOCKWIDGET_H
 #pragma once
 #include <QWidget>
+#include "../../core/common/interfaces/IExerciseWidget.h"
 
 class IBlockWidget : public QWidget
 {
@@ -12,8 +13,8 @@ public:
     virtual ~IBlockWidget() {};
 signals:
     void backClicked();
-    void exerciseSelected(QWidget* exercise);
-    void exerciseBackClicked();
+    void exerciseSelected(ExerciseType, IBlockWidget*);
+    // void exerciseBackClicked();
 };
 
 #endif // IBLOCKWIDGET_H

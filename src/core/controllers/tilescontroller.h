@@ -3,16 +3,11 @@
 
 #include "../audio/playback/noteplayer.h"
 
-struct Note {
-    QString name;
-    int midi;
-};
-
-class TilesController
+class TilesController : public QObject
 {
+    Q_OBJECT
 public:
-    explicit TilesController() {};
-    QVector<Note> setNotes();
+    explicit TilesController(NotePlayer* player) : notePlayer(player) {};
 public slots:
     void playTile(const QString& noteName);
 private:

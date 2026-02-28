@@ -5,6 +5,11 @@
 #include <QStackedWidget>
 #include "./blocks/mainmenuwidget.h"
 #include "./blocks/IBlockWidget.h"
+#include "../core/data/samples/sampleloader.h"
+#include "../core/data/samples/samplerepository.h"
+#include "../audio/audio.h"
+#include "../audio/playback/noteplayer.h"
+#include "../../core/sessions/isession.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -29,5 +34,11 @@ private:
     MainMenuWidget* mainMenu;
     QWidget* previousWidget = nullptr;
     QVector<IBlockWidget*> blocks;
+    SampleLoader sampleLoader;
+    SampleRepository sampleRepository;
+    AudioProcessor* audio;
+    NotePlayer* notePlayer;
+    ISession* session;
+    IExerciseWidget* exercise;
 };
 #endif // MAINWINDOW_H

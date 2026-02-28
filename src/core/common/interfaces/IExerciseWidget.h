@@ -2,7 +2,12 @@
 #define IEXERCISEWIDGET_H
 
 #include <QWidget>
-#include "../common/notetileswidget.h"
+#include "../models/Mode.h"
+
+enum class ExerciseType {
+    IntervalRecognise,
+    IntervalBuild,
+};
 
 class IExerciseWidget : public QWidget {
     Q_OBJECT
@@ -11,13 +16,10 @@ public:
     virtual ~IExerciseWidget() {};
     virtual QString title() const = 0;
 
-    QVector<QString> correctAnswer;
-    QVector<QString>  userAnswer;
 signals:
-    void start();
-    void stop();
-    void inputFinished();
-    void requestSetMode(NoteTilesWidget::Mode);
+    void startClicked();
+    void stopClicked();
+    void requestSetMode(Mode);
     void backClicked();
 };
 

@@ -1,7 +1,7 @@
 #ifndef AUDIO_H
 #define AUDIO_H
 
-#include "RtAudio.h"
+#include "rtaudio/RtAudio.h"
 #include <QObject>
 #include <QVector>
 #include <QTime>

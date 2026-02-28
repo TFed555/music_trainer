@@ -4,8 +4,8 @@
 
 #include "../audio.h"
 #include "../core/data/samples/samplerepository.h"
-#include "generators/IGenerator.h"
-#include "generatorfactory.h"
+#include "../generators/IGenerator.h"
+#include "../generators/generatorfactory.h"
 #include <samplerate.h>
 
 struct PlaybackLog {
@@ -25,7 +25,7 @@ public:
 signals:
     void playbackFinished();
     void error(const QString&);
-    void notesPlayed(const GeneratedAudio& info);
+    void notesPlayed(GeneratedAudio info);
 private:
     void setGenerator(std::unique_ptr<IGenerator> gen) { generator = std::move(gen);};
     AudioProcessor* processor;
