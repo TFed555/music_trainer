@@ -16,6 +16,7 @@ IntervalExerciseWidget::IntervalExerciseWidget(QWidget *parent)
     connect(ui->backBtn, &QPushButton::clicked, this, [this] (){
         emit backClicked();
     });
+    connect(tiles, &NoteTilesWidget::noteSelected, this, &IntervalExerciseWidget::noteSelected);
 }
 
 IntervalExerciseWidget::~IntervalExerciseWidget()

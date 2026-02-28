@@ -22,6 +22,8 @@ public:
 public slots:
     void showResult(const QVector<QString>& correct);
     void setMode(Mode m);
+signals:
+    void noteSelected(const QString& noteName);
 private:
     Ui::IntervalExerciseWidget *ui;
     NoteTilesWidget *tiles;
