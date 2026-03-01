@@ -3,7 +3,6 @@
 
 #include <QObject>
 #include "../../audio/playback/noteplayer.h"
-#include "../../music/pitchutils.h"
 
 class IExerciseController : public QObject
 {
@@ -20,12 +19,9 @@ public slots:
     virtual void start() = 0;
     virtual void stop() = 0;
 private:
-    virtual void onNotesPlayed(const GeneratedAudio& result)
-    {
-        correctAnswer.clear();
-        correctAnswer.append(MusicUtils::midiToNote(result.midiNotes[0]));
-        correctAnswer.append(MusicUtils::midiToNote(result.midiNotes[1]));
-    }
+    virtual void playTone() = 0;
+
+    virtual void onNotesPlayed(const GeneratedAudio& result) = 0;
 
     void connectPlayer()
     {
@@ -42,8 +38,7 @@ private:
                 });
     }
 protected:
-    QVector<QString> correctAnswer;
-    QVector<QString>  userAnswer;
+
     NotePlayer* notePlayer;
 };
 

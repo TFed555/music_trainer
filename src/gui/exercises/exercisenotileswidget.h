@@ -17,6 +17,9 @@ public:
     ~ExerciseNoTilesWidget();
 public slots:
     void addAnswers(QVector<QString> answers);
+    void showResult(const QString& correct);
+signals:
+    void answerSelected(const QString& answer);
 private:
     Ui::ExerciseNoTilesWidget *ui;
 };

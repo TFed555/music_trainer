@@ -1,10 +1,10 @@
 #include "intervalrecognisecontroller.h"
+#include "../../music/pitchutils.h"
 
 IntervalRecogniseController::IntervalRecogniseController(NotePlayer* player)
     : IExerciseController(player)
 {
 }
-
 
 void IntervalRecogniseController::start() {
     playTone();
@@ -24,12 +24,19 @@ void IntervalRecogniseController::stop() {
 
 void IntervalRecogniseController::noteSelected(const QString& name) {
     qDebug() << "Note selected" << name;
-                userAnswer.append(name);
-                noteCounter++;
-                if (noteCounter == 2) {
-                    if (correctAnswer.size() == 2) {
-                        emit showResult(correctAnswer);
-                        emit requestSetMode(Mode::Result);
-                    }
-                }
+    userAnswer.append(name);
+    noteCounter++;
+    if (noteCounter == 2) {
+        if (correctAnswer.size() == 2) {
+            emit showResult(correctAnswer);
+            emit requestSetMode(Mode::Result);
+        }
+    }
 }
+
+void IntervalRecogniseController::onNotesPlayed(const GeneratedAudio& result){
+    correctAnswer.clear();
+    correctAnswer.append(MusicUtils::midiToNote(result.midiNotes[0]));
+    correctAnswer.append(MusicUtils::midiToNote(result.midiNotes[1]));
+}
+

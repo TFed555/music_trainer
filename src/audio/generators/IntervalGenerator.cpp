@@ -33,6 +33,7 @@ GeneratedAudio IntervalGenerator::generate() {
     int secondMidi = 60+((firstMidi-60+semitones) % 12);
 
     GeneratedAudio res;
+    res.interval.append(MusicUtils::semitonesToInterval(semitones));
     res.midiNotes.append(firstMidi);
     res.midiNotes.append(secondMidi);
     res.desc = QString("%1 -> %2").arg(MusicUtils::midiToNote(firstMidi)).arg(MusicUtils::midiToNote(secondMidi));

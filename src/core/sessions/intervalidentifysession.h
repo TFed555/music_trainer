@@ -2,7 +2,7 @@
 #define INTERVALIDENTIFYSESSION_H
 
 #include "isession.h"
-#include "../../gui/exercises/exercisewithtileswidget.h"
+#include "../../gui/exercises/exercisenotileswidget.h"
 #include "../core/controllers/intervalidentifycontroller.h"
 #include <QObject>
 
@@ -14,11 +14,11 @@ public:
         QWidget* parentWidget,
         NotePlayer* player,
         QObject* parent = nullptr);
-    ExerciseWithTilesWidget* getWidget() const override {
+    ExerciseNoTilesWidget* getWidget() const override {
         qDebug() << "getWidget()" << view; return view; }
 private:
     int noteCounter = 0;
-    ExerciseWithTilesWidget* view;
+    ExerciseNoTilesWidget* view;
     IntervalIdentifyController* exerciseController;
 };
 

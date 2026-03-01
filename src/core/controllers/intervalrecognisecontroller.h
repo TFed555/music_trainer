@@ -19,8 +19,11 @@ signals:
     void showResult(QVector<QString> answer);
 
 private:
-    void playTone();
+    void playTone() override;
+    void onNotesPlayed(const GeneratedAudio& result) override;
 private:
+    QVector<QString> correctAnswer;
+    QVector<QString>  userAnswer;
     int noteCounter;
 };
 

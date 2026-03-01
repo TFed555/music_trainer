@@ -25,4 +25,9 @@ void ExerciseNoTilesWidget::addAnswers(QVector<QString> answers) {
         newBtn->setText(answers[i]);
         ui->horizontalLayout->addWidget(newBtn);
     }
+    update();
+}
+
+void ExerciseNoTilesWidget::showResult(const QString& correct) {
+
 }

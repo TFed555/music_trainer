@@ -27,4 +27,8 @@ namespace MusicUtils {
     double midiToFreq(int midi) {
         return std::pow(2.0, (midi-69)/12.0)*440.0;
     }
+
+    QString semitonesToInterval(int semitones) {
+        return static_cast<QString>(intervals.value(semitones));
+    }
 }
