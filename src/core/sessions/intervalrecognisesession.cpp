@@ -8,26 +8,26 @@ IntervalRecogniseSession::IntervalRecogniseSession(QWidget* parentWidget,
 {
     auto* tilesController = new TilesController(player);
     exerciseController = new IntervalRecogniseController(player);
-    view = new IntervalExerciseWidget(parentWidget);
+    view = new ExerciseWithTilesWidget(parentWidget);
 
-    connect(view, &IntervalExerciseWidget::startClicked, exerciseController, &IntervalRecogniseController::start);
+    connect(view, &ExerciseWithTilesWidget::startClicked, exerciseController, &IntervalRecogniseController::start);
 
-    connect(view, &IntervalExerciseWidget::stopClicked, exerciseController, &IntervalRecogniseController::stop);
+    connect(view, &ExerciseWithTilesWidget::stopClicked, exerciseController, &IntervalRecogniseController::stop);
 
-    connect(view, &IntervalExerciseWidget::backClicked, this, [this](){
+    connect(view, &ExerciseWithTilesWidget::backClicked, this, [this](){
         emit back();
     });
 
     connect(exerciseController, &IntervalRecogniseController::showResult,
-            view, &IntervalExerciseWidget::showResult);
+            view, &ExerciseWithTilesWidget::showResult);
 
     connect(exerciseController, &IntervalRecogniseController::requestSetMode,
-            view, &IntervalExerciseWidget::setMode, Qt::QueuedConnection);
+            view, &ExerciseWithTilesWidget::setMode, Qt::QueuedConnection);
 
-    connect(view, &IntervalExerciseWidget::noteSelected,
+    connect(view, &ExerciseWithTilesWidget::noteSelected,
             tilesController, &TilesController::playTile);
 
-    connect(view, &IntervalExerciseWidget::noteSelected,
+    connect(view, &ExerciseWithTilesWidget::noteSelected,
             exerciseController, &IntervalRecogniseController::noteSelected);
 
 }

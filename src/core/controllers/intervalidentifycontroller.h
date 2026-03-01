@@ -4,10 +4,14 @@
 #include <QObject>
 #include "iexercisecontroller.h"
 
-class IntervalIdentifyController
+class IntervalIdentifyController : public IExerciseController
 {
 public:
-    IntervalIdentifyController();
+    explicit IntervalIdentifyController(NotePlayer* player);
+public slots:
+    void start() override;
+    void stop() override;
+private:
 };
 
 #endif // INTERVALIDENTIFYCONTROLLER_H

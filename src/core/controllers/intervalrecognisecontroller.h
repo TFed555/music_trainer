@@ -21,10 +21,7 @@ signals:
 private:
     void playTone();
 private:
-    QVector<QString> correctAnswer;
-    QVector<QString>  userAnswer;
     int noteCounter;
-    NotePlayer* notePlayer;
 };
 
 #endif // INTERVALRECOGNISECONTROLLER_H

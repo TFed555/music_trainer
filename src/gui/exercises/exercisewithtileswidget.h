@@ -1,21 +1,21 @@
-#ifndef INTERVALEXERCISEWIDGET_H
-#define INTERVALEXERCISEWIDGET_H
+#ifndef EXERCISEWITHTILESWIDGET_H
+#define EXERCISEWITHTILESWIDGET_H
 
 #include <QWidget>
 #include "../../core/common/interfaces/IExerciseWidget.h"
 #include "../common/notetileswidget.h"
 
 namespace Ui {
-class IntervalExerciseWidget;
+class ExerciseWithTilesWidget;
 }
 
-class IntervalExerciseWidget : public IExerciseWidget
+class ExerciseWithTilesWidget : public IExerciseWidget
 {
     Q_OBJECT
 
 public:
-    explicit IntervalExerciseWidget(QWidget *parent = nullptr);
-    ~IntervalExerciseWidget();
+    explicit ExerciseWithTilesWidget(QWidget *parent = nullptr);
+    ~ExerciseWithTilesWidget();
 
 public slots:
     void showResult(const QVector<QString>& correct);
@@ -23,8 +23,8 @@ public slots:
 signals:
     void noteSelected(const QString& noteName);
 private:
-    Ui::IntervalExerciseWidget *ui;
+    Ui::ExerciseWithTilesWidget *ui;
     NoteTilesWidget *tiles;
 };
 
-#endif // INTERVALEXERCISEWIDGET_H
+#endif // EXERCISEWITHTILESWIDGET_H

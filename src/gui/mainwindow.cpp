@@ -54,7 +54,7 @@ void MainWindow::addBlock(IBlockWidget* block) {
             session = new IntervalRecogniseSession(stack, notePlayer, this);
             exercise = session->getWidget();
             this->setWindowTitle("Exercise 1");
-            connect(exercise, &IntervalExerciseWidget::backClicked,
+            connect(exercise, &ExerciseWithTilesWidget::backClicked,
                     this, [this]() {
                     this->setWindowTitle("Music trainer");
                 });

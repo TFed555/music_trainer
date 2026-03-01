@@ -1,3 +1,6 @@
 #include "intervalidentifycontroller.h"
 
-IntervalIdentifyController::IntervalIdentifyController() {}
+IntervalIdentifyController::IntervalIdentifyController(NotePlayer* player)
+    : IExerciseController(player)
+{
+}

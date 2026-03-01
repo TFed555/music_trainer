@@ -1,19 +1,8 @@
 #include "intervalrecognisecontroller.h"
-#include "../../music/pitchutils.h"
 
 IntervalRecogniseController::IntervalRecogniseController(NotePlayer* player)
-    : notePlayer(player)
+    : IExerciseController(player)
 {
-    connect(notePlayer, &NotePlayer::playbackFinished,
-            this, []() { qDebug() << "Playback finished"; });
-    connect(notePlayer, &NotePlayer::error,
-            this, [](const QString& msg) { qDebug() << "Error:" << msg; });
-    connect(notePlayer, &NotePlayer::notesPlayed,
-            this, [this](const GeneratedAudio& result) {
-                qDebug() << "Played:" << result.desc;
-                correctAnswer.append(MusicUtils::midiToNote(result.midiNotes[0]));
-                correctAnswer.append(MusicUtils::midiToNote(result.midiNotes[1]));
-            });
 }
 
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>IntervalExerciseWidget</class>
- <widget class="QWidget" name="IntervalExerciseWidget">
+ <class>ExerciseWithTilesWidget</class>
+ <widget class="QWidget" name="ExerciseWithTilesWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
