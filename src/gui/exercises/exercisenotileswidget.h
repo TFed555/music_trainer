@@ -18,8 +18,10 @@ public:
 public slots:
     void addAnswers(QVector<QString> answers);
     void showResult(const QString& correct);
+    void requestAnswerSlot();
 signals:
     void answerSelected(const QString& answer);
+    void requestAnswers();
 private:
     Ui::ExerciseNoTilesWidget *ui;
 };

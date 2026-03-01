@@ -14,8 +14,9 @@ public slots:
     void start() override;
     void stop() override;
     void answerSelected(const QString& answer);
+    void giveAnswers();
 signals:
-    void setAnswers(QVector<QString> answers);
+    void setAnswers(QVector<QString>);
     void showResult(const QString& correct);
 private:
     void playTone() override;

@@ -6,7 +6,7 @@
 
 enum class ExerciseType {
     IntervalRecognise,
-    IntervalBuild,
+    IntervalIdentify,
 };
 
 class IExerciseWidget : public QWidget {

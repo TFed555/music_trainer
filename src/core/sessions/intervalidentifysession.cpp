@@ -22,6 +22,11 @@ IntervalIdentifySession::IntervalIdentifySession(QWidget* parentWidget,
     connect(view, &ExerciseNoTilesWidget::answerSelected,
             exerciseController, &IntervalIdentifyController::answerSelected);
 
-    connect(exerciseController,  &IntervalIdentifyController::setAnswers,
+    connect(view, &ExerciseNoTilesWidget::requestAnswers,
+            exerciseController, &IntervalIdentifyController::giveAnswers);
+
+    connect(exerciseController, &IntervalIdentifyController::setAnswers,
             view, &ExerciseNoTilesWidget::addAnswers);
+
+    view->requestAnswerSlot();
 }

@@ -3,6 +3,7 @@
 #include "./blocks/intervalblockwidget.h"
 #include "../core/common/interfaces/IExerciseWidget.h"
 #include "../../core/sessions/intervalrecognisesession.h"
+#include "../../core/sessions/intervalidentifysession.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -11,7 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
     , sampleRepository(&sampleLoader)
     , audio(new AudioProcessor(this))
     , notePlayer(new NotePlayer(audio, &sampleRepository))
-
+    , session(nullptr)
 {
     ui->setupUi(this);
     mainMenu = new MainMenuWidget(this);
@@ -64,8 +65,19 @@ void MainWindow::addBlock(IBlockWidget* block) {
             connect(session, &IntervalRecogniseSession::back,
                     this, [=]() { stack->setCurrentWidget(block); });
             break;
-        case ExerciseType::IntervalBuild:
+        case ExerciseType::IntervalIdentify:
+            session = new IntervalIdentifySession(stack, notePlayer, this);
+            exercise = session->getWidget();
+            this->setWindowTitle("Exercise 2");
+            connect(exercise, &ExerciseWithTilesWidget::backClicked,
+                    this, [this]() {
+                        this->setWindowTitle("Music trainer");
+                    });
 
+            stack->addWidget(exercise);
+            stack->setCurrentWidget(exercise);
+            connect(session, &IntervalRecogniseSession::back,
+                    this, [=]() { stack->setCurrentWidget(block); });
             break;
         }
     });

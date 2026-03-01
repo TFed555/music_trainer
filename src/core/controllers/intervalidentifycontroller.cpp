@@ -3,7 +3,7 @@
 IntervalIdentifyController::IntervalIdentifyController(NotePlayer* player)
     : IExerciseController(player)
 {
-    emit setAnswers(answerVariants);
+
 }
 
 void IntervalIdentifyController::start() {
@@ -28,4 +28,9 @@ void IntervalIdentifyController::onNotesPlayed(const GeneratedAudio& result) {
 void IntervalIdentifyController::answerSelected(const QString& answer){
     userAnswer = answer;
     emit showResult(correctAnswer);
+}
+
+void IntervalIdentifyController::giveAnswers()
+{
+    emit setAnswers(answerVariants);
 }
