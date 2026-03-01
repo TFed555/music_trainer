@@ -4,7 +4,7 @@ set(GUI_MODULE_NAME "gui_module")
 
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
 
-add_library(gui STATIC
+add_library(gui_module STATIC
     mainwindow.cpp
     mainwindow.h
     mainwindow.ui
@@ -19,15 +19,15 @@ add_library(gui STATIC
     blocks/IBlockWidget.h
 )
 
-target_link_libraries(gui PUBLIC
+target_link_libraries(gui_module PUBLIC
     Qt${QT_VERSION_MAJOR}::Widgets
     audio_module
     music_module
     log_module
 )
-target_link_libraries(gui PRIVATE Qt${QT_VERSION_MAJOR}::Core)
+target_link_libraries(gui_module PRIVATE Qt${QT_VERSION_MAJOR}::Core)
 
-target_include_directories(gui PUBLIC
+target_include_directories(gui_module PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
 )
 

@@ -33,6 +33,9 @@ void NoteTilesWidget::paintEvent(QPaintEvent* event) {
 
     for (int i = 0; i < notes.size(); i++) {
         QRect rect(i*tileWidth, 0, tileWidth, tileHeight);
+        // if (mode == Mode::Input) {
+        //     highlightedIndexes.clear();
+        // }
         if (mode == Mode::Input && i == selectedIndex) {
             painter.setBrush(QColor("#66ccff"));
         }

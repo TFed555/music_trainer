@@ -46,7 +46,7 @@ else()
     endif()
 endif()
 
-target_link_libraries(trainer_1 PRIVATE Qt${QT_VERSION_MAJOR}::Widgets ${AUDIO_MODULE_TARGET})
+# target_link_libraries(trainer_1 PRIVATE Qt${QT_VERSION_MAJOR}::Widgets ${AUDIO_MODULE_TARGET})
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
@@ -59,7 +59,7 @@ set_target_properties(trainer_1 PROPERTIES
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
     MACOSX_BUNDLE TRUE
-    WIN32_EXECUTABLE TRUE
+    # WIN32_EXECUTABLE TRUE
 )
 
 include(GNUInstallDirs)
@@ -76,12 +76,11 @@ endif()
 
 target_link_libraries(trainer_1 PRIVATE
     Qt${QT_VERSION_MAJOR}::Widgets
-    gui
+    gui_module
     log_module
     audio_module
     music_module
     core
-    ${CMAKE_CURRENT_SOURCE_DIR}/../assets   
 )
 
 add_custom_command(TARGET trainer_1 POST_BUILD

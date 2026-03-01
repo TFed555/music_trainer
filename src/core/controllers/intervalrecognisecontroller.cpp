@@ -38,7 +38,9 @@ void IntervalRecogniseController::noteSelected(const QString& name) {
                 userAnswer.append(name);
                 noteCounter++;
                 if (noteCounter == 2) {
-                    emit showResult(correctAnswer);
-                    emit requestSetMode(Mode::Result);
+                    if (correctAnswer.size() == 2) {
+                        emit showResult(correctAnswer);
+                        emit requestSetMode(Mode::Result);
+                    }
                 }
 }

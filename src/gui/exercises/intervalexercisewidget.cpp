@@ -17,6 +17,8 @@ IntervalExerciseWidget::IntervalExerciseWidget(QWidget *parent)
         emit backClicked();
     });
     connect(tiles, &NoteTilesWidget::noteSelected, this, &IntervalExerciseWidget::noteSelected);
+    connect(this, &IntervalExerciseWidget::requestSetMode,
+        this, &IntervalExerciseWidget::setMode);
 }
 
 IntervalExerciseWidget::~IntervalExerciseWidget()

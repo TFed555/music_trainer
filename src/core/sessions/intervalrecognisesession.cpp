@@ -26,4 +26,8 @@ IntervalRecogniseSession::IntervalRecogniseSession(QWidget* parentWidget,
 
     connect(view, &IntervalExerciseWidget::noteSelected,
             tilesController, &TilesController::playTile);
+
+    connect(view, &IntervalExerciseWidget::noteSelected,
+            exerciseController, &IntervalRecogniseController::noteSelected);
+
 }
