@@ -9,6 +9,7 @@ class IExerciseController : public QObject
     Q_OBJECT
 public:
     explicit IExerciseController(QObject *parent = nullptr) : QObject(parent) {};
+
 public slots:
     virtual void start() = 0;
     virtual void stop() = 0;

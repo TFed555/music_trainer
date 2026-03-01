@@ -6,6 +6,8 @@ pkg_check_modules(SNDFILE REQUIRED sndfile)
 
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
 
 add_library(core STATIC
     factory/registryfactory.h
@@ -20,6 +22,8 @@ add_library(core STATIC
     sessions/intervalrecognisesession.cpp sessions/intervalrecognisesession.h
     sessions/isession.h  common/models/Note.h common/interfaces/IExerciseWidget
     common/models/Mode.h
+    sessions/intervalidentifysession.h sessions/intervalidentifysession.cpp
+    controllers/intervalidentifycontroller.h controllers/intervalidentifycontroller.cpp
 )
 
 
@@ -28,6 +32,8 @@ target_link_libraries(core PUBLIC
     Qt${QT_VERSION_MAJOR}::Core
     ${SNDFILE_LIBRARIES}
 )
+target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
+target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
 target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
 
 target_include_directories(core PUBLIC

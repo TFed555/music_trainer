@@ -6,9 +6,9 @@ IntervalRecogniseSession::IntervalRecogniseSession(QWidget* parentWidget,
                                                    QObject* parent)
     : ISession(parent)
 {
-    view = new IntervalExerciseWidget(parentWidget);
     auto* tilesController = new TilesController(player);
     exerciseController = new IntervalRecogniseController(player);
+    view = new IntervalExerciseWidget(parentWidget);
 
     connect(view, &IntervalExerciseWidget::startClicked, exerciseController, &IntervalRecogniseController::start);
 

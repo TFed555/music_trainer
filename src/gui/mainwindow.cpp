@@ -15,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     mainMenu = new MainMenuWidget(this);
-
+    this->window()->setWindowTitle("Music trainer");
     stack = ui->stackedWidget;
     stack->addWidget(mainMenu);
     stack->setCurrentWidget(mainMenu);
@@ -51,14 +51,14 @@ void MainWindow::addBlock(IBlockWidget* block) {
         //переделывать под фабрики
         switch(type) {
         case ExerciseType::IntervalRecognise:
-            session = new IntervalRecogniseSession(
-                    stack,
-                    notePlayer,
-                    this
-                );
+            session = new IntervalRecogniseSession(stack, notePlayer, this);
             exercise = session->getWidget();
-            Q_ASSERT(exercise);
-            qDebug() << "exercise ptr" << exercise;
+            this->setWindowTitle("Exercise 1");
+            connect(exercise, &IntervalExerciseWidget::backClicked,
+                    this, [this]() {
+                    this->setWindowTitle("Music trainer");
+                });
+
             stack->addWidget(exercise);
             stack->setCurrentWidget(exercise);
             connect(session, &IntervalRecogniseSession::back,

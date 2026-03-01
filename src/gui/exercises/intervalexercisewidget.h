@@ -17,8 +17,6 @@ public:
     explicit IntervalExerciseWidget(QWidget *parent = nullptr);
     ~IntervalExerciseWidget();
 
-    QString title() const override { return "Распознавание интервала"; }
-
 public slots:
     void showResult(const QVector<QString>& correct);
     void setMode(Mode m);

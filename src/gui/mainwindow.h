@@ -10,7 +10,6 @@
 #include "../audio/audio.h"
 #include "../audio/playback/noteplayer.h"
 #include "../../core/sessions/isession.h"
-
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -24,7 +23,6 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
 private:
     void addBlock(IBlockWidget* block);
 

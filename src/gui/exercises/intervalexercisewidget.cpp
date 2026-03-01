@@ -9,8 +9,8 @@ IntervalExerciseWidget::IntervalExerciseWidget(QWidget *parent)
     , tiles(new NoteTilesWidget(this))
 {
     ui->setupUi(this);
-    // auto* tiles = new NoteTilesWidget(this);
     ui->horizontalLayout->addWidget(tiles);
+
     connect(ui->startBtn, &QPushButton::clicked, this, &IntervalExerciseWidget::startClicked);
     connect(ui->stopBtn, &QPushButton::clicked, this, &IntervalExerciseWidget::stopClicked);
     connect(ui->backBtn, &QPushButton::clicked, this, [this] (){
