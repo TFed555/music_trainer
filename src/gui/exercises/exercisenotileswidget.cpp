@@ -20,14 +20,14 @@ ExerciseNoTilesWidget::~ExerciseNoTilesWidget()
 }
 
 void ExerciseNoTilesWidget::addAnswers(QVector<QString> answers) {
-    ui->gridLayout->setHorizontalSpacing(150);
-    ui->gridLayout->setVerticalSpacing(80);
+    ui->gridLayout->setHorizontalSpacing(10);
+    ui->gridLayout->setVerticalSpacing(10);
     ui->gridLayout->setContentsMargins(20, 20, 20, 20);
     for (size_t i = 0; i < answers.size(); i++) {
         QPushButton* newBtn = new QPushButton();
         newBtn->setText(answers[i]);
         newBtn->setMinimumHeight(40);
-        newBtn->setMinimumWidth(120);
+        newBtn->setMinimumWidth(80);
         newBtn->setStyleSheet(
             "QPushButton {"
             "   background-color: #f0f0f0;"

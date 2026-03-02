@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>881</width>
-    <height>539</height>
+    <width>1000</width>
+    <height>700</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,8 +16,8 @@
   <widget class="QPushButton" name="backBtn">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>60</y>
+     <x>130</x>
+     <y>80</y>
      <width>84</width>
      <height>23</height>
     </rect>
@@ -29,10 +29,10 @@
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>130</x>
-     <y>30</y>
-     <width>160</width>
-     <height>80</height>
+     <x>370</x>
+     <y>40</y>
+     <width>251</width>
+     <height>101</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -57,8 +57,8 @@
     <rect>
      <x>60</x>
      <y>200</y>
-     <width>691</width>
-     <height>281</height>
+     <width>781</width>
+     <height>291</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout"/>

@@ -16,11 +16,16 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     mainMenu = new MainMenuWidget(this);
+    mainMenu->setFixedSize(800,800);
     this->window()->setWindowTitle("Music trainer");
     stack = ui->stackedWidget;
     stack->addWidget(mainMenu);
     stack->setCurrentWidget(mainMenu);
 
+    // QVBoxLayout *layout = new QVBoxLayout();
+    // // layout->addStrut(200);
+    // layout->addWidget(stack);
+    // setLayout(layout);
     blocks = {
         new IntervalBlockWidget(this)
     };
@@ -37,6 +42,7 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::addBlock(IBlockWidget* block) {
+    block->setFixedSize(800,800);
     stack->addWidget(block);
 
     connect(block, &IBlockWidget::backClicked,
@@ -74,6 +80,7 @@ void MainWindow::addBlock(IBlockWidget* block) {
                         this->setWindowTitle("Music trainer");
                     });
 
+            exercise->setFixedSize(1000,1000);
             stack->addWidget(exercise);
             stack->setCurrentWidget(exercise);
             connect(session, &IntervalRecogniseSession::back,
