@@ -16,8 +16,8 @@ IntervalIdentifySession::IntervalIdentifySession(QWidget* parentWidget,
         emit back();
     });
 
-    // connect(exerciseController, &IntervalIdentifyController::showResult,
-    //         view, &ExerciseNoTilesWidget::showResult);
+    connect(exerciseController, &IntervalIdentifyController::showResult,
+            view, &ExerciseNoTilesWidget::showResult);
 
     connect(view, &ExerciseNoTilesWidget::answerSelected,
             exerciseController, &IntervalIdentifyController::answerSelected);
@@ -27,6 +27,9 @@ IntervalIdentifySession::IntervalIdentifySession(QWidget* parentWidget,
 
     connect(exerciseController, &IntervalIdentifyController::setAnswers,
             view, &ExerciseNoTilesWidget::addAnswers);
+
+    connect(exerciseController, &IntervalIdentifyController::exercisePlayFinished,
+            view, &ExerciseNoTilesWidget::exercisePlayFinished);
 
     view->requestAnswerSlot();
 }

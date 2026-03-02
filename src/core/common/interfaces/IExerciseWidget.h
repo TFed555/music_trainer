@@ -14,7 +14,8 @@ class IExerciseWidget : public QWidget {
 public:
     explicit IExerciseWidget(QWidget* parent = nullptr) : QWidget(parent) {}
     virtual ~IExerciseWidget() {};
-
+public slots:
+    virtual void exercisePlayFinished() = 0;
 signals:
     void startClicked();
     void stopClicked();

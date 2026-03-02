@@ -4,8 +4,11 @@
 NotePlayer::NotePlayer(AudioProcessor* proc, SampleRepository* sampleRepo)
     : processor(proc), sampleRepository{sampleRepo}
 {
-    connect(processor, &AudioProcessor::playbackFinished,
+    connect(processor, &AudioProcessor::playbackStopped,
             this, &NotePlayer::playbackFinished);
+
+    connect(processor, &AudioProcessor::playlistEmpty,
+            this, &NotePlayer::playlistEmpty);
 
     connect(processor, &AudioProcessor::err,
             this, &NotePlayer::error);

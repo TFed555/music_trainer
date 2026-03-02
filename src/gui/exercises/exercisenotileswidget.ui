@@ -61,7 +61,7 @@
      <height>291</height>
     </rect>
    </property>
-   <layout class="QGridLayout" name="gridLayout"/>
+   <layout class="QGridLayout" name="answersLayout"/>
   </widget>
  </widget>
  <resources/>

@@ -4,6 +4,9 @@
 IntervalRecogniseController::IntervalRecogniseController(NotePlayer* player)
     : IExerciseController(player)
 {
+    connect(player, &NotePlayer::playlistEmpty, [this]() {
+        emit exercisePlayFinished();
+    });
 }
 
 void IntervalRecogniseController::start() {
@@ -14,7 +17,7 @@ void IntervalRecogniseController::playTone() {
     correctAnswer.clear();
     userAnswer.clear();
     noteCounter = 0;
-    emit requestSetMode(Mode::Input);
+    // emit requestSetMode(Mode::Input);
     notePlayer->playExercise(GeneratorType::Interval);
 }
 

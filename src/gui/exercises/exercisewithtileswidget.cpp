@@ -11,11 +11,12 @@ ExerciseWithTilesWidget::ExerciseWithTilesWidget(QWidget *parent)
     ui->setupUi(this);
     ui->horizontalLayout->addWidget(tiles);
 
-    connect(ui->startBtn, &QPushButton::clicked, this, &ExerciseWithTilesWidget::startClicked);
+    connect(ui->startBtn, &QPushButton::clicked, this, [this] {
+            emit startClicked();
+            setMode(Mode::Wait);
+        });
     connect(ui->stopBtn, &QPushButton::clicked, this, &ExerciseWithTilesWidget::stopClicked);
-    connect(ui->backBtn, &QPushButton::clicked, this, [this] (){
-        emit backClicked();
-    });
+    connect(ui->backBtn, &QPushButton::clicked, this, &ExerciseWithTilesWidget::backClicked);
     connect(tiles, &NoteTilesWidget::noteSelected, this, &ExerciseWithTilesWidget::noteSelected);
     connect(this, &ExerciseWithTilesWidget::requestSetMode,
         this, &ExerciseWithTilesWidget::setMode);
@@ -24,6 +25,10 @@ ExerciseWithTilesWidget::ExerciseWithTilesWidget(QWidget *parent)
 ExerciseWithTilesWidget::~ExerciseWithTilesWidget()
 {
     delete ui;
+}
+
+void ExerciseWithTilesWidget::exercisePlayFinished() {
+    emit requestSetMode(Mode::Input);
 }
 
 void ExerciseWithTilesWidget::showResult(const QVector<QString>& correct) {

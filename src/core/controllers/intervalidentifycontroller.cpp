@@ -3,7 +3,9 @@
 IntervalIdentifyController::IntervalIdentifyController(NotePlayer* player)
     : IExerciseController(player)
 {
-
+    connect(player, &NotePlayer::playlistEmpty, [this]() {
+        emit exercisePlayFinished();
+    });
 }
 
 void IntervalIdentifyController::start() {
@@ -21,7 +23,7 @@ void IntervalIdentifyController::stop() {
 }
 
 void IntervalIdentifyController::onNotesPlayed(const GeneratedAudio& result) {
-    correctAnswer.clear();
+    correctAnswer = 0;
     correctAnswer = result.interval;
 }
 

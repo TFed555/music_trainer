@@ -18,6 +18,8 @@ public:
 public slots:
     virtual void start() = 0;
     virtual void stop() = 0;
+signals:
+    void exercisePlayFinished();
 private:
     virtual void playTone() = 0;
 

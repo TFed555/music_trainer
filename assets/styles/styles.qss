@@ -1,0 +1,28 @@
+
+QPushButton#answerBtn {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    min-height: 40px;
+    min-width: 80px;
+}
+
+QPushButton#answerBtn:hover {
+    background-color: #e0e0e0;
+}
+
+QPushButton#answerBtn:pressed {
+    background-color: #d0d0d0;
+}
+
+QPushButton#answerBtn[state="selected"] {
+    background-color: blue;
+    color: white;
+}
+
+QPushButton#answerBtn[state="correct"] {
+    background-color: #4CAF50;
+    color: white;
+    border: 2px solid #45a049;
+}

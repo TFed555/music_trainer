@@ -1,5 +1,6 @@
 #include "pitchutils.h"
 #include <cmath>
+#include <QDebug>
 
 namespace MusicUtils {
     int freqToMidi(double freq) {
@@ -29,6 +30,8 @@ namespace MusicUtils {
     }
 
     QString semitonesToInterval(int semitones) {
+        qDebug() << semitones;
+        qDebug() << intervals.value(semitones);
         return static_cast<QString>(intervals.value(semitones));
     }
 }

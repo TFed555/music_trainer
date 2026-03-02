@@ -27,6 +27,7 @@ signals:
     void playbackFinished();
     void err(const QString& msg);
     // void notePlayed();
+    void playlistEmpty();
 private slots:
     void playNextSample();
 private:
