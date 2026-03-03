@@ -6,7 +6,8 @@
 
 enum class ExerciseType {
     IntervalRecognise,
-    IntervalBuild,
+    IntervalIdentify,
+    IntervalBuild
 };
 
 class IExerciseWidget : public QWidget {
@@ -14,8 +15,8 @@ class IExerciseWidget : public QWidget {
 public:
     explicit IExerciseWidget(QWidget* parent = nullptr) : QWidget(parent) {}
     virtual ~IExerciseWidget() {};
-    virtual QString title() const = 0;
-
+public slots:
+    virtual void exercisePlayFinished() = 0;
 signals:
     void startClicked();
     void stopClicked();

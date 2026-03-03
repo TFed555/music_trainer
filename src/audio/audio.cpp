@@ -24,6 +24,7 @@ void AudioProcessor::playNextSample() {
     if (playlistIdx >= playlist.size()) {
         disconnect(this, &AudioProcessor::playbackStopped,
                    this, &AudioProcessor::playNextSample);
+        emit playlistEmpty();
         return;
     }
     Sample s = playlist[playlistIdx++];

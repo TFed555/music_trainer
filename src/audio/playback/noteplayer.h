@@ -20,12 +20,13 @@ public:
     explicit NotePlayer(AudioProcessor* processor = nullptr, SampleRepository* sampleRepo = nullptr);
 
     void playMidi(int midi, float durationSec = 0.5f);
-    void playExercise(GeneratorType type);
+    void playExercise(GeneratorType type, int noteCount);
     void stop();
 signals:
     void playbackFinished();
     void error(const QString&);
     void notesPlayed(GeneratedAudio info);
+    void playlistEmpty();
 private:
     void setGenerator(std::unique_ptr<IGenerator> gen) { generator = std::move(gen);};
     AudioProcessor* processor;

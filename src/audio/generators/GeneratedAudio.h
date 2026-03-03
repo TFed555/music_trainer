@@ -5,6 +5,7 @@
 
 struct GeneratedAudio {
     QString desc;
+    QString interval;
     QVector<int> midiNotes;
 };
 

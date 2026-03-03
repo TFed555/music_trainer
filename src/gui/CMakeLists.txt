@@ -14,9 +14,10 @@ add_library(gui_module STATIC
     blocks/mainmenuwidget.h 
     blocks/mainmenuwidget.cpp 
     blocks/mainmenuwidget.ui
-    exercises/intervalexercisewidget.h exercises/intervalexercisewidget.cpp exercises/intervalexercisewidget.ui
+    exercises/exercisewithtileswidget.h exercises/exercisewithtileswidget.cpp exercises/exercisewithtileswidget.ui
     common/notetileswidget.h common/notetileswidget.cpp common/notetileswidget.ui
     blocks/IBlockWidget.h
+    exercises/exercisenotileswidget.h exercises/exercisenotileswidget.cpp exercises/exercisenotileswidget.ui
 )
 
 target_link_libraries(gui_module PUBLIC

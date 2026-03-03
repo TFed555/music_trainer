@@ -6,28 +6,30 @@ IntervalRecogniseSession::IntervalRecogniseSession(QWidget* parentWidget,
                                                    QObject* parent)
     : ISession(parent)
 {
-    view = new IntervalExerciseWidget(parentWidget);
-    auto* tilesController = new TilesController(player);
-    exerciseController = new IntervalRecogniseController(player);
+    auto* tilesController = new TilesController(player, this);
+    exerciseController = new IntervalRecogniseController(player, this);
+    view = new ExerciseWithTilesWidget(parentWidget);
 
-    connect(view, &IntervalExerciseWidget::startClicked, exerciseController, &IntervalRecogniseController::start);
+    connect(view, &ExerciseWithTilesWidget::startClicked, exerciseController, &IntervalRecogniseController::start);
 
-    connect(view, &IntervalExerciseWidget::stopClicked, exerciseController, &IntervalRecogniseController::stop);
+    connect(view, &ExerciseWithTilesWidget::stopClicked, exerciseController, &IntervalRecogniseController::stop);
 
-    connect(view, &IntervalExerciseWidget::backClicked, this, [this](){
+    connect(view, &ExerciseWithTilesWidget::backClicked, this, [this](){
         emit back();
     });
 
     connect(exerciseController, &IntervalRecogniseController::showResult,
-            view, &IntervalExerciseWidget::showResult);
+            view, &ExerciseWithTilesWidget::showResult);
 
     connect(exerciseController, &IntervalRecogniseController::requestSetMode,
-            view, &IntervalExerciseWidget::setMode, Qt::QueuedConnection);
+            view, &ExerciseWithTilesWidget::setMode, Qt::QueuedConnection);
 
-    connect(view, &IntervalExerciseWidget::noteSelected,
+    connect(view, &ExerciseWithTilesWidget::noteSelected,
             tilesController, &TilesController::playTile);
 
-    connect(view, &IntervalExerciseWidget::noteSelected,
+    connect(view, &ExerciseWithTilesWidget::noteSelected,
             exerciseController, &IntervalRecogniseController::noteSelected);
 
+    connect(exerciseController, &IntervalRecogniseController::exercisePlayFinished,
+            view, &ExerciseWithTilesWidget::exercisePlayFinished);
 }

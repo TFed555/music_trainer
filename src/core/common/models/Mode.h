@@ -3,6 +3,8 @@
 
 enum class Mode {
     Input,
+    Question,
+    Wait,
     Result
 };
 

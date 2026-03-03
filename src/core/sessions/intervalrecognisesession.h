@@ -2,7 +2,7 @@
 #define INTERVALRECOGNISESESSION_H
 
 #include "isession.h"
-#include "../../gui/exercises/intervalexercisewidget.h"
+#include "../../gui/exercises/exercisewithtileswidget.h"
 #include "../core/controllers/intervalrecognisecontroller.h"
 
 class IntervalRecogniseSession : public ISession
@@ -13,11 +13,18 @@ public:
         QWidget* parentWidget,
         NotePlayer* player,
         QObject* parent = nullptr);
-    IntervalExerciseWidget* getWidget() const override {
+    ~IntervalRecogniseSession() {
+        if (view) {
+            view->setParent(nullptr);
+            delete view;
+            view = nullptr;
+        }
+    }
+    ExerciseWithTilesWidget* getWidget() const override {
         qDebug() << "getWidget()" << view; return view; }
 private:
     int noteCounter = 0;
-    IntervalExerciseWidget* view;
+    ExerciseWithTilesWidget* view;
     IntervalRecogniseController* exerciseController;
 };
 

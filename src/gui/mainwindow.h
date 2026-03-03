@@ -10,24 +10,23 @@
 #include "../audio/audio.h"
 #include "../audio/playback/noteplayer.h"
 #include "../../core/sessions/isession.h"
-
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
 }
 QT_END_NAMESPACE
 
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-
+QString mainTitle = "Music trainer";
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
 private:
     void addBlock(IBlockWidget* block);
-
+    void addExercise(IBlockWidget* block,QString title);
 private:
     Ui::MainWindow *ui;
     QStackedWidget* stack;
@@ -40,5 +39,7 @@ private:
     NotePlayer* notePlayer;
     ISession* session;
     IExerciseWidget* exercise;
+    QMetaObject::Connection sessionBackConn;
+    QMetaObject::Connection exerciseBackConn;
 };
 #endif // MAINWINDOW_H
