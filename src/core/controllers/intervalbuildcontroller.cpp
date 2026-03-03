@@ -38,4 +38,6 @@ void IntervalBuildController::onNotesPlayed(const GeneratedAudio& result){
     correctAnswer.clear();
     correctAnswer.append(MusicUtils::midiToNote(result.midiNotes[1]));
     setQuestion(result.interval);
+    emit requestSetMode(Mode::Question);
+    emit highlightQuestion({MusicUtils::midiToNote(result.midiNotes[0])});
 }

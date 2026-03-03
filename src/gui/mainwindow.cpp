@@ -74,19 +74,6 @@ void MainWindow::addBlock(IBlockWidget* block) {
 }
 
 void MainWindow::addExercise(IBlockWidget* block, QString title) {
-    // exercise = session->getWidget();
-    // this->setWindowTitle(title);
-    // connect(exercise, &ExerciseWithTilesWidget::backClicked,
-    //         this, [this]() {
-    //             this->setWindowTitle(mainTitle);
-    //         });
-
-    // connect(session, &ISession::back,
-    //         this, [=]() { stack->setCurrentWidget(block);
-    //         });
-
-    // stack->addWidget(exercise);
-    // stack->setCurrentWidget(exercise);
     exercise = session->getWidget();
     this->setWindowTitle(title);
 

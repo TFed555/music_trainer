@@ -33,11 +33,11 @@ void NoteTilesWidget::paintEvent(QPaintEvent* event) {
 
     for (int i = 0; i < notes.size(); i++) {
         QRect rect(i*tileWidth, 0, tileWidth, tileHeight);
-        // if (mode == Mode::Input) {
-        //     highlightedIndexes.clear();
-        // }
         if (mode == Mode::Input && i == selectedIndex) {
             painter.setBrush(QColor("#66ccff"));
+        }
+        else if (mode == Mode::Question && highlightedIndexes.contains(i)) {
+            painter.setBrush(QColor("#2196F3"));
         }
         else if (mode == Mode::Result && highlightedIndexes.contains(i)) {
             painter.setBrush(QColor("#008000")); //зеленый

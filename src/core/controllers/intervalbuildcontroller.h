@@ -18,6 +18,7 @@ signals:
     void requestSetMode(Mode);
     void showResult(QVector<QString> answer);
     void setQuestion(const QString& question);
+    void highlightQuestion(QVector<QString> notes);
 private:
     void playTone() override;
     void onNotesPlayed(const GeneratedAudio& result) override;

@@ -35,7 +35,7 @@ void ExerciseWithTilesWidget::exercisePlayFinished() {
 void ExerciseWithTilesWidget::showResult(const QVector<QString>& correct) {
     tiles->highlight(correct);
     QTimer::singleShot(2000, this, [this]() {
-        emit requestSetMode(Mode::Input);
+        emit requestSetMode(Mode::Wait); //временно
     });
 }
 
@@ -46,4 +46,8 @@ void ExerciseWithTilesWidget::setMode(Mode m) {
 void ExerciseWithTilesWidget::setQuestion(const QString& question) {
     QLabel* questionLabel = new QLabel(question, this);
     ui->manageLayout->addWidget(questionLabel);
+}
+
+void ExerciseWithTilesWidget::highlightQuestion(QVector<QString> notes) {
+    tiles->highlight(notes);
 }
