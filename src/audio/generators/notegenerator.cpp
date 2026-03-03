@@ -2,6 +2,7 @@
 #include "generatorfactory.h"
 #include <QDebug>
 
+
 GeneratedAudio NoteGenerator::generate() {
 
 }

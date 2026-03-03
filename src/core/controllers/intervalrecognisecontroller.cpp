@@ -1,10 +1,11 @@
 #include "intervalrecognisecontroller.h"
 #include "../../music/pitchutils.h"
 
-IntervalRecogniseController::IntervalRecogniseController(NotePlayer* player)
-    : IExerciseController(player)
+IntervalRecogniseController::IntervalRecogniseController(NotePlayer* player,
+                                                         QObject *parent)
+    : IExerciseController(player, parent)
 {
-    connect(player, &NotePlayer::playlistEmpty, [this]() {
+    connect(player, &NotePlayer::playlistEmpty, this, [this]() {
         emit exercisePlayFinished();
     });
 }
@@ -18,7 +19,7 @@ void IntervalRecogniseController::playTone() {
     userAnswer.clear();
     noteCounter = 0;
     // emit requestSetMode(Mode::Input);
-    notePlayer->playExercise(GeneratorType::Interval);
+    notePlayer->playExercise(GeneratorType::Interval, 2);
 }
 
 void IntervalRecogniseController::stop() {

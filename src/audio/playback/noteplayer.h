@@ -20,7 +20,7 @@ public:
     explicit NotePlayer(AudioProcessor* processor = nullptr, SampleRepository* sampleRepo = nullptr);
 
     void playMidi(int midi, float durationSec = 0.5f);
-    void playExercise(GeneratorType type);
+    void playExercise(GeneratorType type, int noteCount);
     void stop();
 signals:
     void playbackFinished();

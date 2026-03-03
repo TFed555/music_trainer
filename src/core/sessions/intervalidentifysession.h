@@ -4,7 +4,6 @@
 #include "isession.h"
 #include "../../gui/exercises/exercisenotileswidget.h"
 #include "../core/controllers/intervalidentifycontroller.h"
-#include <QObject>
 
 class IntervalIdentifySession : public ISession
 {

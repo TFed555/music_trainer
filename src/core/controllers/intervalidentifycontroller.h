@@ -1,7 +1,6 @@
 #ifndef INTERVALIDENTIFYCONTROLLER_H
 #define INTERVALIDENTIFYCONTROLLER_H
 
-#include <QObject>
 #include "iexercisecontroller.h"
 #include "../../music/pitchutils.h"
 
@@ -9,7 +8,7 @@ class IntervalIdentifyController : public IExerciseController
 {
     Q_OBJECT
 public:
-    explicit IntervalIdentifyController(NotePlayer* player);
+    explicit IntervalIdentifyController(NotePlayer* player, QObject *parent = nullptr);
 public slots:
     void start() override;
     void stop() override;

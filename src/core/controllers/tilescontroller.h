@@ -7,7 +7,7 @@ class TilesController : public QObject
 {
     Q_OBJECT
 public:
-    explicit TilesController(NotePlayer* player) : notePlayer(player) {};
+    explicit TilesController(NotePlayer* player,  QObject *parent = nullptr) : notePlayer(player) {};
 public slots:
     void playTile(const QString& noteName);
 private:

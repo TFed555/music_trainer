@@ -8,3 +8,5 @@ release/
 .qtcreator/
 *.user
 *.autosave
+
+*.sh

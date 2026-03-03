@@ -8,6 +8,8 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
 
 add_library(core STATIC
     factory/registryfactory.h
@@ -24,6 +26,8 @@ add_library(core STATIC
     common/models/Mode.h
     sessions/intervalidentifysession.h sessions/intervalidentifysession.cpp
     controllers/intervalidentifycontroller.h controllers/intervalidentifycontroller.cpp
+    controllers/intervalbuildcontroller.h controllers/intervalbuildcontroller.cpp
+    sessions/intervalbuildsession.h sessions/intervalbuildsession.cpp
 )
 
 
@@ -32,6 +36,8 @@ target_link_libraries(core PUBLIC
     Qt${QT_VERSION_MAJOR}::Core
     ${SNDFILE_LIBRARIES}
 )
+target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
+target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
 target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
 target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
 target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)

@@ -1,0 +1,5 @@
+#!/bin/bash
+git add .
+read -p "Введи описание коммита " desc
+echo
+git commit -m "$desc"

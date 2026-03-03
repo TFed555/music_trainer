@@ -1,7 +1,8 @@
 #include "intervalidentifycontroller.h"
 
-IntervalIdentifyController::IntervalIdentifyController(NotePlayer* player)
-    : IExerciseController(player)
+IntervalIdentifyController::IntervalIdentifyController(NotePlayer* player,
+                                                       QObject *parent)
+    : IExerciseController(player, parent)
 {
     connect(player, &NotePlayer::playlistEmpty, [this]() {
         emit exercisePlayFinished();
@@ -15,7 +16,7 @@ void IntervalIdentifyController::start() {
 void IntervalIdentifyController::playTone() {
     correctAnswer = 0;
     userAnswer = 0;
-    notePlayer->playExercise(GeneratorType::Interval);
+    notePlayer->playExercise(GeneratorType::Interval, 2);
 }
 
 void IntervalIdentifyController::stop() {

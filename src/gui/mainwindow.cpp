@@ -4,6 +4,7 @@
 #include "../core/common/interfaces/IExerciseWidget.h"
 #include "../../core/sessions/intervalrecognisesession.h"
 #include "../../core/sessions/intervalidentifysession.h"
+#include "../../core/sessions/intervalbuildsession.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -22,10 +23,6 @@ MainWindow::MainWindow(QWidget *parent)
     stack->addWidget(mainMenu);
     stack->setCurrentWidget(mainMenu);
 
-    // QVBoxLayout *layout = new QVBoxLayout();
-    // // layout->addStrut(200);
-    // layout->addWidget(stack);
-    // setLayout(layout);
     blocks = {
         new IntervalBlockWidget(this)
     };
@@ -53,42 +50,57 @@ void MainWindow::addBlock(IBlockWidget* block) {
         if (session) {
             QWidget* oldView = session->getWidget();
             stack->removeWidget(oldView);
+            oldView->setParent(nullptr);
+            // delete oldView;
+            delete session;
             session = nullptr;
         }
-        //переделывать под фабрики
+
         switch(type) {
         case ExerciseType::IntervalRecognise:
             session = new IntervalRecogniseSession(stack, notePlayer, this);
-            exercise = session->getWidget();
-            this->setWindowTitle("Exercise 1");
-            connect(exercise, &ExerciseWithTilesWidget::backClicked,
-                    this, [this]() {
-                    this->setWindowTitle("Music trainer");
-                });
-
-            stack->addWidget(exercise);
-            stack->setCurrentWidget(exercise);
-            connect(session, &IntervalRecogniseSession::back,
-                    this, [=]() { stack->setCurrentWidget(block); });
+            addExercise(block, "Exercise 1");
             break;
         case ExerciseType::IntervalIdentify:
             session = new IntervalIdentifySession(stack, notePlayer, this);
-            exercise = session->getWidget();
-            this->setWindowTitle("Exercise 2");
-            connect(exercise, &ExerciseWithTilesWidget::backClicked,
-                    this, [this]() {
-                        this->setWindowTitle("Music trainer");
-                    });
-
-            exercise->setFixedSize(1000,1000);
-            stack->addWidget(exercise);
-            stack->setCurrentWidget(exercise);
-            connect(session, &IntervalRecogniseSession::back,
-                    this, [=]() { stack->setCurrentWidget(block); });
+            addExercise(block, "Exercise 2");
+            break;
+        case ExerciseType::IntervalBuild:
+            session = new IntervalBuildSession(stack, notePlayer, this);
+            addExercise(block, "Exercise 3");
             break;
         }
     });
-
 }
 
+void MainWindow::addExercise(IBlockWidget* block, QString title) {
+    // exercise = session->getWidget();
+    // this->setWindowTitle(title);
+    // connect(exercise, &ExerciseWithTilesWidget::backClicked,
+    //         this, [this]() {
+    //             this->setWindowTitle(mainTitle);
+    //         });
 
+    // connect(session, &ISession::back,
+    //         this, [=]() { stack->setCurrentWidget(block);
+    //         });
+
+    // stack->addWidget(exercise);
+    // stack->setCurrentWidget(exercise);
+    exercise = session->getWidget();
+    this->setWindowTitle(title);
+
+    disconnect(sessionBackConn);
+    disconnect(exerciseBackConn);
+
+    exerciseBackConn = connect(exercise, &IExerciseWidget::backClicked,
+                               this, [this]() {
+                                   this->setWindowTitle(mainTitle);
+                               });
+
+    sessionBackConn = connect(session, &ISession::back,
+                              this, [=]() { stack->setCurrentWidget(block); });
+
+    stack->addWidget(exercise);
+    stack->setCurrentWidget(exercise);
+}

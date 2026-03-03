@@ -13,6 +13,13 @@ public:
         QWidget* parentWidget,
         NotePlayer* player,
         QObject* parent = nullptr);
+    ~IntervalRecogniseSession() {
+        if (view) {
+            view->setParent(nullptr);
+            delete view;
+            view = nullptr;
+        }
+    }
     ExerciseWithTilesWidget* getWidget() const override {
         qDebug() << "getWidget()" << view; return view; }
 private:

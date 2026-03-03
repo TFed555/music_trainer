@@ -22,7 +22,7 @@
      <height>121</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
+   <layout class="QVBoxLayout" name="manageLayout">
     <item>
      <widget class="QPushButton" name="startBtn">
       <property name="text">

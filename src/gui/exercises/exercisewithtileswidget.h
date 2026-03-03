@@ -21,6 +21,7 @@ public slots:
     void showResult(const QVector<QString>& correct);
     void setMode(Mode m);
     void exercisePlayFinished() override;
+    void setQuestion(const QString&);
 signals:
     void noteSelected(const QString& noteName);
 private:

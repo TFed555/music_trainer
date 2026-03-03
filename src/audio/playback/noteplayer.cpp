@@ -39,7 +39,7 @@ void NotePlayer::playMidi(int midi, float durationSec) {
     processor->playSample(buffer);
 }
 
-void NotePlayer::playExercise(GeneratorType type) {
+void NotePlayer::playExercise(GeneratorType type, int noteCount) {
     GeneratorParams params;
 
     auto gen = GeneratorFactory::instance()
@@ -47,9 +47,10 @@ void NotePlayer::playExercise(GeneratorType type) {
     auto result = gen->generate();
     setGenerator(std::move(gen));
     QVector<int> midiNotes = result.midiNotes;
+    long size = noteCount > 1 ? midiNotes.size() : midiNotes.size() - 1;
     QVector<Sample> samples;
     double ratio;
-    for (size_t i = 0; i < midiNotes.size(); i++) {
+    for (size_t i = 0; i < size; i++) {
         Sample buffer = sampleRepository->getSample(midiNotes[i]);
         ratio = std::pow(2.0, (buffer.nearestMidi - midiNotes[i])/12.0);
         QVector<float> resampledData = resample(buffer.data, ratio);

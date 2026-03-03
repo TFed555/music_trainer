@@ -8,7 +8,7 @@ class ISession : public QObject
 {
     Q_OBJECT
 public:
-    explicit ISession(QObject *parent = nullptr) {};
+    explicit ISession(QObject *parent = nullptr) : QObject(parent) {};
     virtual ~ISession() = default;
     virtual IExerciseWidget* getWidget() const = 0;
 signals:

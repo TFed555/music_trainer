@@ -5,7 +5,7 @@ IntervalIdentifySession::IntervalIdentifySession(QWidget* parentWidget,
                                                    QObject* parent)
     : ISession(parent)
 {
-    exerciseController = new IntervalIdentifyController(player);
+    exerciseController = new IntervalIdentifyController(player, this);
     view = new ExerciseNoTilesWidget(parentWidget);
 
     connect(view, &ExerciseNoTilesWidget::startClicked, exerciseController, &IntervalIdentifyController::start);

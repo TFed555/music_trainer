@@ -1,7 +1,8 @@
 #include "exercisewithtileswidget.h"
 #include "ui_exercisewithtileswidget.h"
-#include <QEventLoop>
+// #include <QEventLoop>
 #include <QTimer>
+#include <QLabel>
 
 ExerciseWithTilesWidget::ExerciseWithTilesWidget(QWidget *parent)
     : IExerciseWidget(parent)
@@ -40,4 +41,9 @@ void ExerciseWithTilesWidget::showResult(const QVector<QString>& correct) {
 
 void ExerciseWithTilesWidget::setMode(Mode m) {
     tiles->setMode(m);
+}
+
+void ExerciseWithTilesWidget::setQuestion(const QString& question) {
+    QLabel* questionLabel = new QLabel(question, this);
+    ui->manageLayout->addWidget(questionLabel);
 }
