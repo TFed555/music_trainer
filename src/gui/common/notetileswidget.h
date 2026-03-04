@@ -29,6 +29,8 @@ private:
     void setNotes();
 signals:
     void noteSelected(const QString& noteName);
+public slots:
+    void resetTiles();
 private:
     Ui::NoteTilesWidget *ui;
     int selectedIndex = -1;

@@ -78,5 +78,9 @@ void NoteTilesWidget::highlight(const QVector<QString>& noteNames) {
 
 void NoteTilesWidget::setMode(Mode m) {
     mode = m;
+    // update(); //временно
+}
+
+void NoteTilesWidget::resetTiles() {
     update();
 }

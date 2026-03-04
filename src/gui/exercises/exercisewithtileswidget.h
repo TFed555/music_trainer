@@ -25,6 +25,7 @@ public slots:
     void highlightQuestion(QVector<QString> notes);
 signals:
     void noteSelected(const QString& noteName);
+    void resetTiles();
 private:
     Ui::ExerciseWithTilesWidget *ui;
     NoteTilesWidget *tiles;

@@ -38,4 +38,6 @@ IntervalBuildSession::IntervalBuildSession(QWidget* parentWidget,
 
     connect(exerciseController, &IntervalBuildController::highlightQuestion,
             view, &ExerciseWithTilesWidget::highlightQuestion);
+
+
 }

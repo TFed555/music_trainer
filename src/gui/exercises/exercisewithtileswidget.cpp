@@ -21,6 +21,7 @@ ExerciseWithTilesWidget::ExerciseWithTilesWidget(QWidget *parent)
     connect(tiles, &NoteTilesWidget::noteSelected, this, &ExerciseWithTilesWidget::noteSelected);
     connect(this, &ExerciseWithTilesWidget::requestSetMode,
         this, &ExerciseWithTilesWidget::setMode);
+    connect(this, &ExerciseWithTilesWidget::resetTiles, tiles, &NoteTilesWidget::resetTiles);
 }
 
 ExerciseWithTilesWidget::~ExerciseWithTilesWidget()
@@ -35,7 +36,8 @@ void ExerciseWithTilesWidget::exercisePlayFinished() {
 void ExerciseWithTilesWidget::showResult(const QVector<QString>& correct) {
     tiles->highlight(correct);
     QTimer::singleShot(2000, this, [this]() {
-        emit requestSetMode(Mode::Wait); //временно
+        emit requestSetMode(Mode::Input);
+        emit resetTiles();
     });
 }
 

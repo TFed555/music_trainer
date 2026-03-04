@@ -16,8 +16,8 @@ public:
     };
 
 public slots:
-    virtual void start() = 0;
-    virtual void stop() = 0;
+    virtual void start() { playTone(); };
+    virtual void stop() { notePlayer->stop(); };
     // virtual void noteSelected(const QString& name) = 0;
 signals:
     void exercisePlayFinished();

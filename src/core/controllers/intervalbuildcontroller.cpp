@@ -10,19 +10,11 @@ IntervalBuildController::IntervalBuildController(NotePlayer* player,
     });
 }
 
-void IntervalBuildController::start() {
-    playTone();
-}
-
 void IntervalBuildController::playTone() {
     correctAnswer.clear();
     userAnswer.clear();
     // emit requestSetMode(Mode::Wait);
     notePlayer->playExercise(GeneratorType::Interval, 1);
-}
-
-void IntervalBuildController::stop() {
-    notePlayer->stop();
 }
 
 void IntervalBuildController::noteSelected(const QString& name) {
@@ -31,6 +23,7 @@ void IntervalBuildController::noteSelected(const QString& name) {
     if (correctAnswer.size() > 0) {
         emit showResult(correctAnswer);
         emit requestSetMode(Mode::Result);
+        correctAnswer.clear();
     }
 }
 

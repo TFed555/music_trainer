@@ -11,8 +11,8 @@ public:
     explicit IntervalRecogniseController(NotePlayer* player, QObject *parent = nullptr);
 
 public slots:
-    void start() override;
-    void stop() override;
+    // void start() override;
+    // void stop() override;
     void noteSelected(const QString& name);
 signals:
     void requestSetMode(Mode);
