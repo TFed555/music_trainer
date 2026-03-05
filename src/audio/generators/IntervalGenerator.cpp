@@ -32,10 +32,13 @@ GeneratedAudio IntervalGenerator::generate() {
     double intervalRatio = std::pow(2.0, semitones/12.0);
     int secondMidi = 60+((firstMidi-60+semitones) % 12);
 
-    int realSemitones = std::abs(secondMidi - firstMidi);
+    int realSemitones = secondMidi - firstMidi;
 
     GeneratedAudio res;
-    res.interval.append(MusicUtils::semitonesToInterval(realSemitones));
+    res.direction = realSemitones >= 0
+                        ? IntervalDirection::Ascending
+                        : IntervalDirection::Descending;
+    res.interval.append(MusicUtils::semitonesToInterval(std::abs(realSemitones)));
     res.midiNotes.append(firstMidi);
     res.midiNotes.append(secondMidi);
     res.desc = QString("%1 -> %2").arg(MusicUtils::midiToNote(firstMidi)).arg(MusicUtils::midiToNote(secondMidi));

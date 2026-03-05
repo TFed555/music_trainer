@@ -21,8 +21,8 @@ IntervalIdentifySession::IntervalIdentifySession(NotePlayer* player,
     connect(view, &ExerciseNoTilesWidget::answerSelected,
             exerciseController, &IntervalIdentifyController::answerSelected);
 
-    connect(view, &ExerciseNoTilesWidget::requestAnswers,
-            exerciseController, &IntervalIdentifyController::giveAnswers);
+    // connect(view, &ExerciseNoTilesWidget::requestAnswers,
+    //         exerciseController, &IntervalIdentifyController::giveAnswers);
 
     connect(exerciseController, &IntervalIdentifyController::setAnswers,
             view, &ExerciseNoTilesWidget::addAnswers);
@@ -30,5 +30,6 @@ IntervalIdentifySession::IntervalIdentifySession(NotePlayer* player,
     connect(exerciseController, &IntervalIdentifyController::exercisePlayFinished,
             view, &ExerciseNoTilesWidget::exercisePlayFinished);
 
-    view->requestAnswerSlot();
+    // view->requestAnswerSlot();
+    exerciseController->giveAnswers();
 }

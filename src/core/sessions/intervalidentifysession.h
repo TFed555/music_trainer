@@ -10,7 +10,6 @@ class IntervalIdentifySession : public ISession
     Q_OBJECT
 public:
     explicit IntervalIdentifySession(
-        // QWidget* parentWidget,
         NotePlayer* player,
         QObject* parent = nullptr);
     ExerciseNoTilesWidget* getWidget() const override {

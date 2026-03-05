@@ -19,12 +19,14 @@ public:
     ~ExerciseNoTilesWidget();
 public slots:
     void addAnswers(QVector<QString> answers);
+    void addDirectionSelector();
     void showResult(const QString& correct);
-    void requestAnswerSlot();
+    // void requestAnswerSlot();
     void exercisePlayFinished() override;
 signals:
     void answerSelected(const QString& answer);
-    void requestAnswers();
+    // void requestAnswers();
+    void directionSelected(const QString& direction);
 private:
     void highlightBtn(Mode, QPushButton*);
     void resetSelection();
@@ -32,6 +34,7 @@ private:
 private:
     Ui::ExerciseNoTilesWidget *ui;
     QPushButton* selectedBtn;
+    QButtonGroup* directionGroup = nullptr;
 };
 
 #endif // EXERCISENOTILESWIDGET_H

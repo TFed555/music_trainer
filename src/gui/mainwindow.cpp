@@ -5,6 +5,7 @@
 #include "../../core/sessions/intervalrecognisesession.h"
 #include "../../core/sessions/intervalidentifysession.h"
 #include "../../core/sessions/intervalbuildsession.h"
+#include "../../core//sessions/intervaldirectionsession.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -69,6 +70,10 @@ void MainWindow::addBlock(IBlockWidget* block) {
         case ExerciseType::IntervalBuild:
             session = new IntervalBuildSession(notePlayer, this);
             addExercise(block, "Exercise 3");
+            break;
+        case ExerciseType::IntervalDirection:
+            session = new IntervalDirectionSession(notePlayer, this);
+            addExercise(block, "Exercise 4");
             break;
         }
     });

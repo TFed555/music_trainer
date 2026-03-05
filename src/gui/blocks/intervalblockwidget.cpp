@@ -17,6 +17,9 @@ IntervalBlockWidget::IntervalBlockWidget(QWidget *parent)
     connect(ui->exercise3Btn, &QPushButton::clicked, this, [this]() {
         emit exerciseSelected(ExerciseType::IntervalBuild, this);
     });
+    connect(ui->exercise4Btn, &QPushButton::clicked, this, [this]() {
+        emit exerciseSelected(ExerciseType::IntervalDirection, this);
+    });
     connect(ui->backBtn, &QPushButton::clicked, this, &IBlockWidget::backClicked);
 }
 

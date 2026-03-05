@@ -1,6 +1,9 @@
 #include "exercisenotileswidget.h"
 #include "ui_exercisenotileswidget.h"
 #include <QTimer>
+#include <QButtonGroup>
+#include <QRadioButton>
+#include <QGroupBox>
 
 ExerciseNoTilesWidget::ExerciseNoTilesWidget(QWidget *parent)
     : IExerciseWidget(parent)
@@ -139,7 +142,28 @@ void ExerciseNoTilesWidget::resetSelection() {
     btnsEnable(false);
 }
 
-void ExerciseNoTilesWidget::requestAnswerSlot()
-{
-    emit requestAnswers();
+// void ExerciseNoTilesWidget::requestAnswerSlot()
+// {
+//     emit requestAnswers();
+// }
+
+void ExerciseNoTilesWidget::addDirectionSelector() {
+    auto* group = new QGroupBox("Direction");
+    auto* layout = new QHBoxLayout(group);
+    auto* ascending  = new QRadioButton("Восходящий");
+    auto* descending = new QRadioButton("Нисходящий");
+
+    directionGroup = new QButtonGroup(this);
+    directionGroup->addButton(ascending,  0);
+    directionGroup->addButton(descending, 1);
+
+    layout->addWidget(ascending);
+    layout->addWidget(descending);
+
+    ui->answersLayout->addWidget(group);
+
+    connect(directionGroup, &QButtonGroup::idClicked,
+            this, [this](int id) {
+                emit directionSelected(id == 0 ? "Ascending" : "Descending");
+    });
 }
