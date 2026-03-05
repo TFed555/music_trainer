@@ -1,14 +1,13 @@
 #include "intervalrecognisesession.h"
 #include "../core/controllers/tilescontroller.h"
 
-IntervalRecogniseSession::IntervalRecogniseSession(QWidget* parentWidget,
-                                                   NotePlayer* player,
+IntervalRecogniseSession::IntervalRecogniseSession(NotePlayer* player,
                                                    QObject* parent)
     : ISession(parent)
 {
     auto* tilesController = new TilesController(player, this);
     exerciseController = new IntervalRecogniseController(player, this);
-    view = new ExerciseWithTilesWidget(parentWidget);
+    view = new ExerciseWithTilesWidget(nullptr);
 
     connect(view, &ExerciseWithTilesWidget::startClicked, exerciseController, &IntervalRecogniseController::start);
 
@@ -18,7 +17,7 @@ IntervalRecogniseSession::IntervalRecogniseSession(QWidget* parentWidget,
         emit back();
     });
 
-    connect(exerciseController, &IntervalRecogniseController::showResult,
+    connect (exerciseController, &IntervalRecogniseController::showResult,
             view, &ExerciseWithTilesWidget::showResult);
 
     connect(exerciseController, &IntervalRecogniseController::requestSetMode,

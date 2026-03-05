@@ -2,6 +2,8 @@
 #define EXERCISEWITHTILESWIDGET_H
 
 #include <QWidget>
+#include <QLabel>
+
 #include "../../core/common/interfaces/IExerciseWidget.h"
 #include "../common/notetileswidget.h"
 
@@ -18,7 +20,7 @@ public:
     ~ExerciseWithTilesWidget();
 
 public slots:
-    void showResult(const QVector<QString>& correct);
+    void showResult(const QVector<QString>& correct, const QVector<QString>& selected);
     void setMode(Mode m);
     void exercisePlayFinished() override;
     void setQuestion(const QString&);
@@ -29,6 +31,7 @@ signals:
 private:
     Ui::ExerciseWithTilesWidget *ui;
     NoteTilesWidget *tiles;
+    QLabel* questionLabel = nullptr;
 };
 
 #endif // EXERCISEWITHTILESWIDGET_H

@@ -1,12 +1,11 @@
 #include "intervalidentifysession.h"
 
-IntervalIdentifySession::IntervalIdentifySession(QWidget* parentWidget,
-                                                   NotePlayer* player,
+IntervalIdentifySession::IntervalIdentifySession(NotePlayer* player,
                                                    QObject* parent)
     : ISession(parent)
 {
     exerciseController = new IntervalIdentifyController(player, this);
-    view = new ExerciseNoTilesWidget(parentWidget);
+    view = new ExerciseNoTilesWidget(nullptr);
 
     connect(view, &ExerciseNoTilesWidget::startClicked, exerciseController, &IntervalIdentifyController::start);
 

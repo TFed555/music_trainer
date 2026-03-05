@@ -1,14 +1,13 @@
 #include "intervalbuildsession.h"
 #include "../core/controllers/tilescontroller.h"
 
-IntervalBuildSession::IntervalBuildSession(QWidget* parentWidget,
-                                           NotePlayer* player,
+IntervalBuildSession::IntervalBuildSession(NotePlayer* player,
                                            QObject* parent)
     : ISession(parent)
 {
     auto* tilesController = new TilesController(player, this);
-    exerciseController = new IntervalBuildController(player);
-    view = new ExerciseWithTilesWidget(parentWidget);
+    exerciseController = new IntervalBuildController(player, this);
+    view = new ExerciseWithTilesWidget(nullptr);
 
     connect(view, &ExerciseWithTilesWidget::startClicked, exerciseController, &IntervalBuildController::start);
 

@@ -10,8 +10,6 @@ class IntervalIdentifyController : public IExerciseController
 public:
     explicit IntervalIdentifyController(NotePlayer* player, QObject *parent = nullptr);
 public slots:
-    // void start() override;
-    // void stop() override;
     void answerSelected(const QString& answer);
     void giveAnswers();
 signals:

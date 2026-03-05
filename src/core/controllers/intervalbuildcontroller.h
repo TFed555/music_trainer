@@ -11,12 +11,10 @@ public:
     explicit IntervalBuildController(NotePlayer* player, QObject *parent = nullptr);
 
 public slots:
-    // void start() override;
-    // void stop() override;
     void noteSelected(const QString& name);
 signals:
     void requestSetMode(Mode);
-    void showResult(QVector<QString> answer);
+    void showResult(QVector<QString> answer, QVector<QString> selected);
     void setQuestion(const QString& question);
     void highlightQuestion(QVector<QString> notes);
 private:

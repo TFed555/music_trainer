@@ -4,7 +4,7 @@ IntervalIdentifyController::IntervalIdentifyController(NotePlayer* player,
                                                        QObject *parent)
     : IExerciseController(player, parent)
 {
-    connect(player, &NotePlayer::playlistEmpty, [this]() {
+    connect(player, &NotePlayer::playlistEmpty, this, [this]() {
         emit exercisePlayFinished();
     });
 }

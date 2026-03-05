@@ -19,7 +19,7 @@ public:
     explicit NoteTilesWidget(QWidget *parent = nullptr);
     ~NoteTilesWidget();
 
-    void highlight(const QVector<QString>& noteNames);
+    void highlight(const QVector<QString>& noteNames, const QVector<QString>& selected);
     void setMode(Mode m);
 
 protected:
@@ -35,6 +35,7 @@ private:
     Ui::NoteTilesWidget *ui;
     int selectedIndex = -1;
     QSet<int> highlightedIndexes;
+    QSet<int> wrongIndexes;
     Mode mode = Mode::Input;
     QVector<Note> notes;
 };
