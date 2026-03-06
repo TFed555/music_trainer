@@ -1,9 +1,9 @@
 #ifndef INTERVALDIRECTIONSESSION_H
 #define INTERVALDIRECTIONSESSION_H
 
-#include "isession.h"
+#include "../common/isession.h"
 #include "../../gui/exercises/exercisenotileswidget.h"
-#include "../core/controllers/intervaldirectioncontroller.h"
+#include "../core/controllers/intervals/intervaldirectioncontroller.h"
 
 class IntervalDirectionSession : public ISession
 {

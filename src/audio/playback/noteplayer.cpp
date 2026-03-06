@@ -39,15 +39,8 @@ void NotePlayer::playMidi(int midi, float durationSec) {
     processor->playSample(buffer);
 }
 
-void NotePlayer::playExercise(GeneratorType type, int noteCount) {
-    GeneratorParams params;
-
-    auto gen = GeneratorFactory::instance()
-                   .create(type, params);
-    auto result = gen->generate();
-    setGenerator(std::move(gen));
-    QVector<int> midiNotes = result.midiNotes;
-    long size = noteCount > 1 ? midiNotes.size() : midiNotes.size() - 1;
+void NotePlayer::playNotes(const QVector<int>& midiNotes) {
+    long size = midiNotes.size();
     QVector<Sample> samples;
     double ratio;
     for (size_t i = 0; i < size; i++) {
@@ -58,9 +51,6 @@ void NotePlayer::playExercise(GeneratorType type, int noteCount) {
         samples.append(buffer);
     }
     processor->playGenerated(samples);
-    playbackLog.append({QDateTime::currentDateTime(), result.desc});
-    qDebug() << playbackLog.last().timestamp << " " << playbackLog.last().desc;
-    emit notesPlayed(result);
 }
 
 void NotePlayer::stop() {

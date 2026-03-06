@@ -4,10 +4,10 @@
 
 #include "IGenerator.h"
 
-class NoteGenerator : public IGenerator
+class NoteGenerator : public IGenerator<GeneratedInterval>
 {
 public:
-    GeneratedAudio generate() override;
+    GeneratedInterval generate() override;
 };
 
 #endif // NOTEGENERATOR_H

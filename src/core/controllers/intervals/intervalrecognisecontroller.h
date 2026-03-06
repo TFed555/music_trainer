@@ -1,8 +1,8 @@
 #ifndef INTERVALRECOGNISECONTROLLER_H
 #define INTERVALRECOGNISECONTROLLER_H
 
-#include "iexercisecontroller.h"
-#include "../common/models/Mode.h"
+#include "../common/iexercisecontroller.h"
+#include "../../common/models/Mode.h"
 
 class IntervalRecogniseController : public IExerciseController
 {
@@ -17,7 +17,6 @@ signals:
     void showResult(QVector<QString> answer, QVector<QString> selected);
 private:
     void playTone() override;
-    void onNotesPlayed(const GeneratedAudio& result) override;
 private:
     QVector<QString> correctAnswer;
     QVector<QString>  userAnswer;

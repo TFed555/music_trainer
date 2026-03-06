@@ -1,9 +1,9 @@
 #ifndef INTERVALRECOGNISESESSION_H
 #define INTERVALRECOGNISESESSION_H
 
-#include "isession.h"
+#include "../common/isession.h"
 #include "../../gui/exercises/exercisewithtileswidget.h"
-#include "../core/controllers/intervalrecognisecontroller.h"
+#include "../core/controllers/intervals/intervalrecognisecontroller.h"
 
 class IntervalRecogniseSession : public ISession
 {

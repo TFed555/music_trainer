@@ -2,10 +2,10 @@
 #include "./ui_mainwindow.h"
 #include "./blocks/intervalblockwidget.h"
 #include "../core/common/interfaces/IExerciseWidget.h"
-#include "../../core/sessions/intervalrecognisesession.h"
-#include "../../core/sessions/intervalidentifysession.h"
-#include "../../core/sessions/intervalbuildsession.h"
-#include "../../core//sessions/intervaldirectionsession.h"
+#include "../../core/sessions/intervals/intervalrecognisesession.h"
+#include "../../core/sessions/intervals/intervalidentifysession.h"
+#include "../../core/sessions/intervals/intervalbuildsession.h"
+#include "../../core//sessions/intervals/intervaldirectionsession.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)

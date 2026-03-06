@@ -17,6 +17,7 @@ add_subdirectory(music)
 add_subdirectory(log)
 add_subdirectory(gui)
 add_subdirectory(core)
+add_subdirectory(generators)
 
 set(PROJECT_SOURCES
         main.cpp
@@ -81,6 +82,7 @@ target_link_libraries(trainer_1 PRIVATE
     audio_module
     music_module
     core
+    generators_module
 )
 
 add_custom_command(TARGET trainer_1 POST_BUILD

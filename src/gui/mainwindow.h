@@ -9,7 +9,7 @@
 #include "../core/data/samples/samplerepository.h"
 #include "../audio/audio.h"
 #include "../audio/playback/noteplayer.h"
-#include "../../core/sessions/isession.h"
+#include "../../core/sessions/common/isession.h"
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;

@@ -1,25 +1,9 @@
 #include "IntervalGenerator.h"
-#include "generatorfactory.h"
 #include "../music/pitchutils.h"
 #include <random>
 #include <QDebug>
 
-namespace {
-bool registered = [] {
-    GeneratorFactory::instance().registerGenerator(
-        GeneratorType::Interval,
-        [](GeneratorParams p) {
-            return std::make_unique<IntervalGenerator>();
-        }
-        );
-    return true;
-}();
-}
-
-void forceLinkIntervalGenerator() {}
-
-
-GeneratedAudio IntervalGenerator::generate() {
+GeneratedInterval IntervalGenerator::generate() {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_real_distribution<> midiDist(60, 71);
@@ -34,7 +18,7 @@ GeneratedAudio IntervalGenerator::generate() {
 
     int realSemitones = secondMidi - firstMidi;
 
-    GeneratedAudio res;
+    GeneratedInterval res;
     res.direction = realSemitones >= 0
                         ? IntervalDirection::Ascending
                         : IntervalDirection::Descending;

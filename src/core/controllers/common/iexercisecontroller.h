@@ -3,6 +3,12 @@
 
 #include <QObject>
 #include "../../audio/playback/noteplayer.h"
+#include "../../generators/IGenerator.h"
+
+struct PlaybackLog {
+    QDateTime timestamp;
+    QString desc;
+};
 
 class IExerciseController : public QObject
 {
@@ -24,8 +30,6 @@ signals:
 private:
     virtual void playTone() = 0;
 
-    virtual void onNotesPlayed(const GeneratedAudio& result) = 0;
-
     void connectPlayer()
     {
         connect(notePlayer, &NotePlayer::playbackFinished,
@@ -34,15 +38,19 @@ private:
         connect(notePlayer, &NotePlayer::error,
                 this, [](const QString& msg) { qDebug() << "Error:" << msg; });
 
-        connect(notePlayer, &NotePlayer::notesPlayed,
-                this, [this](const GeneratedAudio& result) {
-                    qDebug() << "Played:" << result.desc;
-                    onNotesPlayed(result);
-                });
+        // connect(notePlayer, &NotePlayer::notesPlayed,
+        //         this, [this](const GeneratedAudio& result) {
+        //             qDebug() << "Played:" << result.desc;
+        //             onNotesPlayed(result);
+        //         });
     }
 protected:
-
+    void log(const QString& desc) {
+        playbackLog.append({QDateTime::currentDateTime(), desc});
+    }
+protected:
     NotePlayer* notePlayer;
+    QVector<PlaybackLog> playbackLog;
 };
 
 #endif // IEXERCISECONTROLLER_H

@@ -5,13 +5,7 @@ find_package(PkgConfig REQUIRED)
 pkg_check_modules(SNDFILE REQUIRED sndfile)
 
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
+
 
 add_library(core STATIC
     factory/registryfactory.h
@@ -20,18 +14,18 @@ add_library(core STATIC
     data/samples/sampleloader.h data/samples/sampleloader.cpp
     data/samples/sample.h
 
-    controllers/iexercisecontroller.h
-    controllers/intervalrecognisecontroller.h controllers/intervalrecognisecontroller.cpp
-    controllers/tilescontroller.h controllers/tilescontroller.cpp
-    sessions/intervalrecognisesession.cpp sessions/intervalrecognisesession.h
-    sessions/isession.h  common/models/Note.h common/interfaces/IExerciseWidget
+    controllers/common/iexercisecontroller.h
+    controllers/intervals/intervalrecognisecontroller.h controllers/intervals/intervalrecognisecontroller.cpp
+    controllers/common/tilescontroller.h controllers/common/tilescontroller.cpp
+    sessions/intervals/intervalrecognisesession.cpp sessions/intervals/intervalrecognisesession.h
+    sessions/common/isession.h  common/models/Note.h common/interfaces/IExerciseWidget
     common/models/Mode.h
-    sessions/intervalidentifysession.h sessions/intervalidentifysession.cpp
-    controllers/intervalidentifycontroller.h controllers/intervalidentifycontroller.cpp
-    controllers/intervalbuildcontroller.h controllers/intervalbuildcontroller.cpp
-    sessions/intervalbuildsession.h sessions/intervalbuildsession.cpp
-    controllers/intervaldirectioncontroller.h controllers/intervaldirectioncontroller.cpp
-    sessions/intervaldirectionsession.h sessions/intervaldirectionsession.cpp
+    sessions/intervals/intervalidentifysession.h sessions/intervals/intervalidentifysession.cpp
+    controllers/intervals/intervalidentifycontroller.h controllers/intervals/intervalidentifycontroller.cpp
+    controllers/intervals/intervalbuildcontroller.h controllers/intervals/intervalbuildcontroller.cpp
+    sessions/intervals/intervalbuildsession.h sessions/intervals/intervalbuildsession.cpp
+    controllers/intervals/intervaldirectioncontroller.h controllers/intervals/intervaldirectioncontroller.cpp
+    sessions/intervals/intervaldirectionsession.h sessions/intervals/intervaldirectionsession.cpp
 )
 
 
@@ -41,12 +35,6 @@ target_link_libraries(core PUBLIC
     ${SNDFILE_LIBRARIES}
 )
 target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
-target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
-target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
-target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
-target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
-target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
-target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
 
 target_include_directories(core PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
@@ -55,4 +43,5 @@ target_include_directories(core PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/controllers
     ${SNDFILE_INCLUDE_DIRS}
 )
+target_link_libraries(core PUBLIC generators_module)
 

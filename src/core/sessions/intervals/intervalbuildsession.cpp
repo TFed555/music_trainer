@@ -1,5 +1,5 @@
 #include "intervalbuildsession.h"
-#include "../core/controllers/tilescontroller.h"
+#include "../core/controllers/common/tilescontroller.h"
 
 IntervalBuildSession::IntervalBuildSession(NotePlayer* player,
                                            QObject* parent)

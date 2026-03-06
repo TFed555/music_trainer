@@ -1,4 +1,5 @@
 #include "intervaldirectioncontroller.h"
+#include "../../generators/intervals/IntervalGenerator.h"
 
 IntervalDirectionController::IntervalDirectionController(NotePlayer* player,
                                                          QObject *parent)
@@ -10,12 +11,12 @@ IntervalDirectionController::IntervalDirectionController(NotePlayer* player,
 }
 
 void IntervalDirectionController::playTone() {
-    notePlayer->playExercise(GeneratorType::Interval, 2);
-}
-
-
-void IntervalDirectionController::onNotesPlayed(const GeneratedAudio& result) {
+    // notePlayer->playExercise(GeneratorType::Interval, 2);
+    IntervalGenerator gen;
+    auto result = gen.generate();
     correctDirection = result.direction;
+    log(result.desc);
+    notePlayer->playNotes(result.midiNotes);
 }
 
 void IntervalDirectionController::answerSelected(const QString& answer) {

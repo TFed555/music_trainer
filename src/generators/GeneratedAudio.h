@@ -10,9 +10,17 @@ enum class IntervalDirection {
 
 struct GeneratedAudio {
     QString desc;
+    QVector<int> midiNotes;
+};
+
+struct GeneratedInterval : GeneratedAudio {
     QString interval;
     IntervalDirection direction;
-    QVector<int> midiNotes;
+};
+
+struct GeneratedChord : GeneratedAudio {
+    QString chordName;
+    QString quality;
 };
 
 #endif // GENERATEDAUDIO_H

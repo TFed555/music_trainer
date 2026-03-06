@@ -1,5 +1,6 @@
 #include "intervalrecognisecontroller.h"
 #include "../../music/pitchutils.h"
+#include "../../generators/intervals/IntervalGenerator.h"
 
 IntervalRecogniseController::IntervalRecogniseController(NotePlayer* player,
                                                          QObject *parent)
@@ -15,7 +16,15 @@ void IntervalRecogniseController::playTone() {
     userAnswer.clear();
     noteCounter = 0;
     emit requestSetMode(Mode::Wait);
-    notePlayer->playExercise(GeneratorType::Interval, 2);
+    // notePlayer->playExercise(GeneratorType::Interval, 2);
+    IntervalGenerator generator;
+    auto result = generator.generate();
+    log(result.desc);
+    correctAnswer.append(MusicUtils::midiToNote(result.midiNotes[0]));
+    correctAnswer.append(MusicUtils::midiToNote(result.midiNotes[1]));
+
+    notePlayer->playNotes(result.midiNotes);
+
 }
 
 void IntervalRecogniseController::noteSelected(const QString& name) {
@@ -29,10 +38,3 @@ void IntervalRecogniseController::noteSelected(const QString& name) {
         }
     }
 }
-
-void IntervalRecogniseController::onNotesPlayed(const GeneratedAudio& result){
-    correctAnswer.clear();
-    correctAnswer.append(MusicUtils::midiToNote(result.midiNotes[0]));
-    correctAnswer.append(MusicUtils::midiToNote(result.midiNotes[1]));
-}
-

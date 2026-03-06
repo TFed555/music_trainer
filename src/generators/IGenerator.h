@@ -3,10 +3,11 @@
 #pragma once
 #include "GeneratedAudio.h"
 
+template <typename T>
 class IGenerator {
 public:
     virtual ~IGenerator() = default;
-    virtual GeneratedAudio generate() = 0;
+    virtual T generate() = 0;
 };
 
 #endif

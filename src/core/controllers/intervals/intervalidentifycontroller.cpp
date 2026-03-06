@@ -1,4 +1,5 @@
 #include "intervalidentifycontroller.h"
+#include "../../generators/intervals/IntervalGenerator.h"
 
 IntervalIdentifyController::IntervalIdentifyController(NotePlayer* player,
                                                        QObject *parent)
@@ -12,12 +13,12 @@ IntervalIdentifyController::IntervalIdentifyController(NotePlayer* player,
 void IntervalIdentifyController::playTone() {
     correctAnswer = 0;
     userAnswer = 0;
-    notePlayer->playExercise(GeneratorType::Interval, 2);
-}
-
-void IntervalIdentifyController::onNotesPlayed(const GeneratedAudio& result) {
-    correctAnswer = 0;
+    IntervalGenerator gen;
+    auto result = gen.generate();
     correctAnswer = result.interval;
+    log(result.desc);
+    notePlayer->playNotes(result.midiNotes);
+    // notePlayer->playExercise(GeneratorType::Interval, 2);
 }
 
 void IntervalIdentifyController::answerSelected(const QString& answer){

@@ -2,7 +2,7 @@
 #define ISESSION_H
 
 #include <QObject>
-#include "../common/interfaces/IExerciseWidget.h"
+#include "../../common/interfaces/IExerciseWidget.h"
 
 class ISession : public QObject
 {

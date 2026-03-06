@@ -1,7 +1,7 @@
 #ifndef INTERVALIDENTIFYCONTROLLER_H
 #define INTERVALIDENTIFYCONTROLLER_H
 
-#include "iexercisecontroller.h"
+#include "../common/iexercisecontroller.h"
 #include "../../music/pitchutils.h"
 
 class IntervalIdentifyController : public IExerciseController
@@ -17,7 +17,6 @@ signals:
     void showResult(const QString& correct);
 private:
     void playTone() override;
-    void onNotesPlayed(const GeneratedAudio& result) override;
 private:
     QVector<QString> answerVariants = MusicUtils::intervals;
     QString correctAnswer;

@@ -1,5 +1,5 @@
 #include "intervalrecognisesession.h"
-#include "../core/controllers/tilescontroller.h"
+#include "../core/controllers/common/tilescontroller.h"
 
 IntervalRecogniseSession::IntervalRecogniseSession(NotePlayer* player,
                                                    QObject* parent)

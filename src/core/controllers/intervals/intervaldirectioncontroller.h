@@ -1,7 +1,7 @@
 #ifndef INTERVALDIRECTIONCONTROLLER_H
 #define INTERVALDIRECTIONCONTROLLER_H
 
-#include "iexercisecontroller.h"
+#include "../common/iexercisecontroller.h"
 
 class IntervalDirectionController : public IExerciseController
 {
@@ -15,7 +15,6 @@ signals:
     void showResult(const QString& correct);
 private:
     void playTone() override;
-    void onNotesPlayed(const GeneratedAudio& result) override;
 private:
     IntervalDirection correctDirection;
     QString userAnswer;

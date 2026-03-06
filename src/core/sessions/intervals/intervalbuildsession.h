@@ -1,9 +1,9 @@
 #ifndef INTERVALBUILDSESSION_H
 #define INTERVALBUILDSESSION_H
 
-#include "isession.h"
+#include "../common/isession.h"
 #include "../../gui/exercises/exercisewithtileswidget.h"
-#include "../core/controllers/intervalbuildcontroller.h"
+#include "../core/controllers/intervals/intervalbuildcontroller.h"
 
 class IntervalBuildSession : public ISession
 {

@@ -1,8 +1,8 @@
 #ifndef INTERVALBUILDCONTROLLER_H
 #define INTERVALBUILDCONTROLLER_H
 
-#include "iexercisecontroller.h"
-#include "../common/models/Mode.h"
+#include "../common/iexercisecontroller.h"
+#include "../../common/models/Mode.h"
 
 class IntervalBuildController : public IExerciseController
 {
@@ -19,7 +19,6 @@ signals:
     void highlightQuestion(QVector<QString> notes);
 private:
     void playTone() override;
-    void onNotesPlayed(const GeneratedAudio& result) override;
 private:
     QVector<QString> correctAnswer;
     QVector<QString> userAnswer;

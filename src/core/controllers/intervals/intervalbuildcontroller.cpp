@@ -1,5 +1,6 @@
 #include "intervalbuildcontroller.h"
 #include "../music/pitchutils.h"
+#include "../../generators/intervals/IntervalGenerator.h"
 
 IntervalBuildController::IntervalBuildController(NotePlayer* player,
                                                  QObject *parent)
@@ -13,8 +14,16 @@ IntervalBuildController::IntervalBuildController(NotePlayer* player,
 void IntervalBuildController::playTone() {
     correctAnswer.clear();
     userAnswer.clear();
+    IntervalGenerator gen;
+    auto result = gen.generate();
+    correctAnswer.append(MusicUtils::midiToNote(result.midiNotes[1]));
+    emit setQuestion(result.interval);
+    emit requestSetMode(Mode::Question);
+    emit highlightQuestion({MusicUtils::midiToNote(result.midiNotes[0])});
+    log(result.desc);
+    notePlayer->playNotes({result.midiNotes[0]});
     // emit requestSetMode(Mode::Wait);
-    notePlayer->playExercise(GeneratorType::Interval, 1);
+    // notePlayer->playExercise(GeneratorType::Interval, 1);
 }
 
 void IntervalBuildController::noteSelected(const QString& name) {
@@ -25,12 +34,4 @@ void IntervalBuildController::noteSelected(const QString& name) {
         emit requestSetMode(Mode::Result);
         correctAnswer.clear();
     }
-}
-
-void IntervalBuildController::onNotesPlayed(const GeneratedAudio& result){
-    correctAnswer.clear();
-    correctAnswer.append(MusicUtils::midiToNote(result.midiNotes[1]));
-    setQuestion(result.interval);
-    emit requestSetMode(Mode::Question);
-    emit highlightQuestion({MusicUtils::midiToNote(result.midiNotes[0])});
 }
