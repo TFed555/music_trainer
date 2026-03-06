@@ -138,20 +138,27 @@ void ExerciseNoTilesWidget::resetSelection() {
             }
         }
         selectedBtn = nullptr;
+        if (directionGroup) {
+            directionGroup->setExclusive(false);
+            for (auto* btn : directionGroup->buttons()) {
+                btn->setChecked(false);
+                btn->setStyleSheet("");
+            }
+            directionGroup->setExclusive(true);
+        }
     });
     btnsEnable(false);
 }
 
-// void ExerciseNoTilesWidget::requestAnswerSlot()
-// {
-//     emit requestAnswers();
-// }
-
 void ExerciseNoTilesWidget::addDirectionSelector() {
-    auto* group = new QGroupBox("Direction");
-    auto* layout = new QHBoxLayout(group);
-    auto* ascending  = new QRadioButton("Восходящий");
-    auto* descending = new QRadioButton("Нисходящий");
+    QGroupBox* group = new QGroupBox();
+    QHBoxLayout* layout = new QHBoxLayout(group);
+    group->setFixedSize(300, 100);
+    QRadioButton* ascending  = new QRadioButton("Восходящий");
+    QRadioButton* descending = new QRadioButton("Нисходящий");
+
+    ascending->setProperty("direction", "Ascending");
+    descending->setProperty("direction", "Descending");
 
     directionGroup = new QButtonGroup(this);
     directionGroup->addButton(ascending,  0);
@@ -166,4 +173,15 @@ void ExerciseNoTilesWidget::addDirectionSelector() {
             this, [this](int id) {
                 emit directionSelected(id == 0 ? "Ascending" : "Descending");
     });
+}
+
+void ExerciseNoTilesWidget::showDirectionResult(const QString& correct) {
+    if (!directionGroup) return;
+    for (auto* btn : directionGroup->buttons()) {
+        QRadioButton* radio = qobject_cast<QRadioButton*>(btn);
+        if (radio && radio->property("direction").toString() == correct) {
+            radio->setStyleSheet("color: green; font-weight: bold;");
+        }
+    }
+    resetSelection();
 }

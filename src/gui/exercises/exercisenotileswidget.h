@@ -23,6 +23,7 @@ public slots:
     void showResult(const QString& correct);
     // void requestAnswerSlot();
     void exercisePlayFinished() override;
+    void showDirectionResult(const QString& correct);
 signals:
     void answerSelected(const QString& answer);
     // void requestAnswers();

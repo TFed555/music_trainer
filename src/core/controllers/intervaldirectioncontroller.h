@@ -18,6 +18,7 @@ private:
     void onNotesPlayed(const GeneratedAudio& result) override;
 private:
     IntervalDirection correctDirection;
+    QString userAnswer;
 };
 
 #endif // INTERVALDIRECTIONCONTROLLER_H

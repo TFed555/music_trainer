@@ -15,8 +15,8 @@ IntervalDirectionSession::IntervalDirectionSession(NotePlayer* player,
         emit back();
     });
 
-    connect(exerciseController, &IntervalDirectionController::showResult,
-            view, &ExerciseNoTilesWidget::showResult);
+    // connect(exerciseController, &IntervalDirectionController::showResult,
+    //         view, &ExerciseNoTilesWidget::showResult);
 
     connect(view, &ExerciseNoTilesWidget::answerSelected,
             exerciseController, &IntervalDirectionController::answerSelected);
@@ -25,6 +25,12 @@ IntervalDirectionSession::IntervalDirectionSession(NotePlayer* player,
             view, &ExerciseNoTilesWidget::exercisePlayFinished);
 
     view->addDirectionSelector();
+
+    connect(view, &ExerciseNoTilesWidget::directionSelected,
+            exerciseController, &IntervalDirectionController::answerSelected);
+
+    connect(exerciseController, &IntervalDirectionController::showResult,
+            view, &ExerciseNoTilesWidget::showDirectionResult);
 
     connect(view, &ExerciseNoTilesWidget::directionSelected,
             exerciseController, &IntervalDirectionController::answerSelected);

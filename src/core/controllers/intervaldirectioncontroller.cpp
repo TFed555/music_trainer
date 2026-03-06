@@ -19,6 +19,7 @@ void IntervalDirectionController::onNotesPlayed(const GeneratedAudio& result) {
 }
 
 void IntervalDirectionController::answerSelected(const QString& answer) {
+    userAnswer = answer;
     QString correct = (correctDirection == IntervalDirection::Ascending)
                             ? "Ascending" : "Descending";
     emit showResult(correct);
