@@ -2,7 +2,6 @@
 #include "ui_exercisewithtileswidget.h"
 // #include <QEventLoop>
 #include <QTimer>
-#include <QLabel>
 
 ExerciseWithTilesWidget::ExerciseWithTilesWidget(QWidget *parent)
     : IExerciseWidget(parent)
@@ -21,6 +20,7 @@ ExerciseWithTilesWidget::ExerciseWithTilesWidget(QWidget *parent)
     connect(tiles, &NoteTilesWidget::noteSelected, this, &ExerciseWithTilesWidget::noteSelected);
     connect(this, &ExerciseWithTilesWidget::requestSetMode,
         this, &ExerciseWithTilesWidget::setMode);
+    connect(this, &ExerciseWithTilesWidget::resetTiles, tiles, &NoteTilesWidget::resetTiles);
 }
 
 ExerciseWithTilesWidget::~ExerciseWithTilesWidget()
@@ -32,10 +32,11 @@ void ExerciseWithTilesWidget::exercisePlayFinished() {
     emit requestSetMode(Mode::Input);
 }
 
-void ExerciseWithTilesWidget::showResult(const QVector<QString>& correct) {
-    tiles->highlight(correct);
+void ExerciseWithTilesWidget::showResult(const QVector<QString>& correct, const QVector<QString>& selected) {
+    tiles->highlight(correct, selected);
     QTimer::singleShot(2000, this, [this]() {
-        emit requestSetMode(Mode::Wait); //временно
+        emit requestSetMode(Mode::Input);
+        emit resetTiles();
     });
 }
 
@@ -44,10 +45,15 @@ void ExerciseWithTilesWidget::setMode(Mode m) {
 }
 
 void ExerciseWithTilesWidget::setQuestion(const QString& question) {
-    QLabel* questionLabel = new QLabel(question, this);
+    if (questionLabel) {
+        delete questionLabel;
+        questionLabel = nullptr;
+    }
+    questionLabel = new QLabel(question, this);
     ui->manageLayout->addWidget(questionLabel);
 }
 
 void ExerciseWithTilesWidget::highlightQuestion(QVector<QString> notes) {
-    tiles->highlight(notes);
+    // QVector<QString>* v = new QVector<QString>;
+    tiles->highlight(notes, {});
 }

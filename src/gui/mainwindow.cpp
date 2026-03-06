@@ -5,6 +5,7 @@
 #include "../../core/sessions/intervalrecognisesession.h"
 #include "../../core/sessions/intervalidentifysession.h"
 #include "../../core/sessions/intervalbuildsession.h"
+#include "../../core//sessions/intervaldirectionsession.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -49,25 +50,30 @@ void MainWindow::addBlock(IBlockWidget* block) {
             this, [this](ExerciseType type, IBlockWidget* block) {
         if (session) {
             QWidget* oldView = session->getWidget();
-            stack->removeWidget(oldView);
-            oldView->setParent(nullptr);
-            // delete oldView;
+            if (oldView) {
+                stack->removeWidget(oldView);
+                delete oldView;
+            }
             delete session;
             session = nullptr;
         }
 
         switch(type) {
         case ExerciseType::IntervalRecognise:
-            session = new IntervalRecogniseSession(stack, notePlayer, this);
+            session = new IntervalRecogniseSession(notePlayer, this);
             addExercise(block, "Exercise 1");
             break;
         case ExerciseType::IntervalIdentify:
-            session = new IntervalIdentifySession(stack, notePlayer, this);
+            session = new IntervalIdentifySession(notePlayer, this);
             addExercise(block, "Exercise 2");
             break;
         case ExerciseType::IntervalBuild:
-            session = new IntervalBuildSession(stack, notePlayer, this);
+            session = new IntervalBuildSession(notePlayer, this);
             addExercise(block, "Exercise 3");
+            break;
+        case ExerciseType::IntervalDirection:
+            session = new IntervalDirectionSession(notePlayer, this);
+            addExercise(block, "Exercise 4");
             break;
         }
     });
@@ -75,6 +81,7 @@ void MainWindow::addBlock(IBlockWidget* block) {
 
 void MainWindow::addExercise(IBlockWidget* block, QString title) {
     exercise = session->getWidget();
+    exercise->setParent(stack);
     this->setWindowTitle(title);
 
     disconnect(sessionBackConn);

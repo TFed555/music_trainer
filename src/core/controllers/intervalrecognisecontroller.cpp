@@ -10,20 +10,12 @@ IntervalRecogniseController::IntervalRecogniseController(NotePlayer* player,
     });
 }
 
-void IntervalRecogniseController::start() {
-    playTone();
-}
-
 void IntervalRecogniseController::playTone() {
     correctAnswer.clear();
     userAnswer.clear();
     noteCounter = 0;
-    // emit requestSetMode(Mode::Input);
+    emit requestSetMode(Mode::Wait);
     notePlayer->playExercise(GeneratorType::Interval, 2);
-}
-
-void IntervalRecogniseController::stop() {
-    notePlayer->stop();
 }
 
 void IntervalRecogniseController::noteSelected(const QString& name) {
@@ -32,7 +24,7 @@ void IntervalRecogniseController::noteSelected(const QString& name) {
     noteCounter++;
     if (noteCounter == 2) {
         if (correctAnswer.size() == 2) {
-            emit showResult(correctAnswer);
+            emit showResult(correctAnswer, userAnswer);
             emit requestSetMode(Mode::Result);
         }
     }

@@ -3,9 +3,15 @@
 
 #include <QVector>
 
+enum class IntervalDirection {
+    Ascending,
+    Descending
+};
+
 struct GeneratedAudio {
     QString desc;
     QString interval;
+    IntervalDirection direction;
     QVector<int> midiNotes;
 };
 

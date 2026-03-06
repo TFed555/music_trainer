@@ -10,7 +10,7 @@ class IntervalBuildSession : public ISession
     Q_OBJECT
 public:
     explicit IntervalBuildSession(
-        QWidget* parentWidget,
+        // QWidget* parentWidget,
         NotePlayer* player,
         QObject* parent = nullptr);
     ExerciseWithTilesWidget* getWidget() const override {

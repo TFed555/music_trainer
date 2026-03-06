@@ -39,6 +39,9 @@ void NoteTilesWidget::paintEvent(QPaintEvent* event) {
         else if (mode == Mode::Question && highlightedIndexes.contains(i)) {
             painter.setBrush(QColor("#2196F3"));
         }
+        else if (mode == Mode::Result && wrongIndexes.contains(i)) {
+            painter.setBrush(QColor("#f44336")); // красный
+        }
         else if (mode == Mode::Result && highlightedIndexes.contains(i)) {
             painter.setBrush(QColor("#008000")); //зеленый
         }
@@ -65,12 +68,16 @@ void NoteTilesWidget::mousePressEvent(QMouseEvent* event) {
     }
 }
 
-void NoteTilesWidget::highlight(const QVector<QString>& noteNames) {
+void NoteTilesWidget::highlight(const QVector<QString>& noteNames, const QVector<QString>& selected) {
     selectedIndex = -1;
+    wrongIndexes.clear();
     highlightedIndexes.clear();
     for (int i = 0; i < notes.size(); i++) {
         if (noteNames.contains(notes[i].name)) {
             highlightedIndexes.insert(i);
+        }
+        if (!selected.isEmpty() && selected.contains(notes[i].name) && !noteNames.contains(notes[i].name)) {
+            wrongIndexes.insert(i);
         }
     }
     update();
@@ -78,5 +85,9 @@ void NoteTilesWidget::highlight(const QVector<QString>& noteNames) {
 
 void NoteTilesWidget::setMode(Mode m) {
     mode = m;
+    // update(); //временно
+}
+
+void NoteTilesWidget::resetTiles() {
     update();
 }

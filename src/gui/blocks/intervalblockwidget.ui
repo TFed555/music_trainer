@@ -23,7 +23,7 @@
     </rect>
    </property>
    <layout class="QFormLayout" name="formLayout">
-    <item row="3" column="1">
+    <item row="4" column="1">
      <widget class="QPushButton" name="backBtn">
       <property name="text">
        <string>Назад</string>
@@ -48,6 +48,13 @@
      <widget class="QPushButton" name="exercise3Btn">
       <property name="text">
        <string>Построение интервала</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QPushButton" name="exercise4Btn">
+      <property name="text">
+       <string>Направление интервала</string>
       </property>
      </widget>
     </item>

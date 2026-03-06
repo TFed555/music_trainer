@@ -5,13 +5,9 @@ IntervalBuildController::IntervalBuildController(NotePlayer* player,
                                                  QObject *parent)
     : IExerciseController(player, parent)
 {
-    connect(player, &NotePlayer::playlistEmpty, [this]() {
+    connect(player, &NotePlayer::playlistEmpty, this, [this]() {
         emit exercisePlayFinished();
     });
-}
-
-void IntervalBuildController::start() {
-    playTone();
 }
 
 void IntervalBuildController::playTone() {
@@ -21,16 +17,13 @@ void IntervalBuildController::playTone() {
     notePlayer->playExercise(GeneratorType::Interval, 1);
 }
 
-void IntervalBuildController::stop() {
-    notePlayer->stop();
-}
-
 void IntervalBuildController::noteSelected(const QString& name) {
     qDebug() << "Note selected" << name;
     userAnswer.append(name);
     if (correctAnswer.size() > 0) {
-        emit showResult(correctAnswer);
+        emit showResult(correctAnswer, userAnswer);
         emit requestSetMode(Mode::Result);
+        correctAnswer.clear();
     }
 }
 
