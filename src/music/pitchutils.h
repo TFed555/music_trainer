@@ -24,6 +24,10 @@ inline const QList<QString> intervals =
         "большая септима", "октава"
     };
 
+inline const QList<QString>  chordTones = {
+    "мажор", "минор"
+    };
+
 QString semitonesToInterval(int semitones);
 }
 

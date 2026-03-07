@@ -20,7 +20,8 @@ struct GeneratedInterval : GeneratedAudio {
 
 struct GeneratedChord : GeneratedAudio {
     QString chordName;
-    QString quality;
+    // QString quality;
+    QString tone;
 };
 
 #endif // GENERATEDAUDIO_H

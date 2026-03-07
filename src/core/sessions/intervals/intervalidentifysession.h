@@ -15,7 +15,6 @@ public:
     ExerciseNoTilesWidget* getWidget() const override {
         qDebug() << "getWidget()" << view; return view; }
 private:
-    int noteCounter = 0;
     ExerciseNoTilesWidget* view;
     IntervalIdentifyController* exerciseController;
 };

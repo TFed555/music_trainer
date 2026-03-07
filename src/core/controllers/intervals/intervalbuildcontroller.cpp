@@ -21,6 +21,7 @@ void IntervalBuildController::playTone() {
     emit requestSetMode(Mode::Question);
     emit highlightQuestion({MusicUtils::midiToNote(result.midiNotes[0])});
     log(result.desc);
+    qDebug() << playbackLog.last().timestamp << " " << playbackLog.last().desc;
     notePlayer->playNotes({result.midiNotes[0]});
     // emit requestSetMode(Mode::Wait);
     // notePlayer->playExercise(GeneratorType::Interval, 1);

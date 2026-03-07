@@ -30,6 +30,13 @@
       </property>
      </widget>
     </item>
+    <item row="1" column="0">
+     <widget class="QPushButton" name="chordBtn">
+      <property name="text">
+       <string>Аккорды</string>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
  </widget>

@@ -5,6 +5,8 @@ find_package(PkgConfig REQUIRED)
 pkg_check_modules(SNDFILE REQUIRED sndfile)
 
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
 
 
 add_library(core STATIC
@@ -26,6 +28,8 @@ add_library(core STATIC
     sessions/intervals/intervalbuildsession.h sessions/intervals/intervalbuildsession.cpp
     controllers/intervals/intervaldirectioncontroller.h controllers/intervals/intervaldirectioncontroller.cpp
     sessions/intervals/intervaldirectionsession.h sessions/intervals/intervaldirectionsession.cpp
+    controllers/chords/chordidentifycontroller.h controllers/chords/chordidentifycontroller.cpp
+    sessions/chords/chordidentifysession.h sessions/chords/chordidentifysession.cpp
 )
 
 
@@ -44,4 +48,6 @@ target_include_directories(core PUBLIC
     ${SNDFILE_INCLUDE_DIRS}
 )
 target_link_libraries(core PUBLIC generators_module)
+target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
+target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
 

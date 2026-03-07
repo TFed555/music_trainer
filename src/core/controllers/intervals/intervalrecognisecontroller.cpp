@@ -20,6 +20,7 @@ void IntervalRecogniseController::playTone() {
     IntervalGenerator generator;
     auto result = generator.generate();
     log(result.desc);
+    qDebug() << playbackLog.last().timestamp << " " << playbackLog.last().desc;
     correctAnswer.append(MusicUtils::midiToNote(result.midiNotes[0]));
     correctAnswer.append(MusicUtils::midiToNote(result.midiNotes[1]));
 

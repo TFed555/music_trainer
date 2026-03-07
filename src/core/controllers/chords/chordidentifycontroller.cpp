@@ -1,7 +1,7 @@
-#include "intervalidentifycontroller.h"
-#include "../../generators/intervals/IntervalGenerator.h"
+#include "chordidentifycontroller.h"
+#include "../../generators/chords/chordgenerator.h"
 
-IntervalIdentifyController::IntervalIdentifyController(NotePlayer* player,
+ChordIdentifyController::ChordIdentifyController(NotePlayer* player,
                                                        QObject *parent)
     : IExerciseController(player, parent)
 {
@@ -10,23 +10,23 @@ IntervalIdentifyController::IntervalIdentifyController(NotePlayer* player,
     });
 }
 
-void IntervalIdentifyController::playTone() {
+void ChordIdentifyController::playTone() {
     correctAnswer = 0;
     userAnswer = 0;
-    IntervalGenerator gen;
+    ChordGenerator gen;
     auto result = gen.generate();
-    correctAnswer = result.interval;
+    correctAnswer = result.tone;
     log(result.desc);
     qDebug() << playbackLog.last().timestamp << " " << playbackLog.last().desc;
     notePlayer->playNotes(result.midiNotes);
 }
 
-void IntervalIdentifyController::answerSelected(const QString& answer){
+void ChordIdentifyController::answerSelected(const QString& answer){
     userAnswer = answer;
     emit showResult(correctAnswer);
 }
 
-void IntervalIdentifyController::giveAnswers()
+void ChordIdentifyController::giveAnswers()
 {
     emit setAnswers(answerVariants);
 }

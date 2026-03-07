@@ -16,6 +16,7 @@ void IntervalDirectionController::playTone() {
     auto result = gen.generate();
     correctDirection = result.direction;
     log(result.desc);
+    qDebug() << playbackLog.last().timestamp << " " << playbackLog.last().desc;
     notePlayer->playNotes(result.midiNotes);
 }
 
