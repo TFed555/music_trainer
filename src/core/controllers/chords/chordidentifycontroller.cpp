@@ -13,9 +13,9 @@ ChordIdentifyController::ChordIdentifyController(NotePlayer* player,
 void ChordIdentifyController::playTone() {
     correctAnswer = 0;
     userAnswer = 0;
-    ChordGenerator gen;
+    ChordGenerator gen({{MusicUtils::ChordType::Major, MusicUtils::ChordType::Minor}});
     auto result = gen.generate();
-    correctAnswer = result.tone;
+    correctAnswer = result.type;
     log(result.desc);
     qDebug() << playbackLog.last().timestamp << " " << playbackLog.last().desc;
     notePlayer->playNotes(result.midiNotes);

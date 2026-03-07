@@ -19,7 +19,7 @@ signals:
 private:
     void playTone() override;
 private:
-    QVector<QString> answerVariants = MusicUtils::chordTones;
+    QVector<QString> answerVariants = MusicUtils::chordTypeNames.values();
     QString correctAnswer;
     QString userAnswer;
 };

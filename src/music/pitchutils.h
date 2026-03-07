@@ -3,6 +3,7 @@
 
 #include <QString>
 #include <QList>
+#include <QMap>
 
 namespace MusicUtils {
 
@@ -24,11 +25,22 @@ inline const QList<QString> intervals =
         "большая септима", "октава"
     };
 
-inline const QList<QString>  chordTones = {
-    "мажор", "минор"
-    };
+// inline const QList<QString>  chordTones = {
+//     "мажор", "минор"
+//     };
 
 QString semitonesToInterval(int semitones);
+
+enum class ChordType {
+    Major,
+    Minor
+};
+
+inline const QMap<ChordType, QString> chordTypeNames = {
+    { ChordType::Major, "мажор" },
+    { ChordType::Minor, "минор" }
+};
+
 }
 
 #endif // PITCHUTILS_H

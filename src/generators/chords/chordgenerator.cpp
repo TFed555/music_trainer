@@ -3,6 +3,10 @@
 #include <random>
 #include <QDebug>
 
+ChordGenerator::ChordGenerator(ChordGeneratorParams params)
+    : params(params)
+{}
+
 GeneratedChord ChordGenerator::generate() {
     std::random_device rd;
     std::mt19937 gen(rd());
@@ -10,24 +14,23 @@ GeneratedChord ChordGenerator::generate() {
 
     int firstMidi = midiDist(gen);
 
-    // std::uniform_int_distribution<> intervalDist(1,12);
-    // int semitones = intervalDist(gen);
+    std::uniform_int_distribution<> typeDist(0, params.allowedTypes.size()-1);
+    MusicUtils::ChordType type = params.allowedTypes[typeDist(gen)];
 
-    int secondMidi = 60+((firstMidi-60+3) % 12); //пока что только мажор
-
-    int thirdMidi = 60+((secondMidi-60+2) % 12);
-
-    // int realSemitones = secondMidi - firstMidi;
+    QVector<int> semitones = requiredIntervals[type];
+    QVector<int> midiNotes = {firstMidi};
+    int lastMidi = firstMidi;
+    for (auto i : semitones) {
+        lastMidi = 60+((lastMidi-60+i) % 12);
+        midiNotes.append(lastMidi);
+    }
 
     GeneratedChord res;
-    // res.chordName = MusicUtils::notesToChord()
-    res.tone = "мажор";
-    res.midiNotes.append(firstMidi);
-    res.midiNotes.append(secondMidi);
-    res.midiNotes.append(thirdMidi);
+    res.type = MusicUtils::chordTypeNames[type];
+    res.midiNotes = midiNotes;
     res.desc = QString("%1 -> %2 -> %3").arg(MusicUtils::midiToNote(firstMidi))
-                   .arg(MusicUtils::midiToNote(secondMidi))
-                   .arg(MusicUtils::midiToNote(thirdMidi));
+                   .arg(MusicUtils::midiToNote(midiNotes[1]))
+                   .arg(MusicUtils::midiToNote(midiNotes[2])); //поменять лог
 
     return res;
 }
