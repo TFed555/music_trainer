@@ -21,7 +21,7 @@ public:
 
     void highlight(const QVector<QString>& noteNames, const QVector<QString>& selected);
     void setMode(Mode m);
-
+    void resetTiles();
 protected:
     void paintEvent(QPaintEvent* event) override;
     void mousePressEvent(QMouseEvent* event) override;
@@ -29,8 +29,7 @@ private:
     void setNotes();
 signals:
     void noteSelected(const QString& noteName);
-public slots:
-    void resetTiles();
+
 private:
     Ui::NoteTilesWidget *ui;
     int selectedIndex = -1;

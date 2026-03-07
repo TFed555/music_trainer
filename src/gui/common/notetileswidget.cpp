@@ -40,7 +40,7 @@ void NoteTilesWidget::paintEvent(QPaintEvent* event) {
             painter.setBrush(QColor("#2196F3"));
         }
         else if (mode == Mode::Result && wrongIndexes.contains(i)) {
-            painter.setBrush(QColor("#f44336")); // красный
+            painter.setBrush(QColor("#f44336")); //красный
         }
         else if (mode == Mode::Result && highlightedIndexes.contains(i)) {
             painter.setBrush(QColor("#008000")); //зеленый
@@ -85,9 +85,12 @@ void NoteTilesWidget::highlight(const QVector<QString>& noteNames, const QVector
 
 void NoteTilesWidget::setMode(Mode m) {
     mode = m;
-    // update(); //временно
+    // update();
 }
 
 void NoteTilesWidget::resetTiles() {
+    wrongIndexes.clear();
+    highlightedIndexes.clear();
+    selectedIndex = -1;
     update();
 }

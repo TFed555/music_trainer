@@ -7,10 +7,6 @@
 
 namespace MusicUtils {
 
-int freqToMidi(double freq);
-
-double midiToFreq(int midi);
-
 QString midiToNote(int midi);
 
 int noteToMidi(QString note);
@@ -24,10 +20,6 @@ inline const QList<QString> intervals =
         "кварта", "тритон", "квинта", "малая секста", "большая секста", "малая септима",
         "большая септима", "октава"
     };
-
-// inline const QList<QString>  chordTones = {
-//     "мажор", "минор"
-//     };
 
 QString semitonesToInterval(int semitones);
 

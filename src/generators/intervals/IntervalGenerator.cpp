@@ -1,20 +1,21 @@
 #include "IntervalGenerator.h"
 #include "../music/pitchutils.h"
-#include <random>
 #include <QDebug>
 
 GeneratedInterval IntervalGenerator::generate() {
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_real_distribution<> midiDist(60, 71);
+    std::uniform_real_distribution<> midiDist(48, 83);
 
     int firstMidi = midiDist(gen);
 
-    std::uniform_int_distribution<> intervalDist(1,12);
+    std::uniform_int_distribution<> intervalDist(-12,12);
     int semitones = intervalDist(gen);
 
-    double intervalRatio = std::pow(2.0, semitones/12.0);
-    int secondMidi = 60+((firstMidi-60+semitones) % 12);
+    int secondMidi = firstMidi + semitones;
+
+    while (secondMidi > 83 || secondMidi < 48) {
+        semitones = intervalDist(gen);
+        secondMidi = firstMidi + semitones;
+    }
 
     int realSemitones = secondMidi - firstMidi;
 
