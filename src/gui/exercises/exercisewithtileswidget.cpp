@@ -18,8 +18,6 @@ ExerciseWithTilesWidget::ExerciseWithTilesWidget(QWidget *parent)
     connect(ui->stopBtn, &QPushButton::clicked, this, &ExerciseWithTilesWidget::stopClicked);
     connect(ui->backBtn, &QPushButton::clicked, this, &ExerciseWithTilesWidget::backClicked);
     connect(tiles, &OctaveTilesWidget::noteSelected, this, &ExerciseWithTilesWidget::noteSelected);
-    connect(this, &ExerciseWithTilesWidget::requestSetMode,
-        this, &ExerciseWithTilesWidget::setMode);
     connect(this, &ExerciseWithTilesWidget::resetTiles, tiles, &OctaveTilesWidget::resetTiles);
 }
 
@@ -29,13 +27,13 @@ ExerciseWithTilesWidget::~ExerciseWithTilesWidget()
 }
 
 void ExerciseWithTilesWidget::exercisePlayFinished() {
-    emit requestSetMode(Mode::Input);
+    setMode(Mode::Input);
 }
 
 void ExerciseWithTilesWidget::showResult(const QVector<QString>& correct, const QVector<QString>& selected) {
     tiles->highlight(correct, selected);
     QTimer::singleShot(2000, this, [this]() {
-        emit requestSetMode(Mode::Input);
+        setMode(Mode::Input);
         emit resetTiles();
     });
 }
@@ -54,6 +52,5 @@ void ExerciseWithTilesWidget::setQuestion(const QString& question) {
 }
 
 void ExerciseWithTilesWidget::highlightQuestion(QVector<QString> notes) {
-    // QVector<QString>* v = new QVector<QString>;
     tiles->highlight(notes, {});
 }

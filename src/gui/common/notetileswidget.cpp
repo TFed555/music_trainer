@@ -27,31 +27,53 @@ void NoteTilesWidget::paintEvent(QPaintEvent* event) {
     if (notes.empty()) return;
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
-
-    int tileWidth = width() / notes.size();
-    int tileHeight = height();
+    const QVector<int> blackTiles = {1,3,6,8,10};
+    const int whiteCount = notes.size() - blackTiles.size();
+    const int tileWidth = width() / whiteCount;
+    const int tileHeight = height();
+    int whiteIdx;
 
     for (int i = 0; i < notes.size(); i++) {
-        QRect rect(i*tileWidth, 0, tileWidth, tileHeight);
-        if (mode == Mode::Input && i == selectedIndex) {
-            painter.setBrush(QColor("#66ccff"));
-        }
-        else if (mode == Mode::Question && highlightedIndexes.contains(i)) {
-            painter.setBrush(QColor("#2196F3"));
-        }
-        else if (mode == Mode::Result && wrongIndexes.contains(i)) {
-            painter.setBrush(QColor("#f44336")); //красный
-        }
-        else if (mode == Mode::Result && highlightedIndexes.contains(i)) {
-            painter.setBrush(QColor("#008000")); //зеленый
-        }
-        else {
-            painter.setBrush(QColor("#dddddd"));
-        }
+        if (blackTiles.contains(i)) continue;
+        QRect rect = QRect(whiteIdx*tileWidth, 0, tileWidth, tileHeight);
+        whiteIdx++;
+        QColor color = setColor(i, TileType::White);
 
+        painter.setBrush(color);
         painter.drawRect(rect);
-        painter.drawText(rect, Qt::AlignCenter, notes[i].name);
+        painter.drawText(rect, Qt::AlignBottom | Qt::AlignCenter, notes[i].name);
     }
+    whiteIdx=0;
+    for (int i = 0; i < notes.size(); i++) {
+        if (!blackTiles.contains(i)) {
+            whiteIdx++;
+            continue;
+        }
+        int idx = whiteIdx*tileWidth-tileWidth/2;
+        QRect rect = QRect(idx, 0, tileWidth*0.7, tileHeight * 0.7);
+        QColor color = setColor(i, TileType::Black);
+
+        painter.setBrush(color);
+        painter.drawRect(rect);
+        painter.setPen(QColor(255, 255, 255));
+        painter.drawText(rect, Qt::AlignBottom | Qt::AlignCenter, notes[i].name);
+    }
+}
+
+QColor NoteTilesWidget::setColor(int i, TileType type){
+    if (mode == Mode::Input && i == selectedIndex) {
+        return QColor(124, 206, 247);
+    }
+    else if (mode == Mode::Question && highlightedIndexes.contains(i)) {
+        return QColor(51, 131, 196);
+    }
+    else if (mode == Mode::Result && wrongIndexes.contains(i)) {
+        return QColor(201, 71, 64); //красный
+    }
+    else if (mode == Mode::Result && highlightedIndexes.contains(i)) {
+        return QColor(0, 128, 0); //зеленый
+    }
+    return type==TileType::White ? QColor(255,255,255) : QColor(10,10,10);
 }
 
 void NoteTilesWidget::mousePressEvent(QMouseEvent* event) {
@@ -91,6 +113,11 @@ void NoteTilesWidget::setMode(Mode m) {
 void NoteTilesWidget::resetTiles() {
     wrongIndexes.clear();
     highlightedIndexes.clear();
+    selectedIndex = -1;
+    update();
+}
+
+void NoteTilesWidget::resetSelection() {
     selectedIndex = -1;
     update();
 }

@@ -22,7 +22,7 @@ public slots:
 signals:
     void startClicked();
     void stopClicked();
-    void requestSetMode(Mode);
+    // void requestSetMode(Mode);
     void backClicked();
 };
 

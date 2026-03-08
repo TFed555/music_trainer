@@ -25,7 +25,7 @@ signals:
 private:
     void resetSelection(int octIdx);
 private:
-    Ui::OctaveTilesWidget *ui;
+    // Ui::OctaveTilesWidget *ui;
     QVector<NoteTilesWidget*> octaves;
 };
 

@@ -1,17 +1,18 @@
 #include "octavetileswidget.h"
-#include "ui_octavetileswidget.h"
+// #include "ui_octavetileswidget.h"
 #include <QHBoxLayout>
 
 OctaveTilesWidget::OctaveTilesWidget(QWidget *parent)
     : QWidget(parent)
-    , ui(new Ui::OctaveTilesWidget)
+    // , ui(new Ui::OctaveTilesWidget)
 {
-    ui->setupUi(this);
+    // ui->setupUi(this);
     QHBoxLayout* layout = new QHBoxLayout(this);
     layout->setContentsMargins(0, 0, 0, 0);
 
     for (size_t i = 0; i < 3; i++) {
         NoteTilesWidget* tiles = new NoteTilesWidget(this);
+        tiles->show();
         layout->addWidget(tiles);
         connect(tiles, &NoteTilesWidget::noteSelected,
                 this, [this, i] (QString noteName) {
@@ -24,13 +25,13 @@ OctaveTilesWidget::OctaveTilesWidget(QWidget *parent)
 
 OctaveTilesWidget::~OctaveTilesWidget()
 {
-    delete ui;
+    // delete ui;
 }
 
 void OctaveTilesWidget::resetSelection(int octIdx) {
     for (size_t i = 0; i < octaves.size(); i++) {
         if (i != octIdx){
-            octaves[i]->resetTiles();
+            octaves[i]->resetSelection();
         }
     }
 }
@@ -38,7 +39,8 @@ void OctaveTilesWidget::resetSelection(int octIdx) {
 void OctaveTilesWidget::highlight(const QVector<QString>& noteNames, const QVector<QString>& selected) {
     QMap<int, QVector<QString>> groupByOctave;
     QMap<int, QVector<QString>> selectedByOctave;
-
+    qDebug() << "noteNames " << noteNames;
+    qDebug() << "selected " << selected;
     for (const QString& name : noteNames) {
         auto list = name.split(" ");
         int oct = list[1].toInt();
@@ -49,8 +51,10 @@ void OctaveTilesWidget::highlight(const QVector<QString>& noteNames, const QVect
         int oct = list[1].toInt();
         selectedByOctave[oct].append(list[0]);
     }
+
     for (int i = 0; i < octaves.size(); i++) {
         octaves[i]->highlight(groupByOctave[i+3], selectedByOctave[i+3]);
+        qDebug() << "octave" << i+3;
     }
 }
 

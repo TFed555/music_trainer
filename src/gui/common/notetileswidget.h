@@ -22,11 +22,18 @@ public:
     void highlight(const QVector<QString>& noteNames, const QVector<QString>& selected);
     void setMode(Mode m);
     void resetTiles();
+    void resetSelection();
+private:
+    enum class TileType {
+        White,
+        Black
+    };
 protected:
     void paintEvent(QPaintEvent* event) override;
     void mousePressEvent(QMouseEvent* event) override;
 private:
     void setNotes();
+    QColor setColor(int, TileType);
 signals:
     void noteSelected(const QString& noteName);
 
@@ -37,6 +44,7 @@ private:
     QSet<int> wrongIndexes;
     Mode mode = Mode::Input;
     QVector<Note> notes;
+
 };
 
 #endif // NOTETILESWIDGET_H
