@@ -1,15 +1,14 @@
-#ifndef CHORDIDENTIFYCONTROLLER_H
-#define CHORDIDENTIFYCONTROLLER_H
+#ifndef CHORDINVERSIONCONTROLLER_H
+#define CHORDINVERSIONCONTROLLER_H
 
 #include "../common/iexercisecontroller.h"
 #include "../../music/pitchutils.h"
 
-class ChordIdentifyController : public IExerciseController
+class ChordInversionController : public IExerciseController
 {
     Q_OBJECT
 public:
-    explicit ChordIdentifyController(NotePlayer* player, QObject *parent = nullptr);
-
+    explicit ChordInversionController(NotePlayer* player, QObject *parent = nullptr);
 public slots:
     void answerSelected(const QString& answer);
     void giveAnswers();
@@ -19,9 +18,9 @@ signals:
 private:
     void playTone() override;
 private:
-    QVector<QString> answerVariants = MusicUtils::Chords::chordTypeNames.values();
+    QVector<QString> answerVariants = MusicUtils::Chords::inversionNames.values();
     QString correctAnswer;
     QString userAnswer;
 };
 
-#endif // CHORDIDENTIFYCONTROLLER_H
+#endif // CHORDINVERSIONCONTROLLER_H

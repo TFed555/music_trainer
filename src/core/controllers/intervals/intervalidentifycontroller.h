@@ -18,7 +18,7 @@ signals:
 private:
     void playTone() override;
 private:
-    QVector<QString> answerVariants = MusicUtils::intervals;
+    QVector<QString> answerVariants = MusicUtils::Intervals::intervals;
     QString correctAnswer;
     QString userAnswer;
 };

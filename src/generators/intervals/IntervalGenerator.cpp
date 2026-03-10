@@ -23,7 +23,7 @@ GeneratedInterval IntervalGenerator::generate() {
     res.direction = realSemitones >= 0
                         ? IntervalDirection::Ascending
                         : IntervalDirection::Descending;
-    res.interval.append(MusicUtils::semitonesToInterval(std::abs(realSemitones)));
+    res.interval.append(MusicUtils::Intervals::semitonesToInterval(std::abs(realSemitones)));
     res.midiNotes.append(firstMidi);
     res.midiNotes.append(secondMidi);
     res.desc = QString("%1 -> %2").arg(MusicUtils::midiToNote(firstMidi)).arg(MusicUtils::midiToNote(secondMidi));

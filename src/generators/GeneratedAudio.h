@@ -22,6 +22,7 @@ struct GeneratedInterval : GeneratedAudio {
 struct GeneratedChord : GeneratedAudio {
     QString chordName;
     QString type;
+    QString inversion;
 };
 
 #endif // GENERATEDAUDIO_H

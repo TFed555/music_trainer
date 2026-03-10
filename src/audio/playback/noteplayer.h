@@ -14,6 +14,7 @@ public:
 
     void playMidi(int midi, float durationSec = 0.5f);
     void playNotes(const QVector<int>& midiNotes);
+    void playChord(const QVector<int>& midiNotes);
     void stop();
 signals:
     void playbackFinished();

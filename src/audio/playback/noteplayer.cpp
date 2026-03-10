@@ -50,7 +50,21 @@ void NotePlayer::playNotes(const QVector<int>& midiNotes) {
         buffer.data = resampledData;
         samples.append(buffer);
     }
-    processor->playGenerated(samples);
+    processor->playGeneratedNotes(samples);
+}
+
+void NotePlayer::playChord(const QVector<int>& midiNotes) {
+    long size = midiNotes.size();
+    QVector<Sample> samples;
+    double ratio;
+    for (size_t i = 0; i < size; i++) {
+        Sample buffer = sampleRepository->getSample(midiNotes[i]);
+        ratio = std::pow(2.0, (buffer.nearestMidi - midiNotes[i])/12.0);
+        QVector<float> resampledData = resample(buffer.data, ratio);
+        buffer.data = resampledData;
+        samples.append(buffer);
+    }
+    processor->playGeneratedChord(samples);
 }
 
 void NotePlayer::stop() {

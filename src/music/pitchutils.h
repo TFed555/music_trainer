@@ -14,24 +14,40 @@ int noteToMidi(QString note);
 static const char* noteNames[] = { "C", "C#", "D", "D#", "E",
                                   "F", "F#", "G", "G#", "A", "A#", "B" };
 
-inline const QList<QString> intervals =
-    {
-        "прима", "малая секунда", "большая секунда", "малая терция", "большая терция",
-        "кварта", "тритон", "квинта", "малая секста", "большая секста", "малая септима",
-        "большая септима", "октава"
+    namespace Intervals {
+    inline const QList<QString> intervals =
+        {
+            "прима", "малая секунда", "большая секунда", "малая терция", "большая терция",
+            "кварта", "тритон", "квинта", "малая секста", "большая секста", "малая септима",
+            "большая септима", "октава"
+        };
+
+    QString semitonesToInterval(int semitones);
+    }
+
+    namespace Chords {
+    enum class ChordType {
+        Major,
+        Minor
     };
 
-QString semitonesToInterval(int semitones);
+    enum class InversionType {
+        Root,
+        First,
+        Second
+    };
 
-enum class ChordType {
-    Major,
-    Minor
-};
+    inline const QMap<ChordType, QString> chordTypeNames = {
+        { ChordType::Major, "мажор" },
+        { ChordType::Minor, "минор" }
+    };
 
-inline const QMap<ChordType, QString> chordTypeNames = {
-    { ChordType::Major, "мажор" },
-    { ChordType::Minor, "минор" }
-};
+    inline const QMap<InversionType, QString> inversionNames = {
+        { InversionType::Root,   "Исходная" },
+        { InversionType::First,  "1-я инверсия" },
+        { InversionType::Second, "2-я инверсия" }
+    };
+    }
 
 }
 

@@ -24,9 +24,11 @@ namespace MusicUtils {
         return (octaveNum + 1) * 12 + noteIndex;
     }
 
+    namespace Intervals{
     QString semitonesToInterval(int semitones) {
         qDebug() << semitones;
         qDebug() << intervals.value(semitones);
         return static_cast<QString>(intervals.value(semitones));
+    }
     }
 }

@@ -8,7 +8,7 @@ AudioProcessor::~AudioProcessor() {
     stopPlayback();
 }
 
-bool AudioProcessor::playGenerated(QVector<Sample> samples) {
+bool AudioProcessor::playGeneratedNotes(QVector<Sample> samples) {
     if (samples.isEmpty()) return false;
     playlist = samples;
     playlistIdx = 0;
@@ -17,6 +17,23 @@ bool AudioProcessor::playGenerated(QVector<Sample> samples) {
             Qt::UniqueConnection);
 
     playNextSample();
+    return true;
+}
+
+bool AudioProcessor::playGeneratedChord(QVector<Sample> samples) {
+    if (samples.isEmpty()) return false;
+    int maxSampleLen = 0;
+    for (auto s : samples) {
+        maxSampleLen = qMax(maxSampleLen, s.data.size());
+    }
+    QVector<float> audioData(maxSampleLen, 0.0f);
+    for (auto s : samples) {
+        for (size_t i = 0; i < s.data.size(); i++){
+            audioData[i] += s.data[i];
+        }
+    }
+
+    playAudio(audioData, sampleRate);
     return true;
 }
 
