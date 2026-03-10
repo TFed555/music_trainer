@@ -28,6 +28,12 @@ private:
         White,
         Black
     };
+    struct TileCoords {
+        QRect rect;
+        int noteIdx;
+        TileType type;
+    };
+
 protected:
     void paintEvent(QPaintEvent* event) override;
     void mousePressEvent(QMouseEvent* event) override;
@@ -44,7 +50,7 @@ private:
     QSet<int> wrongIndexes;
     Mode mode = Mode::Input;
     QVector<Note> notes;
-
+    QVector<TileCoords> tileCoords;
 };
 
 #endif // NOTETILESWIDGET_H

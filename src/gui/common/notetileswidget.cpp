@@ -24,6 +24,7 @@ void NoteTilesWidget::setNotes() {
 }
 
 void NoteTilesWidget::paintEvent(QPaintEvent* event) {
+    tileCoords.clear();
     if (notes.empty()) return;
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
@@ -31,11 +32,12 @@ void NoteTilesWidget::paintEvent(QPaintEvent* event) {
     const int whiteCount = notes.size() - blackTiles.size();
     const int tileWidth = width() / whiteCount;
     const int tileHeight = height();
-    int whiteIdx;
+    int whiteIdx = 0;
 
     for (int i = 0; i < notes.size(); i++) {
         if (blackTiles.contains(i)) continue;
         QRect rect = QRect(whiteIdx*tileWidth, 0, tileWidth, tileHeight);
+        tileCoords.append({rect,i,TileType::White});
         whiteIdx++;
         QColor color = setColor(i, TileType::White);
 
@@ -51,6 +53,7 @@ void NoteTilesWidget::paintEvent(QPaintEvent* event) {
         }
         int idx = whiteIdx*tileWidth-tileWidth/2;
         QRect rect = QRect(idx, 0, tileWidth*0.7, tileHeight * 0.7);
+        tileCoords.append({rect,i,TileType::Black});
         QColor color = setColor(i, TileType::Black);
 
         painter.setBrush(color);
@@ -80,13 +83,24 @@ void NoteTilesWidget::mousePressEvent(QMouseEvent* event) {
     if (notes.empty()) return;
     if (mode != Mode::Input)
         return;
+    QPoint pos = event->pos();
 
-    int tileWidth = width() / notes.size();
-    int index = event->pos().x() / tileWidth;
-    if (index >= 0 && index < notes.size()) {
-        selectedIndex = index;
-        emit noteSelected(notes[index].name);
-        update();
+    for (auto t : tileCoords) {
+        if (t.rect.contains(pos) && t.type==TileType::Black) {
+            selectedIndex = t.noteIdx;
+            emit noteSelected(notes[t.noteIdx].name);
+            update();
+            return;
+        }
+    }
+
+    for (auto t : tileCoords) {
+        if (t.rect.contains(pos) && t.type==TileType::White) {
+            selectedIndex = t.noteIdx;
+            emit noteSelected(notes[t.noteIdx].name);
+            update();
+            return;
+        }
     }
 }
 
