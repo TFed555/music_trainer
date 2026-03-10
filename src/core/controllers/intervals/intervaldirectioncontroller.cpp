@@ -3,11 +3,8 @@
 
 IntervalDirectionController::IntervalDirectionController(NotePlayer* player,
                                                          QObject *parent)
-    : IExerciseController(player, parent)
+    : IExerciseController(player, PlaybackendSignal::PlaylistEmpty, parent)
 {
-    connect(player, &NotePlayer::playlistEmpty, this, [this]() {
-        emit exercisePlayFinished();
-    });
 }
 
 void IntervalDirectionController::playTone() {

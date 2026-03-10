@@ -15,7 +15,7 @@ namespace MusicUtils {
         auto list = note.split(" ");
         int octaveNum = list[1].toInt();
         int noteIndex;
-        for (size_t i = 0; i < 12; i++) {
+        for (int i = 0; i < 12; i++) {
             if (list[0] == noteNames[i]) {
                 noteIndex = i; break;
             }

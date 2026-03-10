@@ -3,16 +3,13 @@
 
 ChordIdentifyController::ChordIdentifyController(NotePlayer* player,
                                                        QObject *parent)
-    : IExerciseController(player, parent)
+    : IExerciseController(player, PlaybackendSignal::PlaybackFinished, parent)
 {
-    connect(player, &NotePlayer::playbackFinished, this, [this]() {
-        emit exercisePlayFinished();
-    });
 }
 
 void ChordIdentifyController::playTone() {
-    correctAnswer = 0;
-    userAnswer = 0;
+    correctAnswer.clear();
+    userAnswer.clear();
     ChordGenerator gen({.allowedTypes={MusicUtils::Chords::ChordType::Major, MusicUtils::Chords::ChordType::Minor},
                         .allowedInversions={MusicUtils::Chords::InversionType::Root}});
     auto result = gen.generate();

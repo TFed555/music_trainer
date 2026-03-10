@@ -3,11 +3,8 @@
 
 ChordInversionController::ChordInversionController(NotePlayer* player,
                                                        QObject *parent)
-    : IExerciseController(player, parent)
+    : IExerciseController(player, PlaybackendSignal::PlaybackFinished, parent)
 {
-    connect(player, &NotePlayer::playbackFinished, this, [this]() {
-        emit exercisePlayFinished();
-    });
 }
 
 void ChordInversionController::playTone() {

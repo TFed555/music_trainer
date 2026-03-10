@@ -21,6 +21,8 @@ signals:
     void error(const QString&);
     void playlistEmpty();
 private:
+    QVector<Sample> loadSamples(const QVector<int>& midiNotes);
+private:
     AudioProcessor* processor;
     SampleRepository* sampleRepository;
 };

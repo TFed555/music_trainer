@@ -2,6 +2,7 @@
 #define INTERVALDIRECTIONCONTROLLER_H
 
 #include "../common/iexercisecontroller.h"
+#include "../../../generators/GeneratedAudio.h"
 
 class IntervalDirectionController : public IExerciseController
 {

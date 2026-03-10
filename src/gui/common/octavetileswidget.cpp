@@ -10,7 +10,7 @@ OctaveTilesWidget::OctaveTilesWidget(QWidget *parent)
     QHBoxLayout* layout = new QHBoxLayout(this);
     layout->setContentsMargins(0, 0, 0, 0);
 
-    for (size_t i = 0; i < 3; i++) {
+    for (int i = 0; i < 3; i++) {
         NoteTilesWidget* tiles = new NoteTilesWidget(this);
         tiles->show();
         layout->addWidget(tiles);
@@ -29,7 +29,7 @@ OctaveTilesWidget::~OctaveTilesWidget()
 }
 
 void OctaveTilesWidget::resetSelection(int octIdx) {
-    for (size_t i = 0; i < octaves.size(); i++) {
+    for (int i = 0; i < octaves.size(); i++) {
         if (i != octIdx){
             octaves[i]->resetSelection();
         }

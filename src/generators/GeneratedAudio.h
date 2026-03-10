@@ -23,6 +23,7 @@ struct GeneratedChord : GeneratedAudio {
     QString chordName;
     QString type;
     QString inversion;
+    QString root;
 };
 
 #endif // GENERATEDAUDIO_H

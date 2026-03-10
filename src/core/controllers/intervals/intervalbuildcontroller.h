@@ -8,7 +8,8 @@ class IntervalBuildController : public IExerciseController
 {
     Q_OBJECT
 public:
-    explicit IntervalBuildController(NotePlayer* player, QObject *parent = nullptr);
+    explicit IntervalBuildController(NotePlayer* player,
+                                    QObject *parent = nullptr);
 
 public slots:
     void noteSelected(const QString& name);

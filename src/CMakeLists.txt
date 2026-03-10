@@ -74,6 +74,11 @@ if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(trainer_1)
 endif()
 
+qt_add_resources(trainer_1 "app_resources"
+    PREFIX "/styles"
+    BASE ${CMAKE_CURRENT_SOURCE_DIR}/../assets/styles
+    FILES ${CMAKE_CURRENT_SOURCE_DIR}/../assets/styles/styles.qss
+)
 
 target_link_libraries(trainer_1 PRIVATE
     Qt${QT_VERSION_MAJOR}::Widgets

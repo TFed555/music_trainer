@@ -4,11 +4,9 @@
 
 ChordRootController::ChordRootController(NotePlayer* player,
                                          QObject *parent)
-    : IExerciseController(player, parent)
+    : IExerciseController(player, PlaybackendSignal::PlaybackFinished, parent)
 {
-    connect(player, &NotePlayer::playbackFinished, this, [this]() {
-        emit exercisePlayFinished();
-    });
+
 }
 
 void ChordRootController::playTone() {
@@ -20,11 +18,8 @@ void ChordRootController::playTone() {
     auto result = gen.generate();
     log(result.desc);
     qDebug() << playbackLog.last().timestamp << " " << playbackLog.last().desc;
-    // correctAnswer.append(MusicUtils::midiToNote(result.midiNotes[0]));
-    correctAnswer.append(MusicUtils::midiToNote(result.midiNotes[1]));
-
+    correctAnswer.append(result.root);
     notePlayer->playChord(result.midiNotes);
-
 }
 
 void ChordRootController::noteSelected(const QString& name) {

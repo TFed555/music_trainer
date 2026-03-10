@@ -39,6 +39,7 @@ GeneratedChord ChordGenerator::generate() {
     res.type = MusicUtils::Chords::chordTypeNames[type];
     res.midiNotes = midiNotes;
     res.inversion = MusicUtils::Chords::inversionNames[inversion];
+    res.root = MusicUtils::midiToNote(midiNotes[1]);
     res.desc = QString("%1 -> %2 -> %3").arg(MusicUtils::midiToNote(firstMidi))
                    .arg(MusicUtils::midiToNote(midiNotes[1]))
                    .arg(MusicUtils::midiToNote(midiNotes[2])); //поменять лог

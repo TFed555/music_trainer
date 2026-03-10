@@ -21,17 +21,15 @@ public slots:
     void addAnswers(QVector<QString> answers);
     void addDirectionSelector();
     void showResult(const QString& correct);
-    // void requestAnswerSlot();
     void exercisePlayFinished() override;
     void showDirectionResult(const QString& correct);
 signals:
     void answerSelected(const QString& answer);
-    // void requestAnswers();
     void directionSelected(const QString& direction);
 private:
-    void highlightBtn(Mode, QPushButton*);
     void resetSelection();
     void btnsEnable(bool status);
+    void refreshStyle(QWidget* w);
 private:
     Ui::ExerciseNoTilesWidget *ui;
     QPushButton* selectedBtn;

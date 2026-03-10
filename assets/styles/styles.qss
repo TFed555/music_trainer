@@ -1,4 +1,3 @@
-
 QPushButton#answerBtn {
     background-color: #f0f0f0;
     border: 1px solid #ccc;
@@ -16,13 +15,24 @@ QPushButton#answerBtn:pressed {
     background-color: #d0d0d0;
 }
 
-QPushButton#answerBtn[state="selected"] {
-    background-color: blue;
-    color: white;
+QPushButton#answerBtn:disabled {
+    background-color: #f8f8f8;
+    color: #aaa;
 }
 
-QPushButton#answerBtn[state="correct"] {
+QPushButton#answerBtn[result="correct"] {
     background-color: #4CAF50;
     color: white;
     border: 2px solid #45a049;
+}
+
+QPushButton#answerBtn[result="wrong"] {
+    background-color: #e53935;
+    color: white;
+    border: 2px solid #c62828;
+}
+
+QPushButton#answerBtn[selected="true"] {
+    background-color: #1565C0;
+    color: white;
 }
