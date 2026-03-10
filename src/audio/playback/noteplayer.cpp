@@ -33,9 +33,10 @@ QVector<float> resample(const QVector<float>& in, double ratio) {
 
 void NotePlayer::playMidi(int midi, float durationSec) {
     Sample buffer = sampleRepository->getSample(midi);
-    double ratio = std::pow(2.0, (buffer.nearestMidi - midi)/12.0);
-    QVector<float> resampledData = resample(buffer.data, ratio);
-    buffer.data = resampledData;
+    if (buffer.nearestMidi != midi) {
+        double ratio = std::pow(2.0, (buffer.nearestMidi - midi)/12.0);
+        buffer.data = resample(buffer.data, ratio);
+    }
     processor->playSample(buffer);
 }
 

@@ -16,7 +16,6 @@ void IntervalRecogniseController::playTone() {
     userAnswer.clear();
     noteCounter = 0;
     emit requestSetMode(Mode::Wait);
-    // notePlayer->playExercise(GeneratorType::Interval, 2);
     IntervalGenerator generator;
     auto result = generator.generate();
     log(result.desc);
