@@ -5,7 +5,7 @@
 #include <QLabel>
 
 #include "../../core/common/interfaces/IExerciseWidget.h"
-#include "../common/notetileswidget.h"
+#include "../common/octavetileswidget.h"
 
 namespace Ui {
 class ExerciseWithTilesWidget;
@@ -30,7 +30,7 @@ signals:
     void resetTiles();
 private:
     Ui::ExerciseWithTilesWidget *ui;
-    NoteTilesWidget *tiles;
+    OctaveTilesWidget *tiles;
     QLabel* questionLabel = nullptr;
 };
 

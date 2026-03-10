@@ -1,11 +1,15 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 #include "./blocks/intervalblockwidget.h"
+#include "./blocks/chordblockwidget.h"
 #include "../core/common/interfaces/IExerciseWidget.h"
-#include "../../core/sessions/intervalrecognisesession.h"
-#include "../../core/sessions/intervalidentifysession.h"
-#include "../../core/sessions/intervalbuildsession.h"
-#include "../../core//sessions/intervaldirectionsession.h"
+#include "../../core/sessions/intervals/intervalrecognisesession.h"
+#include "../../core/sessions/intervals/intervalidentifysession.h"
+#include "../../core/sessions/intervals/intervalbuildsession.h"
+#include "../../core/sessions/intervals/intervaldirectionsession.h"
+#include "../../core/sessions/chords/chordidentifysession.h"
+#include "../../core/sessions/chords/chordinversionsession.h"
+#include "../../core/sessions/chords/chordrootsession.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -25,13 +29,17 @@ MainWindow::MainWindow(QWidget *parent)
     stack->setCurrentWidget(mainMenu);
 
     blocks = {
-        new IntervalBlockWidget(this)
+        new IntervalBlockWidget(this),
+        new ChordBlockWidget(this)
     };
 
     for (auto* block : blocks) addBlock(block);
 
     connect(mainMenu, &MainMenuWidget::intervalClicked,
             this, [=](){ stack->setCurrentWidget(blocks[0]); });
+
+    connect(mainMenu, &MainMenuWidget::chordClicked,
+            this, [=](){ stack->setCurrentWidget(blocks[1]); });
 }
 
 MainWindow::~MainWindow()
@@ -74,6 +82,18 @@ void MainWindow::addBlock(IBlockWidget* block) {
         case ExerciseType::IntervalDirection:
             session = new IntervalDirectionSession(notePlayer, this);
             addExercise(block, "Exercise 4");
+            break;
+        case ExerciseType::ChordIdentify:
+            session = new ChordIdentifySession(notePlayer, this);
+            addExercise(block, "Exercise 1");
+            break;
+        case ExerciseType::ChordInversion:
+            session = new ChordInversionSession(notePlayer, this);
+            addExercise(block, "Exercise 2");
+            break;
+        case ExerciseType::ChordRoot:
+            session = new ChordRootSession(notePlayer, this);
+            addExercise(block, "Exercise 3");
             break;
         }
     });

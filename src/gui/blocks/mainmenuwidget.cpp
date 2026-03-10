@@ -7,6 +7,7 @@ MainMenuWidget::MainMenuWidget(QWidget *parent)
 {
     ui->setupUi(this);
     connect(ui->intervalBtn, &QPushButton::clicked, this, &MainMenuWidget::intervalClicked);
+    connect(ui->chordBtn, &QPushButton::clicked, this, &MainMenuWidget::chordClicked);
 }
 
 MainMenuWidget::~MainMenuWidget()

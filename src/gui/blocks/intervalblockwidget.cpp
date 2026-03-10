@@ -7,7 +7,6 @@ IntervalBlockWidget::IntervalBlockWidget(QWidget *parent)
 {
     ui->setupUi(this);
 
-
     connect(ui->exercise1Btn, &QPushButton::clicked, this, [this]() {
         emit exerciseSelected(ExerciseType::IntervalRecognise, this);
     });

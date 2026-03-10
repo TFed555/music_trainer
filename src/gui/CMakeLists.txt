@@ -18,6 +18,9 @@ add_library(gui_module STATIC
     common/notetileswidget.h common/notetileswidget.cpp common/notetileswidget.ui
     blocks/IBlockWidget.h
     exercises/exercisenotileswidget.h exercises/exercisenotileswidget.cpp exercises/exercisenotileswidget.ui
+    blocks/chordblockwidget.h blocks/chordblockwidget.cpp blocks/chordblockwidget.ui
+    common/octavetileswidget.h common/octavetileswidget.cpp common/octavetileswidget.ui
+
 )
 
 target_link_libraries(gui_module PUBLIC

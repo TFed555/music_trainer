@@ -16,7 +16,8 @@ class AudioProcessor : public QObject
 public:
     AudioProcessor(QObject *parent = nullptr);
     ~AudioProcessor();
-    bool playGenerated(QVector<Sample> samples);
+    bool playGeneratedNotes(QVector<Sample> samples);
+    bool playGeneratedChord(QVector<Sample> samples);
     void playSample(Sample sample);
 
 public slots:

@@ -17,6 +17,7 @@ add_subdirectory(music)
 add_subdirectory(log)
 add_subdirectory(gui)
 add_subdirectory(core)
+add_subdirectory(generators)
 
 set(PROJECT_SOURCES
         main.cpp
@@ -73,6 +74,11 @@ if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(trainer_1)
 endif()
 
+qt_add_resources(trainer_1 "app_resources"
+    PREFIX "/styles"
+    BASE ${CMAKE_CURRENT_SOURCE_DIR}/../assets/styles
+    FILES ${CMAKE_CURRENT_SOURCE_DIR}/../assets/styles/styles.qss
+)
 
 target_link_libraries(trainer_1 PRIVATE
     Qt${QT_VERSION_MAJOR}::Widgets
@@ -81,6 +87,7 @@ target_link_libraries(trainer_1 PRIVATE
     audio_module
     music_module
     core
+    generators_module
 )
 
 add_custom_command(TARGET trainer_1 POST_BUILD

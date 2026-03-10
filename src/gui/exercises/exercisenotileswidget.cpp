@@ -4,6 +4,7 @@
 #include <QButtonGroup>
 #include <QRadioButton>
 #include <QGroupBox>
+#include <QStyle>
 
 ExerciseNoTilesWidget::ExerciseNoTilesWidget(QWidget *parent)
     : IExerciseWidget(parent)
@@ -43,111 +44,58 @@ void ExerciseNoTilesWidget::addAnswers(QVector<QString> answers) {
     ui->answersLayout->setHorizontalSpacing(10);
     ui->answersLayout->setVerticalSpacing(10);
     ui->answersLayout->setContentsMargins(20, 20, 20, 20);
-    for (size_t i = 0; i < answers.size(); i++) {
+    for (int i = 0; i < answers.size(); i++) {
         QPushButton* newBtn = new QPushButton();
+        newBtn->setObjectName("answerBtn");
         newBtn->setText(answers[i]);
         newBtn->setMinimumHeight(40);
         newBtn->setMinimumWidth(80);
-        //TODO: создать файл стилей
-        newBtn->setStyleSheet(
-            "QPushButton {"
-            "   background-color: #f0f0f0;"
-            "   border: 1px solid #ccc;"
-            "   border-radius: 5px;"
-            "   padding: 5px;"
-            "}"
-            "QPushButton:hover {"
-            "   background-color: #e0e0e0;"
-            "}"
-            "QPushButton:pressed {"
-            "   background-color: #d0d0d0;"
-            "}"
-            );
-        ui->answersLayout->addWidget(newBtn, i / 4, i % 4);
         newBtn->setDisabled(true);
+
+        ui->answersLayout->addWidget(newBtn, i / 4, i % 4);
+
         connect(newBtn, &QPushButton::clicked,
                 this, [this, newBtn] () {
             selectedBtn = newBtn;
-            highlightBtn(Mode::Input, newBtn);
+            for (auto* b : findChildren<QPushButton*>("answerBtn"))
+                b->setProperty("selected", false);
+
+            newBtn->setProperty("selected", true);
+            refreshStyle(newBtn);
+
             emit answerSelected(newBtn->text());
-                });
+        });
     }
     update();
 }
 
-void ExerciseNoTilesWidget::highlightBtn(Mode mode, QPushButton* btn) {
-    QString style = mode == Mode::Input ? "background-color: blue; color: white;" :
-    "QPushButton {"
-    "   background-color: #f0f0f0;"
-    "   border: 1px solid #ccc;"
-    "   border-radius: 5px;"
-    "   padding: 5px;"
-    "}"
-    "QPushButton:hover {"
-    "   background-color: #e0e0e0;"
-    "}"
-    "QPushButton:pressed {"
-    "   background-color: #d0d0d0;"
-    "}";
-    btn->setStyleSheet(style);
+void ExerciseNoTilesWidget::refreshStyle(QWidget* w) {
+    w->style()->unpolish(w);
+    w->style()->polish(w);
 }
 
 void ExerciseNoTilesWidget::showResult(const QString& correct) {
-    for (size_t i = 0; i < ui->answersLayout->count(); i++) {
-        QLayoutItem* item = ui->answersLayout->itemAt(i);
-        if (item && item->widget()) {
-            QPushButton* btn = qobject_cast<QPushButton*>(item->widget());
-            if (btn) {
-                QString answerText = btn->text();
-                if (answerText == correct) {
-                    btn->setStyleSheet(
-                        "QPushButton {"
-                        "   background-color: #4CAF50;"
-                        "   color: white;"
-                        "   border: 2px solid #45a049;"
-                        "   border-radius: 5px;"
-                        "}"
-                        );
-                }
-            }
-        }
+    for (auto* btn : findChildren<QPushButton*>("answerBtn")) {
+        btn->setProperty("selected", false);
+        if (btn->text() == correct)
+            btn->setProperty("result", "correct");
+        else if (btn == selectedBtn)
+            btn->setProperty("result", "wrong");
+        refreshStyle(btn);
     }
     resetSelection();
 }
 
 void ExerciseNoTilesWidget::resetSelection() {
     QTimer::singleShot(2000, this, [this]() {
-        for (int i = 0; i < ui->answersLayout->count(); i++) {
-            QLayoutItem* item = ui->answersLayout->itemAt(i);
-            if (item && item->widget()) {
-                QPushButton* btn = qobject_cast<QPushButton*>(item->widget());
-                if (btn) {
-                    btn->setStyleSheet(            "QPushButton {"
-                                               "   background-color: #f0f0f0;"
-                                               "   border: 1px solid #ccc;"
-                                               "   border-radius: 5px;"
-                                               "   padding: 5px;"
-                                               "}"
-                                               "QPushButton:hover {"
-                                               "   background-color: #e0e0e0;"
-                                               "}"
-                                               "QPushButton:pressed {"
-                                               "   background-color: #d0d0d0;"
-                                               "}");
-                }
-            }
+        for (auto* btn : findChildren<QPushButton*>("answerBtn")) {
+            btn->setProperty("result", "");
+            btn->setProperty("selected", false);
+            refreshStyle(btn);
         }
         selectedBtn = nullptr;
-        if (directionGroup) {
-            directionGroup->setExclusive(false);
-            for (auto* btn : directionGroup->buttons()) {
-                btn->setChecked(false);
-                btn->setStyleSheet("");
-            }
-            directionGroup->setExclusive(true);
-        }
+        btnsEnable(false);
     });
-    btnsEnable(false);
 }
 
 void ExerciseNoTilesWidget::addDirectionSelector() {

@@ -8,7 +8,10 @@ enum class ExerciseType {
     IntervalRecognise,
     IntervalIdentify,
     IntervalBuild,
-    IntervalDirection
+    IntervalDirection,
+    ChordIdentify,
+    ChordInversion,
+    ChordRoot
 };
 
 class IExerciseWidget : public QWidget {
@@ -21,7 +24,7 @@ public slots:
 signals:
     void startClicked();
     void stopClicked();
-    void requestSetMode(Mode);
+    // void requestSetMode(Mode);
     void backClicked();
 };
 
