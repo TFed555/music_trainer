@@ -1,24 +1,24 @@
-#ifndef INTERVALRECOGNISESESSION_H
-#define INTERVALRECOGNISESESSION_H
+#ifndef CHORDROOTSESSION_H
+#define CHORDROOTSESSION_H
 
 #include "../common/isession.h"
 #include "../../gui/exercises/exercisewithtileswidget.h"
-#include "../core/controllers/intervals/intervalrecognisecontroller.h"
+#include "../core/controllers/chords/chordrootcontroller.h"
 
-class IntervalRecogniseSession : public ISession
+
+class ChordRootSession : public ISession
 {
     Q_OBJECT
 public:
-    explicit IntervalRecogniseSession(
+    explicit ChordRootSession(
         NotePlayer* player,
         QObject* parent = nullptr);
-
     ExerciseWithTilesWidget* getWidget() const override {
         qDebug() << "getWidget()" << view; return view; }
 private:
     int noteCounter = 0;
     ExerciseWithTilesWidget* view;
-    IntervalRecogniseController* exerciseController;
+    ChordRootController* exerciseController;
 };
 
-#endif // INTERVALRECOGNISESESSION_H
+#endif // CHORDROOTSESSION_H

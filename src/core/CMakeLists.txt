@@ -8,6 +8,8 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
 
 
 add_library(core STATIC
@@ -33,6 +35,8 @@ add_library(core STATIC
     sessions/chords/chordidentifysession.h sessions/chords/chordidentifysession.cpp
     controllers/chords/chordinversioncontroller.h controllers/chords/chordinversioncontroller.cpp
     sessions/chords/chordinversionsession.h sessions/chords/chordinversionsession.cpp
+    controllers/chords/chordrootcontroller.h controllers/chords/chordrootcontroller.cpp
+    sessions/chords/chordrootsession.h sessions/chords/chordrootsession.cpp
 )
 
 
@@ -51,6 +55,8 @@ target_include_directories(core PUBLIC
     ${SNDFILE_INCLUDE_DIRS}
 )
 target_link_libraries(core PUBLIC generators_module)
+target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
+target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
 target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
 target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
 target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)

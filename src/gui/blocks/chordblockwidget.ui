@@ -47,7 +47,7 @@
     <item row="2" column="1">
      <widget class="QPushButton" name="exercise3Btn">
       <property name="text">
-       <string/>
+       <string>Определение основной ноты аккорда</string>
       </property>
      </widget>
     </item>

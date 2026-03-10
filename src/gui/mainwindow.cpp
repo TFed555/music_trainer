@@ -9,6 +9,7 @@
 #include "../../core/sessions/intervals/intervaldirectionsession.h"
 #include "../../core/sessions/chords/chordidentifysession.h"
 #include "../../core/sessions/chords/chordinversionsession.h"
+#include "../../core/sessions/chords/chordrootsession.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -89,6 +90,10 @@ void MainWindow::addBlock(IBlockWidget* block) {
         case ExerciseType::ChordInversion:
             session = new ChordInversionSession(notePlayer, this);
             addExercise(block, "Exercise 2");
+            break;
+        case ExerciseType::ChordRoot:
+            session = new ChordRootSession(notePlayer, this);
+            addExercise(block, "Exercise 3");
             break;
         }
     });
