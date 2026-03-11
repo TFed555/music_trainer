@@ -1,41 +1,40 @@
-#include "intervalbuildsession.h"
+#include "chordbuildsession.h"
 #include "../core/controllers/common/tilescontroller.h"
 
-IntervalBuildSession::IntervalBuildSession(NotePlayer* player,
+ChordBuildSession::ChordBuildSession(NotePlayer* player,
                                            QObject* parent)
     : ISession(parent)
 {
     auto* tilesController = new TilesController(player, this);
-    exerciseController = new IntervalBuildController(player, this);
+    exerciseController = new ChordBuildController(player, this);
     view = new ExerciseWithTilesWidget(nullptr);
 
-    connect(view, &ExerciseWithTilesWidget::startClicked, exerciseController, &IntervalBuildController::start);
+    connect(view, &ExerciseWithTilesWidget::startClicked, exerciseController, &ChordBuildController::start);
 
-    connect(view, &ExerciseWithTilesWidget::stopClicked, exerciseController, &IntervalBuildController::stop);
+    connect(view, &ExerciseWithTilesWidget::stopClicked, exerciseController, &ChordBuildController::stop);
 
     connect(view, &ExerciseWithTilesWidget::backClicked, this, [this](){
         emit back();
     });
 
-    connect(exerciseController, &IntervalBuildController::showResult,
+    connect(exerciseController, &ChordBuildController::showResult,
             view, &ExerciseWithTilesWidget::showResult);
 
-    connect(exerciseController, &IntervalBuildController::requestSetMode,
+    connect(exerciseController, &ChordBuildController::requestSetMode,
             view, &ExerciseWithTilesWidget::setMode, Qt::QueuedConnection);
 
     connect(view, &ExerciseWithTilesWidget::noteSelected,
             tilesController, &TilesController::playTile);
 
     connect(view, &ExerciseWithTilesWidget::noteSelected,
-            exerciseController, &IntervalBuildController::noteSelected);
+            exerciseController, &ChordBuildController::noteSelected);
 
-    connect(exerciseController, &IntervalBuildController::exercisePlayFinished,
+    connect(exerciseController, &ChordBuildController::exercisePlayFinished,
             view, &ExerciseWithTilesWidget::exercisePlayFinished);
 
-    connect(exerciseController, &IntervalBuildController::setQuestion,
+    connect(exerciseController, &ChordBuildController::setQuestion,
             view, &ExerciseWithTilesWidget::setQuestion);
 
-    connect(exerciseController, &IntervalBuildController::highlightQuestion,
+    connect(exerciseController, &ChordBuildController::highlightQuestion,
             view, &ExerciseWithTilesWidget::highlightQuestion);
-
 }

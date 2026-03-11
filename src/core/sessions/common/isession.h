@@ -11,6 +11,7 @@ public:
     explicit ISession(QObject *parent = nullptr) : QObject(parent) {};
     virtual ~ISession() = default;
     virtual IExerciseWidget* getWidget() const = 0;
+    virtual QString title() const = 0;
 signals:
     void back();
 };

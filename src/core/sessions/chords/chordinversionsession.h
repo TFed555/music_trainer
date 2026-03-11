@@ -15,6 +15,9 @@ public:
     ExerciseNoTilesWidget* getWidget() const override {
         qDebug() << "getWidget()" << view; return view;
     }
+    QString title() const override {
+        return "Обращение аккорда";
+    }
 private:
     ExerciseNoTilesWidget* view;
     ChordInversionController* exerciseController;

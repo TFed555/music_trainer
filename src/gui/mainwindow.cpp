@@ -67,7 +67,7 @@ void MainWindow::addBlock(IBlockWidget* block) {
         auto newSession = sessionFactory.create(type, notePlayer, this);
         if (!newSession) return;
         session.reset(newSession.release());
-        addExercise(block, "");
+        addExercise(block, session->title());
     });
 }
 

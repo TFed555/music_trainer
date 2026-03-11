@@ -9,6 +9,7 @@
 #include "../sessions/chords/chordidentifysession.h"
 #include "../sessions/chords/chordinversionsession.h"
 #include "../sessions/chords/chordrootsession.h"
+#include "../sessions/chords/chordbuildsession.h"
 
 inline void registerAllSessions(SessionFactory& factory) {
     factory.registerFactory(ExerciseType::IntervalRecognise,
@@ -38,6 +39,10 @@ inline void registerAllSessions(SessionFactory& factory) {
     factory.registerFactory(ExerciseType::ChordRoot,
                             [](NotePlayer* player, QObject* parent){
                                 return std::make_unique<ChordRootSession>(player, parent);
+                            });
+    factory.registerFactory(ExerciseType::ChordBuild,
+                            [](NotePlayer* player, QObject* parent){
+                                return std::make_unique<ChordBuildSession>(player, parent);
                             });
 }
 

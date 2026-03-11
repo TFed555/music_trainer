@@ -10,11 +10,13 @@ class IntervalBuildSession : public ISession
     Q_OBJECT
 public:
     explicit IntervalBuildSession(
-        // QWidget* parentWidget,
         NotePlayer* player,
         QObject* parent = nullptr);
     ExerciseWithTilesWidget* getWidget() const override {
         qDebug() << "getWidget()" << view; return view; }
+    QString title() const override {
+        return "Построение интервала";
+    }
 private:
     ExerciseWithTilesWidget* view;
     IntervalBuildController* exerciseController;

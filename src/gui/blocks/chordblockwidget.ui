@@ -54,7 +54,7 @@
     <item row="3" column="1">
      <widget class="QPushButton" name="exercise4Btn">
       <property name="text">
-       <string/>
+       <string>Построение аккорда</string>
       </property>
      </widget>
     </item>
