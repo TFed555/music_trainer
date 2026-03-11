@@ -37,6 +37,8 @@ add_library(core STATIC
     sessions/chords/chordinversionsession.h sessions/chords/chordinversionsession.cpp
     controllers/chords/chordrootcontroller.h controllers/chords/chordrootcontroller.cpp
     sessions/chords/chordrootsession.h sessions/chords/chordrootsession.cpp
+    factory/sessionfactory.h
+    factory/sessionregistry.h
 )
 
 

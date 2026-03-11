@@ -3,15 +3,8 @@
 #include "./blocks/intervalblockwidget.h"
 #include "./blocks/chordblockwidget.h"
 #include "../core/common/interfaces/IExerciseWidget.h"
-#include "../../core/sessions/intervals/intervalrecognisesession.h"
-#include "../../core/sessions/intervals/intervalidentifysession.h"
-#include "../../core/sessions/intervals/intervalbuildsession.h"
-#include "../../core/sessions/intervals/intervaldirectionsession.h"
-#include "../../core/sessions/chords/chordidentifysession.h"
-#include "../../core/sessions/chords/chordinversionsession.h"
-#include "../../core/sessions/chords/chordrootsession.h"
 
-MainWindow::MainWindow(QWidget *parent)
+MainWindow::MainWindow(SessionFactory& factory, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
     , sampleLoader()
@@ -19,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
     , audio(new AudioProcessor(this))
     , notePlayer(new NotePlayer(audio, &sampleRepository))
     , session(nullptr)
+    , sessionFactory(factory)
 {
     ui->setupUi(this);
     mainMenu = new MainMenuWidget(this);
@@ -33,13 +27,18 @@ MainWindow::MainWindow(QWidget *parent)
         new ChordBlockWidget(this)
     };
 
+    QMap<IBlockWidget::BlockCategory, IBlockWidget*> blockNames = {
+        {IBlockWidget::BlockCategory::Intervals, blocks[0]},
+        {IBlockWidget::BlockCategory::Chords, blocks[1]}
+    };
+
     for (auto* block : blocks) addBlock(block);
 
     connect(mainMenu, &MainMenuWidget::intervalClicked,
-            this, [=](){ stack->setCurrentWidget(blocks[0]); });
+            this, [=](){ stack->setCurrentWidget(blockNames[IBlockWidget::BlockCategory::Intervals]); });
 
     connect(mainMenu, &MainMenuWidget::chordClicked,
-            this, [=](){ stack->setCurrentWidget(blocks[1]); });
+            this, [=](){ stack->setCurrentWidget(blockNames[IBlockWidget::BlockCategory::Chords]); });
 }
 
 MainWindow::~MainWindow()
@@ -56,46 +55,19 @@ void MainWindow::addBlock(IBlockWidget* block) {
 
     connect(block, &IBlockWidget::exerciseSelected,
             this, [this](ExerciseType type, IBlockWidget* block) {
+
         if (session) {
-            QWidget* oldView = session->getWidget();
+            IExerciseWidget* oldView = session->getWidget();
             if (oldView) {
                 stack->removeWidget(oldView);
-                delete oldView;
             }
-            delete session;
-            session = nullptr;
+            session.reset();
         }
 
-        switch(type) {
-        case ExerciseType::IntervalRecognise:
-            session = new IntervalRecogniseSession(notePlayer, this);
-            addExercise(block, "Exercise 1");
-            break;
-        case ExerciseType::IntervalIdentify:
-            session = new IntervalIdentifySession(notePlayer, this);
-            addExercise(block, "Exercise 2");
-            break;
-        case ExerciseType::IntervalBuild:
-            session = new IntervalBuildSession(notePlayer, this);
-            addExercise(block, "Exercise 3");
-            break;
-        case ExerciseType::IntervalDirection:
-            session = new IntervalDirectionSession(notePlayer, this);
-            addExercise(block, "Exercise 4");
-            break;
-        case ExerciseType::ChordIdentify:
-            session = new ChordIdentifySession(notePlayer, this);
-            addExercise(block, "Exercise 1");
-            break;
-        case ExerciseType::ChordInversion:
-            session = new ChordInversionSession(notePlayer, this);
-            addExercise(block, "Exercise 2");
-            break;
-        case ExerciseType::ChordRoot:
-            session = new ChordRootSession(notePlayer, this);
-            addExercise(block, "Exercise 3");
-            break;
-        }
+        auto newSession = sessionFactory.create(type, notePlayer, this);
+        if (!newSession) return;
+        session.reset(newSession.release());
+        addExercise(block, "");
     });
 }
 
@@ -112,7 +84,7 @@ void MainWindow::addExercise(IBlockWidget* block, QString title) {
                                    this->setWindowTitle(mainTitle);
                                });
 
-    sessionBackConn = connect(session, &ISession::back,
+    sessionBackConn = connect(session.get(), &ISession::back,
                               this, [=]() { stack->setCurrentWidget(block); });
 
     stack->addWidget(exercise);

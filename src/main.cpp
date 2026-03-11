@@ -1,6 +1,8 @@
 #include "gui/mainwindow.h"
 #include <QFile>
 #include <QApplication>
+#include "core/factory/sessionfactory.h"
+#include "core/factory/sessionregistry.h"
 
 int main(int argc, char *argv[])
 {
@@ -14,7 +16,10 @@ int main(int argc, char *argv[])
         qWarning() << "Failed to load styles";
     }
 
-    MainWindow w;
+    SessionFactory sessionFactory;
+    registerAllSessions(sessionFactory);
+
+    MainWindow w(sessionFactory);
     w.show();
     return a.exec();
 }
