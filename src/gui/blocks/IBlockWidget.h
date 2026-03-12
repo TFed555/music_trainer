@@ -11,6 +11,10 @@ class IBlockWidget : public QWidget
 public:
     explicit IBlockWidget(QWidget* parent = nullptr) : QWidget(parent) {}
     virtual ~IBlockWidget() {};
+    enum class BlockCategory {
+        Intervals,
+        Chords
+    };
 signals:
     void backClicked();
     void exerciseSelected(ExerciseType, IBlockWidget*);

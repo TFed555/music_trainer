@@ -15,6 +15,9 @@ public:
     ExerciseNoTilesWidget* getWidget() const override {
         qDebug() << "getWidget()" << view; return view;
     }
+    QString title() const override {
+        return "Определение аккорда";
+    }
 private:
     ExerciseNoTilesWidget* view;
     ChordIdentifyController* exerciseController;

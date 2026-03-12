@@ -16,6 +16,9 @@ ChordBlockWidget::ChordBlockWidget(QWidget *parent)
     connect(ui->exercise3Btn, &QPushButton::clicked, this, [this]() {
         emit exerciseSelected(ExerciseType::ChordRoot, this);
     });
+    connect(ui->exercise4Btn, &QPushButton::clicked, this, [this]() {
+        emit exerciseSelected(ExerciseType::ChordBuild, this);
+    });
     connect(ui->backBtn, &QPushButton::clicked, this, &IBlockWidget::backClicked);
 }
 

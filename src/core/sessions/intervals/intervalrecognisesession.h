@@ -15,6 +15,9 @@ public:
 
     ExerciseWithTilesWidget* getWidget() const override {
         qDebug() << "getWidget()" << view; return view; }
+    QString title() const override {
+        return "Определение интервала";
+    }
 private:
     int noteCounter = 0;
     ExerciseWithTilesWidget* view;

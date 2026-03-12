@@ -11,7 +11,8 @@ enum class ExerciseType {
     IntervalDirection,
     ChordIdentify,
     ChordInversion,
-    ChordRoot
+    ChordRoot,
+    ChordBuild
 };
 
 class IExerciseWidget : public QWidget {

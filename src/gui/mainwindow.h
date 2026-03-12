@@ -10,6 +10,8 @@
 #include "../audio/audio.h"
 #include "../audio/playback/noteplayer.h"
 #include "../../core/sessions/common/isession.h"
+#include "../core/factory/sessionfactory.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -22,7 +24,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 QString mainTitle = "Music trainer";
 public:
-    MainWindow(QWidget *parent = nullptr);
+    MainWindow(SessionFactory& factory, QWidget *parent = nullptr);
     ~MainWindow();
 private:
     void addBlock(IBlockWidget* block);
@@ -37,9 +39,10 @@ private:
     SampleRepository sampleRepository;
     AudioProcessor* audio;
     NotePlayer* notePlayer;
-    ISession* session;
+    QScopedPointer<ISession> session;
     IExerciseWidget* exercise;
     QMetaObject::Connection sessionBackConn;
     QMetaObject::Connection exerciseBackConn;
+    SessionFactory& sessionFactory;
 };
 #endif // MAINWINDOW_H
