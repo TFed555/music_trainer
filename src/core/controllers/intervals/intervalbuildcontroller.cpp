@@ -12,7 +12,7 @@ IntervalBuildController::IntervalBuildController(NotePlayer* player,
 void IntervalBuildController::playTone() {
     correctAnswer.clear();
     userAnswer.clear();
-    IntervalGenerator gen;
+    IntervalGenerator gen(config);
     auto result = gen.generate();
     correctAnswer.append(MusicUtils::midiToNote(result.midiNotes[1]));
     emit setQuestion(result.interval);
@@ -21,6 +21,11 @@ void IntervalBuildController::playTone() {
     log(result.desc);
     qDebug() << playbackLog.last().timestamp << " " << playbackLog.last().desc;
     notePlayer->playNotes({result.midiNotes[0]});
+}
+
+void IntervalBuildController::setDifficulty(int level) {
+    Difficulty dif = static_cast<Difficulty>(level);
+    config = difficultyMap<IntervalDifficultyConfig>[dif];
 }
 
 void IntervalBuildController::noteSelected(const QString& name) {

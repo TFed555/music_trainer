@@ -8,13 +8,17 @@ IntervalDirectionController::IntervalDirectionController(NotePlayer* player,
 }
 
 void IntervalDirectionController::playTone() {
-    // notePlayer->playExercise(GeneratorType::Interval, 2);
-    IntervalGenerator gen;
+    IntervalGenerator gen(config);
     auto result = gen.generate();
     correctDirection = result.direction;
     log(result.desc);
     qDebug() << playbackLog.last().timestamp << " " << playbackLog.last().desc;
     notePlayer->playNotes(result.midiNotes);
+}
+
+void IntervalDirectionController::setDifficulty(int level) {
+    Difficulty dif = static_cast<Difficulty>(level);
+    config = difficultyMap<IntervalDifficultyConfig>[dif];
 }
 
 void IntervalDirectionController::answerSelected(const QString& answer) {

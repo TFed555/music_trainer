@@ -13,7 +13,7 @@ void IntervalRecogniseController::playTone() {
     userAnswer.clear();
     noteCounter = 0;
     emit requestSetMode(Mode::Wait);
-    IntervalGenerator generator;
+    IntervalGenerator generator(config);
     auto result = generator.generate();
     log(result.desc);
     qDebug() << playbackLog.last().timestamp << " " << playbackLog.last().desc;
@@ -22,6 +22,11 @@ void IntervalRecogniseController::playTone() {
 
     notePlayer->playNotes(result.midiNotes);
 
+}
+
+void IntervalRecogniseController::setDifficulty(int level) {
+    Difficulty dif = static_cast<Difficulty>(level);
+    config = difficultyMap<IntervalDifficultyConfig>[dif];
 }
 
 void IntervalRecogniseController::noteSelected(const QString& name) {

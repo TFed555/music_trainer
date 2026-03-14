@@ -12,6 +12,7 @@ public:
                                   QObject *parent = nullptr);
 public slots:
     void noteSelected(const QString& name);
+    void setDifficulty(int level) override;
 signals:
     void requestSetMode(Mode);
     void showResult(QVector<QString> answer, QVector<QString> selected);
@@ -23,6 +24,7 @@ private:
     QVector<QString> correctAnswer;
     QVector<QString> userAnswer;
     int noteCounter = 0;
+    ChordDifficultyConfig config = difficultyMap<ChordDifficultyConfig>[Difficulty::Easy];
 };
 
 #endif // CHORDBUILDCONTROLLER_H

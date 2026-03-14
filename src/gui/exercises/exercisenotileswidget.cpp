@@ -5,6 +5,7 @@
 #include <QRadioButton>
 #include <QGroupBox>
 #include <QStyle>
+#include <QComboBox>
 
 ExerciseNoTilesWidget::ExerciseNoTilesWidget(QWidget *parent)
     : IExerciseWidget(parent)
@@ -17,6 +18,10 @@ ExerciseNoTilesWidget::ExerciseNoTilesWidget(QWidget *parent)
     connect(ui->backBtn, &QPushButton::clicked, this, [this] (){
         emit backClicked();
     });
+    // connect(ui->difficultyBox, &QComboBox::activated,
+    //         this, &ExerciseNoTilesWidget::difficultyChanged);
+    connect(ui->difficultyBox, &QComboBox::currentIndexChanged,
+            this, &ExerciseNoTilesWidget::difficultyChanged);
 }
 
 ExerciseNoTilesWidget::~ExerciseNoTilesWidget()

@@ -31,4 +31,7 @@ IntervalRecogniseSession::IntervalRecogniseSession(NotePlayer* player,
 
     connect(exerciseController, &IntervalRecogniseController::exercisePlayFinished,
             view, &ExerciseWithTilesWidget::exercisePlayFinished);
+
+    connect(view, &ExerciseWithTilesWidget::difficultyChanged,
+            exerciseController, &IntervalRecogniseController::setDifficulty);
 }

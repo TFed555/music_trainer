@@ -11,6 +11,7 @@ public:
     IntervalDirectionController(NotePlayer* player, QObject* parent = nullptr);
 public slots:
     void answerSelected(const QString& answer);
+    void setDifficulty(int level) override;
 signals:
     void setAnswers(QVector<QString>);
     void showResult(const QString& correct);
@@ -19,6 +20,7 @@ private:
 private:
     IntervalDirection correctDirection;
     QString userAnswer;
+    IntervalDifficultyConfig config = difficultyMap<IntervalDifficultyConfig>[Difficulty::Easy];
 };
 
 #endif // INTERVALDIRECTIONCONTROLLER_H

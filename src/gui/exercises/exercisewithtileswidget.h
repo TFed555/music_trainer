@@ -28,6 +28,7 @@ public slots:
 signals:
     void noteSelected(const QString& noteName);
     void resetTiles();
+    void difficultyChanged(int level);
 private:
     Ui::ExerciseWithTilesWidget *ui;
     OctaveTilesWidget *tiles;

@@ -3,7 +3,8 @@
 
 #include <QObject>
 #include "../../audio/playback/noteplayer.h"
-#include "../../generators/IGenerator.h"
+#include "../../common/models/Difficulty.h"
+#include "../../music/pitchutils.h"
 
 struct PlaybackLog {
     QDateTime timestamp;
@@ -11,6 +12,12 @@ struct PlaybackLog {
 };
 
 enum class PlaybackendSignal { PlaybackFinished, PlaylistEmpty };
+
+template <typename Config>
+const QMap<Difficulty, Config> difficultyMap = {
+    {Difficulty::Easy, Config::easy() },
+    {Difficulty::Hard, Config::hard() }
+};
 
 class IExerciseController : public QObject
 {
@@ -28,6 +35,7 @@ public:
 public slots:
     virtual void start() { playTone(); };
     virtual void stop() { notePlayer->stop(); };
+    virtual void setDifficulty(int level) = 0;
 signals:
     void exercisePlayFinished();
 private:

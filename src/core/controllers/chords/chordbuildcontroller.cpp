@@ -8,13 +8,11 @@ ChordBuildController::ChordBuildController(NotePlayer* player,
 {
 }
 
-
 void ChordBuildController::playTone() {
     correctAnswer.clear();
     userAnswer.clear();
     noteCounter = 0;
-    ChordGenerator gen({.allowedTypes={MusicUtils::Chords::ChordType::Major, MusicUtils::Chords::ChordType::Minor},
-                        .allowedInversions={MusicUtils::Chords::InversionType::Root}});
+    ChordGenerator gen(config);
     auto result = gen.generate();
     correctAnswer = {MusicUtils::midiToNote(result.midiNotes[1]),
                     MusicUtils::midiToNote(result.midiNotes[2])};
@@ -24,6 +22,12 @@ void ChordBuildController::playTone() {
     log(result.desc);
     qDebug() << playbackLog.last().timestamp << " " << playbackLog.last().desc;
     notePlayer->playNotes({result.midiNotes[0]});
+}
+
+void ChordBuildController::setDifficulty(int level) {
+    Difficulty dif = static_cast<Difficulty>(level);
+    config = difficultyMap<ChordDifficultyConfig>[dif];
+    config.allowedInversions = {MusicUtils::Chords::InversionType::Root};
 }
 
 void ChordBuildController::noteSelected(const QString& name) {
