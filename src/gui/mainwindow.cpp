@@ -2,6 +2,7 @@
 #include "./ui_mainwindow.h"
 #include "./blocks/intervalblockwidget.h"
 #include "./blocks/chordblockwidget.h"
+#include "./blocks/noteblockwidget.h"
 #include "../core/common/interfaces/IExerciseWidget.h"
 
 MainWindow::MainWindow(SessionFactory& factory, QWidget *parent)
@@ -24,12 +25,14 @@ MainWindow::MainWindow(SessionFactory& factory, QWidget *parent)
 
     blocks = {
         new IntervalBlockWidget(this),
-        new ChordBlockWidget(this)
+        new ChordBlockWidget(this),
+        new NoteBlockWidget(this)
     };
 
     QMap<IBlockWidget::BlockCategory, IBlockWidget*> blockNames = {
         {IBlockWidget::BlockCategory::Intervals, blocks[0]},
-        {IBlockWidget::BlockCategory::Chords, blocks[1]}
+        {IBlockWidget::BlockCategory::Chords, blocks[1]},
+        {IBlockWidget::BlockCategory::Notes, blocks[2]}
     };
 
     for (auto* block : blocks) addBlock(block);
@@ -39,6 +42,9 @@ MainWindow::MainWindow(SessionFactory& factory, QWidget *parent)
 
     connect(mainMenu, &MainMenuWidget::chordClicked,
             this, [=](){ stack->setCurrentWidget(blockNames[IBlockWidget::BlockCategory::Chords]); });
+
+    connect(mainMenu, &MainMenuWidget::noteClicked,
+            this, [=](){ stack->setCurrentWidget(blockNames[IBlockWidget::BlockCategory::Notes]); });
 }
 
 MainWindow::~MainWindow()

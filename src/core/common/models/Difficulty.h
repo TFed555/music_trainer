@@ -9,6 +9,17 @@ enum class Difficulty {
     Hard
 };
 
+struct NoteDifficultyConfig {
+    int midiMin = 48;
+    int midiMax = 83;
+    static NoteDifficultyConfig easy() {
+        return {60, 72};
+    }
+    static NoteDifficultyConfig hard() {
+        return {};
+    }
+};
+
 struct IntervalDifficultyConfig {
     QVector<int> allowedSemitones = []{
         QVector<int> v(12);

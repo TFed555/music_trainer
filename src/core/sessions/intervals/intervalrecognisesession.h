@@ -19,7 +19,6 @@ public:
         return "Определение интервала";
     }
 private:
-    int noteCounter = 0;
     ExerciseWithTilesWidget* view;
     IntervalRecogniseController* exerciseController;
 };
