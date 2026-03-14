@@ -7,7 +7,7 @@ ChordBuildSession::ChordBuildSession(NotePlayer* player,
 {
     auto* tilesController = new TilesController(player, this);
     exerciseController = new ChordBuildController(player, this);
-    view = new ExerciseWithTilesWidget(nullptr);
+    view = new ExerciseWithTilesWidget(true, nullptr);
 
     connect(view, &ExerciseWithTilesWidget::startClicked, exerciseController, &ChordBuildController::start);
 
@@ -37,4 +37,7 @@ ChordBuildSession::ChordBuildSession(NotePlayer* player,
 
     connect(exerciseController, &ChordBuildController::highlightQuestion,
             view, &ExerciseWithTilesWidget::highlightQuestion);
+
+    connect(view, &ExerciseWithTilesWidget::difficultyChanged,
+            exerciseController, &ChordBuildController::setDifficulty);
 }

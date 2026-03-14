@@ -7,7 +7,7 @@ NoteRecogniseSession::NoteRecogniseSession(NotePlayer* player,
 {
     auto* tilesController = new TilesController(player, this);
     exerciseController = new NoteRecogniseController(player, this);
-    view = new ExerciseWithTilesWidget(nullptr);
+    view = new ExerciseWithTilesWidget(true, nullptr);
 
     connect(view, &ExerciseWithTilesWidget::startClicked, exerciseController, &NoteRecogniseController::start);
 
@@ -34,5 +34,4 @@ NoteRecogniseSession::NoteRecogniseSession(NotePlayer* player,
 
     connect(view, &ExerciseWithTilesWidget::difficultyChanged,
             exerciseController, &NoteRecogniseController::setDifficulty);
-
 }

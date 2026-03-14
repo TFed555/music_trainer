@@ -21,15 +21,14 @@ IntervalIdentifySession::IntervalIdentifySession(NotePlayer* player,
     connect(view, &ExerciseNoTilesWidget::answerSelected,
             exerciseController, &IntervalIdentifyController::answerSelected);
 
-    // connect(view, &ExerciseNoTilesWidget::requestAnswers,
-    //         exerciseController, &IntervalIdentifyController::giveAnswers);
-
     connect(exerciseController, &IntervalIdentifyController::setAnswers,
             view, &ExerciseNoTilesWidget::addAnswers);
 
     connect(exerciseController, &IntervalIdentifyController::exercisePlayFinished,
             view, &ExerciseNoTilesWidget::exercisePlayFinished);
 
-    // view->requestAnswerSlot();
+    connect(view, &ExerciseNoTilesWidget::difficultyChanged,
+            exerciseController, &IntervalIdentifyController::setDifficulty);
+
     exerciseController->giveAnswers();
 }

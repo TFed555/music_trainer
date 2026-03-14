@@ -11,7 +11,6 @@ NoteRecogniseController::NoteRecogniseController(NotePlayer* player,
 void NoteRecogniseController::playTone() {
     correctAnswer.clear();
     userAnswer.clear();
-    noteCounter = 0;
     emit requestSetMode(Mode::Wait);
     NoteGenerator generator(config);
     auto result = generator.generate();
@@ -29,7 +28,6 @@ void NoteRecogniseController::setDifficulty(int level) {
 void NoteRecogniseController::noteSelected(const QString& name) {
     qDebug() << "Note selected" << name;
     userAnswer.append(name);
-    noteCounter++;
     if (correctAnswer.size() > 0) {
             emit showResult(correctAnswer, userAnswer);
             emit requestSetMode(Mode::Result);

@@ -14,6 +14,9 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
 
 
 add_library(core STATIC
@@ -47,6 +50,9 @@ add_library(core STATIC
     sessions/chords/chordbuildsession.h sessions/chords/chordbuildsession.cpp
     common/models/Difficulty.h controllers/notes/noterecognisecontroller.h controllers/notes/noterecognisecontroller.cpp
     sessions/notes/noterecognisesession.h sessions/notes/noterecognisesession.cpp
+    controllers/notes/notebuildcontroller.h controllers/notes/notebuildcontroller.cpp
+    sessions/notes/notebuildsession.h sessions/notes/notebuildsession.cpp
+
 )
 
 
@@ -65,6 +71,9 @@ target_include_directories(core PUBLIC
     ${SNDFILE_INCLUDE_DIRS}
 )
 target_link_libraries(core PUBLIC generators_module)
+target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
+target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
+target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
 target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
 target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
 target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)

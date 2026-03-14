@@ -27,5 +27,8 @@ ChordInversionSession::ChordInversionSession(NotePlayer* player,
     connect(exerciseController, &ChordInversionController::exercisePlayFinished,
             view, &ExerciseNoTilesWidget::exercisePlayFinished);
 
+    connect(view, &ExerciseNoTilesWidget::difficultyChanged,
+            exerciseController, &ChordInversionController::setDifficulty);
+
     exerciseController->giveAnswers();
 }

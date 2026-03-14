@@ -16,7 +16,7 @@ class ExerciseWithTilesWidget : public IExerciseWidget
     Q_OBJECT
 
 public:
-    explicit ExerciseWithTilesWidget(QWidget *parent = nullptr);
+    explicit ExerciseWithTilesWidget(bool noteNamesVisible = true, QWidget *parent = nullptr);
     ~ExerciseWithTilesWidget();
 
 public slots:
@@ -25,6 +25,7 @@ public slots:
     void exercisePlayFinished() override;
     void setQuestion(const QString&);
     void highlightQuestion(QVector<QString> notes);
+    void setOctaveCount(int count);
 signals:
     void noteSelected(const QString& noteName);
     void resetTiles();

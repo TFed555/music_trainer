@@ -7,7 +7,7 @@ IntervalRecogniseSession::IntervalRecogniseSession(NotePlayer* player,
 {
     auto* tilesController = new TilesController(player, this);
     exerciseController = new IntervalRecogniseController(player, this);
-    view = new ExerciseWithTilesWidget(nullptr);
+    view = new ExerciseWithTilesWidget(true, nullptr);
 
     connect(view, &ExerciseWithTilesWidget::startClicked, exerciseController, &IntervalRecogniseController::start);
 

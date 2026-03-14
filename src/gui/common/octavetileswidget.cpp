@@ -1,18 +1,16 @@
 #include "octavetileswidget.h"
-// #include "ui_octavetileswidget.h"
 #include <QHBoxLayout>
 
-OctaveTilesWidget::OctaveTilesWidget(QWidget *parent)
+OctaveTilesWidget::OctaveTilesWidget(bool noteNamesVisible, QWidget *parent)
     : QWidget(parent)
-    // , ui(new Ui::OctaveTilesWidget)
 {
-    // ui->setupUi(this);
     QHBoxLayout* layout = new QHBoxLayout(this);
     layout->setContentsMargins(0, 0, 0, 0);
-
+    setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
     for (int i = 0; i < 3; i++) {
-        NoteTilesWidget* tiles = new NoteTilesWidget(this);
+        NoteTilesWidget* tiles = new NoteTilesWidget(noteNamesVisible, this);
         tiles->show();
+        tiles->setFixedWidth(parent->width()/3);
         layout->addWidget(tiles);
         connect(tiles, &NoteTilesWidget::noteSelected,
                 this, [this, i] (QString noteName) {
@@ -23,10 +21,7 @@ OctaveTilesWidget::OctaveTilesWidget(QWidget *parent)
     }
 }
 
-OctaveTilesWidget::~OctaveTilesWidget()
-{
-    // delete ui;
-}
+OctaveTilesWidget::~OctaveTilesWidget() {}
 
 void OctaveTilesWidget::resetSelection(int octIdx) {
     for (int i = 0; i < octaves.size(); i++) {
@@ -67,5 +62,11 @@ void OctaveTilesWidget::setMode(Mode m) {
 void OctaveTilesWidget::resetTiles() {
     for (auto* w : octaves) {
         w->resetTiles();
+    }
+}
+
+void OctaveTilesWidget::setVisibleOctaves(int count) {
+    for (auto* w : octaves) {
+        w->setVisible(octaves.indexOf(w)<count);
     }
 }

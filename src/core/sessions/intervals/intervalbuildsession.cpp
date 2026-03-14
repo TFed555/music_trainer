@@ -7,7 +7,7 @@ IntervalBuildSession::IntervalBuildSession(NotePlayer* player,
 {
     auto* tilesController = new TilesController(player, this);
     exerciseController = new IntervalBuildController(player, this);
-    view = new ExerciseWithTilesWidget(nullptr);
+    view = new ExerciseWithTilesWidget(true, nullptr);
 
     connect(view, &ExerciseWithTilesWidget::startClicked, exerciseController, &IntervalBuildController::start);
 
@@ -38,4 +38,6 @@ IntervalBuildSession::IntervalBuildSession(NotePlayer* player,
     connect(exerciseController, &IntervalBuildController::highlightQuestion,
             view, &ExerciseWithTilesWidget::highlightQuestion);
 
+    connect(view, &ExerciseWithTilesWidget::difficultyChanged,
+            exerciseController, &IntervalBuildController::setDifficulty);
 }

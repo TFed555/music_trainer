@@ -2,9 +2,10 @@
 #include "ui_notetileswidget.h"
 #include "../../music/pitchutils.h"
 
-NoteTilesWidget::NoteTilesWidget(QWidget *parent)
+NoteTilesWidget::NoteTilesWidget(bool noteNamesVisible, QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::NoteTilesWidget)
+    , noteNamesVisible(noteNamesVisible)
 {
     ui->setupUi(this);
     setNotes();
@@ -43,7 +44,9 @@ void NoteTilesWidget::paintEvent(QPaintEvent* event) {
 
         painter.setBrush(color);
         painter.drawRect(rect);
-        painter.drawText(rect, Qt::AlignBottom | Qt::AlignCenter, notes[i].name);
+        if (noteNamesVisible) {
+            painter.drawText(rect, Qt::AlignBottom | Qt::AlignCenter, notes[i].name);
+        }
     }
     whiteIdx=0;
     for (int i = 0; i < notes.size(); i++) {
@@ -59,7 +62,9 @@ void NoteTilesWidget::paintEvent(QPaintEvent* event) {
         painter.setBrush(color);
         painter.drawRect(rect);
         painter.setPen(QColor(255, 255, 255));
-        painter.drawText(rect, Qt::AlignBottom | Qt::AlignCenter, notes[i].name);
+        if (noteNamesVisible) {
+            painter.drawText(rect, Qt::AlignBottom | Qt::AlignCenter, notes[i].name);
+        }
     }
 }
 

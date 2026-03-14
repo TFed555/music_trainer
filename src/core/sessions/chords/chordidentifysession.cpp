@@ -27,5 +27,8 @@ ChordIdentifySession::ChordIdentifySession(NotePlayer* player,
     connect(exerciseController, &ChordIdentifyController::exercisePlayFinished,
             view, &ExerciseNoTilesWidget::exercisePlayFinished);
 
+    connect(view, &ExerciseNoTilesWidget::difficultyChanged,
+            exerciseController, &ChordIdentifyController::setDifficulty);
+
     exerciseController->giveAnswers();
 }

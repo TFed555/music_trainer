@@ -7,7 +7,7 @@ ChordRootSession::ChordRootSession(NotePlayer* player,
 {
     auto* tilesController = new TilesController(player, this);
     exerciseController = new ChordRootController(player, this);
-    view = new ExerciseWithTilesWidget(nullptr);
+    view = new ExerciseWithTilesWidget(true, nullptr);
 
     connect(view, &ExerciseWithTilesWidget::startClicked, exerciseController, &ChordRootController::start);
 
@@ -31,4 +31,8 @@ ChordRootSession::ChordRootSession(NotePlayer* player,
 
     connect(exerciseController, &ChordRootController::exercisePlayFinished,
             view, &ExerciseWithTilesWidget::exercisePlayFinished);
+
+    connect(view, &ExerciseWithTilesWidget::difficultyChanged,
+            exerciseController, &ChordRootController::setDifficulty);
+
 }

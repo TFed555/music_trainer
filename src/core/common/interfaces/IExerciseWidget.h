@@ -13,7 +13,8 @@ enum class ExerciseType {
     ChordInversion,
     ChordRoot,
     ChordBuild,
-    NoteRecognise
+    NoteRecognise,
+    NoteBuild
 };
 
 class IExerciseWidget : public QWidget {
