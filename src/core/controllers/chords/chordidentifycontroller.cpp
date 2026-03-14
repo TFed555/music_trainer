@@ -1,6 +1,7 @@
 #include "chordidentifycontroller.h"
 #include "../../generators/chords/chordgenerator.h"
 
+
 ChordIdentifyController::ChordIdentifyController(NotePlayer* player,
                                                        QObject *parent)
     : IExerciseController(player, PlaybackendSignal::PlaybackFinished, parent)
@@ -10,8 +11,7 @@ ChordIdentifyController::ChordIdentifyController(NotePlayer* player,
 void ChordIdentifyController::playTone() {
     correctAnswer.clear();
     userAnswer.clear();
-    ChordGenerator gen({.allowedTypes={MusicUtils::Chords::ChordType::Major, MusicUtils::Chords::ChordType::Minor},
-                        .allowedInversions={MusicUtils::Chords::InversionType::Root}});
+    ChordGenerator gen(config);
     auto result = gen.generate();
     correctAnswer = result.type;
     log(result.desc);
@@ -22,6 +22,12 @@ void ChordIdentifyController::playTone() {
 void ChordIdentifyController::answerSelected(const QString& answer){
     userAnswer = answer;
     emit showResult(correctAnswer);
+}
+
+void ChordIdentifyController::setDifficulty(int level) {
+    Difficulty dif = static_cast<Difficulty>(level);
+    config = difficultyMap<ChordDifficultyConfig>[dif];
+    config.allowedInversions = {MusicUtils::Chords::InversionType::Root};
 }
 
 void ChordIdentifyController::giveAnswers()

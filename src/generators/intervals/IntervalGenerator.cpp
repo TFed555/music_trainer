@@ -2,17 +2,25 @@
 #include "../music/pitchutils.h"
 #include <QDebug>
 
+IntervalGenerator::IntervalGenerator(IntervalDifficultyConfig config)
+    : config(config)
+{}
+
 GeneratedInterval IntervalGenerator::generate() {
-    std::uniform_real_distribution<> midiDist(48, 83);
+    std::uniform_int_distribution<> midiDist(config.midiMin, config.midiMax);
 
     int firstMidi = midiDist(gen);
 
-    std::uniform_int_distribution<> intervalDist(-12,12);
-    int semitones = intervalDist(gen);
+    std::uniform_int_distribution<> intervalDist(0, config.allowedSemitones.size()-1);
+    int semitones = config.allowedSemitones[intervalDist(gen)];
+
+    std::uniform_int_distribution<int> signDist(0, 1);
+    int sign = signDist(gen);
+    if (sign) semitones = -semitones;
 
     int secondMidi = firstMidi + semitones;
 
-    while (secondMidi > 83 || secondMidi < 48) {
+    while (secondMidi > config.midiMax || secondMidi < config.midiMin) {
         semitones = intervalDist(gen);
         secondMidi = firstMidi + semitones;
     }

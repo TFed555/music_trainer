@@ -63,6 +63,39 @@
    </property>
    <layout class="QGridLayout" name="answersLayout"/>
   </widget>
+  <widget class="QComboBox" name="difficultyBox">
+   <property name="geometry">
+    <rect>
+     <x>730</x>
+     <y>50</y>
+     <width>121</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>Easy</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Hard</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>730</x>
+     <y>30</y>
+     <width>101</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Difficulty level</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

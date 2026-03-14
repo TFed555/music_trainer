@@ -1,6 +1,5 @@
 #include "exercisewithtileswidget.h"
 #include "ui_exercisewithtileswidget.h"
-// #include <QEventLoop>
 #include <QTimer>
 
 ExerciseWithTilesWidget::ExerciseWithTilesWidget(QWidget *parent)
@@ -19,6 +18,10 @@ ExerciseWithTilesWidget::ExerciseWithTilesWidget(QWidget *parent)
     connect(ui->backBtn, &QPushButton::clicked, this, &ExerciseWithTilesWidget::backClicked);
     connect(tiles, &OctaveTilesWidget::noteSelected, this, &ExerciseWithTilesWidget::noteSelected);
     connect(this, &ExerciseWithTilesWidget::resetTiles, tiles, &OctaveTilesWidget::resetTiles);
+    // connect(ui->difficultyBox, &QComboBox::activated,
+    //         this, &ExerciseWithTilesWidget::difficultyChanged);
+    connect(ui->difficultyBox, &QComboBox::currentIndexChanged,
+            this, &ExerciseWithTilesWidget::difficultyChanged);
 }
 
 ExerciseWithTilesWidget::~ExerciseWithTilesWidget()

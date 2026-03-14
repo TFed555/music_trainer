@@ -11,6 +11,7 @@ public:
     explicit ChordRootController(NotePlayer* player, QObject *parent = nullptr);
 public slots:
     void noteSelected(const QString& name);
+    void setDifficulty(int level) override;
 signals:
     void requestSetMode(Mode);
     void showResult(QVector<QString> answer, QVector<QString> selected);
@@ -19,6 +20,7 @@ private:
 private:
     QVector<QString> correctAnswer;
     QVector<QString>  userAnswer;
+    ChordDifficultyConfig config = difficultyMap<ChordDifficultyConfig>[Difficulty::Easy];
 };
 
 #endif // CHORDROOTCONTROLLER_H

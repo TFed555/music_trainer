@@ -43,6 +43,7 @@ add_library(core STATIC
     factory/sessionregistry.h
     controllers/chords/chordbuildcontroller.h controllers/chords/chordbuildcontroller.cpp
     sessions/chords/chordbuildsession.h sessions/chords/chordbuildsession.cpp
+    common/models/Difficulty.h
 )
 
 

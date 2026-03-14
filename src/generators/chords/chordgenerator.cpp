@@ -1,24 +1,21 @@
 #include "chordgenerator.h"
-#include "../music/pitchutils.h"
-#include <random>
 #include <QDebug>
 
-ChordGenerator::ChordGenerator(ChordGeneratorParams params)
-    : params(params)
+ChordGenerator::ChordGenerator(ChordDifficultyConfig config)
+    : config(config)
 {}
 
 GeneratedChord ChordGenerator::generate() {
-    std::random_device rd;
-    std::mt19937 gen(rd());
+
     std::uniform_int_distribution<> midiDist(60, 71);
 
     int firstMidi = midiDist(gen);
 
-    std::uniform_int_distribution<> typeDist(0, params.allowedTypes.size()-1);
-    MusicUtils::Chords::ChordType type = params.allowedTypes[typeDist(gen)];
+    std::uniform_int_distribution<> typeDist(0, config.allowedTypes.size()-1);
+    MusicUtils::Chords::ChordType type = config.allowedTypes[typeDist(gen)];
 
-    std::uniform_int_distribution<> inversionDist(0, params.allowedInversions.size()-1);
-    MusicUtils::Chords::InversionType inversion = params.allowedInversions[inversionDist(gen)];
+    std::uniform_int_distribution<> inversionDist(0, config.allowedInversions.size()-1);
+    MusicUtils::Chords::InversionType inversion = config.allowedInversions[inversionDist(gen)];
 
 
     QVector<int> semitones = requiredIntervals[type];
@@ -40,7 +37,7 @@ GeneratedChord ChordGenerator::generate() {
     res.midiNotes = midiNotes;
     res.inversion = MusicUtils::Chords::inversionNames[inversion];
     res.root = MusicUtils::midiToNote(midiNotes[1]);
-    res.desc = QString("%1 -> %2 -> %3").arg(MusicUtils::midiToNote(firstMidi))
+    res.desc = QString("%1 -> %2 -> %3").arg(MusicUtils::midiToNote(midiNotes[0]))
                    .arg(MusicUtils::midiToNote(midiNotes[1]))
                    .arg(MusicUtils::midiToNote(midiNotes[2])); //поменять лог
 

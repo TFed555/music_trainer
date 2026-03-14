@@ -14,6 +14,7 @@ public:
     virtual QString title() const = 0;
 signals:
     void back();
+    void setDifficulty(int level);
 };
 
 #endif // ISESSION_H

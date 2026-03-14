@@ -1,5 +1,6 @@
 #include "chordinversioncontroller.h"
 #include "../../generators/chords/chordgenerator.h"
+using namespace MusicUtils::Chords;
 
 ChordInversionController::ChordInversionController(NotePlayer* player,
                                                        QObject *parent)
@@ -10,7 +11,7 @@ ChordInversionController::ChordInversionController(NotePlayer* player,
 void ChordInversionController::playTone() {
     correctAnswer = 0;
     userAnswer = 0;
-    ChordGenerator gen({});
+    ChordGenerator gen(config);
     auto result = gen.generate();
     correctAnswer = result.inversion;
     log(result.desc);
@@ -21,6 +22,12 @@ void ChordInversionController::playTone() {
 void ChordInversionController::answerSelected(const QString& answer){
     userAnswer = answer;
     emit showResult(correctAnswer);
+}
+
+void ChordInversionController::setDifficulty(int level) {
+    Difficulty dif = static_cast<Difficulty>(level);
+    config = difficultyMap<ChordDifficultyConfig>[dif];
+    config.allowedInversions = {InversionType::Root, InversionType::First, InversionType::Second};
 }
 
 void ChordInversionController::giveAnswers()

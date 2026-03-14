@@ -12,6 +12,7 @@ public:
 
 public slots:
     void noteSelected(const QString& name);
+    void setDifficulty(int level) override;
 signals:
     void requestSetMode(Mode);
     void showResult(QVector<QString> answer, QVector<QString> selected);
@@ -21,6 +22,7 @@ private:
     QVector<QString> correctAnswer;
     QVector<QString>  userAnswer;
     int noteCounter;
+    IntervalDifficultyConfig config = difficultyMap<IntervalDifficultyConfig>[Difficulty::Easy];
 };
 
 #endif // INTERVALRECOGNISECONTROLLER_H

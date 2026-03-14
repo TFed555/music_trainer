@@ -26,6 +26,7 @@ public slots:
 signals:
     void answerSelected(const QString& answer);
     void directionSelected(const QString& direction);
+    void difficultyChanged(int level);
 private:
     void resetSelection();
     void btnsEnable(bool status);
