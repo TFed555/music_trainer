@@ -5,6 +5,7 @@ IntervalIdentifyController::IntervalIdentifyController(NotePlayer* player,
                                                        QObject *parent)
     : IExerciseController(player, PlaybackendSignal::PlaylistEmpty, parent)
 {
+    answerVariants = MusicUtils::Intervals::intervals;
 }
 
 void IntervalIdentifyController::playTone() {
@@ -26,9 +27,4 @@ void IntervalIdentifyController::setDifficulty(int level) {
 void IntervalIdentifyController::answerSelected(const QString& answer){
     userAnswer = answer;
     emit showResult(correctAnswer);
-}
-
-void IntervalIdentifyController::giveAnswers()
-{
-    emit setAnswers(answerVariants);
 }

@@ -5,7 +5,8 @@ NoteGuessSession::NoteGuessSession(NotePlayer* player,
     : ISession(parent)
 {
     exerciseController = new NoteGuessController(player, this);
-    view = new ExerciseNoTilesWidget(nullptr);
+    noTilesView = new ExerciseNoTilesWidget(nullptr);
+    view = noTilesView;
 
     connect(view, &ExerciseNoTilesWidget::startClicked, exerciseController, &NoteGuessController::start);
 
@@ -16,18 +17,18 @@ NoteGuessSession::NoteGuessSession(NotePlayer* player,
     });
 
     connect(exerciseController, &NoteGuessController::showResult,
-            view, &ExerciseNoTilesWidget::showResult);
+            noTilesView, &ExerciseNoTilesWidget::showResult);
 
-    connect(view, &ExerciseNoTilesWidget::answerSelected,
+    connect(noTilesView, &ExerciseNoTilesWidget::answerSelected,
             exerciseController, &NoteGuessController::answerSelected);
 
     connect(exerciseController, &NoteGuessController::setAnswers,
-            view, &ExerciseNoTilesWidget::addAnswers);
+            noTilesView, &ExerciseNoTilesWidget::addAnswers);
 
     connect(exerciseController, &NoteGuessController::exercisePlayFinished,
-            view, &ExerciseNoTilesWidget::exercisePlayFinished);
+            noTilesView, &ExerciseNoTilesWidget::exercisePlayFinished);
 
-    connect(view, &ExerciseNoTilesWidget::difficultyChanged,
+    connect(noTilesView, &ExerciseNoTilesWidget::difficultyChanged,
             exerciseController, &NoteGuessController::setDifficulty);
 
     exerciseController->giveAnswers();

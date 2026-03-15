@@ -12,14 +12,12 @@ public:
     explicit IntervalIdentifySession(
         NotePlayer* player,
         QObject* parent = nullptr);
-    ExerciseNoTilesWidget* getWidget() const override {
-        qDebug() << "getWidget()" << view; return view; }
     QString title() const override {
         return "Определение названия интервала";
     }
 private:
-    ExerciseNoTilesWidget* view;
     IntervalIdentifyController* exerciseController;
+    ExerciseNoTilesWidget* noTilesView;
 };
 
 #endif // INTERVALIDENTIFYSESSION_H

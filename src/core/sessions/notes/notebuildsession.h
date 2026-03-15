@@ -11,14 +11,12 @@ class NoteBuildSession : public ISession
 public:
     explicit NoteBuildSession(NotePlayer* player,
                                   QObject* parent = nullptr);
-    ExerciseWithTilesWidget* getWidget() const override {
-        qDebug() << "getWidget()" << view; return view; }
     QString title() const override {
         return "Название ноты";
     }
 private:
-    ExerciseWithTilesWidget* view;
     NoteBuildController* exerciseController;
+    ExerciseWithTilesWidget* tilesView;
 };
 
 #endif // NOTEBUILDSESSION_H

@@ -32,12 +32,16 @@ public:
         connectPlayer(endSignal);
     };
 
+signals:
+    void exercisePlayFinished();
+    void setAnswers(QVector<QString>);
+
 public slots:
     virtual void start() { playTone(); };
     virtual void stop() { notePlayer->stop(); };
     virtual void setDifficulty(int level) = 0;
-signals:
-    void exercisePlayFinished();
+    void giveAnswers() { emit setAnswers(answerVariants); }
+
 private:
     virtual void playTone() = 0;
 
@@ -68,6 +72,7 @@ protected:
 protected:
     NotePlayer* notePlayer;
     QVector<PlaybackLog> playbackLog;
+    QVector<QString> answerVariants;
 };
 
 #endif // IEXERCISECONTROLLER_H

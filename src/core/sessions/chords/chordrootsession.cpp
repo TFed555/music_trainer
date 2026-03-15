@@ -7,7 +7,8 @@ ChordRootSession::ChordRootSession(NotePlayer* player,
 {
     auto* tilesController = new TilesController(player, this);
     exerciseController = new ChordRootController(player, this);
-    view = new ExerciseWithTilesWidget(true, nullptr);
+    tilesView = new ExerciseWithTilesWidget(true, nullptr);
+    view = tilesView;
 
     connect(view, &ExerciseWithTilesWidget::startClicked, exerciseController, &ChordRootController::start);
 
@@ -18,21 +19,21 @@ ChordRootSession::ChordRootSession(NotePlayer* player,
     });
 
     connect (exerciseController, &ChordRootController::showResult,
-            view, &ExerciseWithTilesWidget::showResult);
+            tilesView, &ExerciseWithTilesWidget::showResult);
 
     connect(exerciseController, &ChordRootController::requestSetMode,
-            view, &ExerciseWithTilesWidget::setMode, Qt::QueuedConnection);
+            tilesView, &ExerciseWithTilesWidget::setMode, Qt::QueuedConnection);
 
-    connect(view, &ExerciseWithTilesWidget::noteSelected,
+    connect(tilesView, &ExerciseWithTilesWidget::noteSelected,
             tilesController, &TilesController::playTile);
 
-    connect(view, &ExerciseWithTilesWidget::noteSelected,
+    connect(tilesView, &ExerciseWithTilesWidget::noteSelected,
             exerciseController, &ChordRootController::noteSelected);
 
     connect(exerciseController, &ChordRootController::exercisePlayFinished,
-            view, &ExerciseWithTilesWidget::exercisePlayFinished);
+            tilesView, &ExerciseWithTilesWidget::exercisePlayFinished);
 
-    connect(view, &ExerciseWithTilesWidget::difficultyChanged,
+    connect(tilesView, &ExerciseWithTilesWidget::difficultyChanged,
             exerciseController, &ChordRootController::setDifficulty);
 
 }

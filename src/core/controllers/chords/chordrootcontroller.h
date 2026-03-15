@@ -1,16 +1,15 @@
 #ifndef CHORDROOTCONTROLLER_H
 #define CHORDROOTCONTROLLER_H
 
-#include "../common/iexercisecontroller.h"
-#include "../../common/models/Mode.h"
+#include "../common/itilesexercisecontroller.h"
 
-class ChordRootController : public IExerciseController
+class ChordRootController : public ITilesExerciseController
 {
     Q_OBJECT
 public:
     explicit ChordRootController(NotePlayer* player, QObject *parent = nullptr);
 public slots:
-    void noteSelected(const QString& name);
+    void noteSelected(const QString& name) override;
     void setDifficulty(int level) override;
 signals:
     void requestSetMode(Mode);
@@ -18,8 +17,6 @@ signals:
 private:
     void playTone() override;
 private:
-    QVector<QString> correctAnswer;
-    QVector<QString>  userAnswer;
     ChordDifficultyConfig config = difficultyMap<ChordDifficultyConfig>[Difficulty::Easy];
 };
 

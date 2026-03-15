@@ -12,15 +12,12 @@ public:
     explicit IntervalDirectionSession(
         NotePlayer* player,
         QObject* parent = nullptr);
-    ExerciseNoTilesWidget* getWidget() const override {
-        qDebug() << "getWidget()" << view; return view; }
     QString title() const override {
         return "Определение направления интервала";
     }
 private:
-    // int noteCounter = 0;
-    ExerciseNoTilesWidget* view;
     IntervalDirectionController* exerciseController;
+    ExerciseNoTilesWidget* noTilesView;
 };
 
 #endif // INTERVALDIRECTIONSESSION_H

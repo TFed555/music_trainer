@@ -11,14 +11,12 @@ class NoteRecogniseSession : public ISession
 public:
     explicit NoteRecogniseSession(NotePlayer* player,
                          QObject* parent = nullptr);
-    ExerciseWithTilesWidget* getWidget() const override {
-        qDebug() << "getWidget()" << view; return view; }
     QString title() const override {
         return "Определение ноты";
     }
 private:
-    ExerciseWithTilesWidget* view;
     NoteRecogniseController* exerciseController;
+    ExerciseWithTilesWidget* tilesView;
 };
 
 #endif // NOTERECOGNISESESSION_H

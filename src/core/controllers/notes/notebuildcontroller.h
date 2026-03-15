@@ -1,24 +1,22 @@
 #ifndef NOTEBUILDCONTROLLER_H
 #define NOTEBUILDCONTROLLER_H
 
-#include "../common/iexercisecontroller.h"
-#include "../../common/models/Mode.h"
+#include "../common/itilesexercisecontroller.h"
 
 static inline const QMap<Difficulty, NoteDifficultyConfig> noteBuildDifficulty = {
     { Difficulty::Easy, {1, 1, 60, 72} },
     { Difficulty::Hard, {} },
     };
 
-class NoteBuildController : public IExerciseController
+class NoteBuildController : public ITilesExerciseController
 {
     Q_OBJECT
 public:
     explicit NoteBuildController(NotePlayer* player, QObject *parent = nullptr);
 public slots:
-    void noteSelected(const QString& name);
+    void noteSelected(const QString& name) override;
     void setDifficulty(int level) override;
 signals:
-    void requestSetMode(Mode);
     void showResult(QVector<QString> answer, QVector<QString> selected);
     void setQuestion(const QString& question);
     void highlightQuestion(QVector<QString> notes);
@@ -26,8 +24,6 @@ signals:
 private:
     void playTone() override;
 private:
-    QVector<QString> correctAnswer;
-    QVector<QString> userAnswer;
     NoteDifficultyConfig config = noteBuildDifficulty[Difficulty::Easy];
 };
 

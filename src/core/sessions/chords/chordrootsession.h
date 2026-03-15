@@ -13,15 +13,13 @@ public:
     explicit ChordRootSession(
         NotePlayer* player,
         QObject* parent = nullptr);
-    ExerciseWithTilesWidget* getWidget() const override {
-        qDebug() << "getWidget()" << view; return view; }
     QString title() const override {
         return "Определение основной ноты аккорда";
     }
 private:
     int noteCounter = 0;
-    ExerciseWithTilesWidget* view;
     ChordRootController* exerciseController;
+    ExerciseWithTilesWidget* tilesView;
 };
 
 #endif // CHORDROOTSESSION_H

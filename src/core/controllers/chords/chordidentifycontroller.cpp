@@ -1,11 +1,11 @@
 #include "chordidentifycontroller.h"
 #include "../../generators/chords/chordgenerator.h"
 
-
 ChordIdentifyController::ChordIdentifyController(NotePlayer* player,
                                                        QObject *parent)
     : IExerciseController(player, PlaybackendSignal::PlaybackFinished, parent)
 {
+    answerVariants = MusicUtils::Chords::chordTypeNames.values();
 }
 
 void ChordIdentifyController::playTone() {
@@ -30,7 +30,3 @@ void ChordIdentifyController::setDifficulty(int level) {
     config.allowedInversions = {MusicUtils::Chords::InversionType::Root};
 }
 
-void ChordIdentifyController::giveAnswers()
-{
-    emit setAnswers(answerVariants);
-}

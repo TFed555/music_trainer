@@ -12,14 +12,12 @@ public:
     explicit NoteGuessSession(
         NotePlayer* player,
         QObject* parent = nullptr);
-    ExerciseNoTilesWidget* getWidget() const override {
-        qDebug() << "getWidget()" << view; return view; }
     QString title() const override {
         return "Определение нот в мелодии";
     }
 private:
-    ExerciseNoTilesWidget* view;
     NoteGuessController* exerciseController;
+    ExerciseNoTilesWidget* noTilesView;
 };
 
 #endif // NOTEGUESSSESSION_H

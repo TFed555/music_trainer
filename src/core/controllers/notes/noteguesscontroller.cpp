@@ -4,7 +4,9 @@
 NoteGuessController::NoteGuessController(NotePlayer* player,
                                          QObject *parent)
     : IExerciseController(player, PlaybackendSignal::PlaylistEmpty, parent)
-{}
+{
+    answerVariants = {"одинаковые", "разные"};
+}
 
 void NoteGuessController::playTone() {
     correctAnswer.clear();
@@ -26,9 +28,4 @@ void NoteGuessController::setDifficulty(int level) {
 void NoteGuessController::answerSelected(const QString& answer){
     userAnswer = answer;
     emit showResult(correctAnswer);
-}
-
-void NoteGuessController::giveAnswers()
-{
-    emit setAnswers(answerVariants);
 }

@@ -7,7 +7,8 @@ NoteBuildSession::NoteBuildSession(NotePlayer* player,
 {
     auto* tilesController = new TilesController(player, this);
     exerciseController = new NoteBuildController(player, this);
-    view = new ExerciseWithTilesWidget(false, nullptr);
+    tilesView = new ExerciseWithTilesWidget(false, nullptr);
+    view = tilesView;
 
     connect(view, &ExerciseWithTilesWidget::startClicked, exerciseController, &NoteBuildController::start);
 
@@ -18,28 +19,28 @@ NoteBuildSession::NoteBuildSession(NotePlayer* player,
     });
 
     connect(exerciseController, &NoteBuildController::showResult,
-            view, &ExerciseWithTilesWidget::showResult);
+            tilesView, &ExerciseWithTilesWidget::showResult);
 
     connect(exerciseController, &NoteBuildController::requestSetMode,
-            view, &ExerciseWithTilesWidget::setMode, Qt::QueuedConnection);
+            tilesView, &ExerciseWithTilesWidget::setMode, Qt::QueuedConnection);
 
-    connect(view, &ExerciseWithTilesWidget::noteSelected,
+    connect(tilesView, &ExerciseWithTilesWidget::noteSelected,
             tilesController, &TilesController::playTile);
 
-    connect(view, &ExerciseWithTilesWidget::noteSelected,
+    connect(tilesView, &ExerciseWithTilesWidget::noteSelected,
             exerciseController, &NoteBuildController::noteSelected);
 
     connect(exerciseController, &NoteBuildController::exercisePlayFinished,
-            view, &ExerciseWithTilesWidget::exercisePlayFinished);
+            tilesView, &ExerciseWithTilesWidget::exercisePlayFinished);
 
     connect(exerciseController, &NoteBuildController::setQuestion,
-            view, &ExerciseWithTilesWidget::setQuestion);
+            tilesView, &ExerciseWithTilesWidget::setQuestion);
 
-    connect(view, &ExerciseWithTilesWidget::difficultyChanged,
+    connect(tilesView, &ExerciseWithTilesWidget::difficultyChanged,
             exerciseController, &NoteBuildController::setDifficulty);
 
     connect(exerciseController, &NoteBuildController::setOctaveCount,
-            view, &ExerciseWithTilesWidget::setOctaveCount);
+            tilesView, &ExerciseWithTilesWidget::setOctaveCount);
 
     exerciseController->setDifficulty(0);
 }

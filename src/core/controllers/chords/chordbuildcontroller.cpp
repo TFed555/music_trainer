@@ -4,7 +4,7 @@
 
 ChordBuildController::ChordBuildController(NotePlayer* player,
                                            QObject *parent)
-    : IExerciseController(player, PlaybackendSignal::PlaybackFinished, parent)
+    : ITilesExerciseController(player, PlaybackendSignal::PlaybackFinished, parent)
 {
 }
 

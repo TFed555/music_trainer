@@ -1,30 +1,26 @@
 #ifndef NOTERECOGNISECONTROLLER_H
 #define NOTERECOGNISECONTROLLER_H
 
-#include "../common/iexercisecontroller.h"
-#include "../../common/models/Mode.h"
+#include "../common/itilesexercisecontroller.h"
 
 static inline const QMap<Difficulty, NoteDifficultyConfig> noteRecogniseDifficulty = {
     { Difficulty::Easy, {1, 1, 60, 72} },
     { Difficulty::Hard, {} },
     };
 
-class NoteRecogniseController : public IExerciseController
+class NoteRecogniseController : public ITilesExerciseController
 {
     Q_OBJECT
 public:
     explicit NoteRecogniseController(NotePlayer* player, QObject *parent = nullptr);
 public slots:
-    void noteSelected(const QString& name);
+    void noteSelected(const QString& name) override;
     void setDifficulty(int level) override;
 signals:
-    void requestSetMode(Mode);
     void showResult(QVector<QString> answer, QVector<QString> selected);
 private:
     void playTone() override;
 private:
-    QVector<QString> correctAnswer;
-    QVector<QString>  userAnswer;
     NoteDifficultyConfig config = noteRecogniseDifficulty[Difficulty::Easy];
 };
 

@@ -2,8 +2,8 @@
 #define CHORDBUILDSESSION_H
 
 #include "../common/isession.h"
-#include "../../gui/exercises/exercisewithtileswidget.h"
 #include "../core/controllers/chords/chordbuildcontroller.h"
+#include "../../gui/exercises/exercisewithtileswidget.h"
 
 class ChordBuildSession : public ISession
 {
@@ -12,14 +12,12 @@ public:
     explicit ChordBuildSession(
         NotePlayer* player,
         QObject* parent = nullptr);
-    ExerciseWithTilesWidget* getWidget() const override {
-        qDebug() << "getWidget()" << view; return view; }
     QString title() const override {
         return "Построение аккорда";
     }
 private:
-    ExerciseWithTilesWidget* view;
     ChordBuildController* exerciseController;
+    ExerciseWithTilesWidget* tilesView;
 };
 
 #endif // CHORDBUILDSESSION_H
