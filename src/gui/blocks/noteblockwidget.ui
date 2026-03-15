@@ -47,7 +47,7 @@
     <item row="2" column="1">
      <widget class="QPushButton" name="exercise3Btn">
       <property name="text">
-       <string/>
+       <string>Определение нот в мелодии</string>
       </property>
      </widget>
     </item>

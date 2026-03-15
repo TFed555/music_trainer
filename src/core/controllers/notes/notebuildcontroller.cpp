@@ -22,7 +22,7 @@ void NoteBuildController::playTone() {
 
 void NoteBuildController::setDifficulty(int level) {
     Difficulty dif = static_cast<Difficulty>(level);
-    config = difficultyMap<NoteDifficultyConfig>[dif];
+    config = noteBuildDifficulty[dif];
     emit setOctaveCount(config.octaveCount);
 }
 

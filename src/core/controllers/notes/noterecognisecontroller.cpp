@@ -22,7 +22,7 @@ void NoteRecogniseController::playTone() {
 
 void NoteRecogniseController::setDifficulty(int level) {
     Difficulty dif = static_cast<Difficulty>(level);
-    config = difficultyMap<NoteDifficultyConfig>[dif];
+    config = noteRecogniseDifficulty[dif];
 }
 
 void NoteRecogniseController::noteSelected(const QString& name) {

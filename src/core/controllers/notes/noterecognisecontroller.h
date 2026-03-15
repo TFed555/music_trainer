@@ -4,6 +4,11 @@
 #include "../common/iexercisecontroller.h"
 #include "../../common/models/Mode.h"
 
+static inline const QMap<Difficulty, NoteDifficultyConfig> noteRecogniseDifficulty = {
+    { Difficulty::Easy, {1, 1, 60, 72} },
+    { Difficulty::Hard, {} },
+    };
+
 class NoteRecogniseController : public IExerciseController
 {
     Q_OBJECT
@@ -20,7 +25,7 @@ private:
 private:
     QVector<QString> correctAnswer;
     QVector<QString>  userAnswer;
-    NoteDifficultyConfig config = difficultyMap<NoteDifficultyConfig>[Difficulty::Easy];
+    NoteDifficultyConfig config = noteRecogniseDifficulty[Difficulty::Easy];
 };
 
 #endif // NOTERECOGNISECONTROLLER_H

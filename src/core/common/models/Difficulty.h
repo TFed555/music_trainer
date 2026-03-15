@@ -11,14 +11,9 @@ enum class Difficulty {
 
 struct NoteDifficultyConfig {
     int octaveCount = 3;
+    int noteCount = 1;
     int midiMin = 48;
     int midiMax = 83;
-    static NoteDifficultyConfig easy() {
-        return {1, 60, 72};
-    }
-    static NoteDifficultyConfig hard() {
-        return {};
-    }
 };
 
 struct IntervalDifficultyConfig {

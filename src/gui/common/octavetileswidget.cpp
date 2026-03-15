@@ -66,7 +66,8 @@ void OctaveTilesWidget::resetTiles() {
 }
 
 void OctaveTilesWidget::setVisibleOctaves(int count) {
-    for (auto* w : octaves) {
-        w->setVisible(octaves.indexOf(w)<count);
+    int firstIdx = (count == 1) ? 1 : 0;
+    for (int i = 0; i < octaves.size(); i++) {
+        octaves[i]->setVisible(i>=firstIdx && i<firstIdx+count);
     }
 }

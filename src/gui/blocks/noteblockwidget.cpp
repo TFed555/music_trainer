@@ -13,6 +13,9 @@ NoteBlockWidget::NoteBlockWidget(QWidget *parent)
     connect(ui->exercise2Btn, &QPushButton::clicked, this, [this]() {
         emit exerciseSelected(ExerciseType::NoteBuild, this);
     });
+    connect(ui->exercise3Btn, &QPushButton::clicked, this, [this]() {
+        emit exerciseSelected(ExerciseType::NoteGuess, this);
+    });
     connect(ui->backBtn, &QPushButton::clicked, this, &IBlockWidget::backClicked);
 }
 
