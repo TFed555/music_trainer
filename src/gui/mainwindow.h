@@ -3,14 +3,14 @@
 
 #include <QMainWindow>
 #include <QStackedWidget>
-#include "./blocks/mainmenuwidget.h"
-#include "./blocks/IBlockWidget.h"
 #include "../core/data/samples/sampleloader.h"
 #include "../core/data/samples/samplerepository.h"
 #include "../audio/audio.h"
 #include "../audio/playback/noteplayer.h"
 #include "../../core/sessions/common/isession.h"
 #include "../core/factory/sessionfactory.h"
+#include "./blocks/startwidget.h"
+#include "./blocks/sidebarwidget.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -27,14 +27,13 @@ public:
     MainWindow(SessionFactory& factory, QWidget *parent = nullptr);
     ~MainWindow();
 private:
-    void addBlock(IBlockWidget* block);
-    void addExercise(IBlockWidget* block,QString title);
+    void startExercise(ExerciseType);
 private:
     Ui::MainWindow *ui;
     QStackedWidget* stack;
-    MainMenuWidget* mainMenu;
     QWidget* previousWidget = nullptr;
-    QVector<IBlockWidget*> blocks;
+    StartWidget* startMenu;
+    SidebarWidget* sidebar;
     SampleLoader sampleLoader;
     SampleRepository sampleRepository;
     AudioProcessor* audio;
