@@ -7,7 +7,8 @@ IntervalBuildSession::IntervalBuildSession(NotePlayer* player,
 {
     auto* tilesController = new TilesController(player, this);
     exerciseController = new IntervalBuildController(player, this);
-    view = new ExerciseWithTilesWidget(nullptr);
+    tilesView = new ExerciseWithTilesWidget(true, nullptr);
+    view = tilesView;
 
     connect(view, &ExerciseWithTilesWidget::startClicked, exerciseController, &IntervalBuildController::start);
 
@@ -18,24 +19,26 @@ IntervalBuildSession::IntervalBuildSession(NotePlayer* player,
     });
 
     connect(exerciseController, &IntervalBuildController::showResult,
-            view, &ExerciseWithTilesWidget::showResult);
+            tilesView, &ExerciseWithTilesWidget::showResult);
 
     connect(exerciseController, &IntervalBuildController::requestSetMode,
-            view, &ExerciseWithTilesWidget::setMode, Qt::QueuedConnection);
+            tilesView, &ExerciseWithTilesWidget::setMode, Qt::QueuedConnection);
 
-    connect(view, &ExerciseWithTilesWidget::noteSelected,
+    connect(tilesView, &ExerciseWithTilesWidget::noteSelected,
             tilesController, &TilesController::playTile);
 
-    connect(view, &ExerciseWithTilesWidget::noteSelected,
+    connect(tilesView, &ExerciseWithTilesWidget::noteSelected,
             exerciseController, &IntervalBuildController::noteSelected);
 
     connect(exerciseController, &IntervalBuildController::exercisePlayFinished,
-            view, &ExerciseWithTilesWidget::exercisePlayFinished);
+            tilesView, &ExerciseWithTilesWidget::exercisePlayFinished);
 
     connect(exerciseController, &IntervalBuildController::setQuestion,
-            view, &ExerciseWithTilesWidget::setQuestion);
+            tilesView, &ExerciseWithTilesWidget::setQuestion);
 
     connect(exerciseController, &IntervalBuildController::highlightQuestion,
-            view, &ExerciseWithTilesWidget::highlightQuestion);
+            tilesView, &ExerciseWithTilesWidget::highlightQuestion);
 
+    connect(tilesView, &ExerciseWithTilesWidget::difficultyChanged,
+            exerciseController, &IntervalBuildController::setDifficulty);
 }

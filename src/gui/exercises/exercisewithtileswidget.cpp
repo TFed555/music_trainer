@@ -2,13 +2,14 @@
 #include "ui_exercisewithtileswidget.h"
 #include <QTimer>
 
-ExerciseWithTilesWidget::ExerciseWithTilesWidget(QWidget *parent)
+ExerciseWithTilesWidget::ExerciseWithTilesWidget(bool noteNamesVisible, QWidget *parent)
     : IExerciseWidget(parent)
     , ui(new Ui::ExerciseWithTilesWidget)
-    , tiles(new OctaveTilesWidget(this))
+    , tiles(new OctaveTilesWidget(noteNamesVisible, this))
 {
     ui->setupUi(this);
     ui->horizontalLayout->addWidget(tiles);
+    tiles->setFixedWidth(700);
 
     connect(ui->startBtn, &QPushButton::clicked, this, [this] {
             emit startClicked();
@@ -56,4 +57,8 @@ void ExerciseWithTilesWidget::setQuestion(const QString& question) {
 
 void ExerciseWithTilesWidget::highlightQuestion(QVector<QString> notes) {
     tiles->highlight(notes, {});
+}
+
+void ExerciseWithTilesWidget::setOctaveCount(int count) {
+    tiles->setVisibleOctaves(count);
 }

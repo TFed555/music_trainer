@@ -5,7 +5,8 @@ ChordInversionSession::ChordInversionSession(NotePlayer* player,
     : ISession{parent}
 {
     exerciseController = new ChordInversionController(player, this);
-    view = new ExerciseNoTilesWidget(nullptr);
+    noTilesView = new ExerciseNoTilesWidget(nullptr);
+    view = noTilesView;
 
     connect(view, &ExerciseNoTilesWidget::startClicked, exerciseController, &ChordInversionController::start);
 
@@ -16,16 +17,19 @@ ChordInversionSession::ChordInversionSession(NotePlayer* player,
     });
 
     connect(exerciseController, &ChordInversionController::showResult,
-            view, &ExerciseNoTilesWidget::showResult);
+            noTilesView, &ExerciseNoTilesWidget::showResult);
 
-    connect(view, &ExerciseNoTilesWidget::answerSelected,
+    connect(noTilesView, &ExerciseNoTilesWidget::answerSelected,
             exerciseController, &ChordInversionController::answerSelected);
 
     connect(exerciseController, &ChordInversionController::setAnswers,
-            view, &ExerciseNoTilesWidget::addAnswers);
+            noTilesView, &ExerciseNoTilesWidget::addAnswers);
 
     connect(exerciseController, &ChordInversionController::exercisePlayFinished,
-            view, &ExerciseNoTilesWidget::exercisePlayFinished);
+            noTilesView, &ExerciseNoTilesWidget::exercisePlayFinished);
+
+    connect(noTilesView, &ExerciseNoTilesWidget::difficultyChanged,
+            exerciseController, &ChordInversionController::setDifficulty);
 
     exerciseController->giveAnswers();
 }

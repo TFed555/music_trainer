@@ -13,12 +13,12 @@ public:
     virtual ~IBlockWidget() {};
     enum class BlockCategory {
         Intervals,
-        Chords
+        Chords,
+        Notes
     };
 signals:
     void backClicked();
     void exerciseSelected(ExerciseType, IBlockWidget*);
-    // void exerciseBackClicked();
 };
 
 #endif // IBLOCKWIDGET_H

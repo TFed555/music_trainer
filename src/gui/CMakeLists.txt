@@ -19,7 +19,8 @@ add_library(gui_module STATIC
     blocks/IBlockWidget.h
     exercises/exercisenotileswidget.h exercises/exercisenotileswidget.cpp exercises/exercisenotileswidget.ui
     blocks/chordblockwidget.h blocks/chordblockwidget.cpp blocks/chordblockwidget.ui
-    common/octavetileswidget.h common/octavetileswidget.cpp common/octavetileswidget.ui
+    common/octavetileswidget.h common/octavetileswidget.cpp
+    blocks/noteblockwidget.h blocks/noteblockwidget.cpp blocks/noteblockwidget.ui
 
 )
 

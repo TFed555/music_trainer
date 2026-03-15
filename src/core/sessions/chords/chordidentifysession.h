@@ -12,15 +12,12 @@ public:
     explicit ChordIdentifySession(
         NotePlayer* player,
         QObject *parent = nullptr);
-    ExerciseNoTilesWidget* getWidget() const override {
-        qDebug() << "getWidget()" << view; return view;
-    }
     QString title() const override {
         return "Определение аккорда";
     }
 private:
-    ExerciseNoTilesWidget* view;
     ChordIdentifyController* exerciseController;
+    ExerciseNoTilesWidget* noTilesView;
 };
 
 #endif // CHORDIDENTIFYSESSION_H

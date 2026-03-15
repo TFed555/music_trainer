@@ -16,7 +16,7 @@ class NoteTilesWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit NoteTilesWidget(QWidget *parent = nullptr);
+    explicit NoteTilesWidget(bool noteNamesVisible = true, QWidget *parent = nullptr);
     ~NoteTilesWidget();
 
     void highlight(const QVector<QString>& noteNames, const QVector<QString>& selected);
@@ -51,6 +51,7 @@ private:
     Mode mode = Mode::Input;
     QVector<Note> notes;
     QVector<TileCoords> tileCoords;
+    bool noteNamesVisible;
 };
 
 #endif // NOTETILESWIDGET_H

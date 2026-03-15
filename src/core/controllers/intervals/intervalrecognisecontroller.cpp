@@ -4,7 +4,7 @@
 
 IntervalRecogniseController::IntervalRecogniseController(NotePlayer* player,
                                                          QObject *parent)
-    : IExerciseController(player, PlaybackendSignal::PlaylistEmpty, parent)
+    : ITilesExerciseController(player, PlaybackendSignal::PlaylistEmpty, parent)
 {
 }
 

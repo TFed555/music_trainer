@@ -12,15 +12,12 @@ public:
     explicit ChordInversionSession(
         NotePlayer* player,
         QObject *parent = nullptr);
-    ExerciseNoTilesWidget* getWidget() const override {
-        qDebug() << "getWidget()" << view; return view;
-    }
     QString title() const override {
         return "Обращение аккорда";
     }
 private:
-    ExerciseNoTilesWidget* view;
     ChordInversionController* exerciseController;
+    ExerciseNoTilesWidget* noTilesView;
 };
 
 

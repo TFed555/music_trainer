@@ -5,7 +5,8 @@ IntervalIdentifySession::IntervalIdentifySession(NotePlayer* player,
     : ISession(parent)
 {
     exerciseController = new IntervalIdentifyController(player, this);
-    view = new ExerciseNoTilesWidget(nullptr);
+    noTilesView = new ExerciseNoTilesWidget(nullptr);
+    view = noTilesView;
 
     connect(view, &ExerciseNoTilesWidget::startClicked, exerciseController, &IntervalIdentifyController::start);
 
@@ -16,20 +17,19 @@ IntervalIdentifySession::IntervalIdentifySession(NotePlayer* player,
     });
 
     connect(exerciseController, &IntervalIdentifyController::showResult,
-            view, &ExerciseNoTilesWidget::showResult);
+            noTilesView, &ExerciseNoTilesWidget::showResult);
 
-    connect(view, &ExerciseNoTilesWidget::answerSelected,
+    connect(noTilesView, &ExerciseNoTilesWidget::answerSelected,
             exerciseController, &IntervalIdentifyController::answerSelected);
 
-    // connect(view, &ExerciseNoTilesWidget::requestAnswers,
-    //         exerciseController, &IntervalIdentifyController::giveAnswers);
-
     connect(exerciseController, &IntervalIdentifyController::setAnswers,
-            view, &ExerciseNoTilesWidget::addAnswers);
+            noTilesView, &ExerciseNoTilesWidget::addAnswers);
 
     connect(exerciseController, &IntervalIdentifyController::exercisePlayFinished,
-            view, &ExerciseNoTilesWidget::exercisePlayFinished);
+            noTilesView, &ExerciseNoTilesWidget::exercisePlayFinished);
 
-    // view->requestAnswerSlot();
+    connect(noTilesView, &ExerciseNoTilesWidget::difficultyChanged,
+            exerciseController, &IntervalIdentifyController::setDifficulty);
+
     exerciseController->giveAnswers();
 }

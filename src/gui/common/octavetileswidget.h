@@ -13,9 +13,9 @@ class OctaveTilesWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit OctaveTilesWidget(QWidget *parent = nullptr);
+    explicit OctaveTilesWidget(bool noteNamesVisible = true, QWidget *parent = nullptr);
     ~OctaveTilesWidget();
-
+    void setVisibleOctaves(int count);
 public slots:
     void highlight(const QVector<QString>& noteNames, const QVector<QString>& selected);
     void setMode(Mode m);
@@ -25,7 +25,6 @@ signals:
 private:
     void resetSelection(int octIdx);
 private:
-    // Ui::OctaveTilesWidget *ui;
     QVector<NoteTilesWidget*> octaves;
 };
 

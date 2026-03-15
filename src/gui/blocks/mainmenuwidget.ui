@@ -23,17 +23,24 @@
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
-     <widget class="QPushButton" name="intervalBtn">
+    <item row="3" column="0">
+     <widget class="QPushButton" name="chordBtn">
       <property name="text">
-       <string>Интервальные упражнения</string>
+       <string>Аккорды</string>
       </property>
      </widget>
     </item>
     <item row="1" column="0">
-     <widget class="QPushButton" name="chordBtn">
+     <widget class="QPushButton" name="noteBtn">
       <property name="text">
-       <string>Аккорды</string>
+       <string>Ноты</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QPushButton" name="intervalBtn">
+      <property name="text">
+       <string>Интервальные упражнения</string>
       </property>
      </widget>
     </item>

@@ -1,10 +1,9 @@
 #ifndef INTERVALBUILDCONTROLLER_H
 #define INTERVALBUILDCONTROLLER_H
 
-#include "../common/iexercisecontroller.h"
-#include "../../common/models/Mode.h"
+#include "../common/itilesexercisecontroller.h"
 
-class IntervalBuildController : public IExerciseController
+class IntervalBuildController : public ITilesExerciseController
 {
     Q_OBJECT
 public:
@@ -12,18 +11,15 @@ public:
                                     QObject *parent = nullptr);
 
 public slots:
-    void noteSelected(const QString& name);
+    void noteSelected(const QString& name) override;
     void setDifficulty(int level) override;
 signals:
-    void requestSetMode(Mode);
     void showResult(QVector<QString> answer, QVector<QString> selected);
     void setQuestion(const QString& question);
     void highlightQuestion(QVector<QString> notes);
 private:
     void playTone() override;
 private:
-    QVector<QString> correctAnswer;
-    QVector<QString> userAnswer;
     IntervalDifficultyConfig config = difficultyMap<IntervalDifficultyConfig>[Difficulty::Easy];
 };
 

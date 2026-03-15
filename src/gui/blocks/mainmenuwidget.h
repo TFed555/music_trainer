@@ -18,6 +18,7 @@ public:
 signals:
     void intervalClicked();
     void chordClicked();
+    void noteClicked();
 private:
     Ui::MainMenuWidget *ui;
 };

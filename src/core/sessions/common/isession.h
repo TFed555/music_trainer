@@ -10,11 +10,13 @@ class ISession : public QObject
 public:
     explicit ISession(QObject *parent = nullptr) : QObject(parent) {};
     virtual ~ISession() = default;
-    virtual IExerciseWidget* getWidget() const = 0;
+    virtual IExerciseWidget* getWidget() const { return view; };
     virtual QString title() const = 0;
 signals:
     void back();
     void setDifficulty(int level);
+protected:
+    IExerciseWidget* view = nullptr;
 };
 
 #endif // ISESSION_H

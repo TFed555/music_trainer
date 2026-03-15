@@ -5,7 +5,8 @@ ChordIdentifySession::ChordIdentifySession(NotePlayer* player,
     : ISession{parent}
 {
     exerciseController = new ChordIdentifyController(player, this);
-    view = new ExerciseNoTilesWidget(nullptr);
+    noTilesView = new ExerciseNoTilesWidget(nullptr);
+    view = noTilesView;
 
     connect(view, &ExerciseNoTilesWidget::startClicked, exerciseController, &ChordIdentifyController::start);
 
@@ -16,16 +17,19 @@ ChordIdentifySession::ChordIdentifySession(NotePlayer* player,
     });
 
     connect(exerciseController, &ChordIdentifyController::showResult,
-            view, &ExerciseNoTilesWidget::showResult);
+            noTilesView, &ExerciseNoTilesWidget::showResult);
 
-    connect(view, &ExerciseNoTilesWidget::answerSelected,
+    connect(noTilesView, &ExerciseNoTilesWidget::answerSelected,
             exerciseController, &ChordIdentifyController::answerSelected);
 
     connect(exerciseController, &ChordIdentifyController::setAnswers,
-            view, &ExerciseNoTilesWidget::addAnswers);
+            noTilesView, &ExerciseNoTilesWidget::addAnswers);
 
     connect(exerciseController, &ChordIdentifyController::exercisePlayFinished,
-            view, &ExerciseNoTilesWidget::exercisePlayFinished);
+            noTilesView, &ExerciseNoTilesWidget::exercisePlayFinished);
+
+    connect(noTilesView, &ExerciseNoTilesWidget::difficultyChanged,
+            exerciseController, &ChordIdentifyController::setDifficulty);
 
     exerciseController->giveAnswers();
 }

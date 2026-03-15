@@ -5,7 +5,8 @@ IntervalDirectionSession::IntervalDirectionSession(NotePlayer* player,
     : ISession(parent)
 {
     exerciseController = new IntervalDirectionController(player, this);
-    view = new ExerciseNoTilesWidget(nullptr);
+    noTilesView = new ExerciseNoTilesWidget(nullptr);
+    view = noTilesView;
 
     connect(view, &ExerciseNoTilesWidget::startClicked, exerciseController, &IntervalDirectionController::start);
 
@@ -15,23 +16,23 @@ IntervalDirectionSession::IntervalDirectionSession(NotePlayer* player,
         emit back();
     });
 
-    // connect(exerciseController, &IntervalDirectionController::showResult,
-    //         view, &ExerciseNoTilesWidget::showResult);
-
-    connect(view, &ExerciseNoTilesWidget::answerSelected,
+    connect(noTilesView, &ExerciseNoTilesWidget::answerSelected,
             exerciseController, &IntervalDirectionController::answerSelected);
 
     connect(exerciseController, &IntervalDirectionController::exercisePlayFinished,
-            view, &ExerciseNoTilesWidget::exercisePlayFinished);
+            noTilesView, &ExerciseNoTilesWidget::exercisePlayFinished);
 
-    view->addDirectionSelector();
+    noTilesView->addDirectionSelector();
 
-    connect(view, &ExerciseNoTilesWidget::directionSelected,
+    connect(noTilesView, &ExerciseNoTilesWidget::directionSelected,
             exerciseController, &IntervalDirectionController::answerSelected);
 
     connect(exerciseController, &IntervalDirectionController::showResult,
-            view, &ExerciseNoTilesWidget::showDirectionResult);
+            noTilesView, &ExerciseNoTilesWidget::showDirectionResult);
 
-    connect(view, &ExerciseNoTilesWidget::directionSelected,
+    connect(noTilesView, &ExerciseNoTilesWidget::directionSelected,
             exerciseController, &IntervalDirectionController::answerSelected);
+
+    connect(noTilesView, &ExerciseNoTilesWidget::difficultyChanged,
+            exerciseController, &IntervalDirectionController::setDifficulty);
 }
