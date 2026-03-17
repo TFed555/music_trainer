@@ -19,9 +19,10 @@ public:
     ~SidebarWidget();
     void open();
 signals:
-    void blockSelected(StartWidget::BlockCategory);
+    void blockSelected(int block);
 private:
     QPushButton* addNavButton(const QString& title, StartWidget::BlockCategory block);
+    void setLayout();
 private:
     Ui::SidebarWidget *ui;
     QPropertyAnimation* anim;

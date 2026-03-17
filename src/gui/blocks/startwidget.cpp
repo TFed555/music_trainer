@@ -9,7 +9,7 @@ StartWidget::StartWidget(QWidget *parent)
     layout->setContentsMargins(0, 0, 0, 0);
     layout->setSpacing(10);
     layout->addStretch();
-    setBlock(BlockCategory::Intervals);
+    setBlock(static_cast<int>(BlockCategory::Intervals));
 }
 
 StartWidget::~StartWidget()
@@ -26,14 +26,15 @@ void StartWidget::addButton(const QString& title, ExerciseType type) {
     });
 }
 
-void StartWidget::setBlock(BlockCategory block) {
+void StartWidget::setBlock(int block) {
+    BlockCategory category = static_cast<BlockCategory>(block);
     clearButtons();
-    switch(block) {
+    switch(category) {
         case BlockCategory::Intervals:
             addButton("Определение интервала", ExerciseType::IntervalRecognise);
             addButton("Название интервала", ExerciseType::IntervalIdentify);
             addButton("Построение интервала",  ExerciseType::IntervalBuild);
-            addButton("Направление интервала",         ExerciseType::IntervalDirection);
+            addButton("Направление интервала", ExerciseType::IntervalDirection);
             break;
         case BlockCategory::Chords:
             addButton("Определение типа аккорда", ExerciseType::ChordIdentify);

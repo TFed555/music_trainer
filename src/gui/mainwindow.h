@@ -41,7 +41,6 @@ private:
     QScopedPointer<ISession> session;
     IExerciseWidget* exercise;
     QMetaObject::Connection sessionBackConn;
-    QMetaObject::Connection exerciseBackConn;
     SessionFactory& sessionFactory;
 };
 #endif // MAINWINDOW_H

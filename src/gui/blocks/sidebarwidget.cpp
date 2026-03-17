@@ -6,11 +6,8 @@ SidebarWidget::SidebarWidget(QWidget *parent)
     , ui(new Ui::SidebarWidget)
 {
     ui->setupUi(this);
+    setLayout();
     anim = new QPropertyAnimation(this, "maximumWidth");
-    QVBoxLayout* layout = new QVBoxLayout(this);
-    layout->addWidget(addNavButton("Интервалы", StartWidget::BlockCategory::Intervals));
-    layout->addWidget(addNavButton("Аккорды", StartWidget::BlockCategory::Chords));
-    layout->addWidget(addNavButton("Ноты", StartWidget::BlockCategory::Notes));
 }
 
 SidebarWidget::~SidebarWidget()
@@ -18,11 +15,22 @@ SidebarWidget::~SidebarWidget()
     delete ui;
 }
 
+void SidebarWidget::setLayout() {
+    QVBoxLayout* layout = new QVBoxLayout(this);
+    layout->addStretch();
+    layout->setContentsMargins(0, 0, 0, 0);
+    layout->setSpacing(20);
+    layout->addWidget(addNavButton("Интервалы", StartWidget::BlockCategory::Intervals));
+    layout->addWidget(addNavButton("Аккорды", StartWidget::BlockCategory::Chords));
+    layout->addWidget(addNavButton("Ноты", StartWidget::BlockCategory::Notes));
+    layout->addStretch();
+}
+
 QPushButton* SidebarWidget::addNavButton(const QString& title, StartWidget::BlockCategory block) {
     QPushButton* btn = new QPushButton(title);
     btn->setFlat(true);
     connect(btn, &QPushButton::clicked, this, [this, block](){
-        emit blockSelected(block);
+        emit blockSelected(static_cast<int>(block));
     });
     return btn;
 }

@@ -42,6 +42,11 @@ MainWindow::MainWindow(SessionFactory& factory, QWidget *parent)
 
     connect(sidebar, &SidebarWidget::blockSelected,
             startMenu, &StartWidget::setBlock);
+    connect(sidebar, &SidebarWidget::blockSelected,
+            this, [this]() {
+            stack->setCurrentWidget(startMenu);
+            this->window()->setWindowTitle("Music trainer");
+        });
     connect(startMenu, &StartWidget::exerciseSelected,
             this, &MainWindow::startExercise);
 }
@@ -72,7 +77,9 @@ void MainWindow::startExercise(ExerciseType type){
     sessionBackConn = connect(session.get(), &ISession::back,
                               this, [=]() {
         stack->setCurrentWidget(startMenu);
-        this->setWindowTitle(mainTitle);    });
+        this->setWindowTitle(mainTitle);  });
+
+    sidebar->open();
 
     stack->addWidget(exercise);
     stack->setCurrentWidget(exercise);

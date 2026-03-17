@@ -18,7 +18,7 @@ public:
         Chords,
         Notes
     };
-    void setBlock(BlockCategory block);
+    void setBlock(int block);
 signals:
     void exerciseSelected(ExerciseType);
 private:
