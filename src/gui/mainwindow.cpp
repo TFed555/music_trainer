@@ -1,9 +1,7 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
-#include "./blocks/intervalblockwidget.h"
-#include "./blocks/chordblockwidget.h"
-#include "./blocks/noteblockwidget.h"
 #include "../core/common/interfaces/IExerciseWidget.h"
+#include <QPushButton>
 
 MainWindow::MainWindow(SessionFactory& factory, QWidget *parent)
     : QMainWindow(parent)
@@ -15,36 +13,42 @@ MainWindow::MainWindow(SessionFactory& factory, QWidget *parent)
     , session(nullptr)
     , sessionFactory(factory)
 {
-    ui->setupUi(this);
-    mainMenu = new MainMenuWidget(this);
-    mainMenu->setFixedSize(800,800);
+    // ui->setupUi(this);
     this->window()->setWindowTitle("Music trainer");
-    stack = ui->stackedWidget;
-    stack->addWidget(mainMenu);
-    stack->setCurrentWidget(mainMenu);
 
-    blocks = {
-        new IntervalBlockWidget(this),
-        new ChordBlockWidget(this),
-        new NoteBlockWidget(this)
-    };
+    QWidget* main = new QWidget(this);
+    setCentralWidget(main);
 
-    QMap<IBlockWidget::BlockCategory, IBlockWidget*> blockNames = {
-        {IBlockWidget::BlockCategory::Intervals, blocks[0]},
-        {IBlockWidget::BlockCategory::Chords, blocks[1]},
-        {IBlockWidget::BlockCategory::Notes, blocks[2]}
-    };
+    stack = new QStackedWidget(main);
+    sidebar = new SidebarWidget(main);
+    sidebar->setMaximumWidth(0);
 
-    for (auto* block : blocks) addBlock(block);
+    startMenu = new StartWidget(main);
+    startMenu->setFixedSize(1000,700);
 
-    connect(mainMenu, &MainMenuWidget::intervalClicked,
-            this, [=](){ stack->setCurrentWidget(blockNames[IBlockWidget::BlockCategory::Intervals]); });
+    QPushButton* menuBtn = new QPushButton("☰", main);
+    connect(menuBtn, &QPushButton::clicked, sidebar, &SidebarWidget::open);
 
-    connect(mainMenu, &MainMenuWidget::chordClicked,
-            this, [=](){ stack->setCurrentWidget(blockNames[IBlockWidget::BlockCategory::Chords]); });
+    stack->addWidget(startMenu);
+    stack->setCurrentWidget(startMenu);
 
-    connect(mainMenu, &MainMenuWidget::noteClicked,
-            this, [=](){ stack->setCurrentWidget(blockNames[IBlockWidget::BlockCategory::Notes]); });
+    QVBoxLayout* leftLayout = new QVBoxLayout();
+    leftLayout->addWidget(menuBtn, 0, Qt::AlignLeft);
+    leftLayout->addWidget(stack);
+
+    QHBoxLayout* mainLayout = new QHBoxLayout(main);
+    mainLayout->addWidget(sidebar);
+    mainLayout->addLayout(leftLayout);
+
+    connect(sidebar, &SidebarWidget::blockSelected,
+            startMenu, &StartWidget::setBlock);
+    connect(sidebar, &SidebarWidget::blockSelected,
+            this, [this]() {
+            stack->setCurrentWidget(startMenu);
+            this->window()->setWindowTitle("Music trainer");
+        });
+    connect(startMenu, &StartWidget::exerciseSelected,
+            this, &MainWindow::startExercise);
 }
 
 MainWindow::~MainWindow()
@@ -52,46 +56,30 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::addBlock(IBlockWidget* block) {
-    block->setFixedSize(800,800);
-    stack->addWidget(block);
-
-    connect(block, &IBlockWidget::backClicked,
-            this, [=](){ stack->setCurrentWidget(mainMenu); });
-
-    connect(block, &IBlockWidget::exerciseSelected,
-            this, [this](ExerciseType type, IBlockWidget* block) {
-
-        if (session) {
-            IExerciseWidget* oldView = session->getWidget();
-            if (oldView) {
-                stack->removeWidget(oldView);
-            }
-            session.reset();
+void MainWindow::startExercise(ExerciseType type){
+    if (session) {
+        IExerciseWidget* oldView = session->getWidget();
+        if (oldView) {
+            stack->removeWidget(oldView);
         }
+        session.reset();
+    }
+    auto newSession = sessionFactory.create(type, notePlayer, this);
+    if (!newSession) return;
+    session.reset(newSession.release());
 
-        auto newSession = sessionFactory.create(type, notePlayer, this);
-        if (!newSession) return;
-        session.reset(newSession.release());
-        addExercise(block, session->title());
-    });
-}
-
-void MainWindow::addExercise(IBlockWidget* block, QString title) {
     exercise = session->getWidget();
     exercise->setParent(stack);
-    this->setWindowTitle(title);
+    this->setWindowTitle(session->title());
 
     disconnect(sessionBackConn);
-    disconnect(exerciseBackConn);
-
-    exerciseBackConn = connect(exercise, &IExerciseWidget::backClicked,
-                               this, [this]() {
-                                   this->setWindowTitle(mainTitle);
-                               });
 
     sessionBackConn = connect(session.get(), &ISession::back,
-                              this, [=]() { stack->setCurrentWidget(block); });
+                              this, [=]() {
+        stack->setCurrentWidget(startMenu);
+        this->setWindowTitle(mainTitle);  });
+
+    sidebar->open();
 
     stack->addWidget(exercise);
     stack->setCurrentWidget(exercise);

@@ -8,19 +8,21 @@ add_library(gui_module STATIC
     mainwindow.cpp
     mainwindow.h
     mainwindow.ui
-    blocks/intervalblockwidget.h 
-    blocks/intervalblockwidget.cpp 
-    blocks/intervalblockwidget.ui
-    blocks/mainmenuwidget.h 
-    blocks/mainmenuwidget.cpp 
-    blocks/mainmenuwidget.ui
+
+
+
+
+
+
     exercises/exercisewithtileswidget.h exercises/exercisewithtileswidget.cpp exercises/exercisewithtileswidget.ui
     common/notetileswidget.h common/notetileswidget.cpp common/notetileswidget.ui
-    blocks/IBlockWidget.h
+
     exercises/exercisenotileswidget.h exercises/exercisenotileswidget.cpp exercises/exercisenotileswidget.ui
-    blocks/chordblockwidget.h blocks/chordblockwidget.cpp blocks/chordblockwidget.ui
+
     common/octavetileswidget.h common/octavetileswidget.cpp
-    blocks/noteblockwidget.h blocks/noteblockwidget.cpp blocks/noteblockwidget.ui
+
+    blocks/startwidget.h blocks/startwidget.cpp
+    blocks/sidebarwidget.h blocks/sidebarwidget.cpp blocks/sidebarwidget.ui
 
 )
 
