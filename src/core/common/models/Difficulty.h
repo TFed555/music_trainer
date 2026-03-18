@@ -53,5 +53,16 @@ struct ChordDifficultyConfig {
     }
 };
 
+struct RhythmDifficultyConfig {
+    float count = 8;
+    QVector<int> allowedDurations = {1, 2, 4, 8, 16};
+    int bpm = 20;
+    static RhythmDifficultyConfig easy() {
+        return {8, {4}, 20};
+    }
+    static RhythmDifficultyConfig hard() {
+        return {};
+    }
+};
 
 #endif // DIFFICULTY_H

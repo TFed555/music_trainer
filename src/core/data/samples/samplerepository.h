@@ -10,6 +10,7 @@ public:
     explicit SampleRepository(SampleLoader* loader = nullptr);
 
     Sample getSample(int midi);
+    Sample getBeatSample();
 private:
     SampleLoader* loader;
 };

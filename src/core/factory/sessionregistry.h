@@ -13,6 +13,7 @@
 #include "../sessions/notes/noterecognisesession.h"
 #include "../sessions/notes/notebuildsession.h"
 #include "../sessions/notes/noteguesssession.h"
+#include "../sessions/rhythm/rhythmrecognisesession.h"
 
 inline void registerAllSessions(SessionFactory& factory) {
     factory.registerFactory(ExerciseType::IntervalRecognise,
@@ -58,6 +59,10 @@ inline void registerAllSessions(SessionFactory& factory) {
     factory.registerFactory(ExerciseType::NoteGuess,
                             [](NotePlayer* player, QObject* parent){
                                 return std::make_unique<NoteGuessSession>(player, parent);
+                            });
+    factory.registerFactory(ExerciseType::RhythmRecognise,
+                            [](NotePlayer* player, QObject* parent){
+                                return std::make_unique<RhythmRecogniseSession>(player, parent);
                             });
 }
 

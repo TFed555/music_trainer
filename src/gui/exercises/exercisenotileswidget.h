@@ -3,7 +3,6 @@
 
 #include <QWidget>
 #include "../../core/common/interfaces/IExerciseWidget.h"
-#include "../../core/common/models/Mode.h"
 #include <QPushButton>
 
 namespace Ui {

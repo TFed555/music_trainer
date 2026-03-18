@@ -23,6 +23,7 @@ add_library(gui_module STATIC
 
     blocks/startwidget.h blocks/startwidget.cpp
     blocks/sidebarwidget.h blocks/sidebarwidget.cpp blocks/sidebarwidget.ui
+    exercises/exerciserhythmwidget.h exercises/exerciserhythmwidget.cpp exercises/exerciserhythmwidget.ui
 
 )
 

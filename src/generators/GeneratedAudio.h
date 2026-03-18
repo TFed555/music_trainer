@@ -26,4 +26,5 @@ struct GeneratedChord : GeneratedAudio {
     QString root;
 };
 
+
 #endif // GENERATEDAUDIO_H

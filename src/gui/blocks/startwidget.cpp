@@ -47,6 +47,9 @@ void StartWidget::setBlock(int block) {
             addButton("Определение ноты", ExerciseType::NoteRecognise);
             addButton("Определение нот в мелодии", ExerciseType::NoteGuess);
             break;
+        case BlockCategory::Rhythm:
+            addButton("Определение ритма", ExerciseType::RhythmRecognise);
+            break;
     }
 }
 

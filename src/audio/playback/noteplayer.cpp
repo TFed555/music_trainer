@@ -41,18 +41,21 @@ void NotePlayer::playMidi(int midi, float durationSec) {
 }
 
 void NotePlayer::playNotes(const QVector<int>& midiNotes) {
-    long size = midiNotes.size();
-    QVector<Sample> samples = loadSamples(midiNotes);
+    QVector<Sample> samples = loadNoteSamples(midiNotes);
     processor->playGeneratedNotes(samples);
 }
 
 void NotePlayer::playChord(const QVector<int>& midiNotes) {
-    long size = midiNotes.size();
-    QVector<Sample> samples = loadSamples(midiNotes);
+    QVector<Sample> samples = loadNoteSamples(midiNotes);
     processor->playGeneratedChord(samples);
 }
 
-QVector<Sample> NotePlayer::loadSamples(const QVector<int>& midiNotes) {
+void NotePlayer::playBeat(const GeneratedRhythm& rhythm) {
+    QVector<Sample> samples = loadBeatSamples(rhythm);
+    processor->playGeneratedBeat(samples);
+}
+
+QVector<Sample> NotePlayer::loadNoteSamples(const QVector<int>& midiNotes) {
     QVector<Sample> samples;
     for (const int midi : midiNotes) {
         Sample buffer = sampleRepository->getSample(midi);
@@ -60,6 +63,18 @@ QVector<Sample> NotePlayer::loadSamples(const QVector<int>& midiNotes) {
             double ratio = std::pow(2.0, (buffer.nearestMidi - midi)/12.0);
             buffer.data = resample(buffer.data, ratio);
         }
+        samples.append(buffer);
+    }
+    return samples;
+}
+
+QVector<Sample> NotePlayer::loadBeatSamples(const GeneratedRhythm& rhythm) {
+    QVector<Sample> samples;
+    int msPrBeat = 60000/rhythm.bpm;
+    for (const Beat& beat : rhythm.beats) {
+        // beat.type;
+        Sample buffer = sampleRepository->getBeatSample();
+        buffer.delayms = msPrBeat/beat.duration;
         samples.append(buffer);
     }
     return samples;

@@ -49,6 +49,15 @@ static const char* noteNames[] = { "C", "C#", "D", "D#", "E",
     };
     }
 
+    namespace Rhythm {
+    enum class BeatType {
+        Accent,
+        Ordinary
+    };
+
+
+    }
+
 }
 
 #endif // PITCHUTILS_H

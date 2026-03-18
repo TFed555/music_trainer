@@ -37,6 +37,31 @@ bool AudioProcessor::playGeneratedChord(QVector<Sample> samples) {
     return true;
 }
 
+bool AudioProcessor::playGeneratedBeat(QVector<Sample> samples) {
+    if (samples.isEmpty()) return false;
+    int len = 0;
+    for (auto s : samples) {
+        int delay = (s.delayms/1000.0) * sampleRate;
+        len += delay;
+    }
+    len+=samples.last().data.size();
+    int offset = 0;
+    QVector<float> audioData(len, 0.0f);
+    for (auto s : samples) {
+        int delay = (s.delayms/1000.0) * sampleRate;
+        offset += delay;
+        for (size_t i = 0; i < s.data.size(); i++){
+            int idx = i + offset;
+            if (idx < audioData.size()) {
+                audioData[idx] += s.data[i];
+            }
+        }
+    }
+
+    playAudio(audioData, sampleRate);
+    return true;
+}
+
 void AudioProcessor::playNextSample() {
     if (playlistIdx >= playlist.size()) {
         disconnect(this, &AudioProcessor::playbackStopped,
@@ -45,7 +70,7 @@ void AudioProcessor::playNextSample() {
         return;
     }
     Sample s = playlist[playlistIdx++];
-    QTimer::singleShot(200, this, [this, s]() {
+    QTimer::singleShot(s.delayms, this, [this, s]() {
         playAudio(s.data, s.sampleRate);
     });
 }

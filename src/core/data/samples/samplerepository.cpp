@@ -11,3 +11,8 @@ Sample SampleRepository::getSample(int midi) {
     Sample loadedSample = loader->loadSample(path, nearestMidi);
     return loadedSample;
 }
+
+Sample SampleRepository::getBeatSample() {
+    Sample loadedSample = loader->loadSample("../../../assets/samples/metronom.wav",0);
+    return loadedSample;
+}

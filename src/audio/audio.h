@@ -18,6 +18,7 @@ public:
     ~AudioProcessor();
     bool playGeneratedNotes(QVector<Sample> samples);
     bool playGeneratedChord(QVector<Sample> samples);
+    bool playGeneratedBeat(QVector<Sample> samples);
     void playSample(Sample sample);
 
 public slots:
