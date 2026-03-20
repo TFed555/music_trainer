@@ -26,9 +26,9 @@ void ChordRootController::setDifficulty(int level) {
     config = difficultyMap<ChordDifficultyConfig>[dif];
 }
 
-void ChordRootController::noteSelected(const QString& name) {
-    qDebug() << "Note selected" << name;
-    userAnswer.append(name);
+void ChordRootController::noteSelected(const QString& noteName) {
+    qDebug() << "Note selected" << noteName;
+    userAnswer.append(noteName);
     if (correctAnswer.size() > 0) {
         emit showResult(correctAnswer, userAnswer);
         emit requestSetMode(Mode::Result);

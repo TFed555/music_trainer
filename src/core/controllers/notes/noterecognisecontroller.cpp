@@ -25,9 +25,9 @@ void NoteRecogniseController::setDifficulty(int level) {
     config = noteRecogniseDifficulty[dif];
 }
 
-void NoteRecogniseController::noteSelected(const QString& name) {
-    qDebug() << "Note selected" << name;
-    userAnswer.append(name);
+void NoteRecogniseController::noteSelected(const QString& noteName) {
+    qDebug() << "Note selected" << noteName;
+    userAnswer.append(noteName);
     if (correctAnswer.size() > 0) {
             emit showResult(correctAnswer, userAnswer);
             emit requestSetMode(Mode::Result);

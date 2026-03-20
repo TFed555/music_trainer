@@ -29,9 +29,9 @@ void IntervalRecogniseController::setDifficulty(int level) {
     config = difficultyMap<IntervalDifficultyConfig>[dif];
 }
 
-void IntervalRecogniseController::noteSelected(const QString& name) {
-    qDebug() << "Note selected" << name;
-    userAnswer.append(name);
+void IntervalRecogniseController::noteSelected(const QString& noteName) {
+    qDebug() << "Note selected" << noteName;
+    userAnswer.append(noteName);
     noteCounter++;
     if (noteCounter == 2) {
         if (correctAnswer.size() == 2) {

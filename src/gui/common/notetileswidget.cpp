@@ -20,7 +20,7 @@ NoteTilesWidget::~NoteTilesWidget()
 void NoteTilesWidget::setNotes() {
     notes.resize(12);
     for (int i = 0; i < notes.size(); i++) {
-        notes[i].name = MusicUtils::noteNames[i];
+        notes[i] = MusicUtils::noteNames[i];
     }
 }
 
@@ -45,7 +45,7 @@ void NoteTilesWidget::paintEvent(QPaintEvent* event) {
         painter.setBrush(color);
         painter.drawRect(rect);
         if (noteNamesVisible) {
-            painter.drawText(rect, Qt::AlignBottom | Qt::AlignCenter, notes[i].name);
+            painter.drawText(rect, Qt::AlignBottom | Qt::AlignCenter, notes[i]);
         }
     }
     whiteIdx=0;
@@ -63,7 +63,7 @@ void NoteTilesWidget::paintEvent(QPaintEvent* event) {
         painter.drawRect(rect);
         painter.setPen(QColor(255, 255, 255));
         if (noteNamesVisible) {
-            painter.drawText(rect, Qt::AlignBottom | Qt::AlignCenter, notes[i].name);
+            painter.drawText(rect, Qt::AlignBottom | Qt::AlignCenter, notes[i]);
         }
     }
 }
@@ -93,7 +93,7 @@ void NoteTilesWidget::mousePressEvent(QMouseEvent* event) {
     for (auto t : tileCoords) {
         if (t.rect.contains(pos) && t.type==TileType::Black) {
             selectedIndex = t.noteIdx;
-            emit noteSelected(notes[t.noteIdx].name);
+            emit noteSelected(notes[t.noteIdx]);
             update();
             return;
         }
@@ -102,7 +102,7 @@ void NoteTilesWidget::mousePressEvent(QMouseEvent* event) {
     for (auto t : tileCoords) {
         if (t.rect.contains(pos) && t.type==TileType::White) {
             selectedIndex = t.noteIdx;
-            emit noteSelected(notes[t.noteIdx].name);
+            emit noteSelected(notes[t.noteIdx]);
             update();
             return;
         }
@@ -114,10 +114,10 @@ void NoteTilesWidget::highlight(const QVector<QString>& noteNames, const QVector
     wrongIndexes.clear();
     highlightedIndexes.clear();
     for (int i = 0; i < notes.size(); i++) {
-        if (noteNames.contains(notes[i].name)) {
+        if (noteNames.contains(notes[i])) {
             highlightedIndexes.insert(i);
         }
-        if (!selected.isEmpty() && selected.contains(notes[i].name) && !noteNames.contains(notes[i].name)) {
+        if (!selected.isEmpty() && selected.contains(notes[i]) && !noteNames.contains(notes[i])) {
             wrongIndexes.insert(i);
         }
     }

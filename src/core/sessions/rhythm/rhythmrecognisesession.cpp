@@ -16,6 +16,9 @@ RhythmRecogniseSession::RhythmRecogniseSession(NotePlayer* player,
         emit back();
     });
 
+    connect(exerciseController, &RhythmRecogniseController::setRhythmNotes,
+            rhythmView, &ExerciseRhythmWidget::setRhythmNotes);
+
     // connect(exerciseController, &NoteGuessController::showResult,
     //         noTilesView, &ExerciseNoTilesWidget::showResult);
 

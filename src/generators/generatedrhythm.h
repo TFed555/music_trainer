@@ -6,7 +6,7 @@
 
 struct Beat {
     MusicUtils::Rhythm::BeatType type;
-    float duration;
+    int duration;
 };
 
 struct GeneratedRhythm {

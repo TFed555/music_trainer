@@ -4,7 +4,7 @@ RhythmGenerator::RhythmGenerator(RhythmDifficultyConfig config)
     : config(config)
 {}
 
-bool countTact(QMap<int, int>& durations, float coef, float &count) {
+bool countTact(QMap<int, int>& durations, int coef, float &count) {
     if (durations[coef] == 0) {
         return false;
     }
@@ -25,20 +25,18 @@ bool countTact(QMap<int, int>& durations, float coef, float &count) {
 GeneratedRhythm RhythmGenerator::generate() {
     // std::uniform_int_distribution<> countDist(config.midiMin, config.midiMax);
     std::uniform_int_distribution<> durationDist(0,config.allowedDurations.size()-1);
-    QMap<int, int> durations = {
-        { 1, 1 },
-        { 2, 2 },
-        { 4, 4 },
-        { 8, 8 },
-        { 16, 16 }
-    };
+    QMap<int, int> durations;
+
+    for (int d : config.allowedDurations) {
+        durations[d] = d;
+    }
 
     GeneratedRhythm res;
-    float count = config.count;
+    float count = config.tact;
     while (!std::all_of(durations.begin(), durations.end(),
                        [](int v){ return v == 0; })) {
         Beat beat;
-        float coef = config.allowedDurations[durationDist(gen)];
+        int coef = config.allowedDurations[durationDist(gen)];
         bool s = countTact(durations, coef, count);
         if (s) {
             beat.duration = coef;

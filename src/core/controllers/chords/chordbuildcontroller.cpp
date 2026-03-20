@@ -30,9 +30,9 @@ void ChordBuildController::setDifficulty(int level) {
     config.allowedInversions = {MusicUtils::Chords::InversionType::Root};
 }
 
-void ChordBuildController::noteSelected(const QString& name) {
-    qDebug() << "Note selected" << name;
-    userAnswer.append(name);
+void ChordBuildController::noteSelected(const QString& noteName) {
+    qDebug() << "Note selected" << noteName;
+    userAnswer.append(noteName);
     noteCounter++;
     if (noteCounter == 2) {
         if (correctAnswer.size() > 0) {

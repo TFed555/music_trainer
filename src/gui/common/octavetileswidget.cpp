@@ -14,7 +14,8 @@ OctaveTilesWidget::OctaveTilesWidget(bool noteNamesVisible, QWidget *parent)
         layout->addWidget(tiles);
         connect(tiles, &NoteTilesWidget::noteSelected,
                 this, [this, i] (QString noteName) {
-            emit noteSelected(QString("%1 %2").arg(noteName).arg(QString::number(i+3)));
+            QString note = QString("%1 %2").arg(noteName).arg(QString::number(i+3));
+            emit noteSelected(note);
             resetSelection(i);
         });
         octaves.append(tiles);

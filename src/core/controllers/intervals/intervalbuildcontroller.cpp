@@ -28,9 +28,9 @@ void IntervalBuildController::setDifficulty(int level) {
     config = difficultyMap<IntervalDifficultyConfig>[dif];
 }
 
-void IntervalBuildController::noteSelected(const QString& name) {
-    qDebug() << "Note selected" << name;
-    userAnswer.append(name);
+void IntervalBuildController::noteSelected(const QString& noteName) {
+    qDebug() << "Note selected" << noteName;
+    userAnswer.append(noteName);
     if (correctAnswer.size() > 0) {
         emit showResult(correctAnswer, userAnswer);
         emit requestSetMode(Mode::Result);

@@ -2,6 +2,7 @@
 #define INTERVALRECOGNISECONTROLLER_H
 
 #include "../common/itilesexercisecontroller.h"
+#include "../../common/models/Note.h"
 
 class IntervalRecogniseController : public ITilesExerciseController
 {
@@ -10,7 +11,7 @@ public:
     explicit IntervalRecogniseController(NotePlayer* player, QObject *parent = nullptr);
 
 public slots:
-    void noteSelected(const QString& name) override;
+    void noteSelected(const QString& noteName) override;
     void setDifficulty(int level) override;
 
 private:

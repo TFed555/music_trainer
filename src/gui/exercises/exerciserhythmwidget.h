@@ -3,7 +3,9 @@
 
 #include <QWidget>
 #include "../../core/common/interfaces/IExerciseWidget.h"
-#include <QKeyEvent>
+#include "../../music/pitchutils.h"
+#include "../common/rhythmcanvaswidget.h"
+// #include "../../core/common/models/Rhythm.h"
 
 namespace Ui {
 class ExerciseRhythmWidget;
@@ -18,10 +20,11 @@ public:
     ~ExerciseRhythmWidget();
 public slots:
     void exercisePlayFinished() override;
-private:
-    void keyPressEvent(QKeyEvent* event) override;
+    void setRhythmNotes(const QVector<MusicUtils::Rhythm::RhythmType>& notes);
+
 private:
     Ui::ExerciseRhythmWidget *ui;
+    RhythmCanvasWidget* canvas;
 };
 
 #endif // EXERCISERHYTHMWIDGET_H

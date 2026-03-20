@@ -10,7 +10,7 @@ class ITilesExerciseController : public IExerciseController
 public:
     using IExerciseController::IExerciseController;
 public slots:
-    virtual void noteSelected(const QString& name) = 0;
+    virtual void noteSelected(const QString& noteName) = 0;
 signals:
     void requestSetMode(Mode);
     void showResult(QVector<QString> answer, QVector<QString> selected);

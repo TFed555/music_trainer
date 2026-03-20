@@ -9,7 +9,7 @@ class ChordRootController : public ITilesExerciseController
 public:
     explicit ChordRootController(NotePlayer* player, QObject *parent = nullptr);
 public slots:
-    void noteSelected(const QString& name) override;
+    void noteSelected(const QString& noteName) override;
     void setDifficulty(int level) override;
 signals:
     void requestSetMode(Mode);

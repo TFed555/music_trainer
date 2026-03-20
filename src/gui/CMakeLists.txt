@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.16)
 set(GUI_MODULE_NAME "gui_module")
 
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Widgets)
 
 add_library(gui_module STATIC
     mainwindow.cpp
@@ -24,6 +25,7 @@ add_library(gui_module STATIC
     blocks/startwidget.h blocks/startwidget.cpp
     blocks/sidebarwidget.h blocks/sidebarwidget.cpp blocks/sidebarwidget.ui
     exercises/exerciserhythmwidget.h exercises/exerciserhythmwidget.cpp exercises/exerciserhythmwidget.ui
+    common/rhythmcanvaswidget.h common/rhythmcanvaswidget.cpp
 
 )
 
@@ -34,6 +36,7 @@ target_link_libraries(gui_module PUBLIC
     log_module
 )
 target_link_libraries(gui_module PRIVATE Qt${QT_VERSION_MAJOR}::Core)
+target_link_libraries(gui_module PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Widgets)
 
 target_include_directories(gui_module PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}

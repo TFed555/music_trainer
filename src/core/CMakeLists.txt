@@ -62,6 +62,7 @@ add_library(core STATIC
     controllers/common/itilesexercisecontroller.h
     controllers/rhythm/rhythmrecognisecontroller.h controllers/rhythm/rhythmrecognisecontroller.cpp
     sessions/rhythm/rhythmrecognisesession.h sessions/rhythm/rhythmrecognisesession.cpp
+    common/models/Rhythm.h
 
 )
 

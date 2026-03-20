@@ -21,7 +21,7 @@ public slots:
     void setMode(Mode m);
     void resetTiles();
 signals:
-    void noteSelected(const QString);
+    void noteSelected(const QString&);
 private:
     void resetSelection(int octIdx);
 private:

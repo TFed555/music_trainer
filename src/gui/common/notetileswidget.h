@@ -1,7 +1,6 @@
 #ifndef NOTETILESWIDGET_H
 #define NOTETILESWIDGET_H
 
-#include "../../core/common/models/Note.h"
 #include "../../core/common/models/Mode.h"
 #include <QWidget>
 #include <QPainter>
@@ -41,7 +40,7 @@ private:
     void setNotes();
     QColor setColor(int, TileType);
 signals:
-    void noteSelected(const QString& noteName);
+    void noteSelected(const QString&);
 
 private:
     Ui::NoteTilesWidget *ui;
@@ -49,7 +48,7 @@ private:
     QSet<int> highlightedIndexes;
     QSet<int> wrongIndexes;
     Mode mode = Mode::Input;
-    QVector<Note> notes;
+    QVector<QString> notes;
     QVector<TileCoords> tileCoords;
     bool noteNamesVisible;
 };

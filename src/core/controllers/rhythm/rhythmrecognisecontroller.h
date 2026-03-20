@@ -3,6 +3,7 @@
 
 #include "../common/iexercisecontroller.h"
 
+
 class RhythmRecogniseController : public IExerciseController
 {
     Q_OBJECT
@@ -10,6 +11,8 @@ public:
     explicit RhythmRecogniseController(NotePlayer* player, QObject *parent = nullptr);
 public slots:
     void setDifficulty(int level) override;
+signals:
+    void setRhythmNotes(const QVector<MusicUtils::Rhythm::RhythmType>&);
 private:
     void playTone() override;
 private:

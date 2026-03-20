@@ -54,7 +54,22 @@ static const char* noteNames[] = { "C", "C#", "D", "D#", "E",
         Accent,
         Ordinary
     };
+    enum class RhythmType
+    {
+        Whole,
+        Half,
+        Quarter,
+        Eighth,
+        Sixteenth
+    };
 
+    inline const QMap<int, RhythmType> rhythmTypeNames = {
+        {1, RhythmType::Whole},
+        {2, RhythmType::Half},
+        {4, RhythmType::Quarter},
+        {8, RhythmType::Eighth},
+        {16, RhythmType::Sixteenth}
+    };
 
     }
 
