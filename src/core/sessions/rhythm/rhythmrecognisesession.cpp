@@ -28,8 +28,8 @@ RhythmRecogniseSession::RhythmRecogniseSession(NotePlayer* player,
     // connect(exerciseController, &NoteGuessController::setAnswers,
     //         noTilesView, &ExerciseNoTilesWidget::addAnswers);
 
-    // connect(exerciseController, &NoteGuessController::exercisePlayFinished,
-    //         noTilesView, &ExerciseNoTilesWidget::exercisePlayFinished);
+    connect(exerciseController, &RhythmRecogniseController::exercisePlayFinished,
+            rhythmView, &ExerciseRhythmWidget::exercisePlayFinished);
 
     // connect(noTilesView, &ExerciseNoTilesWidget::difficultyChanged,
     //         exerciseController, &NoteGuessController::setDifficulty);

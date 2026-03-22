@@ -4,7 +4,7 @@
 
 RhythmRecogniseController::RhythmRecogniseController(NotePlayer* player,
                                                      QObject *parent)
-    : IExerciseController(player, PlaybackendSignal::PlaylistEmpty, parent)
+    : IExerciseController(player, PlaybackendSignal::PlaybackFinished, parent)
 {
 }
 
@@ -19,7 +19,7 @@ void RhythmRecogniseController::playTone() {
     for (auto b : result.beats) {
         rhythmTypes.append(rhythmTypeNames[b.duration]);
     }
-    setRhythmNotes(rhythmTypes);
+    setRhythmNotes(rhythmTypes, result.bpm);
 }
 
 void RhythmRecogniseController::setDifficulty(int level) {

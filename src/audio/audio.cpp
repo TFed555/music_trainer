@@ -27,7 +27,7 @@ bool AudioProcessor::playGeneratedChord(QVector<Sample> samples) {
         maxSampleLen = qMax(maxSampleLen, s.data.size());
     }
     QVector<float> audioData(maxSampleLen, 0.0f);
-    for (auto s : samples) {
+    for (auto& s : samples) {
         for (size_t i = 0; i < s.data.size(); i++){
             audioData[i] += s.data[i];
         }
@@ -40,22 +40,25 @@ bool AudioProcessor::playGeneratedChord(QVector<Sample> samples) {
 bool AudioProcessor::playGeneratedBeat(QVector<Sample> samples) {
     if (samples.isEmpty()) return false;
     int len = 0;
-    for (auto s : samples) {
-        int delay = (s.delayms/1000.0) * sampleRate;
-        len += delay;
-    }
-    len+=samples.last().data.size();
     int offset = 0;
-    QVector<float> audioData(len, 0.0f);
     for (auto s : samples) {
         int delay = (s.delayms/1000.0) * sampleRate;
+        offset += delay;
+        len = qMax(len, offset + (int)s.data.size());
+    }
+    // len+=samples.last().data.size();
+    offset = 0;
+    QVector<float> audioData(len, 0.0f);
+    for (auto& s : samples) {
+        int delay = (s.delayms/1000.0) * sampleRate;
+        offset += delay;
         for (size_t i = 0; i < s.data.size(); i++){
             int idx = i + offset;
             if (idx < audioData.size()) {
                 audioData[idx] += s.data[i];
-            }    
+            }
         }
-        offset += delay;
+
     }
 
     playAudio(audioData, sampleRate);

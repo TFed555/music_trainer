@@ -8,6 +8,8 @@ ExerciseRhythmWidget::ExerciseRhythmWidget(QWidget *parent)
 {
     ui->setupUi(this);
     ui->horizontalLayout->addWidget(canvas);
+    ui->horizontalLayout->setSpacing(10);
+    ui->horizontalLayout->setContentsMargins(0, 0, 0, 0);
     connect(ui->startBtn, &QPushButton::clicked, this, &ExerciseRhythmWidget::startClicked);
     connect(ui->stopBtn, &QPushButton::clicked, this, &ExerciseRhythmWidget::stopClicked);
     connect(ui->backBtn, &QPushButton::clicked, this, [this] (){
@@ -24,11 +26,11 @@ ExerciseRhythmWidget::~ExerciseRhythmWidget()
     delete ui;
 }
 
-void ExerciseRhythmWidget::setRhythmNotes(const QVector<MusicUtils::Rhythm::RhythmType>& notes) {
-    canvas->setNotes(notes);
+void ExerciseRhythmWidget::setRhythmNotes(const QVector<MusicUtils::Rhythm::RhythmType>& notes, int bpm) {
+    canvas->setNotes(notes, bpm);
 }
 
 
 void ExerciseRhythmWidget::exercisePlayFinished() {
-
+    canvas->exerciseStarted();
 }

@@ -6,6 +6,8 @@
 #include "../../music/pitchutils.h"
 #include <QKeyEvent>
 #include <QPainter>
+#include "../../core/common/models/Mode.h"
+#include <QTimer>
 
 class RhythmCanvasWidget : public QWidget
 {
@@ -13,10 +15,8 @@ class RhythmCanvasWidget : public QWidget
 public:
     explicit RhythmCanvasWidget(QWidget *parent = nullptr);
     ~RhythmCanvasWidget();
-    void setNotes(const QVector<MusicUtils::Rhythm::RhythmType>& notes) {
-        rhythmNotes = notes;
-        update();
-    }
+    void setNotes(const QVector<MusicUtils::Rhythm::RhythmType>& notes, int bpm);
+
     const QMap<MusicUtils::Rhythm::RhythmType, QChar> musicSymbol {
         {MusicUtils::Rhythm::RhythmType::Whole, QChar(0xE0A2)},
         {MusicUtils::Rhythm::RhythmType::Half, QChar(0xECA3)},
@@ -24,13 +24,26 @@ public:
         {MusicUtils::Rhythm::RhythmType::Eighth, QChar(0xECA7)},
         {MusicUtils::Rhythm::RhythmType::Sixteenth, QChar(0xECA9)}
     };
+
+public slots:
+    void exerciseStarted();
 protected:
     void paintEvent(QPaintEvent* event) override;
     // void mousePressEvent(QMouseEvent* event) override;
     void keyPressEvent(QKeyEvent* event) override;
+    float durationMs(MusicUtils::Rhythm::RhythmType type);
 
 private:
     QVector<MusicUtils::Rhythm::RhythmType> rhythmNotes;
+    float currentBeatX = 10.0f;
+    QVector<int> userTaps;
+    Mode mode = Mode::Wait;
+    QTimer* timer = nullptr;
+    QVector<int> notePoses;
+    float pxPerMs = 0.1f;
+    int bpm;
+    int startX = 10;
+    float step;
 };
 
 #endif // RHYTHMCANVASWIDGET_H

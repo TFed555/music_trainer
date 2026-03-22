@@ -56,9 +56,9 @@ struct ChordDifficultyConfig {
 struct RhythmDifficultyConfig {
     float tact = 8.0f;
     QVector<int> allowedDurations = {1, 2, 4, 8, 16};
-    int bpm = 20;
+    int bpm = 80;
     static RhythmDifficultyConfig easy() {
-        return {8, {1, 2, 4}, 20};
+        return {4, {1, 2, 4}, 40};
     }
     static RhythmDifficultyConfig hard() {
         return {};

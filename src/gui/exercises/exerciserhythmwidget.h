@@ -20,7 +20,7 @@ public:
     ~ExerciseRhythmWidget();
 public slots:
     void exercisePlayFinished() override;
-    void setRhythmNotes(const QVector<MusicUtils::Rhythm::RhythmType>& notes);
+    void setRhythmNotes(const QVector<MusicUtils::Rhythm::RhythmType>& notes, int bpm);
 
 private:
     Ui::ExerciseRhythmWidget *ui;

@@ -12,7 +12,7 @@ public:
 public slots:
     void setDifficulty(int level) override;
 signals:
-    void setRhythmNotes(const QVector<MusicUtils::Rhythm::RhythmType>&);
+    void setRhythmNotes(const QVector<MusicUtils::Rhythm::RhythmType>&, int bpm);
 private:
     void playTone() override;
 private:
