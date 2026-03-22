@@ -32,7 +32,8 @@ protected:
     // void mousePressEvent(QMouseEvent* event) override;
     void keyPressEvent(QKeyEvent* event) override;
     float durationMs(MusicUtils::Rhythm::RhythmType type);
-
+signals:
+    void inputFinished(const QVector<int>& notePoses, const QVector<int>& userTaps);
 private:
     QVector<MusicUtils::Rhythm::RhythmType> rhythmNotes;
     float currentBeatX = 10.0f;

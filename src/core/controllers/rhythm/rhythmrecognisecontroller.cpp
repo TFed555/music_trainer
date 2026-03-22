@@ -26,3 +26,17 @@ void RhythmRecogniseController::setDifficulty(int level) {
 
 }
 
+void RhythmRecogniseController::inputFinished(const QVector<int>& notePoses, const QVector<int>& userTaps) {
+    int wrong = 0;
+    int correct = 0;
+    for (int i = 0; i < userTaps.size(); i++) {
+        if (std::abs(userTaps[i] - notePoses[i]) <= treshold) {
+            correct++;
+        }
+        else {
+            wrong++;
+        }
+    }
+    emit result(correct, wrong);
+}
+

@@ -1,5 +1,6 @@
 #include "exerciserhythmwidget.h"
 #include "ui_exerciserhythmwidget.h"
+#include <QMessageBox>
 
 ExerciseRhythmWidget::ExerciseRhythmWidget(QWidget *parent)
     : IExerciseWidget(parent)
@@ -15,6 +16,7 @@ ExerciseRhythmWidget::ExerciseRhythmWidget(QWidget *parent)
     connect(ui->backBtn, &QPushButton::clicked, this, [this] (){
         emit backClicked();
     });
+    connect(canvas, &RhythmCanvasWidget::inputFinished, this, &ExerciseRhythmWidget::inputFinished);
     for (auto* btn : this->findChildren<QPushButton*>()) {
         btn->setFocusPolicy(Qt::NoFocus);
     }
@@ -33,4 +35,10 @@ void ExerciseRhythmWidget::setRhythmNotes(const QVector<MusicUtils::Rhythm::Rhyt
 
 void ExerciseRhythmWidget::exercisePlayFinished() {
     canvas->exerciseStarted();
+}
+
+void ExerciseRhythmWidget::getResult(const int correct, const int wrong) {
+    QMessageBox::information(this, "Результат", QString("Количество попаданий: %1\n Количество ошибок: %2")
+                                                    .arg(correct).arg(wrong));
+
 }

@@ -21,7 +21,9 @@ public:
 public slots:
     void exercisePlayFinished() override;
     void setRhythmNotes(const QVector<MusicUtils::Rhythm::RhythmType>& notes, int bpm);
-
+    void getResult(const int correct, const int wrong);
+signals:
+    void inputFinished(const QVector<int>& notePoses, const QVector<int>& userTaps);
 private:
     Ui::ExerciseRhythmWidget *ui;
     RhythmCanvasWidget* canvas;

@@ -42,7 +42,6 @@ void RhythmCanvasWidget::paintEvent(QPaintEvent* event) {
     QPainter painter(this);
     QFont musicFont("Bravura", 40);
     painter.setFont(musicFont);
-    // qDebug() << painter.font().family();
     QRect rect;
     int y = height() * 0.75;
     for (int i = 0; i < rhythmNotes.size(); i++) {
@@ -66,8 +65,6 @@ void RhythmCanvasWidget::keyPressEvent(QKeyEvent* event) {
         qDebug() << "key pressed";
         userTaps.append(currentBeatX);
         update();
-        // emit
-
     }
 }
 
@@ -75,7 +72,7 @@ void RhythmCanvasWidget::exerciseStarted() {
     qDebug() << "bpm:" << bpm;
     qDebug() << "pxPerMs:" << pxPerMs;
     qDebug() << "step:" << step;
-    qDebug() << "quarter px:" << durationMs(MusicUtils::Rhythm::RhythmType::Quarter) * pxPerMs;
+    qDebug() << "quarter px:" << durationMs(RhythmType::Quarter) * pxPerMs;
     qDebug() << "total time ms:" << [this]() {
         float t = 0;
         for (auto n : rhythmNotes) t += durationMs(n);
@@ -91,6 +88,7 @@ void RhythmCanvasWidget::exerciseStarted() {
             if (currentBeatX > width()) {
                 timer->stop();
                 mode = Mode::Result;
+                emit inputFinished(notePoses, userTaps);
             }
             update();
         });

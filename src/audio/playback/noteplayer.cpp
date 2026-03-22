@@ -74,7 +74,7 @@ QVector<Sample> NotePlayer::loadBeatSamples(const GeneratedRhythm& rhythm) {
     for (const Beat& beat : rhythm.beats) {
         // beat.type;
         Sample buffer = sampleRepository->getBeatSample();
-        buffer.delayms = msPrBeat/beat.duration;
+        buffer.delayms = msPrBeat*(4.0f/beat.duration);
         samples.append(buffer);
     }
     return samples;
