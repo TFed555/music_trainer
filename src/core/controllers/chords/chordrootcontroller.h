@@ -13,7 +13,7 @@ public slots:
     void setDifficulty(int level) override;
 signals:
     void requestSetMode(Mode);
-    void showResult(QVector<QString> answer, QVector<QString> selected);
+    // void showResult(QVector<QString> answer, QVector<QString> selected);
 private:
     void playTone() override;
 private:

@@ -17,7 +17,7 @@ public slots:
     void noteSelected(const QString& noteName) override;
     void setDifficulty(int level) override;
 signals:
-    void showResult(QVector<QString> answer, QVector<QString> selected);
+    // void showResult(QVector<QString> answer, QVector<QString> selected);
 private:
     void playTone() override;
 private:

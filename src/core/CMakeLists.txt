@@ -22,6 +22,8 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
 
 
 add_library(core STATIC
@@ -34,35 +36,40 @@ add_library(core STATIC
     controllers/common/iexercisecontroller.h
     controllers/intervals/intervalrecognisecontroller.h controllers/intervals/intervalrecognisecontroller.cpp
     controllers/common/tilescontroller.h controllers/common/tilescontroller.cpp
-    sessions/intervals/intervalrecognisesession.cpp sessions/intervals/intervalrecognisesession.h
+
     sessions/common/isession.h  common/models/Note.h common/interfaces/IExerciseWidget
     common/models/Mode.h
-    sessions/intervals/intervalidentifysession.h sessions/intervals/intervalidentifysession.cpp
+
     controllers/intervals/intervalidentifycontroller.h controllers/intervals/intervalidentifycontroller.cpp
     controllers/intervals/intervalbuildcontroller.h controllers/intervals/intervalbuildcontroller.cpp
-    sessions/intervals/intervalbuildsession.h sessions/intervals/intervalbuildsession.cpp
+
     controllers/intervals/intervaldirectioncontroller.h controllers/intervals/intervaldirectioncontroller.cpp
-    sessions/intervals/intervaldirectionsession.h sessions/intervals/intervaldirectionsession.cpp
+
     controllers/chords/chordidentifycontroller.h controllers/chords/chordidentifycontroller.cpp
-    sessions/chords/chordidentifysession.h sessions/chords/chordidentifysession.cpp
+
     controllers/chords/chordinversioncontroller.h controllers/chords/chordinversioncontroller.cpp
-    sessions/chords/chordinversionsession.h sessions/chords/chordinversionsession.cpp
+
     controllers/chords/chordrootcontroller.h controllers/chords/chordrootcontroller.cpp
-    sessions/chords/chordrootsession.h sessions/chords/chordrootsession.cpp
+
     factory/sessionfactory.h
     factory/sessionregistry.h
     controllers/chords/chordbuildcontroller.h controllers/chords/chordbuildcontroller.cpp
-    sessions/chords/chordbuildsession.h sessions/chords/chordbuildsession.cpp
+
     common/models/Difficulty.h controllers/notes/noterecognisecontroller.h controllers/notes/noterecognisecontroller.cpp
-    sessions/notes/noterecognisesession.h sessions/notes/noterecognisesession.cpp
+
     controllers/notes/notebuildcontroller.h controllers/notes/notebuildcontroller.cpp
-    sessions/notes/notebuildsession.h sessions/notes/notebuildsession.cpp
+
     controllers/notes/noteguesscontroller.h controllers/notes/noteguesscontroller.cpp
-    sessions/notes/noteguesssession.h sessions/notes/noteguesssession.cpp
+
     controllers/common/itilesexercisecontroller.h
     controllers/rhythm/rhythmrecognisecontroller.h controllers/rhythm/rhythmrecognisecontroller.cpp
     sessions/rhythm/rhythmrecognisesession.h sessions/rhythm/rhythmrecognisesession.cpp
     common/models/Rhythm.h
+    sessions/common/tilessession.h sessions/common/tilessession.cpp
+    sessions/common/notilessession.h sessions/common/notilessession.cpp
+    factory/registry/intervalsessions.h
+    factory/registry/chordsessions.h
+    factory/registry/notesessions.h
 
 )
 
@@ -82,6 +89,8 @@ target_include_directories(core PUBLIC
     ${SNDFILE_INCLUDE_DIRS}
 )
 target_link_libraries(core PUBLIC generators_module)
+target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
+target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
 target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
 target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
 target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
