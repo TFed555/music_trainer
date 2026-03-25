@@ -21,6 +21,8 @@ private:
 private:
     int noteCounter = 0;
     ChordDifficultyConfig config = difficultyMap<ChordDifficultyConfig>[Difficulty::Easy];
+    static constexpr int chordNoteCount = 2;
+    static constexpr int thirdNoteIdx = 2;
 };
 
 #endif // CHORDBUILDCONTROLLER_H

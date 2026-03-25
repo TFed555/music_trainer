@@ -17,6 +17,8 @@ signals:
 protected:
     QVector<QString> correctAnswer;
     QVector<QString> userAnswer;
+    static constexpr int firstNoteIdx = 0;
+    static constexpr int secondNoteIdx = 1;
 };
 
 #endif // ITILESEXERCISECONTROLLER_H

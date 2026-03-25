@@ -3,6 +3,10 @@
 
 #include "../common/iexercisecontroller.h"
 
+static inline const QMap<Difficulty, RhythmDifficultyConfig> rhythmRecogniseDifficulty = {
+    { Difficulty::Easy, {8.0, {4}, 80}},
+    { Difficulty::Hard, {8.0, {2, 4}, 120}},
+};
 
 class RhythmRecogniseController : public IExerciseController
 {
@@ -18,7 +22,7 @@ signals:
 private:
     void playTone() override;
 private:
-    RhythmDifficultyConfig config = difficultyMap<RhythmDifficultyConfig>[Difficulty::Easy];
+    RhythmDifficultyConfig config = rhythmRecogniseDifficulty[Difficulty::Easy];
     float treshold = 10;
 };
 

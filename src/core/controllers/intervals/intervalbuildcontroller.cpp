@@ -14,13 +14,13 @@ void IntervalBuildController::playTone() {
     userAnswer.clear();
     IntervalGenerator gen(config);
     auto result = gen.generate();
-    correctAnswer.append(MusicUtils::midiToNote(result.midiNotes[1]));
+    correctAnswer.append(MusicUtils::midiToNote(result.midiNotes[secondNoteIdx]));
     emit setQuestion(result.interval);
     emit requestSetMode(Mode::Question);
-    emit highlightQuestion({MusicUtils::midiToNote(result.midiNotes[0])});
+    emit highlightQuestion({MusicUtils::midiToNote(result.midiNotes[firstNoteIdx])});
     log(result.desc);
     qDebug() << playbackLog.last().timestamp << " " << playbackLog.last().desc;
-    notePlayer->playNotes({result.midiNotes[0]});
+    notePlayer->playNotes({result.midiNotes[firstNoteIdx]});
 }
 
 void IntervalBuildController::setDifficulty(int level) {

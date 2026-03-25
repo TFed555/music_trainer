@@ -7,14 +7,14 @@ OctaveTilesWidget::OctaveTilesWidget(bool noteNamesVisible, QWidget *parent)
     QHBoxLayout* layout = new QHBoxLayout(this);
     layout->setContentsMargins(0, 0, 0, 0);
     setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < octaveCount; i++) {
         NoteTilesWidget* tiles = new NoteTilesWidget(noteNamesVisible, this);
         tiles->show();
-        tiles->setFixedWidth(parent->width()/3);
+        tiles->setFixedWidth(parent->width()/octaveCount);
         layout->addWidget(tiles);
         connect(tiles, &NoteTilesWidget::noteSelected,
                 this, [this, i] (QString noteName) {
-            QString note = QString("%1 %2").arg(noteName).arg(QString::number(i+3));
+            QString note = QString("%1 %2").arg(noteName).arg(QString::number(i+octaveOffset));
             emit noteSelected(note);
             resetSelection(i);
         });

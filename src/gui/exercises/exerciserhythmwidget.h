@@ -24,6 +24,7 @@ public slots:
     void getResult(const int correct, const int wrong);
 signals:
     void inputFinished(const QVector<int>& notePoses, const QVector<int>& userTaps);
+    void difficultyChanged(int level);
 private:
     Ui::ExerciseRhythmWidget *ui;
     RhythmCanvasWidget* canvas;

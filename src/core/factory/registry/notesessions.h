@@ -32,6 +32,8 @@ inline void registerNoteSessions(SessionFactory& factory) {
 
                                     QObject::connect(ctrl, &NoteBuildController::setOctaveCount,
                                                      view, &ExerciseWithTilesWidget::setOctaveCount);
+
+                                    ctrl->setDifficulty(0);
                                 });
                                 return session;
                             });

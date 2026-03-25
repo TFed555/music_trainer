@@ -21,6 +21,8 @@ ExerciseRhythmWidget::ExerciseRhythmWidget(QWidget *parent)
         btn->setFocusPolicy(Qt::NoFocus);
     }
     ui->difficultyBox->setFocusPolicy(Qt::NoFocus);
+    connect(ui->difficultyBox, &QComboBox::currentIndexChanged,
+            this, &ExerciseRhythmWidget::difficultyChanged);
 }
 
 ExerciseRhythmWidget::~ExerciseRhythmWidget()

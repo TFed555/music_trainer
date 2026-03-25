@@ -19,6 +19,7 @@ private:
 private:
     int noteCounter;
     IntervalDifficultyConfig config = difficultyMap<IntervalDifficultyConfig>[Difficulty::Easy];
+    static constexpr int intervalNoteCount = 2;
 };
 
 #endif // INTERVALRECOGNISECONTROLLER_H

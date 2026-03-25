@@ -36,15 +36,20 @@ signals:
     void inputFinished(const QVector<int>& notePoses, const QVector<int>& userTaps);
 private:
     QVector<MusicUtils::Rhythm::RhythmType> rhythmNotes;
-    float currentBeatX = 10.0f;
+    float currentBeatX = 0.0f;
+    float currentUserX = 0.0f;
     QVector<int> userTaps;
     Mode mode = Mode::Wait;
-    QTimer* timer = nullptr;
+    QTimer* beatTimer = nullptr;
+    QTimer* userTimer = nullptr;
     QVector<int> notePoses;
     float pxPerMs = 0.1f;
     int bpm;
-    int startX = 10;
-    float step;
+    int startX = 0;
+    float beatStep;
+    float userStep;
+    float msPerBeat;
+    float durationMin;
 };
 
 #endif // RHYTHMCANVASWIDGET_H

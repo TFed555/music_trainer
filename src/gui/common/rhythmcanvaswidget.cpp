@@ -11,7 +11,6 @@ RhythmCanvasWidget::~RhythmCanvasWidget()
 }
 
 float RhythmCanvasWidget::durationMs(MusicUtils::Rhythm::RhythmType type) {
-    float msPerBeat = 60000.0f/bpm;
     switch(type) {
     case RhythmType::Whole:    return msPerBeat * 4;
     case RhythmType::Half:     return msPerBeat * 2;
@@ -25,11 +24,19 @@ void RhythmCanvasWidget::setNotes(const QVector<MusicUtils::Rhythm::RhythmType>&
     rhythmNotes = notes;
     bpm = r_bpm;
     notePoses.clear();
+    msPerBeat = 60000.0f/r_bpm;
+    int realBpm = 60000.0f/r_bpm;
     int x = startX;
     float total = 0;
-    for (auto n : notes) total += durationMs(n);
+    durationMin = durationMs(MusicUtils::Rhythm::RhythmType::Quarter);
+    for (auto n : notes){
+        float d = durationMs(n);
+        total += d;
+        durationMin = qMin(durationMin, d);
+    }
     pxPerMs = (width()-x*2) / total;
-    step = pxPerMs * 16.0f;
+    beatStep = pxPerMs * durationMin;
+    userStep = pxPerMs * durationMs(MusicUtils::Rhythm::RhythmType::Sixteenth);
     for (auto n : notes) {
         notePoses.append(x);
         x+=durationMs(n) * pxPerMs;
@@ -53,6 +60,8 @@ void RhythmCanvasWidget::paintEvent(QPaintEvent* event) {
         painter.drawLine(0, y, width(), y);
         painter.setPen(Qt::black);
         painter.drawLine((int)currentBeatX, y-10, (int)currentBeatX, y+10);
+        painter.setPen(Qt::blue);
+        painter.drawLine((int)currentUserX, y-10, (int)currentUserX, y+10);
         painter.setPen(Qt::red);
         for (int tapX : userTaps) {
             painter.drawEllipse(tapX - 4, y - 4, 15, 15);
@@ -63,7 +72,7 @@ void RhythmCanvasWidget::paintEvent(QPaintEvent* event) {
 void RhythmCanvasWidget::keyPressEvent(QKeyEvent* event) {
     if (event->key() == Qt::Key_Space) {
         qDebug() << "key pressed";
-        userTaps.append(currentBeatX);
+        userTaps.append(currentUserX);
         update();
     }
 }
@@ -71,29 +80,46 @@ void RhythmCanvasWidget::keyPressEvent(QKeyEvent* event) {
 void RhythmCanvasWidget::exerciseStarted() {
     qDebug() << "bpm:" << bpm;
     qDebug() << "pxPerMs:" << pxPerMs;
-    qDebug() << "step:" << step;
+    qDebug() << "step:" << beatStep;
     qDebug() << "quarter px:" << durationMs(RhythmType::Quarter) * pxPerMs;
     qDebug() << "total time ms:" << [this]() {
         float t = 0;
         for (auto n : rhythmNotes) t += durationMs(n);
         return t;
     }();
+    float beatTickMs = durationMin;
+    float userTickMs = durationMs(MusicUtils::Rhythm::RhythmType::Sixteenth);
     currentBeatX = 0.0f;
+    currentUserX = 0.0f;
     userTaps.clear();
     mode = Mode::Input;
-    if (!timer) {
-        timer = new QTimer(this);
-        connect(timer, &QTimer::timeout, this, [this]() {
-            currentBeatX += durationMs(RhythmType::Quarter) * pxPerMs;
+    if (!beatTimer) {
+        beatTimer = new QTimer(this);
+        connect(beatTimer, &QTimer::timeout, this, [this]() {
+            currentBeatX += beatStep;
             if (currentBeatX > width()) {
-                timer->stop();
+                beatTimer->stop();
                 mode = Mode::Result;
                 emit inputFinished(notePoses, userTaps);
             }
             update();
         });
     }
-    QTimer::singleShot(1000, this, [this]() {
-        timer->start(60000/bpm);
+
+    if (!userTimer) {
+        userTimer = new QTimer(this);
+        connect(userTimer, &QTimer::timeout, this, [this]() {
+            currentUserX += userStep;
+            if (currentUserX > width()) {
+                userTimer->stop();
+            }
+            update();
+        });
+    }
+
+    QTimer::singleShot(1000, this, [this, beatTickMs, userTickMs]() {
+        beatTimer->start(static_cast<int>(beatTickMs));
+        userTimer->start(static_cast<int>(userTickMs));
+        update();
     });
 }

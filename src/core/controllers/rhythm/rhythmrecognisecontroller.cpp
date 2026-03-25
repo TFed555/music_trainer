@@ -23,7 +23,8 @@ void RhythmRecogniseController::playTone() {
 }
 
 void RhythmRecogniseController::setDifficulty(int level) {
-
+    Difficulty dif = static_cast<Difficulty>(level);
+    config = rhythmRecogniseDifficulty[dif];
 }
 
 void RhythmRecogniseController::inputFinished(const QVector<int>& notePoses, const QVector<int>& userTaps) {
