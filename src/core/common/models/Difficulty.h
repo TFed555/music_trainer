@@ -2,7 +2,7 @@
 #define DIFFICULTY_H
 
 #include <QVector>
-#include "../../../music/pitchutils.h"
+#include "../../../music/musicutils.h"
 
 enum class Difficulty {
     Easy,

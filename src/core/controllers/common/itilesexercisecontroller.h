@@ -14,6 +14,8 @@ public slots:
 signals:
     void requestSetMode(Mode);
     void showResult(QVector<QString> answer, QVector<QString> selected);
+    void highlightQuestion(QVector<QString> notes);
+    void setQuestion(const QString& question);
 protected:
     QVector<QString> correctAnswer;
     QVector<QString> userAnswer;

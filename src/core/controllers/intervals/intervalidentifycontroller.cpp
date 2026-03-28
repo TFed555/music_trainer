@@ -3,7 +3,7 @@
 
 IntervalIdentifyController::IntervalIdentifyController(NotePlayer* player,
                                                        QObject *parent)
-    : IExerciseController(player, PlaybackendSignal::PlaylistEmpty, parent)
+    : IChoiceExerciseController(player, PlaybackendSignal::PlaylistEmpty, parent)
 {
     answerVariants = MusicUtils::Intervals::intervals;
 }

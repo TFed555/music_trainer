@@ -1,4 +1,5 @@
 #include "noteplayer.h"
+#include "../../music/musicutils.h"
 #include <QDebug>
 
 NotePlayer::NotePlayer(AudioProcessor* proc, SampleRepository* sampleRepo)
@@ -40,6 +41,11 @@ void NotePlayer::playMidi(int midi, float durationSec) {
     processor->playSample(buffer);
 }
 
+void NotePlayer::playMetronome(const GeneratedRhythm& rhythm) {
+    QVector<Sample> samples = loadBeatSamples(rhythm.metronomeBeats, rhythm.bpm);
+    processor->playGeneratedBeat(samples);
+}
+
 void NotePlayer::playNotes(const QVector<int>& midiNotes) {
     QVector<Sample> samples = loadNoteSamples(midiNotes);
     processor->playGeneratedNotes(samples);
@@ -51,7 +57,22 @@ void NotePlayer::playChord(const QVector<int>& midiNotes) {
 }
 
 void NotePlayer::playBeat(const GeneratedRhythm& rhythm) {
-    QVector<Sample> samples = loadBeatSamples(rhythm);
+    QMap<float, Beat> byPosition;
+    float pos = 0.0f;
+    for (const Beat& b : rhythm.metronomeBeats) {
+        byPosition[pos] = b;
+        pos += 4.0f / b.duration;
+    }
+    pos = 0.0f;
+    for (const Beat& b : rhythm.userBeats) {
+        byPosition[pos] = b;
+        pos += 4.0f / b.duration;
+    }
+    QVector<Beat> allBeats;
+    for (const Beat& b : byPosition) {
+        allBeats.append(b);
+    }
+    QVector<Sample> samples = loadBeatSamples(allBeats, rhythm.bpm);
     processor->playGeneratedBeat(samples);
 }
 
@@ -68,12 +89,17 @@ QVector<Sample> NotePlayer::loadNoteSamples(const QVector<int>& midiNotes) {
     return samples;
 }
 
-QVector<Sample> NotePlayer::loadBeatSamples(const GeneratedRhythm& rhythm) {
+QVector<Sample> NotePlayer::loadBeatSamples(const QVector<Beat>& beats, const int bpm) {
+    using namespace MusicUtils::Rhythm;
     QVector<Sample> samples;
-    int msPrBeat = 60000/rhythm.bpm;
-    for (const Beat& beat : rhythm.beats) {
-        // beat.type;
-        Sample buffer = sampleRepository->getBeatSample();
+    int msPrBeat = 60000/bpm;
+    for (const Beat& beat : beats) {
+        Sample buffer;
+        switch (beat.type) {
+            case BeatType::Accent:   buffer = accentSample;   break;
+            case BeatType::Ordinary: buffer = ordinarySample; break;
+            case BeatType::UserBeat: buffer = userBeatSample; break;
+        }
         buffer.delayms = msPrBeat*(4.0f/beat.duration);
         samples.append(buffer);
     }

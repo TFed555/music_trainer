@@ -1,24 +1,19 @@
 #ifndef INTERVALIDENTIFYCONTROLLER_H
 #define INTERVALIDENTIFYCONTROLLER_H
 
-#include "../common/iexercisecontroller.h"
-#include "../../music/pitchutils.h"
+#include "../common/ichoiceexercisecontroller.h"
 
-class IntervalIdentifyController : public IExerciseController
+class IntervalIdentifyController : public IChoiceExerciseController
 {
     Q_OBJECT
 public:
     explicit IntervalIdentifyController(NotePlayer* player, QObject *parent = nullptr);
 public slots:
-    void answerSelected(const QString& answer);
+    void answerSelected(const QString& answer) override;
     void setDifficulty(int level) override;
-signals:
-    void showResult(const QString& correct);
 private:
     void playTone() override;
 private:
-    QString correctAnswer;
-    QString userAnswer;
     IntervalDifficultyConfig config = difficultyMap<IntervalDifficultyConfig>[Difficulty::Easy];
 };
 

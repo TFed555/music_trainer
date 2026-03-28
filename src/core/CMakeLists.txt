@@ -24,6 +24,7 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
 
 
 add_library(core STATIC
@@ -63,13 +64,16 @@ add_library(core STATIC
 
     controllers/common/itilesexercisecontroller.h
     controllers/rhythm/rhythmrecognisecontroller.h controllers/rhythm/rhythmrecognisecontroller.cpp
-    sessions/rhythm/rhythmrecognisesession.h sessions/rhythm/rhythmrecognisesession.cpp
+    sessions/rhythm/rhythmsession.h sessions/rhythm/rhythmsession.cpp
     common/models/Rhythm.h
     sessions/common/tilessession.h sessions/common/tilessession.cpp
     sessions/common/notilessession.h sessions/common/notilessession.cpp
     factory/registry/intervalsessions.h
     factory/registry/chordsessions.h
     factory/registry/notesessions.h
+    controllers/common/ichoiceexercisecontroller.h
+    controllers/common/irhythmexercisecontroller.h
+    factory/registry/rhythmsessions.h
 
 )
 
@@ -89,6 +93,7 @@ target_include_directories(core PUBLIC
     ${SNDFILE_INCLUDE_DIRS}
 )
 target_link_libraries(core PUBLIC generators_module)
+target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
 target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
 target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
 target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)

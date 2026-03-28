@@ -2,7 +2,7 @@
 #define GENERATEDRHYTHM_H
 
 #include <QVector>
-#include "../music/pitchutils.h"
+#include "../music/musicutils.h"
 
 struct Beat {
     MusicUtils::Rhythm::BeatType type;
@@ -10,7 +10,8 @@ struct Beat {
 };
 
 struct GeneratedRhythm {
-    QVector<Beat> beats;
+    QVector<Beat> userBeats;
+    QVector<Beat> metronomeBeats;
     int bpm;
     QString desc;
 };

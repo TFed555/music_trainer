@@ -4,7 +4,7 @@
 #include <QObject>
 #include "../../audio/playback/noteplayer.h"
 #include "../../common/models/Difficulty.h"
-#include "../../music/pitchutils.h"
+#include "../../music/musicutils.h"
 
 struct PlaybackLog {
     QDateTime timestamp;
@@ -34,13 +34,11 @@ public:
 
 signals:
     void exercisePlayFinished();
-    void setAnswers(QVector<QString>);
 
 public slots:
     virtual void start() { playTone(); };
     virtual void stop() { notePlayer->stop(); };
     virtual void setDifficulty(int level) = 0;
-    void giveAnswers() { emit setAnswers(answerVariants); }
 
 private:
     virtual void playTone() = 0;
@@ -56,11 +54,11 @@ private:
         switch(endSignal) {
             case PlaybackendSignal::PlaybackFinished:
                 connect(notePlayer, &NotePlayer::playbackFinished,
-                       this, [this]() { emit exercisePlayFinished(); });
+                       this, [this]() { onPlaybackFinished(); });
                 break;
             case PlaybackendSignal::PlaylistEmpty:
                 connect(notePlayer, &NotePlayer::playlistEmpty,
-                    this, [this]() { emit exercisePlayFinished(); });
+                    this, [this]() { onPlaybackFinished(); });
                 break;
         }
     }
@@ -69,10 +67,12 @@ protected:
     void log(const QString& desc) {
         playbackLog.append({QDateTime::currentDateTime(), desc});
     }
+    virtual void onPlaybackFinished() {
+        emit exercisePlayFinished();
+    }
 protected:
     NotePlayer* notePlayer;
     QVector<PlaybackLog> playbackLog;
-    QVector<QString> answerVariants;
 };
 
 #endif // IEXERCISECONTROLLER_H

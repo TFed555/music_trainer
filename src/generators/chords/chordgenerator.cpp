@@ -22,7 +22,8 @@ GeneratedChord ChordGenerator::generate() {
     QVector<int> midiNotes = {firstMidi};
     int lastMidi = firstMidi;
     for (auto i : semitones) {
-        lastMidi = 60+((lastMidi-60+i) % 12);
+        lastMidi += i;
+        // lastMidi = 60+((lastMidi-60+i) % 12);
         midiNotes.append(lastMidi);
     }
 

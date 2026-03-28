@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <QWidget>
-#include "../../music/pitchutils.h"
+#include "../../music/musicutils.h"
 #include <QKeyEvent>
 #include <QPainter>
 #include "../../core/common/models/Mode.h"
@@ -16,6 +16,7 @@ public:
     explicit RhythmCanvasWidget(QWidget *parent = nullptr);
     ~RhythmCanvasWidget();
     void setNotes(const QVector<MusicUtils::Rhythm::RhythmType>& notes, int bpm);
+    void handleTap();
 
     const QMap<MusicUtils::Rhythm::RhythmType, QChar> musicSymbol {
         {MusicUtils::Rhythm::RhythmType::Whole, QChar(0xE0A2)},
@@ -30,7 +31,7 @@ public slots:
 protected:
     void paintEvent(QPaintEvent* event) override;
     // void mousePressEvent(QMouseEvent* event) override;
-    void keyPressEvent(QKeyEvent* event) override;
+    // void keyPressEvent(QKeyEvent* event) override;
     float durationMs(MusicUtils::Rhythm::RhythmType type);
 signals:
     void inputFinished(const QVector<int>& notePoses, const QVector<int>& userTaps);

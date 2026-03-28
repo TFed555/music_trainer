@@ -1,5 +1,5 @@
 #include "intervalbuildcontroller.h"
-#include "../music/pitchutils.h"
+#include "../music/musicutils.h"
 #include "../../generators/intervals/IntervalGenerator.h"
 
 IntervalBuildController::IntervalBuildController(NotePlayer* player,

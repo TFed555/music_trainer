@@ -1,5 +1,5 @@
 #include "chordrootcontroller.h"
-#include "../../music/pitchutils.h"
+#include "../../music/musicutils.h"
 #include "../../generators/chords/chordgenerator.h"
 
 ChordRootController::ChordRootController(NotePlayer* player,

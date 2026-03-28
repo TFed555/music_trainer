@@ -51,14 +51,13 @@ bool AudioProcessor::playGeneratedBeat(QVector<Sample> samples) {
     QVector<float> audioData(len, 0.0f);
     for (auto& s : samples) {
         int delay = (s.delayms/1000.0) * sampleRate;
-
+        offset += delay;
         for (size_t i = 0; i < s.data.size(); i++){
             int idx = i + offset;
             if (idx < audioData.size()) {
                 audioData[idx] += s.data[i];
             }
         }
-        offset += delay;
     }
 
     playAudio(audioData, sampleRate);

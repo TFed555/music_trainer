@@ -1,5 +1,5 @@
-#ifndef PITCHUTILS_H
-#define PITCHUTILS_H
+#ifndef MUSICUTILS_H
+#define MUSICUTILS_H
 
 #include <QString>
 #include <QList>
@@ -52,7 +52,8 @@ static const char* noteNames[] = { "C", "C#", "D", "D#", "E",
     namespace Rhythm {
     enum class BeatType {
         Accent,
-        Ordinary
+        Ordinary,
+        UserBeat
     };
     enum class RhythmType
     {
@@ -75,4 +76,4 @@ static const char* noteNames[] = { "C", "C#", "D", "D#", "E",
 
 }
 
-#endif // PITCHUTILS_H
+#endif // MUSICUTILS_H

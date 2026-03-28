@@ -24,17 +24,6 @@ inline void registerIntervalSessions(SessionFactory& factory) {
                                 auto* ctrl = new IntervalIdentifyController(player, session.get());
                                 auto* view = new ExerciseNoTilesWidget(nullptr);
                                 session->setup(ctrl, view);
-                                session->configure([ctrl, view] () {
-                                    QObject::connect(ctrl, &IntervalIdentifyController::showResult,
-                                                     view, &ExerciseNoTilesWidget::showResult);
-
-                                    QObject::connect(view, &ExerciseNoTilesWidget::answerSelected,
-                                                     ctrl, &IntervalIdentifyController::answerSelected);
-
-                                    QObject::connect(ctrl, &IntervalIdentifyController::setAnswers,
-                                                     view, &ExerciseNoTilesWidget::addAnswers);
-                                    ctrl->giveAnswers();
-                                });
                                 return session;
                             });
     factory.registerFactory(ExerciseType::IntervalBuild,
@@ -44,13 +33,6 @@ inline void registerIntervalSessions(SessionFactory& factory) {
                                 auto* tilesctrl = new TilesController(player, session.get());
                                 auto* view = new ExerciseWithTilesWidget(true, nullptr);
                                 session->setup(ctrl, tilesctrl, view);
-                                session->configure([ctrl, view] () {
-                                    QObject::connect(ctrl, &IntervalBuildController::setQuestion,
-                                                     view, &ExerciseWithTilesWidget::setQuestion);
-
-                                    QObject::connect(ctrl, &IntervalBuildController::highlightQuestion,
-                                                     view, &ExerciseWithTilesWidget::highlightQuestion);
-                                });
                                 return session;
                             });
     factory.registerFactory(ExerciseType::IntervalDirection,
@@ -59,18 +41,6 @@ inline void registerIntervalSessions(SessionFactory& factory) {
                                 auto* ctrl = new IntervalDirectionController(player, session.get());
                                 auto* view = new ExerciseNoTilesWidget(nullptr);
                                 session->setup(ctrl, view);
-                                session->configure([ctrl, view] () {
-                                    QObject::connect(ctrl, &IntervalDirectionController::showResult,
-                                                     view, &ExerciseNoTilesWidget::showDirectionResult);
-
-                                    QObject::connect(view, &ExerciseNoTilesWidget::directionSelected,
-                                                     ctrl, &IntervalDirectionController::answerSelected);
-
-                                    QObject::connect(view, &ExerciseNoTilesWidget::answerSelected,
-                                                     ctrl, &IntervalDirectionController::answerSelected);
-
-                                    view->addDirectionSelector();
-                                });
                                 return session;
                             });
 }

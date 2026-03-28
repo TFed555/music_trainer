@@ -1,5 +1,5 @@
 #include "intervalrecognisecontroller.h"
-#include "../../music/pitchutils.h"
+#include "../../music/musicutils.h"
 #include "../../generators/intervals/IntervalGenerator.h"
 
 IntervalRecogniseController::IntervalRecogniseController(NotePlayer* player,

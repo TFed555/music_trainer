@@ -69,24 +69,18 @@ void RhythmCanvasWidget::paintEvent(QPaintEvent* event) {
     }
 }
 
-void RhythmCanvasWidget::keyPressEvent(QKeyEvent* event) {
-    if (event->key() == Qt::Key_Space) {
-        qDebug() << "key pressed";
-        userTaps.append(currentUserX);
-        update();
-    }
+void RhythmCanvasWidget::handleTap() {
+    qDebug() << "key pressed";
+    userTaps.append(currentUserX);
+    update();
 }
 
 void RhythmCanvasWidget::exerciseStarted() {
+    if (beatTimer) beatTimer->stop();
+    if (userTimer) userTimer->stop();
     qDebug() << "bpm:" << bpm;
-    qDebug() << "pxPerMs:" << pxPerMs;
+    qDebug() << "userstep:" << userStep;
     qDebug() << "step:" << beatStep;
-    qDebug() << "quarter px:" << durationMs(RhythmType::Quarter) * pxPerMs;
-    qDebug() << "total time ms:" << [this]() {
-        float t = 0;
-        for (auto n : rhythmNotes) t += durationMs(n);
-        return t;
-    }();
     float beatTickMs = durationMin;
     float userTickMs = durationMs(MusicUtils::Rhythm::RhythmType::Sixteenth);
     currentBeatX = 0.0f;

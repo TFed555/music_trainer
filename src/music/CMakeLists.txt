@@ -4,8 +4,8 @@ set(MUSIC_MODULE_NAME "music_module")
 
 
 set(MUSIC_SOURCES
-    ${CMAKE_CURRENT_SOURCE_DIR}/pitchutils.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/pitchutils.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/musicutils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/musicutils.h
 )
 
 add_library(${MUSIC_MODULE_NAME} STATIC ${MUSIC_SOURCES})

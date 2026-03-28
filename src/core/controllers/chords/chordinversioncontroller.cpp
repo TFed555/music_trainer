@@ -4,7 +4,7 @@ using namespace MusicUtils::Chords;
 
 ChordInversionController::ChordInversionController(NotePlayer* player,
                                                        QObject *parent)
-    : IExerciseController(player, PlaybackendSignal::PlaybackFinished, parent)
+    : IChoiceExerciseController(player, PlaybackendSignal::PlaybackFinished, parent)
 {
     answerVariants = MusicUtils::Chords::inversionNames.values();
 }

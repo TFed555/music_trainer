@@ -16,10 +16,6 @@ public:
 
     };
 
-    void configure(std::function<void()> fn) {
-        fn();
-    }
-
     void setup(ITilesExerciseController* ctrl, TilesController* tilesctrl, ExerciseWithTilesWidget* w);
     QString title() const override { return _title;}
 private:

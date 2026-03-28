@@ -6,10 +6,10 @@
 #include "../core/common/models/Difficulty.h"
 #include <random>
 
-class IntervalGenerator : public IGenerator<GeneratedInterval> {
+class IntervalGenerator : public IGenerator<IntervalGenerator, GeneratedInterval> {
 public:
     explicit IntervalGenerator(IntervalDifficultyConfig config = {});
-    GeneratedInterval generate() override;
+    GeneratedInterval generate();
 private:
     std::mt19937 gen{std::random_device{}()};
     IntervalDifficultyConfig config;

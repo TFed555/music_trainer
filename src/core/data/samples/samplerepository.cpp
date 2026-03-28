@@ -12,7 +12,19 @@ Sample SampleRepository::getSample(int midi) {
     return loadedSample;
 }
 
-Sample SampleRepository::getBeatSample() {
-    Sample loadedSample = loader->loadSample("../../../assets/samples/metronom.wav",0);
+Sample SampleRepository::getBeatSample(int type) {
+    Sample loadedSample;
+    switch (type) {
+    case 0:
+        loadedSample = loader->loadSample("../../../assets/samples/click_accent.wav",0);
+        break;
+    case 1:
+        loadedSample = loader->loadSample("../../../assets/samples/click.wav",0);
+        break;
+    case 2:
+        loadedSample = loader->loadSample("../../../assets/samples/user_click.wav",0);
+        break;
+    }
+
     return loadedSample;
 }

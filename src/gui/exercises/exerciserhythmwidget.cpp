@@ -20,9 +20,35 @@ ExerciseRhythmWidget::ExerciseRhythmWidget(QWidget *parent)
     for (auto* btn : this->findChildren<QPushButton*>()) {
         btn->setFocusPolicy(Qt::NoFocus);
     }
-    ui->difficultyBox->setFocusPolicy(Qt::NoFocus);
-    connect(ui->difficultyBox, &QComboBox::currentIndexChanged,
-            this, &ExerciseRhythmWidget::difficultyChanged);
+
+    const QMap<QCheckBox*, int> durationMap = {
+        {ui->checkBox_1, 1},
+        {ui->checkBox_2, 2},
+        {ui->checkBox_3, 4},
+        {ui->checkBox_4, 8},
+        {ui->checkBox_5, 16},
+    };
+
+    for (auto [box, dur] : durationMap.asKeyValueRange()) {
+        states[dur] = box->isChecked() ? 1 : 0;
+    }
+
+    connect(ui->spinBox, &QSpinBox::editingFinished, this, [this]() {
+        ui->spinBox->clearFocus();
+    });
+    ui->spinBox->setRange(30,244);
+    ui->spinBox->setValue(80);
+    connect(ui->spinBox, &QSpinBox::valueChanged, this, &ExerciseRhythmWidget::bpmChanged);
+
+    for (auto* box : ui->layoutWidget2->findChildren<QCheckBox*>()) {
+        box->setFocusPolicy(Qt::NoFocus);
+        connect(box, &QCheckBox::checkStateChanged, this, [this, box, durationMap](Qt::CheckState state) {
+            int status = state == Qt::CheckState::Unchecked ? 0 : 1;
+            states[durationMap[box]] = status;
+            emit configChanged(states);
+        });
+    }
+    ui->checkBox_3->setChecked(true);
 }
 
 ExerciseRhythmWidget::~ExerciseRhythmWidget()
@@ -34,7 +60,6 @@ void ExerciseRhythmWidget::setRhythmNotes(const QVector<MusicUtils::Rhythm::Rhyt
     canvas->setNotes(notes, bpm);
 }
 
-
 void ExerciseRhythmWidget::exercisePlayFinished() {
     canvas->exerciseStarted();
 }
@@ -44,3 +69,12 @@ void ExerciseRhythmWidget::getResult(const int correct, const int wrong) {
                                                     .arg(correct).arg(wrong));
 
 }
+
+void ExerciseRhythmWidget::keyPressEvent(QKeyEvent* event) {
+    if (event->key() == Qt::Key_Space) {
+        canvas->handleTap();
+    }
+    IExerciseWidget::keyPressEvent(event);
+}
+
+

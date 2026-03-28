@@ -6,11 +6,11 @@
 #include "../core/common/models/Difficulty.h"
 #include <random>
 
-class RhythmGenerator : public IGenerator<GeneratedRhythm>
+class RhythmGenerator : public IGenerator<RhythmGenerator, GeneratedRhythm>
 {
 public:
     explicit RhythmGenerator(RhythmDifficultyConfig config = {});
-    GeneratedRhythm generate() override;
+    GeneratedRhythm generate();
 private:
     std::mt19937 gen{std::random_device{}()};
     RhythmDifficultyConfig config;

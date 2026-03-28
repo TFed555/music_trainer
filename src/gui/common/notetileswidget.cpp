@@ -1,6 +1,6 @@
 #include "notetileswidget.h"
 #include "ui_notetileswidget.h"
-#include "../../music/pitchutils.h"
+#include "../../music/musicutils.h"
 
 namespace {
     static const QVector<int> blackTiles = {1, 3, 6, 8, 10};

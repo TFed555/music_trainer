@@ -2,7 +2,7 @@
 #define NOTILESSESSION_H
 
 #include "isession.h"
-#include "../../controllers/common/iexercisecontroller.h"
+#include "../../controllers/common/ichoiceexercisecontroller.h"
 #include "../../gui/exercises/exercisenotileswidget.h"
 
 class NoTilesSession : public ISession
@@ -15,11 +15,7 @@ public:
 
     };
 
-    void configure(std::function<void()> fn) {
-        fn();
-    }
-
-    void setup(IExerciseController* ctrl, ExerciseNoTilesWidget* w);
+    void setup(IChoiceExerciseController* ctrl, ExerciseNoTilesWidget* w);
     QString title() const override { return _title;}
 private:
     QString _title;

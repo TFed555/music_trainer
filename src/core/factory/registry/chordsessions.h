@@ -15,18 +15,6 @@ inline void registerChordSessions(SessionFactory& factory) {
                                 auto* ctrl = new ChordIdentifyController(player, session.get());
                                 auto* view = new ExerciseNoTilesWidget(nullptr);
                                 session->setup(ctrl, view);
-                                session->configure([ctrl, view] () {
-                                    QObject::connect(ctrl, &ChordIdentifyController::showResult,
-                                                     view, &ExerciseNoTilesWidget::showResult);
-
-                                    QObject::connect(view, &ExerciseNoTilesWidget::answerSelected,
-                                                     ctrl, &ChordIdentifyController::answerSelected);
-
-                                    QObject::connect(ctrl, &ChordIdentifyController::setAnswers,
-                                                     view, &ExerciseNoTilesWidget::addAnswers);
-
-                                    ctrl->giveAnswers();
-                                });
                                 return session;
                             });
     factory.registerFactory(ExerciseType::ChordInversion,
@@ -35,18 +23,6 @@ inline void registerChordSessions(SessionFactory& factory) {
                                 auto* ctrl = new ChordInversionController(player, session.get());
                                 auto* view = new ExerciseNoTilesWidget(nullptr);
                                 session->setup(ctrl, view);
-                                session->configure([ctrl, view] () {
-                                    QObject::connect(ctrl, &ChordInversionController::showResult,
-                                                     view, &ExerciseNoTilesWidget::showResult);
-
-                                    QObject::connect(view, &ExerciseNoTilesWidget::answerSelected,
-                                                     ctrl, &ChordInversionController::answerSelected);
-
-                                    QObject::connect(ctrl, &ChordInversionController::setAnswers,
-                                                     view, &ExerciseNoTilesWidget::addAnswers);
-
-                                    ctrl->giveAnswers();
-                                });
                                 return session;
                             });
     factory.registerFactory(ExerciseType::ChordRoot,
@@ -65,13 +41,6 @@ inline void registerChordSessions(SessionFactory& factory) {
                                 auto* tilesctrl = new TilesController(player, session.get());
                                 auto* view = new ExerciseWithTilesWidget(true, nullptr);
                                 session->setup(ctrl, tilesctrl, view);
-                                session->configure([ctrl, view] () {
-                                    QObject::connect(ctrl, &ChordBuildController::setQuestion,
-                                                     view, &ExerciseWithTilesWidget::setQuestion);
-
-                                    QObject::connect(ctrl, &ChordBuildController::highlightQuestion,
-                                                     view, &ExerciseWithTilesWidget::highlightQuestion);
-                                });
                                 return session;
                             });
 }

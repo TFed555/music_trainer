@@ -11,11 +11,11 @@ inline const QMap<MusicUtils::Chords::ChordType, QVector<int>> requiredIntervals
     {MusicUtils::Chords::ChordType::Minor, {3, 4}},
 };
 
-class ChordGenerator : public IGenerator<GeneratedChord>
+class ChordGenerator : public IGenerator<ChordGenerator, GeneratedChord>
 {
 public:
     explicit ChordGenerator(ChordDifficultyConfig config = {});
-    GeneratedChord generate() override;
+    GeneratedChord generate();
 private:
     ChordDifficultyConfig config;
     std::mt19937 gen{std::random_device{}()};

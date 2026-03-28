@@ -3,7 +3,7 @@
 
 NoteGuessController::NoteGuessController(NotePlayer* player,
                                          QObject *parent)
-    : IExerciseController(player, PlaybackendSignal::PlaylistEmpty, parent)
+    : IChoiceExerciseController(player, PlaybackendSignal::PlaylistEmpty, parent)
 {
     answerVariants = {"одинаковые", "разные"};
 }

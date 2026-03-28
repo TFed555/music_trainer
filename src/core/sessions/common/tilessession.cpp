@@ -27,4 +27,10 @@ void TilesSession::setup(ITilesExerciseController* ctrl, TilesController* tilesc
 
     connect(w, &ExerciseWithTilesWidget::difficultyChanged,
             ctrl, &ITilesExerciseController::setDifficulty);
+
+    connect(ctrl, &ITilesExerciseController::setQuestion,
+                     w, &ExerciseWithTilesWidget::setQuestion);
+
+    connect(ctrl, &ITilesExerciseController::highlightQuestion,
+                     w, &ExerciseWithTilesWidget::highlightQuestion);
 }
