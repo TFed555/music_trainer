@@ -21,11 +21,13 @@ public slots:
     void setMode(Mode m);
     void resetTiles();
 signals:
-    void noteSelected(const QString);
+    void noteSelected(const QString&);
 private:
     void resetSelection(int octIdx);
 private:
     QVector<NoteTilesWidget*> octaves;
+    static constexpr int octaveCount = 3;
+    static constexpr int octaveOffset = 3;
 };
 
 #endif // OCTAVETILESWIDGET_H

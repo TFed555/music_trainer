@@ -16,7 +16,8 @@ public:
     enum class BlockCategory {
         Intervals,
         Chords,
-        Notes
+        Notes,
+        Rhythm
     };
     void setBlock(int block);
 signals:

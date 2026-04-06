@@ -1,5 +1,5 @@
-#ifndef PITCHUTILS_H
-#define PITCHUTILS_H
+#ifndef MUSICUTILS_H
+#define MUSICUTILS_H
 
 #include <QString>
 #include <QList>
@@ -49,6 +49,31 @@ static const char* noteNames[] = { "C", "C#", "D", "D#", "E",
     };
     }
 
+    namespace Rhythm {
+    enum class BeatType {
+        Accent,
+        Ordinary,
+        UserBeat
+    };
+    enum class RhythmType
+    {
+        Whole,
+        Half,
+        Quarter,
+        Eighth,
+        Sixteenth
+    };
+
+    inline const QMap<int, RhythmType> rhythmTypeNames = {
+        {1, RhythmType::Whole},
+        {2, RhythmType::Half},
+        {4, RhythmType::Quarter},
+        {8, RhythmType::Eighth},
+        {16, RhythmType::Sixteenth}
+    };
+
+    }
+
 }
 
-#endif // PITCHUTILS_H
+#endif // MUSICUTILS_H

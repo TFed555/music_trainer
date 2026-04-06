@@ -1,5 +1,5 @@
 #include "chordbuildcontroller.h"
-#include "../music/pitchutils.h"
+#include "../music/musicutils.h"
 #include "../../generators/chords/chordgenerator.h"
 
 ChordBuildController::ChordBuildController(NotePlayer* player,
@@ -14,14 +14,14 @@ void ChordBuildController::playTone() {
     noteCounter = 0;
     ChordGenerator gen(config);
     auto result = gen.generate();
-    correctAnswer = {MusicUtils::midiToNote(result.midiNotes[1]),
-                    MusicUtils::midiToNote(result.midiNotes[2])};
+    correctAnswer = {MusicUtils::midiToNote(result.midiNotes[secondNoteIdx]),
+                    MusicUtils::midiToNote(result.midiNotes[thirdNoteIdx])};
     emit setQuestion(result.type);
     emit requestSetMode(Mode::Question);
-    emit highlightQuestion({MusicUtils::midiToNote(result.midiNotes[0])});
+    emit highlightQuestion({MusicUtils::midiToNote(result.midiNotes[firstNoteIdx])});
     log(result.desc);
     qDebug() << playbackLog.last().timestamp << " " << playbackLog.last().desc;
-    notePlayer->playNotes({result.midiNotes[0]});
+    notePlayer->playNotes({result.midiNotes[firstNoteIdx]});
 }
 
 void ChordBuildController::setDifficulty(int level) {
@@ -30,11 +30,11 @@ void ChordBuildController::setDifficulty(int level) {
     config.allowedInversions = {MusicUtils::Chords::InversionType::Root};
 }
 
-void ChordBuildController::noteSelected(const QString& name) {
-    qDebug() << "Note selected" << name;
-    userAnswer.append(name);
+void ChordBuildController::noteSelected(const QString& noteName) {
+    qDebug() << "Note selected" << noteName;
+    userAnswer.append(noteName);
     noteCounter++;
-    if (noteCounter == 2) {
+    if (noteCounter == chordNoteCount) {
         if (correctAnswer.size() > 0) {
             emit showResult(correctAnswer, userAnswer);
             emit requestSetMode(Mode::Result);

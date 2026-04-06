@@ -79,7 +79,7 @@ void MainWindow::startExercise(ExerciseType type){
         stack->setCurrentWidget(startMenu);
         this->setWindowTitle(mainTitle);  });
 
-    sidebar->open();
+    // sidebar->open();
 
     stack->addWidget(exercise);
     stack->setCurrentWidget(exercise);

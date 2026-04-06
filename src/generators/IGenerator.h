@@ -3,11 +3,12 @@
 #pragma once
 #include "GeneratedAudio.h"
 
-template <typename T>
+template <typename Derived, typename T>
 class IGenerator {
 public:
-    virtual ~IGenerator() = default;
-    virtual T generate() = 0;
+    T generate() {
+        return static_cast<Derived*>(this)->generate();
+    }
 };
 
 #endif

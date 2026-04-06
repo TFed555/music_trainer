@@ -7,6 +7,7 @@ struct Sample {
     QVector<float> data;
     int nearestMidi;
     int sampleRate;
+    int delayms = 200;
 };
 
 

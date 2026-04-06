@@ -1,5 +1,5 @@
 #include "IntervalGenerator.h"
-#include "../music/pitchutils.h"
+#include "../music/musicutils.h"
 #include <QDebug>
 
 IntervalGenerator::IntervalGenerator(IntervalDifficultyConfig config)

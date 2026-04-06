@@ -28,6 +28,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
 
+
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET trainer_1 APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
@@ -78,6 +79,12 @@ qt_add_resources(trainer_1 "app_resources"
     PREFIX "/styles"
     BASE ${CMAKE_CURRENT_SOURCE_DIR}/../assets/styles
     FILES ${CMAKE_CURRENT_SOURCE_DIR}/../assets/styles/styles.qss
+)
+
+qt_add_resources(trainer_1 "resources"
+    PREFIX "/"
+    BASE ${CMAKE_CURRENT_SOURCE_DIR}/../assets/fonts
+    FILES ${CMAKE_CURRENT_SOURCE_DIR}/../assets/fonts/Bravura.otf
 )
 
 target_link_libraries(trainer_1 PRIVATE

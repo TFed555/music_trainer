@@ -3,7 +3,7 @@
 
 ChordIdentifyController::ChordIdentifyController(NotePlayer* player,
                                                        QObject *parent)
-    : IExerciseController(player, PlaybackendSignal::PlaybackFinished, parent)
+    : IChoiceExerciseController(player, PlaybackendSignal::PlaybackFinished, parent)
 {
     answerVariants = MusicUtils::Chords::chordTypeNames.values();
 }

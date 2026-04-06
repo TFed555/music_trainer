@@ -23,6 +23,7 @@ void SidebarWidget::setLayout() {
     layout->addWidget(addNavButton("Интервалы", StartWidget::BlockCategory::Intervals));
     layout->addWidget(addNavButton("Аккорды", StartWidget::BlockCategory::Chords));
     layout->addWidget(addNavButton("Ноты", StartWidget::BlockCategory::Notes));
+    layout->addWidget(addNavButton("Ритм", StartWidget::BlockCategory::Rhythm));
     layout->addStretch();
 }
 

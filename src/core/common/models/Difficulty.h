@@ -2,7 +2,7 @@
 #define DIFFICULTY_H
 
 #include <QVector>
-#include "../../../music/pitchutils.h"
+#include "../../../music/musicutils.h"
 
 enum class Difficulty {
     Easy,
@@ -53,5 +53,10 @@ struct ChordDifficultyConfig {
     }
 };
 
+struct RhythmDifficultyConfig {
+    float tact = 8.0f;
+    QVector<int> allowedDurations = {1, 2, 4, 8, 16};
+    int bpm = 80;
+};
 
 #endif // DIFFICULTY_H

@@ -6,11 +6,11 @@
 #include "../core/common/models/Difficulty.h"
 #include <random>
 
-class NoteGenerator : public IGenerator<GeneratedAudio>
+class NoteGenerator : public IGenerator<NoteGenerator, GeneratedAudio>
 {
 public:
     explicit NoteGenerator(NoteDifficultyConfig config = {});
-    GeneratedAudio generate() override;
+    GeneratedAudio generate();
 private:
     std::mt19937 gen{std::random_device{}()};
     NoteDifficultyConfig config;

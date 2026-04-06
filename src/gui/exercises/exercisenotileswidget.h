@@ -3,7 +3,6 @@
 
 #include <QWidget>
 #include "../../core/common/interfaces/IExerciseWidget.h"
-#include "../../core/common/models/Mode.h"
 #include <QPushButton>
 
 namespace Ui {
@@ -19,13 +18,10 @@ public:
     ~ExerciseNoTilesWidget();
 public slots:
     void addAnswers(QVector<QString> answers);
-    void addDirectionSelector();
     void showResult(const QString& correct);
     void exercisePlayFinished() override;
-    void showDirectionResult(const QString& correct);
 signals:
     void answerSelected(const QString& answer);
-    void directionSelected(const QString& direction);
     void difficultyChanged(int level);
 private:
     void resetSelection();
@@ -34,7 +30,6 @@ private:
 private:
     Ui::ExerciseNoTilesWidget *ui;
     QPushButton* selectedBtn;
-    QButtonGroup* directionGroup = nullptr;
 };
 
 #endif // EXERCISENOTILESWIDGET_H
