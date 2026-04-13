@@ -7,21 +7,33 @@ ChordInversionController::ChordInversionController(NotePlayer* player,
     : IChoiceExerciseController(player, PlaybackendSignal::PlaybackFinished, parent)
 {
     answerVariants = MusicUtils::Chords::inversionNames.values();
+    description = tr("Определите обращение аккорда");
 }
 
-void ChordInversionController::playTone() {
+void ChordInversionController::generateTask() {
     correctAnswer = 0;
     userAnswer = 0;
     ChordGenerator gen(config);
-    auto result = gen.generate();
+    result = gen.generate();
     correctAnswer = result.inversion;
     log(result.desc);
+    playTask();
+}
+
+void ChordInversionController::playTask() {
     qDebug() << playbackLog.last().timestamp << " " << playbackLog.last().desc;
     notePlayer->playChord(result.midiNotes);
 }
 
 void ChordInversionController::answerSelected(const QString& answer){
     userAnswer = answer;
+    emit attemptDone({
+        .exerciseId = "chord.inversion",
+        .correctAnswer = correctAnswer,
+        .userAnswer = userAnswer,
+        .correct = (userAnswer == correctAnswer),
+        .timestamp = QDateTime::currentDateTime()
+    });
     emit showResult(correctAnswer);
 }
 

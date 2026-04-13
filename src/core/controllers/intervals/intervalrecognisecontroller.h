@@ -15,11 +15,13 @@ public slots:
     void setDifficulty(int level) override;
 
 private:
-    void playTone() override;
+    void generateTask() override;
+    void playTask() override;
 private:
     int noteCounter;
     IntervalDifficultyConfig config = difficultyMap<IntervalDifficultyConfig>[Difficulty::Easy];
     static constexpr int intervalNoteCount = 2;
+    GeneratedInterval result;
 };
 
 #endif // INTERVALRECOGNISECONTROLLER_H

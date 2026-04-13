@@ -12,9 +12,11 @@ public slots:
     void answerSelected(const QString& answer) override;
     void setDifficulty(int level) override;
 private:
-    void playTone() override;
+    void generateTask() override;
+    void playTask() override;
 private:
     IntervalDifficultyConfig config = difficultyMap<IntervalDifficultyConfig>[Difficulty::Easy];
+    GeneratedInterval result;
 };
 
 #endif // INTERVALIDENTIFYCONTROLLER_H

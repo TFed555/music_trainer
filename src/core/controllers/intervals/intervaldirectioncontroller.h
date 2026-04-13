@@ -2,7 +2,6 @@
 #define INTERVALDIRECTIONCONTROLLER_H
 
 #include "../common/ichoiceexercisecontroller.h"
-#include "../../generators/GeneratedAudio.h"
 
 class IntervalDirectionController : public IChoiceExerciseController
 {
@@ -18,9 +17,11 @@ public slots:
     void answerSelected(const QString& answer) override;
     void setDifficulty(int level) override;
 private:
-    void playTone() override;
+    void generateTask() override;
+    void playTask() override;
 private:
     IntervalDifficultyConfig config = difficultyMap<IntervalDifficultyConfig>[Difficulty::Easy];
+    GeneratedInterval result;
 };
 
 #endif // INTERVALDIRECTIONCONTROLLER_H

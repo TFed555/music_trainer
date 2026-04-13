@@ -1,6 +1,7 @@
 #include "tilessession.h"
 
-void TilesSession::setup(ITilesExerciseController* ctrl, TilesController* tilesctrl, ExerciseWithTilesWidget* w) {
+void TilesSession::setup(ITilesExerciseController* ctrl, TilesController* tilesctrl,
+                         ExerciseWithTilesWidget* w, StatisticsRepository* statsRepo) {
     view = w;
     connect(view, &ExerciseWithTilesWidget::startClicked, ctrl, &ITilesExerciseController::start);
 
@@ -9,6 +10,8 @@ void TilesSession::setup(ITilesExerciseController* ctrl, TilesController* tilesc
     connect(view, &ExerciseWithTilesWidget::backClicked, this, [this](){
         emit back();
     });
+
+    connect(w, &ExerciseWithTilesWidget::replayClicked, ctrl, &ITilesExerciseController::replay);
 
     connect (ctrl, &ITilesExerciseController::showResult,
             w, &ExerciseWithTilesWidget::showResult);
@@ -33,4 +36,12 @@ void TilesSession::setup(ITilesExerciseController* ctrl, TilesController* tilesc
 
     connect(ctrl, &ITilesExerciseController::highlightQuestion,
                      w, &ExerciseWithTilesWidget::highlightQuestion);
+
+    connect(ctrl, &ITilesExerciseController::attemptDone,
+                    statsRepo, &StatisticsRepository::recordStatistics);
+
+    connect(ctrl, &ITilesExerciseController::setDescription,
+            w, &ExerciseWithTilesWidget::setDescription);
+
+    ctrl->sendDescription();
 }

@@ -4,14 +4,18 @@
 
 RhythmRecogniseController::RhythmRecogniseController(NotePlayer* player,
                                                      QObject *parent)
-    : IRhythmExerciseController(player, PlaybackendSignal::PlaybackFinished, parent)
+    : IRhythmExerciseController(player, PlaybackendSignal::BeatFinished, parent)
 {
+    description = tr("Прослушайте ритм и затем простучите \nего с помощью клавиши пробел");
+    connect(notePlayer, &NotePlayer::beatFinished,
+            this, &RhythmRecogniseController::onBeatFinished);
 }
 
-void RhythmRecogniseController::playTone() {
+void RhythmRecogniseController::generateTask() {
     using namespace MusicUtils::Rhythm;
     RhythmGenerator generator(config);
-    auto result = generator.generate();
+    result = generator.generate();
+    emit requestSetMode(Mode::Wait);
     log(result.desc);
     qDebug() << playbackLog.last().timestamp << " " << playbackLog.last().desc;
     QVector<RhythmType> rhythmTypes;
@@ -20,20 +24,42 @@ void RhythmRecogniseController::playTone() {
     }
     emit setRhythmNotes(rhythmTypes, result.bpm);
     lastBeats = result;
+    state = PlaybackState::Task;
+    playTask();
+}
+
+void RhythmRecogniseController::playTask() {
+    state = PlaybackState::Task;
     notePlayer->playBeat(result);
-    playbackCount = 3;
 }
 
 void RhythmRecogniseController::setDifficulty(int level) {
 
 }
 
-void RhythmRecogniseController::onPlaybackFinished() {
-    playbackCount--;
-    if (playbackCount <= 0) return;
-    emit exercisePlayFinished();
-    notePlayer->playMetronome(lastBeats);
+void RhythmRecogniseController::onBeatFinished() {
+    QTimer::singleShot(200, this, [this]() {
+        emit exercisePlayFinished();
+        notePlayer->playMetronome(lastBeats);
+    });
 }
+
+// void RhythmRecogniseController::onPlaybackFinished() {
+//     qDebug() << "onPlaybackFinished state=" << (int)state;
+//     switch(state) {
+//     case PlaybackState::Task:
+//         state = PlaybackState::Metronome;
+//         notePlayer->playMetronome(lastBeats);
+//         break;
+//     case PlaybackState::Metronome:
+//         state = PlaybackState::Idle;
+//         emit exercisePlayFinished();
+//         notePlayer->playMetronome(lastBeats);
+//         break;
+//     case PlaybackState::Idle:
+//         break;
+//     }
+// }
 
 void RhythmRecogniseController::setConfig(const QMap<int,int>& states) {
     QVector<int> allowedDurations;
@@ -74,6 +100,7 @@ void RhythmRecogniseController::inputFinished(const QVector<int>& notePoses, con
     }
     wrong = userTaps.size() - correct;
     // int missed = notePoses.size() - correct;
-    emit result(correct, wrong);
+    emit showResult(correct, wrong);
+    emit requestSetMode(Mode::Result);
 }
 

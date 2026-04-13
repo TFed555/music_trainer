@@ -32,7 +32,7 @@
      <x>370</x>
      <y>40</y>
      <width>251</width>
-     <height>101</height>
+     <height>104</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -47,6 +47,13 @@
      <widget class="QPushButton" name="stopBtn">
       <property name="text">
        <string>Стоп</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="replayBtn">
+      <property name="text">
+       <string>Повторить</string>
       </property>
      </widget>
     </item>
@@ -94,6 +101,19 @@
    </property>
    <property name="text">
     <string>Difficulty level</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="descriptionLabel">
+   <property name="geometry">
+    <rect>
+     <x>660</x>
+     <y>80</y>
+     <width>249</width>
+     <height>91</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
    </property>
   </widget>
  </widget>

@@ -6,15 +6,20 @@ IntervalIdentifyController::IntervalIdentifyController(NotePlayer* player,
     : IChoiceExerciseController(player, PlaybackendSignal::PlaylistEmpty, parent)
 {
     answerVariants = MusicUtils::Intervals::intervals;
+    description = tr("Выберите название интервала");
 }
 
-void IntervalIdentifyController::playTone() {
+void IntervalIdentifyController::generateTask() {
     correctAnswer = 0;
     userAnswer = 0;
     IntervalGenerator gen(config);
-    auto result = gen.generate();
+    result = gen.generate();
     correctAnswer = result.interval;
     log(result.desc);
+    playTask();
+}
+
+void IntervalIdentifyController::playTask() {
     qDebug() << playbackLog.last().timestamp << " " << playbackLog.last().desc;
     notePlayer->playNotes(result.midiNotes);
 }
@@ -26,5 +31,12 @@ void IntervalIdentifyController::setDifficulty(int level) {
 
 void IntervalIdentifyController::answerSelected(const QString& answer){
     userAnswer = answer;
+    emit attemptDone({
+        .exerciseId = "interval.identify",
+        .correctAnswer = correctAnswer,
+        .userAnswer = userAnswer,
+        .correct = (userAnswer == correctAnswer),
+        .timestamp = QDateTime::currentDateTime()
+    });
     emit showResult(correctAnswer);
 }

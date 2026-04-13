@@ -14,9 +14,11 @@ public slots:
     void noteSelected(const QString& noteName) override;
     void setDifficulty(int level) override;
 private:
-    void playTone() override;
+    void generateTask() override;
+    void playTask() override;
 private:
     IntervalDifficultyConfig config = difficultyMap<IntervalDifficultyConfig>[Difficulty::Easy];
+    GeneratedInterval result;
 };
 
 #endif // INTERVALBUILDCONTROLLER_H

@@ -16,6 +16,7 @@ ExerciseRhythmWidget::ExerciseRhythmWidget(QWidget *parent)
     connect(ui->backBtn, &QPushButton::clicked, this, [this] (){
         emit backClicked();
     });
+    connect(ui->replayBtn, &QPushButton::clicked, this, &ExerciseRhythmWidget::replayClicked);
     connect(canvas, &RhythmCanvasWidget::inputFinished, this, &ExerciseRhythmWidget::inputFinished);
     for (auto* btn : this->findChildren<QPushButton*>()) {
         btn->setFocusPolicy(Qt::NoFocus);
@@ -49,6 +50,7 @@ ExerciseRhythmWidget::ExerciseRhythmWidget(QWidget *parent)
         });
     }
     ui->checkBox_3->setChecked(true);
+    ui->modeLabel->setText("");
 }
 
 ExerciseRhythmWidget::~ExerciseRhythmWidget()
@@ -61,6 +63,7 @@ void ExerciseRhythmWidget::setRhythmNotes(const QVector<MusicUtils::Rhythm::Rhyt
 }
 
 void ExerciseRhythmWidget::exercisePlayFinished() {
+    setMode(Mode::Input);
     canvas->exerciseStarted();
 }
 
@@ -77,4 +80,23 @@ void ExerciseRhythmWidget::keyPressEvent(QKeyEvent* event) {
     IExerciseWidget::keyPressEvent(event);
 }
 
+void ExerciseRhythmWidget::setDescription(const QString& text) {
+    ui->descriptionLabel->setText(text);
+}
 
+void ExerciseRhythmWidget::setMode(Mode m) {
+    switch (m) {
+    case Mode::Wait:
+        ui->modeLabel->setText("Слушайте");
+        break;
+    case Mode::Input:
+        ui->modeLabel->setText("Введите ответ");
+        break;
+    case Mode::Result:
+        ui->modeLabel->setText("");
+        break;
+    case Mode::Question:
+        ui->modeLabel->setText("");
+        break;
+    }
+}

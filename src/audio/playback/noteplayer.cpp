@@ -44,6 +44,8 @@ void NotePlayer::playMidi(int midi, float durationSec) {
 void NotePlayer::playMetronome(const GeneratedRhythm& rhythm) {
     QVector<Sample> samples = loadBeatSamples(rhythm.metronomeBeats, rhythm.bpm);
     processor->playGeneratedBeat(samples);
+    // connectOnce(processor, &AudioProcessor::playbackStopped,
+    //             this, &NotePlayer::metronomeFinished);
 }
 
 void NotePlayer::playNotes(const QVector<int>& midiNotes) {
@@ -74,6 +76,8 @@ void NotePlayer::playBeat(const GeneratedRhythm& rhythm) {
     }
     QVector<Sample> samples = loadBeatSamples(allBeats, rhythm.bpm);
     processor->playGeneratedBeat(samples);
+    connectOnce(processor, &AudioProcessor::playbackStopped,
+                this, &NotePlayer::beatFinished);
 }
 
 QVector<Sample> NotePlayer::loadNoteSamples(const QVector<int>& midiNotes) {

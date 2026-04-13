@@ -5,17 +5,22 @@ NoteBuildController::NoteBuildController(NotePlayer* player,
                                            QObject *parent)
     : ITilesExerciseController(player, PlaybackendSignal::PlaybackFinished, parent)
 {
+    description = tr("Выберите нужную ноту");
 }
 
-void NoteBuildController::playTone() {
+void NoteBuildController::generateTask() {
     correctAnswer.clear();
     userAnswer.clear();
     NoteGenerator gen(config);
-    auto result = gen.generate();
+    result = gen.generate();
     correctAnswer = {MusicUtils::midiToNote(result.midiNotes[0])};
     emit setQuestion(result.desc);
     emit requestSetMode(Mode::Question);
     log(result.desc);
+    playTask();
+}
+
+void NoteBuildController::playTask() {
     qDebug() << playbackLog.last().timestamp << " " << playbackLog.last().desc;
     notePlayer->playNotes({result.midiNotes[0]});
 }
@@ -30,6 +35,13 @@ void NoteBuildController::noteSelected(const QString& noteName) {
     qDebug() << "Note selected" << noteName;
     userAnswer.append(noteName);
     if (correctAnswer.size() > 0) {
+            emit attemptDone({
+                .exerciseId = "note.build",
+                .correctAnswer = vecToStr(correctAnswer),
+                .userAnswer = vecToStr(userAnswer),
+                .correct = (userAnswer == correctAnswer),
+                .timestamp = QDateTime::currentDateTime()
+            });
             emit showResult(correctAnswer, userAnswer);
             emit requestSetMode(Mode::Result);
             correctAnswer.clear();

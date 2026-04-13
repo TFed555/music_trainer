@@ -6,7 +6,8 @@
 #include "../common/interfaces/IExerciseWidget.h"
 #include "../sessions/common/isession.h"
 #include "../../audio/playback/noteplayer.h"
+#include "../data/statistics/statisticsrepository.h"
 
-using SessionFactory = RegistryFactory<ExerciseType, ISession, NotePlayer*, QObject*>;
+using SessionFactory = RegistryFactory<ExerciseType, ISession, NotePlayer*, StatisticsRepository*, QObject*>;
 
 #endif // SESSIONFACTORY_H

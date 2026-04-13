@@ -23,9 +23,20 @@ signals:
     void playbackFinished();
     void error(const QString&);
     void playlistEmpty();
+    void beatFinished();
+    void metronomeFinished();
 private:
     QVector<Sample> loadBeatSamples(const QVector<Beat>& beats, const int bpm);
     QVector<Sample> loadNoteSamples(const QVector<int>& midiNotes);
+    template <typename Sender, typename Signal, typename Receiver, typename Slot>
+    void connectOnce(Sender* s, Signal sig, Receiver r, Slot slot) {
+        QMetaObject::Connection* conn = new QMetaObject::Connection;
+        *conn = QObject::connect(s, sig, r, [r, slot, conn] {
+            (r->*slot)();
+            QObject::disconnect(*conn);
+            delete conn;
+        });
+    };
 private:
     AudioProcessor* processor;
     SampleRepository* sampleRepository;

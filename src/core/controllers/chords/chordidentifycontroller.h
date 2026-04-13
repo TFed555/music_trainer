@@ -13,9 +13,11 @@ public slots:
     void answerSelected(const QString& answer) override;
     void setDifficulty(int level) override;
 private:
-    void playTone() override;
+    void generateTask() override;
+    void playTask() override;
 private:
     ChordDifficultyConfig config = difficultyMap<ChordDifficultyConfig>[Difficulty::Easy];
+    GeneratedChord result;
 };
 
 #endif // CHORDIDENTIFYCONTROLLER_H

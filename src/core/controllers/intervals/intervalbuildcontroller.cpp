@@ -6,19 +6,23 @@ IntervalBuildController::IntervalBuildController(NotePlayer* player,
                                                  QObject *parent)
     : ITilesExerciseController(player, PlaybackendSignal::PlaylistEmpty, parent)
 {
-
+    description = tr("Постройте интервал от \nподсвеченной ноты");
 }
 
-void IntervalBuildController::playTone() {
+void IntervalBuildController::generateTask() {
     correctAnswer.clear();
     userAnswer.clear();
     IntervalGenerator gen(config);
-    auto result = gen.generate();
+    result = gen.generate();
     correctAnswer.append(MusicUtils::midiToNote(result.midiNotes[secondNoteIdx]));
     emit setQuestion(result.interval);
     emit requestSetMode(Mode::Question);
     emit highlightQuestion({MusicUtils::midiToNote(result.midiNotes[firstNoteIdx])});
     log(result.desc);
+    playTask();
+}
+
+void IntervalBuildController::playTask() {
     qDebug() << playbackLog.last().timestamp << " " << playbackLog.last().desc;
     notePlayer->playNotes({result.midiNotes[firstNoteIdx]});
 }
@@ -32,6 +36,13 @@ void IntervalBuildController::noteSelected(const QString& noteName) {
     qDebug() << "Note selected" << noteName;
     userAnswer.append(noteName);
     if (correctAnswer.size() > 0) {
+        emit attemptDone({
+            .exerciseId = "interval.build",
+            .correctAnswer = vecToStr(correctAnswer),
+            .userAnswer = vecToStr(userAnswer),
+            .correct = (userAnswer == correctAnswer),
+            .timestamp = QDateTime::currentDateTime()
+        });
         emit showResult(correctAnswer, userAnswer);
         emit requestSetMode(Mode::Result);
         correctAnswer.clear();

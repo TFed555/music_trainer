@@ -5,7 +5,7 @@
 #include "../../core/common/interfaces/IExerciseWidget.h"
 #include "../../music/musicutils.h"
 #include "../common/rhythmcanvaswidget.h"
-// #include "../../core/common/models/Rhythm.h"
+#include <QLabel>
 #include <QCheckBox>
 
 namespace Ui {
@@ -23,6 +23,8 @@ public slots:
     void exercisePlayFinished() override;
     void setRhythmNotes(const QVector<MusicUtils::Rhythm::RhythmType>& notes, int bpm);
     void getResult(const int correct, const int wrong);
+    void setDescription(const QString& text) override;
+    void setMode(Mode m);
 signals:
     void inputFinished(const QVector<int>& notePoses, const QVector<int>& userTaps);
     void configChanged(const QMap<int,int>& states);
@@ -39,6 +41,7 @@ private:
         {8, 0},
         {16, 0},
     };
+    QLabel* descriptionLabel = nullptr;
 };
 
 #endif // EXERCISERHYTHMWIDGET_H

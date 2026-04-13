@@ -19,9 +19,11 @@ public slots:
 signals:
     void setOctaveCount(int count);
 private:
-    void playTone() override;
+    void generateTask() override;
+    void playTask() override;
 private:
     NoteDifficultyConfig config = noteBuildDifficulty[Difficulty::Easy];
+    GeneratedAudio result;
 };
 
 #endif // NOTEBUILDCONTROLLER_H

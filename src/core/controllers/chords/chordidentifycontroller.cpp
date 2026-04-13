@@ -6,21 +6,33 @@ ChordIdentifyController::ChordIdentifyController(NotePlayer* player,
     : IChoiceExerciseController(player, PlaybackendSignal::PlaybackFinished, parent)
 {
     answerVariants = MusicUtils::Chords::chordTypeNames.values();
+    description = tr("Определите тональность аккорда");
 }
 
-void ChordIdentifyController::playTone() {
+void ChordIdentifyController::generateTask() {
     correctAnswer.clear();
     userAnswer.clear();
     ChordGenerator gen(config);
-    auto result = gen.generate();
+    result = gen.generate();
     correctAnswer = result.type;
     log(result.desc);
+    playTask();
+}
+
+void ChordIdentifyController::playTask() {
     qDebug() << playbackLog.last().timestamp << " " << playbackLog.last().desc;
     notePlayer->playChord(result.midiNotes);
 }
 
 void ChordIdentifyController::answerSelected(const QString& answer){
     userAnswer = answer;
+    emit attemptDone({
+        .exerciseId = "chord.identify",
+        .correctAnswer = correctAnswer,
+        .userAnswer = userAnswer,
+        .correct = (userAnswer == correctAnswer),
+        .timestamp = QDateTime::currentDateTime()
+    });
     emit showResult(correctAnswer);
 }
 

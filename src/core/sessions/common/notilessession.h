@@ -4,6 +4,7 @@
 #include "isession.h"
 #include "../../controllers/common/ichoiceexercisecontroller.h"
 #include "../../gui/exercises/exercisenotileswidget.h"
+#include "../../data/statistics/statisticsrepository.h"
 
 class NoTilesSession : public ISession
 {
@@ -15,7 +16,7 @@ public:
 
     };
 
-    void setup(IChoiceExerciseController* ctrl, ExerciseNoTilesWidget* w);
+    void setup(IChoiceExerciseController* ctrl, ExerciseNoTilesWidget* w, StatisticsRepository* statsRepo);
     QString title() const override { return _title;}
 private:
     QString _title;

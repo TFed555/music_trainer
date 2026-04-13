@@ -20,6 +20,7 @@ public slots:
     void addAnswers(QVector<QString> answers);
     void showResult(const QString& correct);
     void exercisePlayFinished() override;
+    void setDescription(const QString& text) override;
 signals:
     void answerSelected(const QString& answer);
     void difficultyChanged(int level);

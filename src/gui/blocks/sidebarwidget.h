@@ -17,7 +17,8 @@ class SidebarWidget : public QWidget
 public:
     explicit SidebarWidget(QWidget *parent = nullptr);
     ~SidebarWidget();
-    void open();
+    void toggle();
+    void close();
 signals:
     void blockSelected(int block);
 private:

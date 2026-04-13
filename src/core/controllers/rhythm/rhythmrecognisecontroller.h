@@ -18,16 +18,18 @@ public slots:
     void inputFinished(const QVector<int>& notePoses, const QVector<int>& userTaps) override;
     void setConfig(const QMap<int,int>& states) override;
     void bpmChanged(const int& bpm) override;
-protected:
-    void onPlaybackFinished() override;
+    void onBeatFinished();
 private:
-    void playTone() override;
+    void generateTask() override;
+    void playTask() override;
+    enum class PlaybackState { Idle, Metronome, Task };
 private:
     RhythmDifficultyConfig config = {8.0f, {4}, 80};
     float treshold = 10;
     int bpm = 80;
     GeneratedRhythm lastBeats;
-    int playbackCount = 3;
+    GeneratedRhythm result;
+    PlaybackState state = PlaybackState::Idle;
 };
 
 #endif // RHYTHMRECOGNISECONTROLLER_H

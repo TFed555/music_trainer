@@ -26,10 +26,12 @@ public:
     virtual ~IExerciseWidget() {};
 public slots:
     virtual void exercisePlayFinished() = 0;
+    virtual void setDescription(const QString& text) = 0;
 signals:
     void startClicked();
     void stopClicked();
     void backClicked();
+    void replayClicked();
 };
 
 #endif // IEXERCISEWIDGET_H

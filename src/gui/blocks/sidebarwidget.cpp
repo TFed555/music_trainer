@@ -36,9 +36,15 @@ QPushButton* SidebarWidget::addNavButton(const QString& title, StartWidget::Bloc
     return btn;
 }
 
-void SidebarWidget::open() {
+void SidebarWidget::toggle() {
     anim->setStartValue(isOpen ? 200 : 0);
     anim->setEndValue(isOpen ? 0 : 200);
     anim->start();
     isOpen = !isOpen;
+}
+
+void SidebarWidget::close() {
+    if (isOpen) {
+        toggle();
+    }
 }

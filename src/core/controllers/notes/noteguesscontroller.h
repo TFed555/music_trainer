@@ -17,9 +17,11 @@ public slots:
     void answerSelected(const QString& answer) override;
     void setDifficulty(int level) override;
 private:
-    void playTone() override;
+    void generateTask() override;
+    void playTask() override;
 private:
     NoteDifficultyConfig config = noteGuessDifficulty[Difficulty::Easy];
+    GeneratedAudio result;
 };
 
 #endif // NOTEGUESSCONTROLLER_H

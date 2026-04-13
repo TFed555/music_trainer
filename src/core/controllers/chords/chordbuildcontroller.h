@@ -13,12 +13,14 @@ public slots:
     void noteSelected(const QString& noteName) override;
     void setDifficulty(int level) override;
 private:
-    void playTone() override;
+    void generateTask() override;
+    void playTask() override;
 private:
     int noteCounter = 0;
     ChordDifficultyConfig config = difficultyMap<ChordDifficultyConfig>[Difficulty::Easy];
     static constexpr int chordNoteCount = 2;
     static constexpr int thirdNoteIdx = 2;
+    GeneratedChord result;
 };
 
 #endif // CHORDBUILDCONTROLLER_H

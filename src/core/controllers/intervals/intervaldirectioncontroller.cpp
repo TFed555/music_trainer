@@ -6,13 +6,18 @@ IntervalDirectionController::IntervalDirectionController(NotePlayer* player,
     : IChoiceExerciseController(player, PlaybackendSignal::PlaylistEmpty, parent)
 {
     answerVariants = directionMap.values();
+    description = tr("Укажите направление интервала");
 }
 
-void IntervalDirectionController::playTone() {
+void IntervalDirectionController::generateTask() {
     IntervalGenerator gen(config);
-    auto result = gen.generate();
+    result = gen.generate();
     correctAnswer = directionMap[result.direction];
     log(result.desc);
+    playTask();
+}
+
+void IntervalDirectionController::playTask() {
     qDebug() << playbackLog.last().timestamp << " " << playbackLog.last().desc;
     notePlayer->playNotes(result.midiNotes);
 }
@@ -24,5 +29,12 @@ void IntervalDirectionController::setDifficulty(int level) {
 
 void IntervalDirectionController::answerSelected(const QString& answer) {
     userAnswer = answer;
+    emit attemptDone({
+        .exerciseId = "interval.direction",
+        .correctAnswer = correctAnswer,
+        .userAnswer = userAnswer,
+        .correct = (userAnswer == correctAnswer),
+        .timestamp = QDateTime::currentDateTime()
+    });
     emit showResult(correctAnswer);
 }

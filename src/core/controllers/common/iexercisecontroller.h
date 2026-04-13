@@ -4,14 +4,16 @@
 #include <QObject>
 #include "../../audio/playback/noteplayer.h"
 #include "../../common/models/Difficulty.h"
+#include "../../common/models/Attempt.h"
 #include "../../music/musicutils.h"
+#include "../../../generators/GeneratedAudio.h"
 
 struct PlaybackLog {
     QDateTime timestamp;
     QString desc;
 };
 
-enum class PlaybackendSignal { PlaybackFinished, PlaylistEmpty };
+enum class PlaybackendSignal { PlaybackFinished, PlaylistEmpty, BeatFinished };
 
 template <typename Config>
 const QMap<Difficulty, Config> difficultyMap = {
@@ -34,14 +36,19 @@ public:
 
 signals:
     void exercisePlayFinished();
+    void attemptDone(Attempt);
+    void setDescription(const QString&);
 
 public slots:
-    virtual void start() { playTone(); };
+    virtual void start() { generateTask(); };
     virtual void stop() { notePlayer->stop(); };
+    virtual void replay() { playTask(); }
     virtual void setDifficulty(int level) = 0;
+    void sendDescription() { emit setDescription(description); }
 
 private:
-    virtual void playTone() = 0;
+    virtual void generateTask() = 0;
+    virtual void playTask() = 0;
 
     void connectPlayer(PlaybackendSignal endSignal)
     {
@@ -60,6 +67,10 @@ private:
                 connect(notePlayer, &NotePlayer::playlistEmpty,
                     this, [this]() { onPlaybackFinished(); });
                 break;
+            case PlaybackendSignal::BeatFinished:
+                connect(notePlayer, &NotePlayer::beatFinished,
+                        this, [this]() {  });
+                break;
         }
     }
 
@@ -73,6 +84,7 @@ protected:
 protected:
     NotePlayer* notePlayer;
     QVector<PlaybackLog> playbackLog;
+    QString description;
 };
 
 #endif // IEXERCISECONTROLLER_H

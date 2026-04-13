@@ -26,6 +26,7 @@ public slots:
     void setQuestion(const QString&);
     void highlightQuestion(QVector<QString> notes);
     void setOctaveCount(int count);
+    void setDescription(const QString& text) override;
 signals:
     void noteSelected(const QString& noteName);
     void resetTiles();
@@ -34,6 +35,7 @@ private:
     Ui::ExerciseWithTilesWidget *ui;
     OctaveTilesWidget *tiles;
     QLabel* questionLabel = nullptr;
+    QLabel* descriptionLabel = nullptr;
 };
 
 #endif // EXERCISEWITHTILESWIDGET_H

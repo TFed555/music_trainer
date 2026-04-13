@@ -5,6 +5,7 @@
 #include "../../controllers/common/itilesexercisecontroller.h"
 #include "../../gui/exercises/exercisewithtileswidget.h"
 #include "../core/controllers/common/tilescontroller.h"
+#include "../../data/statistics/statisticsrepository.h"
 
 class TilesSession : public ISession
 {
@@ -16,7 +17,8 @@ public:
 
     };
 
-    void setup(ITilesExerciseController* ctrl, TilesController* tilesctrl, ExerciseWithTilesWidget* w);
+    void setup(ITilesExerciseController* ctrl, TilesController* tilesctrl,
+               ExerciseWithTilesWidget* w, StatisticsRepository* statsRepo);
     QString title() const override { return _title;}
 private:
     QString _title;

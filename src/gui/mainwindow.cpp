@@ -11,6 +11,8 @@ MainWindow::MainWindow(SessionFactory& factory, QWidget *parent)
     , audio(new AudioProcessor(this))
     , notePlayer(new NotePlayer(audio, &sampleRepository))
     , session(nullptr)
+    , statsLoader()
+    , statsRepository(&statsLoader)
     , sessionFactory(factory)
 {
     // ui->setupUi(this);
@@ -21,15 +23,17 @@ MainWindow::MainWindow(SessionFactory& factory, QWidget *parent)
 
     stack = new QStackedWidget(main);
     sidebar = new SidebarWidget(main);
+    stats = new StatsWidget(&statsRepository, main);
     sidebar->setMaximumWidth(0);
 
     startMenu = new StartWidget(main);
     startMenu->setFixedSize(1000,700);
 
     QPushButton* menuBtn = new QPushButton("☰", main);
-    connect(menuBtn, &QPushButton::clicked, sidebar, &SidebarWidget::open);
+    connect(menuBtn, &QPushButton::clicked, sidebar, &SidebarWidget::toggle);
 
     stack->addWidget(startMenu);
+    stack->addWidget(stats);
     stack->setCurrentWidget(startMenu);
 
     QVBoxLayout* leftLayout = new QVBoxLayout();
@@ -39,6 +43,17 @@ MainWindow::MainWindow(SessionFactory& factory, QWidget *parent)
     QHBoxLayout* mainLayout = new QHBoxLayout(main);
     mainLayout->addWidget(sidebar);
     mainLayout->addLayout(leftLayout);
+
+    QMenuBar* menu = menuBar();
+
+    QMenu* fileMenu = menu->addMenu("File");
+    QMenu* helpMenu = menu->addMenu("Help");
+
+    QAction* statsAction = fileMenu->addAction("Statistics");
+    QAction* exitAction  = fileMenu->addAction("Exit");
+
+    connect(statsAction, &QAction::triggered, this, &MainWindow::showStats);
+    connect(exitAction,  &QAction::triggered, this, &QApplication::quit);
 
     connect(sidebar, &SidebarWidget::blockSelected,
             startMenu, &StartWidget::setBlock);
@@ -56,6 +71,10 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::showStats() {
+    stack->setCurrentWidget(stats);
+}
+
 void MainWindow::startExercise(ExerciseType type){
     if (session) {
         IExerciseWidget* oldView = session->getWidget();
@@ -64,7 +83,7 @@ void MainWindow::startExercise(ExerciseType type){
         }
         session.reset();
     }
-    auto newSession = sessionFactory.create(type, notePlayer, this);
+    auto newSession = sessionFactory.create(type, notePlayer, &statsRepository, this);
     if (!newSession) return;
     session.reset(newSession.release());
 
@@ -79,7 +98,7 @@ void MainWindow::startExercise(ExerciseType type){
         stack->setCurrentWidget(startMenu);
         this->setWindowTitle(mainTitle);  });
 
-    // sidebar->open();
+    sidebar->close();
 
     stack->addWidget(exercise);
     stack->setCurrentWidget(exercise);

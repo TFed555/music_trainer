@@ -21,6 +21,10 @@ protected:
     QVector<QString> userAnswer;
     static constexpr int firstNoteIdx = 0;
     static constexpr int secondNoteIdx = 1;
+
+QString vecToStr(const QVector<QString>& v) {
+        return v.join(", ");
+}
 };
 
 #endif // ITILESEXERCISECONTROLLER_H

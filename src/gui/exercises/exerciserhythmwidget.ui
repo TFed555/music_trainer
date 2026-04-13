@@ -52,7 +52,7 @@
      <x>9</x>
      <y>181</y>
      <width>161</width>
-     <height>83</height>
+     <height>112</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="manageLayout">
@@ -67,6 +67,13 @@
      <widget class="QPushButton" name="stopBtn">
       <property name="text">
        <string>Стоп</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="replayBtn">
+      <property name="text">
+       <string>Повторить</string>
       </property>
      </widget>
     </item>
@@ -125,6 +132,32 @@
      </widget>
     </item>
    </layout>
+  </widget>
+  <widget class="QLabel" name="descriptionLabel">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>80</y>
+     <width>451</width>
+     <height>131</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="modeLabel">
+   <property name="geometry">
+    <rect>
+     <x>360</x>
+     <y>270</y>
+     <width>311</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
   </widget>
  </widget>
  <resources/>

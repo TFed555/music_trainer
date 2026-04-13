@@ -4,16 +4,12 @@ set(GUI_MODULE_NAME "gui_module")
 
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Widgets)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
 add_library(gui_module STATIC
     mainwindow.cpp
     mainwindow.h
     mainwindow.ui
-
-
-
-
-
 
     exercises/exercisewithtileswidget.h exercises/exercisewithtileswidget.cpp exercises/exercisewithtileswidget.ui
     common/notetileswidget.h common/notetileswidget.cpp common/notetileswidget.ui
@@ -26,19 +22,23 @@ add_library(gui_module STATIC
     blocks/sidebarwidget.h blocks/sidebarwidget.cpp blocks/sidebarwidget.ui
     exercises/exerciserhythmwidget.h exercises/exerciserhythmwidget.cpp exercises/exerciserhythmwidget.ui
     common/rhythmcanvaswidget.h common/rhythmcanvaswidget.cpp
+    common/statswidget.h common/statswidget.cpp
 
 )
 
 target_link_libraries(gui_module PUBLIC
     Qt${QT_VERSION_MAJOR}::Widgets
+    Qt${QT_VERSION_MAJOR}::Charts
     audio_module
     music_module
     log_module
 )
 target_link_libraries(gui_module PRIVATE Qt${QT_VERSION_MAJOR}::Core)
 target_link_libraries(gui_module PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(gui_module PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 
 target_include_directories(gui_module PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
+find_package(Qt6 REQUIRED COMPONENTS Charts)

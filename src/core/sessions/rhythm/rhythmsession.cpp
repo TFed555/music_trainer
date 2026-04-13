@@ -11,8 +11,13 @@ void RhythmSession::setup(IRhythmExerciseController* ctrl, ExerciseRhythmWidget*
         emit back();
     });
 
+    connect(w, &ExerciseRhythmWidget::replayClicked, ctrl, &IRhythmExerciseController::replay);
+
     connect(ctrl, &IRhythmExerciseController::setRhythmNotes,
             w, &ExerciseRhythmWidget::setRhythmNotes);
+
+    connect(ctrl, &IRhythmExerciseController::requestSetMode,
+            w, &ExerciseRhythmWidget::setMode, Qt::QueuedConnection);
 
     connect(ctrl, &IRhythmExerciseController::exercisePlayFinished,
             w, &ExerciseRhythmWidget::exercisePlayFinished);
@@ -20,7 +25,7 @@ void RhythmSession::setup(IRhythmExerciseController* ctrl, ExerciseRhythmWidget*
     connect(w, &ExerciseRhythmWidget::inputFinished, ctrl,
                 &IRhythmExerciseController::inputFinished);
 
-    connect(ctrl, &IRhythmExerciseController::result,
+    connect(ctrl, &IRhythmExerciseController::showResult,
             w, &ExerciseRhythmWidget::getResult);
 
     connect(w, &ExerciseRhythmWidget::configChanged,
@@ -28,4 +33,9 @@ void RhythmSession::setup(IRhythmExerciseController* ctrl, ExerciseRhythmWidget*
 
     connect(w, &ExerciseRhythmWidget::bpmChanged,
             ctrl, &IRhythmExerciseController::bpmChanged);
+
+    connect(ctrl, &IRhythmExerciseController::setDescription,
+            w, &ExerciseRhythmWidget::setDescription);
+
+    ctrl->sendDescription();
 }

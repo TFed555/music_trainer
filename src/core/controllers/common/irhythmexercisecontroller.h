@@ -2,6 +2,7 @@
 #define IRHYTHMEXERCISECONTROLLER_H
 
 #include "iexercisecontroller.h"
+#include "../../common/models/Mode.h"
 
 class IRhythmExerciseController : public IExerciseController
 {
@@ -15,7 +16,9 @@ public slots:
     virtual void bpmChanged(const int& bpm) = 0;
 signals:
     void setRhythmNotes(const QVector<MusicUtils::Rhythm::RhythmType>&, int bpm);
-    void result(int correct, int wrong);
+    void showResult(int correct, int wrong);
+    void attemptDone(RhythmAttempt);
+    void requestSetMode(Mode);
 };
 
 #endif // IRHYTHMEXERCISECONTROLLER_H

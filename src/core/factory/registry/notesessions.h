@@ -11,29 +11,29 @@
 
 inline void registerNoteSessions(SessionFactory& factory) {
     factory.registerFactory(ExerciseType::NoteRecognise,
-                            [](NotePlayer* player, QObject* parent){
+                            [](NotePlayer* player, StatisticsRepository* repo, QObject* parent){
                                 auto session = std::make_unique<TilesSession>("Определение ноты", parent);
                                 auto* ctrl = new NoteRecogniseController(player, session.get());
                                 auto* tilesctrl = new TilesController(player, session.get());
                                 auto* view = new ExerciseWithTilesWidget(true, nullptr);
-                                session->setup(ctrl, tilesctrl, view);
+                                session->setup(ctrl, tilesctrl, view, repo);
                                 return session;
                             });
     factory.registerFactory(ExerciseType::NoteBuild,
-                            [](NotePlayer* player, QObject* parent){
+                            [](NotePlayer* player, StatisticsRepository* repo, QObject* parent){
                                 auto session = std::make_unique<TilesSession>("Название ноты", parent);
                                 auto* ctrl = new NoteBuildController(player, session.get());
                                 auto* tilesctrl = new TilesController(player, session.get());
                                 auto* view = new ExerciseWithTilesWidget(false, nullptr);
-                                session->setup(ctrl, tilesctrl, view);
+                                session->setup(ctrl, tilesctrl, view, repo);
                                 return session;
                             });
     factory.registerFactory(ExerciseType::NoteGuess,
-                            [](NotePlayer* player, QObject* parent){
+                            [](NotePlayer* player, StatisticsRepository* repo, QObject* parent){
                                 auto session = std::make_unique<NoTilesSession>("Определение нот в мелодии", parent);
                                 auto* ctrl = new NoteGuessController(player, session.get());
                                 auto* view = new ExerciseNoTilesWidget(nullptr);
-                                session->setup(ctrl, view);
+                                session->setup(ctrl, view, repo);
                                 return session;
                             });
 }
