@@ -28,7 +28,11 @@ static const char* noteNames[] = { "C", "C#", "D", "D#", "E",
     namespace Chords {
     enum class ChordType {
         Major,
-        Minor
+        Minor,
+        DiminishedTriad,
+        AugmentedTriad,
+        MajorSeventhChord,
+        MinorSeventhChord
     };
 
     enum class InversionType {
@@ -39,7 +43,11 @@ static const char* noteNames[] = { "C", "C#", "D", "D#", "E",
 
     inline const QMap<ChordType, QString> chordTypeNames = {
         { ChordType::Major, "мажор" },
-        { ChordType::Minor, "минор" }
+        { ChordType::Minor, "минор" },
+        { ChordType::AugmentedTriad, "увеличенное трезвучие"},
+        { ChordType::DiminishedTriad, "уменьшенное трезвучие"},
+        { ChordType::MajorSeventhChord, "малый мажорный септаккорд"},
+        { ChordType::MinorSeventhChord, "малый минорный септаккорд"},
     };
 
     inline const QMap<InversionType, QString> inversionNames = {

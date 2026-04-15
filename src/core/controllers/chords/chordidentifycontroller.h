@@ -15,6 +15,7 @@ public slots:
 private:
     void generateTask() override;
     void playTask() override;
+    void setAnswerVariants();
 private:
     ChordDifficultyConfig config = difficultyMap<ChordDifficultyConfig>[Difficulty::Easy];
     GeneratedChord result;

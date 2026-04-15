@@ -23,8 +23,17 @@ GeneratedChord ChordGenerator::generate() {
     int lastMidi = firstMidi;
     for (auto i : semitones) {
         lastMidi += i;
-        // lastMidi = 60+((lastMidi-60+i) % 12);
         midiNotes.append(lastMidi);
+    }
+
+    while (lastMidi > config.midiMax || lastMidi < config.midiMin) {
+        midiNotes.clear();
+        firstMidi = midiDist(gen);
+        lastMidi = firstMidi;
+        for (auto i : semitones) {
+            lastMidi += i;
+            midiNotes.append(lastMidi);
+        }
     }
 
     for (int i = 0; i < (int)inversion; i++) {
@@ -38,9 +47,14 @@ GeneratedChord ChordGenerator::generate() {
     res.midiNotes = midiNotes;
     res.inversion = MusicUtils::Chords::inversionNames[inversion];
     res.root = MusicUtils::midiToNote(midiNotes[1]);
-    res.desc = QString("%1 -> %2 -> %3").arg(MusicUtils::midiToNote(midiNotes[0]))
-                   .arg(MusicUtils::midiToNote(midiNotes[1]))
-                   .arg(MusicUtils::midiToNote(midiNotes[2])); //поменять лог
+    res.desc = [](const QVector<int>& midiNotes) -> QString {
+        QVector<QString> res;
+        res.reserve(midiNotes.size());
+        for (const auto& m : midiNotes) {
+            res.append(MusicUtils::midiToNote(m));
+        }
+        return res.join(" -> ");
+    }(midiNotes);
 
     return res;
 }

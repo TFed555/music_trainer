@@ -9,6 +9,10 @@
 inline const QMap<MusicUtils::Chords::ChordType, QVector<int>> requiredIntervals = {
     {MusicUtils::Chords::ChordType::Major, {4, 3}},
     {MusicUtils::Chords::ChordType::Minor, {3, 4}},
+    {MusicUtils::Chords::ChordType::MajorSeventhChord, {4, 3, 3}},
+    {MusicUtils::Chords::ChordType::MinorSeventhChord, {3, 4, 3}},
+    {MusicUtils::Chords::ChordType::AugmentedTriad, {4, 4}},
+    {MusicUtils::Chords::ChordType::DiminishedTriad, {3, 3}}
 };
 
 class ChordGenerator : public IGenerator<ChordGenerator, GeneratedChord>

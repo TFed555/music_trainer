@@ -33,6 +33,8 @@ struct IntervalDifficultyConfig {
 };
 
 struct ChordDifficultyConfig {
+    int midiMin = 48;
+    int midiMax = 83;
     QVector<MusicUtils::Chords::ChordType> allowedTypes = {
         MusicUtils::Chords::ChordType::Major,
         MusicUtils::Chords::ChordType::Minor
@@ -44,7 +46,7 @@ struct ChordDifficultyConfig {
         return {};
     }
     static ChordDifficultyConfig hard() {
-        return {
+        return { 48, 83,
             {MusicUtils::Chords::ChordType::Major, MusicUtils::Chords::ChordType::Minor},
             {MusicUtils::Chords::InversionType::Root,
              MusicUtils::Chords::InversionType::First,
