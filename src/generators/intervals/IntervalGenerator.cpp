@@ -21,7 +21,8 @@ GeneratedInterval IntervalGenerator::generate() {
     int secondMidi = firstMidi + semitones;
 
     while (secondMidi > config.midiMax || secondMidi < config.midiMin) {
-        semitones = intervalDist(gen);
+        // semitones = intervalDist(gen);
+        semitones = config.allowedSemitones[intervalDist(gen)];
         secondMidi = firstMidi + semitones;
     }
 

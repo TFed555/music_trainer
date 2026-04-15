@@ -17,7 +17,12 @@ public:
         Intervals,
         Chords,
         Notes,
-        Rhythm
+        Rhythm,
+        Melody
+    };
+    struct ExerciseEntry {
+        QString title;
+        ExerciseType type;
     };
     void setBlock(int block);
 signals:
@@ -25,8 +30,9 @@ signals:
 private:
     void clearButtons();
     void addButton(const QString& title, ExerciseType type);
-private:
     QVBoxLayout* layout;
+    using BlockConfig = QVector<ExerciseEntry>;
+    static const QMap<BlockCategory, BlockConfig>& blockConfigs();
 };
 
 #endif // STARTWIDGET_H

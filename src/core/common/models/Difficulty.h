@@ -16,6 +16,7 @@ struct NoteDifficultyConfig {
     int midiMax = 83;
 };
 
+
 struct IntervalDifficultyConfig {
     QVector<int> allowedSemitones = []{
         QVector<int> v(12);
@@ -59,6 +60,14 @@ struct RhythmDifficultyConfig {
     float tact = 8.0f;
     QVector<int> allowedDurations = {1, 2, 4, 8, 16};
     int bpm = 80;
+};
+
+struct MelodyDifficultyConfig : NoteDifficultyConfig {
+    QVector<int> allowedSemitones = []{
+        QVector<int> v(12);
+        std::iota(v.begin(), v.end(), 1);
+        return v;
+    }();
 };
 
 #endif // DIFFICULTY_H

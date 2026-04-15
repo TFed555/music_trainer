@@ -26,30 +26,41 @@ void StartWidget::addButton(const QString& title, ExerciseType type) {
     });
 }
 
+const QMap<StartWidget::BlockCategory, StartWidget::BlockConfig>& StartWidget::blockConfigs() {
+    static const QMap<BlockCategory, BlockConfig> configs = {
+            { BlockCategory::Intervals, {
+                                     { "Определение интервала",  ExerciseType::IntervalRecognise },
+                                     { "Название интервала",     ExerciseType::IntervalIdentify  },
+                                     { "Построение интервала",   ExerciseType::IntervalBuild},
+                                     { "Направление интервала",  ExerciseType::IntervalDirection },
+                                     }},
+            { BlockCategory::Chords, {
+                                  { "Определение типа аккорда", ExerciseType::ChordIdentify  },
+                                  { "Определение обращения аккорда", ExerciseType::ChordInversion },
+                                  { "Определение основной ноты аккорда", ExerciseType::ChordRoot},
+                                  { "Построение аккорда", ExerciseType::ChordBuild},
+                                  }},
+            { BlockCategory::Notes, {
+                                 { "Название ноты", ExerciseType::NoteBuild},
+                                 { "Определение ноты", ExerciseType::NoteRecognise},
+                                 { "Определение нот в мелодии",   ExerciseType::NoteGuess},
+                                 }},
+            { BlockCategory::Rhythm, {
+                                  { "Определение ритма", ExerciseType::RhythmRecognise},
+                                  }},
+            { BlockCategory::Melody, {
+                                     { "Повтор мелодии", ExerciseType::MelodyRepeat},
+                                     }},
+            };
+    return configs;
+}
+
 void StartWidget::setBlock(int block) {
     BlockCategory category = static_cast<BlockCategory>(block);
     clearButtons();
-    switch(category) {
-        case BlockCategory::Intervals:
-            addButton("Определение интервала", ExerciseType::IntervalRecognise);
-            addButton("Название интервала", ExerciseType::IntervalIdentify);
-            addButton("Построение интервала",  ExerciseType::IntervalBuild);
-            addButton("Направление интервала", ExerciseType::IntervalDirection);
-            break;
-        case BlockCategory::Chords:
-            addButton("Определение типа аккорда", ExerciseType::ChordIdentify);
-            addButton("Определение обращения аккорда", ExerciseType::ChordInversion);
-            addButton("Определение основной ноты аккорда", ExerciseType::ChordRoot);
-            addButton("Построение аккорда", ExerciseType::ChordBuild);
-            break;
-        case BlockCategory::Notes:
-            addButton("Название ноты", ExerciseType::NoteBuild);
-            addButton("Определение ноты", ExerciseType::NoteRecognise);
-            addButton("Определение нот в мелодии", ExerciseType::NoteGuess);
-            break;
-        case BlockCategory::Rhythm:
-            addButton("Определение ритма", ExerciseType::RhythmRecognise);
-            break;
+    const auto& entries = blockConfigs().value(static_cast<BlockCategory>(block));
+    for (const auto& entry : entries) {
+        addButton(entry.title, entry.type);
     }
 }
 

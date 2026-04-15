@@ -16,6 +16,7 @@ signals:
     void showResult(QVector<QString> answer, QVector<QString> selected);
     void highlightQuestion(QVector<QString> notes);
     void setQuestion(const QString& question);
+    void setOctaveCount(int count);
 protected:
     QVector<QString> correctAnswer;
     QVector<QString> userAnswer;

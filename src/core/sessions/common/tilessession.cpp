@@ -43,5 +43,9 @@ void TilesSession::setup(ITilesExerciseController* ctrl, TilesController* tilesc
     connect(ctrl, &ITilesExerciseController::setDescription,
             w, &ExerciseWithTilesWidget::setDescription);
 
+    connect(ctrl, &ITilesExerciseController::setOctaveCount,
+            w, &ExerciseWithTilesWidget::setOctaveCount);
+
     ctrl->sendDescription();
+    ctrl->setDifficulty(0);
 }

@@ -16,8 +16,6 @@ public:
 public slots:
     void noteSelected(const QString& noteName) override;
     void setDifficulty(int level) override;
-signals:
-    void setOctaveCount(int count);
 private:
     void generateTask() override;
     void playTask() override;

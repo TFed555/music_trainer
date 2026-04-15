@@ -24,6 +24,7 @@ void SidebarWidget::setLayout() {
     layout->addWidget(addNavButton("Аккорды", StartWidget::BlockCategory::Chords));
     layout->addWidget(addNavButton("Ноты", StartWidget::BlockCategory::Notes));
     layout->addWidget(addNavButton("Ритм", StartWidget::BlockCategory::Rhythm));
+    layout->addWidget(addNavButton("Мелодический слух", StartWidget::BlockCategory::Melody));
     layout->addStretch();
 }
 

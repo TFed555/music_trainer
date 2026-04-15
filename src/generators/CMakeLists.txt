@@ -8,6 +8,7 @@ add_library(generators_module STATIC
     chords/chordgenerator.h chords/chordgenerator.cpp notes/notegenerator.h notes/notegenerator.cpp
     rhythm/rhythmgenerator.h rhythm/rhythmgenerator.cpp
     generatedrhythm.h
+    melody/melodygenerator.h melody/melodygenerator.cpp
 )
 target_link_libraries(generators_module PUBLIC music_module Qt::Core)
 target_link_libraries(generators_module PRIVATE Qt${QT_VERSION_MAJOR}::Core)

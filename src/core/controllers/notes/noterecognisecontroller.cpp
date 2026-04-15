@@ -42,5 +42,6 @@ void NoteRecogniseController::noteSelected(const QString& noteName) {
             });
             emit showResult(correctAnswer, userAnswer);
             emit requestSetMode(Mode::Result);
+            correctAnswer.clear();
     }
 }
