@@ -33,7 +33,7 @@ void MelodyRepeatController::playTask() {
 
 void MelodyRepeatController::setDifficulty(int level) {
     Difficulty dif = static_cast<Difficulty>(level);
-    config = melodyBuildDifficulty[dif];
+    config = difficultyMap<MelodyDifficultyConfig>[dif];
     answerSize = config.noteCount;
     emit setOctaveCount(config.octaveCount);
 }

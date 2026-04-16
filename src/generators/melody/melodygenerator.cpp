@@ -6,42 +6,47 @@ MelodyGenerator::MelodyGenerator(MelodyDifficultyConfig config)
 
 GeneratedAudio MelodyGenerator::generate() {
     std::uniform_int_distribution<> midiDist(config.midiMin, config.midiMax);
-    GeneratedAudio res;
-    QVector<int>& midiNotes = res.midiNotes;
-    int current = midiDist(gen);
-    midiNotes = {current};
-    std::uniform_int_distribution<> intervalDist(0, config.allowedSemitones.size()-1);
-    int semitones = config.allowedSemitones[intervalDist(gen)];
-
+    std::uniform_int_distribution<> intervalDist(0, config.allowedSemitones.size() - 1);
+    std::uniform_int_distribution<> directionDist(0, config.directions.size()-1);
     std::uniform_int_distribution<int> signDist(0, 1);
-    int sign = signDist(gen);
-    if (sign) semitones = -semitones;
+
+    int dir = directionDist(gen);
+    int sign = 0;
+    bool wavy = false;
+    switch(dir){
+        case 0:
+            sign = 0;
+            break;
+        case 1:
+            sign = 1;
+            break;
+        case 2:
+            wavy = true;
+            break;
+    }
+
+    GeneratedAudio res;
+    res.midiNotes.reserve(config.noteCount);
+
+    int current = midiDist(gen);
+    res.midiNotes.append(current);
 
     for (int i = 1; i < config.noteCount; i++) {
         int interval = config.allowedSemitones[intervalDist(gen)];
-        if (sign) semitones = -semitones;
-        current += interval;
-        current = std::clamp(current, config.midiMin, config.midiMax);
-        midiNotes.append(current);
+        if (i == config.noteCount/2 && wavy) {
+            sign = 1;
+        }
+        if (sign) interval = -interval;
+        current = std::clamp(current + interval, config.midiMin, config.midiMax);
+        res.midiNotes.append(current);
     }
 
-    while (current > config.midiMax || current < config.midiMin) {
-        midiNotes.clear();
-        for (int i = 1; i < config.noteCount; i++) {
-            int interval = config.allowedSemitones[intervalDist(gen)];
-            if (sign) semitones = -semitones;
-            current += interval;
-            current = std::clamp(current, config.midiMin, config.midiMax);
-            midiNotes.append(current);
-        }
-    }
-    res.desc = [](const QVector<int>& midiNotes) -> QString {
-        QVector<QString> res;
-        res.reserve(midiNotes.size());
-        for (const auto& m : midiNotes) {
-            res.append(MusicUtils::midiToNote(m));
-        }
-        return res.join(" ");
-    }(midiNotes);
+    QVector<QString> names;
+    names.reserve(res.midiNotes.size());
+    for (int m : res.midiNotes)
+        names.append(MusicUtils::midiToNote(m));
+    res.desc = names.join(" ");
+    res.direction = MusicUtils::melodyDirNames[config.directions[dir]];
+
     return res;
 }

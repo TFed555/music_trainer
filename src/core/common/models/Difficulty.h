@@ -68,6 +68,14 @@ struct MelodyDifficultyConfig : NoteDifficultyConfig {
         std::iota(v.begin(), v.end(), 1);
         return v;
     }();
+    QVector<MusicUtils::MelodyDirection> directions;
+    static MelodyDifficultyConfig easy() {
+        return {1, 3, 60, 72, {1, 3, 4, 5, 7, 12}, {MusicUtils::MelodyDirection::Up, MusicUtils::MelodyDirection::Down}};
+    }
+    static MelodyDifficultyConfig hard() {
+        return {3, 6, 48, 83, {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12},
+                {MusicUtils::MelodyDirection::Up, MusicUtils::MelodyDirection::Down, MusicUtils::MelodyDirection::Wavy}};
+    }
 };
 
 #endif // DIFFICULTY_H

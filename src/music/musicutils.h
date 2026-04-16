@@ -14,6 +14,18 @@ int noteToMidi(QString note);
 static const char* noteNames[] = { "C", "C#", "D", "D#", "E",
                                   "F", "F#", "G", "G#", "A", "A#", "B" };
 
+enum class MelodyDirection {
+    Up,
+    Down,
+    Wavy
+};
+
+static const QMap<MelodyDirection, QString> melodyDirNames = {
+    { MelodyDirection::Up, "восходящее" },
+    { MelodyDirection::Down, "нисходящее" },
+    { MelodyDirection::Wavy, "волнообразное"},
+};
+
     namespace Intervals {
     inline const QList<QString> intervals =
         {

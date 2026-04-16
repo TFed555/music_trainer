@@ -6,6 +6,7 @@ pkg_check_modules(SNDFILE REQUIRED sndfile)
 
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
 
 
 add_library(core STATIC
@@ -61,6 +62,7 @@ add_library(core STATIC
     common/models/StatisticsModel.h
     data/statistics/statisticssolver.h data/statistics/statisticssolver.cpp
     controllers/melody/melodyrepeatcontroller.h controllers/melody/melodyrepeatcontroller.cpp
+    controllers/melody/melodydirectioncontroller.h controllers/melody/melodydirectioncontroller.cpp
 
 )
 
@@ -80,6 +82,7 @@ target_include_directories(core PUBLIC
     ${SNDFILE_INCLUDE_DIRS}
 )
 target_link_libraries(core PUBLIC generators_module)
+target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
 target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
 target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
 

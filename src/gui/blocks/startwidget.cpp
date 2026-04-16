@@ -50,6 +50,7 @@ const QMap<StartWidget::BlockCategory, StartWidget::BlockConfig>& StartWidget::b
                                   }},
             { BlockCategory::Melody, {
                                      { "Повтор мелодии", ExerciseType::MelodyRepeat},
+                                    {"Определение направления мелодии", ExerciseType::MelodyDirection}
                                      }},
             };
     return configs;

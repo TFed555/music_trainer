@@ -7,6 +7,7 @@
 #include "../controllers/notes/noterecognisecontroller.h"
 #include "../controllers/notes/noteguesscontroller.h"
 #include "../controllers/melody/melodyrepeatcontroller.h"
+#include "../controllers/melody/melodydirectioncontroller.h"
 #include "../sessions/common/tilessession.h"
 #include "../sessions/common/notilessession.h"
 
@@ -45,6 +46,15 @@ inline void registerNoteSessions(SessionFactory& factory) {
                                 auto* tilesctrl = new TilesController(player, session.get());
                                 auto* view = new ExerciseWithTilesWidget(true, nullptr);
                                 session->setup(ctrl, tilesctrl, view, repo);
+                                return session;
+                            });
+
+    factory.registerFactory(ExerciseType::MelodyDirection,
+                            [](NotePlayer* player, StatisticsRepository* repo, QObject* parent){
+                                auto session = std::make_unique<NoTilesSession>("Определение направления мелодии", parent);
+                                auto* ctrl = new MelodyDirectionController(player, session.get());
+                                auto* view = new ExerciseNoTilesWidget(nullptr);
+                                session->setup(ctrl, view, repo);
                                 return session;
                             });
 }
