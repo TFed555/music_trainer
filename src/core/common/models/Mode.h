@@ -2,6 +2,7 @@
 #define MODE_H
 
 enum class Mode {
+    Try,
     Input,
     Question,
     Wait,

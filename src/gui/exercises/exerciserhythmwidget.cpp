@@ -17,6 +17,7 @@ ExerciseRhythmWidget::ExerciseRhythmWidget(QWidget *parent)
         emit backClicked();
     });
     connect(ui->replayBtn, &QPushButton::clicked, this, &ExerciseRhythmWidget::replayClicked);
+    ui->replayBtn->setEnabled(false);
     connect(canvas, &RhythmCanvasWidget::inputFinished, this, &ExerciseRhythmWidget::inputFinished);
     for (auto* btn : this->findChildren<QPushButton*>()) {
         btn->setFocusPolicy(Qt::NoFocus);
@@ -96,6 +97,9 @@ void ExerciseRhythmWidget::setMode(Mode m) {
         ui->modeLabel->setText("");
         break;
     case Mode::Question:
+        ui->modeLabel->setText("");
+        break;
+    case Mode::Try:
         ui->modeLabel->setText("");
         break;
     }

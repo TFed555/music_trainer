@@ -3,11 +3,6 @@
 
 #include "../common/irhythmexercisecontroller.h"
 
-// static inline const QMap<Difficulty, RhythmDifficultyConfig> rhythmRecogniseDifficulty = {
-//     { Difficulty::Easy, {8.0, {4}, 80}},
-//     { Difficulty::Hard, {8.0, {2, 4}, 120}},
-// };
-
 class RhythmRecogniseController : public IRhythmExerciseController
 {
     Q_OBJECT
@@ -24,7 +19,10 @@ private:
     void playTask() override;
     enum class PlaybackState { Idle, Metronome, Task };
 private:
-    RhythmDifficultyConfig config = {8.0f, {4}, 80};
+    RhythmDifficultyConfig config = {.replayCount = 2,
+                                     .tact = 8.0f,
+                                     .allowedDurations = {4},
+                                     .bpm = 80};
     float treshold = 10;
     int bpm = 80;
     GeneratedRhythm lastBeats;

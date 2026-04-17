@@ -40,7 +40,7 @@ private:
     void setNotes();
     QColor setColor(int, TileType);
 signals:
-    void noteSelected(const QString&);
+    void noteSelected(const QString&, const bool);
 
 private:
     Ui::NoteTilesWidget *ui;

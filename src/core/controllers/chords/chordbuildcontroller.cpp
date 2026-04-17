@@ -33,10 +33,12 @@ void ChordBuildController::setDifficulty(int level) {
     Difficulty dif = static_cast<Difficulty>(level);
     config = difficultyMap<ChordDifficultyConfig>[dif];
     config.allowedInversions = {MusicUtils::Chords::InversionType::Root};
+    replayCount = config.replayCount;
 }
 
-void ChordBuildController::noteSelected(const QString& noteName) {
+void ChordBuildController::noteSelected(const QString& noteName, const bool listenOnly) {
     qDebug() << "Note selected" << noteName;
+    if (listenOnly) return;
     userAnswer.append(noteName);
     noteCounter++;
     if (noteCounter == chordNoteCount) {

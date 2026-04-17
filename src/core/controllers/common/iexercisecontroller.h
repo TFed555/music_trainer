@@ -36,13 +36,19 @@ public:
 
 signals:
     void exercisePlayFinished();
+    void replayAvailable(int replays);
     void attemptDone(Attempt);
     void setDescription(const QString&);
 
 public slots:
     virtual void start() { generateTask(); };
     virtual void stop() { notePlayer->stop(); };
-    virtual void replay() { playTask(); }
+    virtual void replay() {
+            if (replayCount <= 0) return;
+            playTask();
+            replayCount--;
+            emit replayAvailable(replayCount);
+    }
     virtual void setDifficulty(int level) = 0;
     void sendDescription() { emit setDescription(description); }
 
@@ -80,11 +86,13 @@ protected:
     }
     virtual void onPlaybackFinished() {
         emit exercisePlayFinished();
+        emit replayAvailable(replayCount);
     }
 protected:
     NotePlayer* notePlayer;
     QVector<PlaybackLog> playbackLog;
     QString description;
+    int replayCount;
 };
 
 #endif // IEXERCISECONTROLLER_H

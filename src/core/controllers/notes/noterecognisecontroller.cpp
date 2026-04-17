@@ -27,10 +27,12 @@ void NoteRecogniseController::playTask() {
 void NoteRecogniseController::setDifficulty(int level) {
     Difficulty dif = static_cast<Difficulty>(level);
     config = noteRecogniseDifficulty[dif];
+    replayCount = config.replayCount;
 }
 
-void NoteRecogniseController::noteSelected(const QString& noteName) {
+void NoteRecogniseController::noteSelected(const QString& noteName, const bool listenOnly) {
     qDebug() << "Note selected" << noteName;
+    if (listenOnly) return;
     userAnswer.append(noteName);
     if (correctAnswer.size() > 0) {
             emit attemptDone({

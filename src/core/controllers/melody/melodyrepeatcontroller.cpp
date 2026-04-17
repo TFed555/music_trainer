@@ -34,12 +34,14 @@ void MelodyRepeatController::playTask() {
 void MelodyRepeatController::setDifficulty(int level) {
     Difficulty dif = static_cast<Difficulty>(level);
     config = difficultyMap<MelodyDifficultyConfig>[dif];
+    replayCount = config.replayCount;
     answerSize = config.noteCount;
     emit setOctaveCount(config.octaveCount);
 }
 
-void MelodyRepeatController::noteSelected(const QString& noteName) {
+void MelodyRepeatController::noteSelected(const QString& noteName, const bool listenOnly) {
     qDebug() << "Note selected" << noteName;
+    if (listenOnly) return;
     userAnswer.append(noteName);
     if (userAnswer.size() == config.noteCount && correctAnswer.size() > 0) {
         emit attemptDone({

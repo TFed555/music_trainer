@@ -28,11 +28,13 @@ void NoteBuildController::playTask() {
 void NoteBuildController::setDifficulty(int level) {
     Difficulty dif = static_cast<Difficulty>(level);
     config = noteBuildDifficulty[dif];
+    replayCount = config.replayCount;
     emit setOctaveCount(config.octaveCount);
 }
 
-void NoteBuildController::noteSelected(const QString& noteName) {
+void NoteBuildController::noteSelected(const QString& noteName, const bool listenOnly) {
     qDebug() << "Note selected" << noteName;
+    if (listenOnly) return;
     userAnswer.append(noteName);
     if (correctAnswer.size() > 0) {
             emit attemptDone({

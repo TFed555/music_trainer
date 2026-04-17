@@ -28,10 +28,12 @@ void ChordRootController::playTask() {
 void ChordRootController::setDifficulty(int level) {
     Difficulty dif = static_cast<Difficulty>(level);
     config = difficultyMap<ChordDifficultyConfig>[dif];
+    replayCount = config.replayCount;
 }
 
-void ChordRootController::noteSelected(const QString& noteName) {
+void ChordRootController::noteSelected(const QString& noteName, const bool listenOnly){
     qDebug() << "Note selected" << noteName;
+    if (listenOnly) return;
     userAnswer.append(noteName);
     if (correctAnswer.size() > 0) {
         emit attemptDone({

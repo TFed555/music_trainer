@@ -41,4 +41,5 @@ void ChordInversionController::setDifficulty(int level) {
     Difficulty dif = static_cast<Difficulty>(level);
     config = difficultyMap<ChordDifficultyConfig>[dif];
     config.allowedInversions = {InversionType::Root, InversionType::First, InversionType::Second};
+    replayCount = config.replayCount;
 }

@@ -30,10 +30,12 @@ void IntervalRecogniseController::playTask() {
 void IntervalRecogniseController::setDifficulty(int level) {
     Difficulty dif = static_cast<Difficulty>(level);
     config = difficultyMap<IntervalDifficultyConfig>[dif];
+    replayCount = config.replayCount;
 }
 
-void IntervalRecogniseController::noteSelected(const QString& noteName) {
+void IntervalRecogniseController::noteSelected(const QString& noteName, const bool listenOnly) {
     qDebug() << "Note selected" << noteName;
+    if (listenOnly) return;
     userAnswer.append(noteName);
     noteCounter++;
     if (noteCounter == intervalNoteCount) {

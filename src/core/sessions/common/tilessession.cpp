@@ -20,7 +20,9 @@ void TilesSession::setup(ITilesExerciseController* ctrl, TilesController* tilesc
             w, &ExerciseWithTilesWidget::setMode, Qt::QueuedConnection);
 
     connect(w, &ExerciseWithTilesWidget::noteSelected,
-            tilesctrl, &TilesController::playTile);
+            tilesctrl, [tilesctrl](const QString& noteName){
+                tilesctrl->playTile(noteName);
+            });
 
     connect(w, &ExerciseWithTilesWidget::noteSelected,
             ctrl, &ITilesExerciseController::noteSelected);
@@ -45,6 +47,9 @@ void TilesSession::setup(ITilesExerciseController* ctrl, TilesController* tilesc
 
     connect(ctrl, &ITilesExerciseController::setOctaveCount,
             w, &ExerciseWithTilesWidget::setOctaveCount);
+
+    connect(ctrl, &ITilesExerciseController::replayAvailable,
+            w, &ExerciseWithTilesWidget::onReplayAvailable);
 
     ctrl->sendDescription();
     ctrl->setDifficulty(0);

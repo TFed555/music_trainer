@@ -40,6 +40,7 @@ void MelodyDirectionController::playTask() {
 void MelodyDirectionController::setDifficulty(int level) {
     Difficulty dif = static_cast<Difficulty>(level);
     config = difficultyMap<MelodyDifficultyConfig>[dif];
+    replayCount = config.replayCount;
     setAnswerVariants();
     giveAnswers();
 }

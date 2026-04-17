@@ -4,7 +4,12 @@
 #include "../common/itilesexercisecontroller.h"
 
 static inline const QMap<Difficulty, NoteDifficultyConfig> noteRecogniseDifficulty = {
-    { Difficulty::Easy, {1, 1, 60, 72} },
+    { Difficulty::Easy, { .replayCount = 2,
+                           .octaveCount = 1,
+                           .noteCount = 1,
+                           .midiMin = 60,
+                           .midiMax = 72
+                        }},
     { Difficulty::Hard, {} },
     };
 
@@ -14,7 +19,7 @@ class NoteRecogniseController : public ITilesExerciseController
 public:
     explicit NoteRecogniseController(NotePlayer* player, QObject *parent = nullptr);
 public slots:
-    void noteSelected(const QString& noteName) override;
+    void noteSelected(const QString& noteName, const bool listenOnly) override;
     void setDifficulty(int level) override;
 private:
     void generateTask() override;

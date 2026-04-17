@@ -68,7 +68,10 @@ void RhythmRecogniseController::setConfig(const QMap<int,int>& states) {
             allowedDurations.append(i);
         }
     }
-    config = {8.0f, allowedDurations, 80};
+    config = {.replayCount = 2,
+              .tact = 8.0f,
+              .allowedDurations = allowedDurations,
+              .bpm = 80};
     qDebug() << allowedDurations;
 }
 

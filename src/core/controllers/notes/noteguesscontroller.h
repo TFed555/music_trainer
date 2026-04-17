@@ -4,8 +4,18 @@
 #include "../common/ichoiceexercisecontroller.h"
 
 static inline const QMap<Difficulty, NoteDifficultyConfig> noteGuessDifficulty = {
-    { Difficulty::Easy, {3, 3, 60, 72} },
-    { Difficulty::Hard, {3, 5, 48, 83} },
+    { Difficulty::Easy, { .replayCount = 2,
+                           .octaveCount = 3,
+                           .noteCount = 3,
+                           .midiMin = 60,
+                           .midiMax = 72
+                       }},
+    { Difficulty::Hard, { .replayCount = 1,
+                           .octaveCount = 3,
+                           .noteCount = 5,
+                           .midiMin = 48,
+                           .midiMax = 83
+                       }},
 };
 
 class NoteGuessController : public IChoiceExerciseController

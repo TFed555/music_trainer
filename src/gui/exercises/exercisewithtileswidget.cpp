@@ -19,12 +19,16 @@ ExerciseWithTilesWidget::ExerciseWithTilesWidget(bool noteNamesVisible, QWidget 
     connect(ui->stopBtn, &QPushButton::clicked, this, &ExerciseWithTilesWidget::stopClicked);
     connect(ui->backBtn, &QPushButton::clicked, this, &ExerciseWithTilesWidget::backClicked);
     connect(ui->replayBtn, &QPushButton::clicked, this, &ExerciseWithTilesWidget::replayClicked);
+    ui->replayBtn->setEnabled(false);
     connect(tiles, &OctaveTilesWidget::noteSelected, this, &ExerciseWithTilesWidget::noteSelected);
     connect(this, &ExerciseWithTilesWidget::resetTiles, tiles, &OctaveTilesWidget::resetTiles);
-    // connect(ui->difficultyBox, &QComboBox::activated,
-    //         this, &ExerciseWithTilesWidget::difficultyChanged);
     connect(ui->difficultyBox, &QComboBox::currentIndexChanged,
             this, &ExerciseWithTilesWidget::difficultyChanged);
+    connect(ui->modeBox, &QComboBox::currentIndexChanged,
+            this, [this](int m) {
+        Mode mode = static_cast<Mode>(m);
+        setMode(mode);
+    });
 }
 
 ExerciseWithTilesWidget::~ExerciseWithTilesWidget()
@@ -33,7 +37,16 @@ ExerciseWithTilesWidget::~ExerciseWithTilesWidget()
 }
 
 void ExerciseWithTilesWidget::exercisePlayFinished() {
-    setMode(Mode::Input);
+    ui->difficultyBox->setEnabled(false);
+    int m = ui->modeBox->currentIndex();
+    switch(m){
+    case 0:
+        setMode(Mode::Try);
+        break;
+    case 1:
+        setMode(Mode::Input);
+        break;
+    }
 }
 
 void ExerciseWithTilesWidget::showResult(const QVector<QString>& correct, const QVector<QString>& selected) {
@@ -59,6 +72,9 @@ void ExerciseWithTilesWidget::setMode(Mode m) {
         case Mode::Question:
             ui->modeLabel->setText("");
             break;
+        case Mode::Try:
+            ui->modeLabel->setText("");
+            break;
     }
 }
 
@@ -81,4 +97,9 @@ void ExerciseWithTilesWidget::setOctaveCount(int count) {
 
 void ExerciseWithTilesWidget::setDescription(const QString& text) {
     ui->descriptionLabel->setText(text);
+}
+
+void ExerciseWithTilesWidget::onReplayAvailable(int replays) {
+    bool en = replays <= 0 ? false : true;
+    ui->replayBtn->setEnabled(en);
 }

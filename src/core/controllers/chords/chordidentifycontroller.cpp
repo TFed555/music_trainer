@@ -60,6 +60,7 @@ void ChordIdentifyController::setDifficulty(int level) {
         config.allowedTypes.append(MusicUtils::Chords::ChordType::DiminishedTriad);
     }
     config.allowedInversions = {MusicUtils::Chords::InversionType::Root};
+    replayCount = config.replayCount;
     setAnswerVariants();
     giveAnswers();
 }

@@ -74,7 +74,7 @@ void NoteTilesWidget::paintEvent(QPaintEvent* event) {
 }
 
 QColor NoteTilesWidget::setColor(int i, TileType type){
-    if (mode == Mode::Input && i == selectedIndex) {
+    if ((mode == Mode::Input || mode == Mode::Try) && i == selectedIndex) {
         return QColor(124, 206, 247);
     }
     else if (mode == Mode::Question && highlightedIndexes.contains(i)) {
@@ -91,14 +91,18 @@ QColor NoteTilesWidget::setColor(int i, TileType type){
 
 void NoteTilesWidget::mousePressEvent(QMouseEvent* event) {
     if (notes.empty()) return;
-    if (mode != Mode::Input)
+    if (mode != Mode::Input && mode != Mode::Try)
         return;
     QPoint pos = event->pos();
+    bool listenOnly = false;
+    if (mode == Mode::Try) {
+        listenOnly = true;
+    }
 
     for (auto t : tileCoords) {
         if (t.rect.contains(pos) && t.type==TileType::Black) {
             selectedIndex = t.noteIdx;
-            emit noteSelected(notes[t.noteIdx]);
+            emit noteSelected(notes[t.noteIdx], listenOnly);
             update();
             return;
         }
@@ -107,7 +111,7 @@ void NoteTilesWidget::mousePressEvent(QMouseEvent* event) {
     for (auto t : tileCoords) {
         if (t.rect.contains(pos) && t.type==TileType::White) {
             selectedIndex = t.noteIdx;
-            emit noteSelected(notes[t.noteIdx]);
+            emit noteSelected(notes[t.noteIdx], listenOnly);
             update();
             return;
         }

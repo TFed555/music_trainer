@@ -30,10 +30,12 @@ void IntervalBuildController::playTask() {
 void IntervalBuildController::setDifficulty(int level) {
     Difficulty dif = static_cast<Difficulty>(level);
     config = difficultyMap<IntervalDifficultyConfig>[dif];
+    replayCount = config.replayCount;
 }
 
-void IntervalBuildController::noteSelected(const QString& noteName) {
+void IntervalBuildController::noteSelected(const QString& noteName, const bool listenOnly) {
     qDebug() << "Note selected" << noteName;
+    if (listenOnly) return;
     userAnswer.append(noteName);
     if (correctAnswer.size() > 0) {
         emit attemptDone({

@@ -27,8 +27,9 @@ public slots:
     void highlightQuestion(QVector<QString> notes);
     void setOctaveCount(int count);
     void setDescription(const QString& text) override;
+    void onReplayAvailable(int replays);
 signals:
-    void noteSelected(const QString& noteName);
+    void noteSelected(const QString& noteName, const bool listenOnly);
     void resetTiles();
     void difficultyChanged(int level);
 private:

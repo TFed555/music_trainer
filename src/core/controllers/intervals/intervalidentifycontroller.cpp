@@ -27,6 +27,7 @@ void IntervalIdentifyController::playTask() {
 void IntervalIdentifyController::setDifficulty(int level) {
     Difficulty dif = static_cast<Difficulty>(level);
     config = difficultyMap<IntervalDifficultyConfig>[dif];
+    replayCount = config.replayCount;
 }
 
 void IntervalIdentifyController::answerSelected(const QString& answer){

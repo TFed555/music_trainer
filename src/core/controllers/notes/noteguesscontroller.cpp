@@ -28,6 +28,7 @@ void NoteGuessController::playTask() {
 void NoteGuessController::setDifficulty(int level) {
     Difficulty dif = static_cast<Difficulty>(level);
     config = noteGuessDifficulty[dif];
+    replayCount = config.replayCount;
 }
 
 void NoteGuessController::answerSelected(const QString& answer){
