@@ -22,18 +22,18 @@ ExerciseRhythmWidget::ExerciseRhythmWidget(QWidget *parent)
     for (auto* btn : this->findChildren<QPushButton*>()) {
         btn->setFocusPolicy(Qt::NoFocus);
     }
-
-    const QMap<QCheckBox*, int> durationMap = {
-        {ui->checkBox_1, 1},
-        {ui->checkBox_2, 2},
-        {ui->checkBox_3, 4},
-        {ui->checkBox_4, 8},
-        {ui->checkBox_5, 16},
+    QVector<QString> durations = durationNames();
+    const QMap<QString, int> durationMap = {
+        {durations[0], 1},
+        {durations[1], 2},
+        {durations[2], 4},
+        {durations[3], 8},
+        {durations[4], 16},
     };
 
-    for (auto [box, dur] : durationMap.asKeyValueRange()) {
-        states[dur] = box->isChecked() ? 1 : 0;
-    }
+    // for (auto [box, dur] : durationMap.asKeyValueRange()) {
+    //     states[dur] = box->isChecked() ? 1 : 0;
+    // }
 
     connect(ui->spinBox, &QSpinBox::editingFinished, this, [this]() {
         ui->spinBox->clearFocus();
@@ -42,15 +42,15 @@ ExerciseRhythmWidget::ExerciseRhythmWidget(QWidget *parent)
     ui->spinBox->setValue(80);
     connect(ui->spinBox, &QSpinBox::valueChanged, this, &ExerciseRhythmWidget::bpmChanged);
 
-    for (auto* box : ui->layoutWidget2->findChildren<QCheckBox*>()) {
+    for (auto* box : ui->durationLayout->findChildren<QCheckBox*>()) {
         box->setFocusPolicy(Qt::NoFocus);
         connect(box, &QCheckBox::checkStateChanged, this, [this, box, durationMap](Qt::CheckState state) {
             int status = state == Qt::CheckState::Unchecked ? 0 : 1;
-            states[durationMap[box]] = status;
+            states[durationMap[box->text()]] = status;
             emit configChanged(states);
         });
     }
-    ui->checkBox_3->setChecked(true);
+    ui->quarter->setChecked(true);
     ui->modeLabel->setText("");
 }
 
@@ -69,7 +69,7 @@ void ExerciseRhythmWidget::exercisePlayFinished() {
 }
 
 void ExerciseRhythmWidget::getResult(const int correct, const int wrong) {
-    QMessageBox::information(this, "Результат", QString("Количество попаданий: %1\n Количество ошибок: %2")
+    QMessageBox::information(this, tr("Результат"), QString(tr("Количество попаданий: %1\n Количество ошибок: %2"))
                                                     .arg(correct).arg(wrong));
 
 }
@@ -103,4 +103,41 @@ void ExerciseRhythmWidget::setMode(Mode m) {
         ui->modeLabel->setText("");
         break;
     }
+}
+
+void ExerciseRhythmWidget::retranslate() {
+    ui->startBtn->setText(tr("Старт"));
+    ui->stopBtn->setText(tr("Стоп"));
+    ui->replayBtn->setText(tr("Повторить"));
+    ui->backBtn->setText(tr("Назад"));
+
+    while (QLayoutItem* item = ui->durationLayout->takeAt(0)) {
+        delete item->widget();
+        delete item;
+    }
+    QVector<QString> durations = durationNames();
+    const QMap<QString, int> durationMap = {
+                                            {durations[0], 1},
+                                            {durations[1], 2},
+                                            {durations[2], 4},
+                                            {durations[3], 8},
+                                            {durations[4], 16},
+                                            };
+
+    for (auto [name, dur] : durationMap.asKeyValueRange()) {
+        QCheckBox* note = new QCheckBox();
+        note->setText(name);
+        ui->durationLayout->addWidget(note);
+        Qt::CheckState status = states[dur] == 1 ? Qt::CheckState::Checked : Qt::CheckState::Unchecked;
+        note->setCheckState(status);
+        states[dur] = note->isChecked() ? 1 : 0;
+        note->setFocusPolicy(Qt::NoFocus);
+        connect(note, &QCheckBox::checkStateChanged, this, [this, note, durationMap](Qt::CheckState state) {
+            int status = state == Qt::CheckState::Unchecked ? 0 : 1;
+            states[durationMap[note->text()]] = status;
+            emit configChanged(states);
+        });
+    }
+
+    emit langChange();
 }

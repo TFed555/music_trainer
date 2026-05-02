@@ -19,6 +19,9 @@ private:
 private:
     IntervalDifficultyConfig config = difficultyMap<IntervalDifficultyConfig>[Difficulty::Easy];
     GeneratedInterval result;
+    QString getDescription() const override {
+        return tr("Постройте интервал от \nподсвеченной ноты");
+    }
 };
 
 #endif // INTERVALBUILDCONTROLLER_H

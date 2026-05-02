@@ -25,10 +25,10 @@ signals:
     void answerSelected(const QString& answer);
     void difficultyChanged(int level);
 private:
+    void retranslate() override;
     void resetSelection();
     void btnsEnable(bool status);
     void refreshStyle(QWidget* w);
-private:
     Ui::ExerciseNoTilesWidget *ui;
     QPushButton* selectedBtn;
 };

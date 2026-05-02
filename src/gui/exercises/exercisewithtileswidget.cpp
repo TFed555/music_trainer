@@ -9,8 +9,11 @@ ExerciseWithTilesWidget::ExerciseWithTilesWidget(bool noteNamesVisible, QWidget 
 {
     ui->setupUi(this);
     ui->horizontalLayout->addWidget(tiles);
-    ui->modeLabel->setText("");
+    ui->tipLabel->setText("");
     tiles->setFixedWidth(700);
+    ui->startBtn->setObjectName("startBtn");
+    ui->backBtn->setObjectName("backBtn");
+    ui->replayBtn->setObjectName("replayBtn");
 
     connect(ui->startBtn, &QPushButton::clicked, this, [this] {
             emit startClicked();
@@ -50,6 +53,7 @@ void ExerciseWithTilesWidget::exercisePlayFinished() {
 }
 
 void ExerciseWithTilesWidget::showResult(const QVector<QString>& correct, const QVector<QString>& selected) {
+    ui->difficultyBox->setEnabled(true);
     tiles->highlight(correct, selected);
     QTimer::singleShot(2000, this, [this]() {
         setMode(Mode::Input);
@@ -61,19 +65,19 @@ void ExerciseWithTilesWidget::setMode(Mode m) {
     tiles->setMode(m);
     switch (m) {
         case Mode::Wait:
-            ui->modeLabel->setText("Слушайте");
+            ui->tipLabel->setText(tr("Слушайте"));
             break;
         case Mode::Input:
-            ui->modeLabel->setText("Введите ответ");
+            ui->tipLabel->setText(tr("Введите ответ"));
             break;
         case Mode::Result:
-            ui->modeLabel->setText("");
+            ui->tipLabel->setText("");
             break;
         case Mode::Question:
-            ui->modeLabel->setText("");
+            ui->tipLabel->setText("");
             break;
         case Mode::Try:
-            ui->modeLabel->setText("");
+            ui->tipLabel->setText("");
             break;
     }
 }
@@ -102,4 +106,33 @@ void ExerciseWithTilesWidget::setDescription(const QString& text) {
 void ExerciseWithTilesWidget::onReplayAvailable(int replays) {
     bool en = replays <= 0 ? false : true;
     ui->replayBtn->setEnabled(en);
+}
+
+void ExerciseWithTilesWidget::retranslate() {
+    ui->startBtn->setText(tr("Старт"));
+    ui->stopBtn->setText(tr("Стоп"));
+    ui->replayBtn->setText(tr("Повторить"));
+    ui->backBtn->setText(tr("Назад"));
+    ui->difficultyLabel->setText(tr("Уровень сложности"));
+
+    int currentDifIndex = ui->difficultyBox->currentIndex();
+    ui->difficultyBox->blockSignals(true);
+    ui->difficultyBox->clear();
+    for (const auto& item : getDifficultyItems()) {
+        ui->difficultyBox->addItem(item);
+    }
+    ui->difficultyBox->setCurrentIndex(currentDifIndex);
+    ui->difficultyBox->blockSignals(false);
+
+    ui->modeLabel->setText(tr("Режим"));
+
+    int currentModeIndex = ui->modeBox->currentIndex();
+    ui->modeBox->blockSignals(true);
+    ui->modeBox->clear();
+    for (const auto& item : getModeItems()) {
+        ui->modeBox->addItem(item);
+    }
+    ui->modeBox->setCurrentIndex(currentModeIndex);
+    ui->modeBox->blockSignals(false);
+    emit langChange();
 }

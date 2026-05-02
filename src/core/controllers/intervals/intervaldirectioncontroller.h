@@ -8,11 +8,6 @@ class IntervalDirectionController : public IChoiceExerciseController
     Q_OBJECT
 public:
     IntervalDirectionController(NotePlayer* player, QObject* parent = nullptr);
-
-    const QMap<IntervalDirection, QString> directionMap = {
-        {IntervalDirection::Ascending, "Ascending"},
-        {IntervalDirection::Descending, "Descening"}
-    };
 public slots:
     void answerSelected(const QString& answer) override;
     void setDifficulty(int level) override;
@@ -22,6 +17,12 @@ private:
 private:
     IntervalDifficultyConfig config = difficultyMap<IntervalDifficultyConfig>[Difficulty::Easy];
     GeneratedInterval result;
+    QString getDescription() const override {
+        return tr("Укажите направление интервала");
+    }
+    QVector<QString> getAnswerVariants() const override {
+        return MusicUtils::toNameVector(config.allowedDirection, MusicUtils::Intervals::intervalDirectionName);
+    }
 };
 
 #endif // INTERVALDIRECTIONCONTROLLER_H

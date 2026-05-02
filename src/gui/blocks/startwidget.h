@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "../../core/common/interfaces/IExerciseWidget.h"
+#include "../../core/common/models/ExerciseType.h"
 #include <QVBoxLayout>
 
 
@@ -20,19 +21,22 @@ public:
         Rhythm,
         Melody
     };
-    struct ExerciseEntry {
-        QString title;
-        ExerciseType type;
+    struct BlockConfig {
+        QVector<ExerciseType> exercises;
     };
+
     void setBlock(int block);
 signals:
     void exerciseSelected(ExerciseType);
+protected:
+    void changeEvent(QEvent* event) override;
 private:
     void clearButtons();
     void addButton(const QString& title, ExerciseType type);
     QVBoxLayout* layout;
-    using BlockConfig = QVector<ExerciseEntry>;
-    static const QMap<BlockCategory, BlockConfig>& blockConfigs();
+    // using BlockConfig = QVector<ExerciseType>;
+    static const QMap<BlockCategory, BlockConfig> blockConfigs;
+    int currentBlock;
 };
 
 #endif // STARTWIDGET_H

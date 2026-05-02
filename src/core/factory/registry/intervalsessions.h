@@ -11,7 +11,7 @@
 inline void registerIntervalSessions(SessionFactory& factory) {
     factory.registerFactory(ExerciseType::IntervalRecognise,
                            [](NotePlayer* player, StatisticsRepository* repo, QObject* parent){
-                               auto session = std::make_unique<TilesSession>("Определение интервала", parent);
+                               auto session = std::make_unique<TilesSession>(ExerciseType::IntervalRecognise, parent);
                                auto* ctrl = new IntervalRecogniseController(player, session.get());
                                auto* tilesctrl = new TilesController(player, session.get());
                                auto* view = new ExerciseWithTilesWidget(true, nullptr);
@@ -20,7 +20,7 @@ inline void registerIntervalSessions(SessionFactory& factory) {
                            });
     factory.registerFactory(ExerciseType::IntervalIdentify,
                             [](NotePlayer* player, StatisticsRepository* repo, QObject* parent){
-                                auto session = std::make_unique<NoTilesSession>("Определение названия интервала", parent);
+                                auto session = std::make_unique<NoTilesSession>(ExerciseType::IntervalIdentify, parent);
                                 auto* ctrl = new IntervalIdentifyController(player, session.get());
                                 auto* view = new ExerciseNoTilesWidget(nullptr);
                                 session->setup(ctrl, view, repo);
@@ -28,7 +28,7 @@ inline void registerIntervalSessions(SessionFactory& factory) {
                             });
     factory.registerFactory(ExerciseType::IntervalBuild,
                             [](NotePlayer* player, StatisticsRepository* repo, QObject* parent){
-                                auto session = std::make_unique<TilesSession>("Построение интервала", parent);
+                                auto session = std::make_unique<TilesSession>(ExerciseType::IntervalBuild, parent);
                                 auto* ctrl = new IntervalBuildController(player, session.get());
                                 auto* tilesctrl = new TilesController(player, session.get());
                                 auto* view = new ExerciseWithTilesWidget(true, nullptr);
@@ -37,7 +37,7 @@ inline void registerIntervalSessions(SessionFactory& factory) {
                             });
     factory.registerFactory(ExerciseType::IntervalDirection,
                             [](NotePlayer* player, StatisticsRepository* repo, QObject* parent){
-                                auto session = std::make_unique<NoTilesSession>("Определение направления интервала", parent);
+                                auto session = std::make_unique<NoTilesSession>(ExerciseType::IntervalDirection, parent);
                                 auto* ctrl = new IntervalDirectionController(player, session.get());
                                 auto* view = new ExerciseNoTilesWidget(nullptr);
                                 session->setup(ctrl, view, repo);

@@ -5,8 +5,6 @@ NoteGuessController::NoteGuessController(NotePlayer* player,
                                          QObject *parent)
     : IChoiceExerciseController(player, PlaybackendSignal::PlaylistEmpty, parent)
 {
-    answerVariants = {"одинаковые", "разные"};
-    description = tr("Определите одинаковые или разные \nпервая и последняя ноты в мелодии");
 }
 
 void NoteGuessController::generateTask() {
@@ -16,7 +14,7 @@ void NoteGuessController::generateTask() {
     result = generator.generate();
     log(result.desc);
     correctAnswer = result.midiNotes.first() == result.midiNotes.last()
-                        ? answerVariants[0] : answerVariants[1];
+                        ? getAnswerVariants()[0] : getAnswerVariants()[1];
     playTask();
 }
 

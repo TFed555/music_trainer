@@ -6,7 +6,6 @@ ChordBuildController::ChordBuildController(NotePlayer* player,
                                            QObject *parent)
     : ITilesExerciseController(player, PlaybackendSignal::PlaybackFinished, parent)
 {
-    description = tr("Постройте аккорд нужной тональности");
 }
 
 void ChordBuildController::generateTask() {

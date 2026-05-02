@@ -95,37 +95,37 @@
      <height>126</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
+   <layout class="QVBoxLayout" name="durationLayout">
     <item>
-     <widget class="QCheckBox" name="checkBox_1">
+     <widget class="QCheckBox" name="whole">
       <property name="text">
        <string>Целая</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QCheckBox" name="checkBox_2">
+     <widget class="QCheckBox" name="half">
       <property name="text">
        <string>Половинная</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QCheckBox" name="checkBox_3">
+     <widget class="QCheckBox" name="quarter">
       <property name="text">
        <string>Четвертная</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QCheckBox" name="checkBox_4">
+     <widget class="QCheckBox" name="eighth">
       <property name="text">
        <string>Восьмая</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QCheckBox" name="checkBox_5">
+     <widget class="QCheckBox" name="sixteenth">
       <property name="text">
        <string>Шестнадцатая</string>
       </property>

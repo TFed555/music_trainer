@@ -5,7 +5,6 @@ MelodyRepeatController::MelodyRepeatController(NotePlayer* player,
                                          QObject *parent)
     : ITilesExerciseController(player, PlaybackendSignal::PlaybackFinished, parent)
 {
-    description = tr("Повторите мелодию");
 }
 
 void MelodyRepeatController::generateTask() {

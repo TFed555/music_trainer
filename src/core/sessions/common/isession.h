@@ -3,20 +3,25 @@
 
 #include <QObject>
 #include "../../common/interfaces/IExerciseWidget.h"
+#include "../../common/models/exercisestrings.h"
 
 class ISession : public QObject
 {
     Q_OBJECT
 public:
-    explicit ISession(QObject *parent = nullptr) : QObject(parent) {};
+    explicit ISession(ExerciseType type, QObject *parent = nullptr) : QObject(parent), exerciseType(type)
+    {};
     virtual ~ISession() = default;
     virtual IExerciseWidget* getWidget() const { return view; };
-    virtual QString title() const = 0;
+    virtual QString title() const {
+        return ExerciseStrings::displayName(exerciseType);
+    }
 signals:
     void back();
     void setDifficulty(int level);
 protected:
     IExerciseWidget* view = nullptr;
+    ExerciseType exerciseType;
 };
 
 #endif // ISESSION_H

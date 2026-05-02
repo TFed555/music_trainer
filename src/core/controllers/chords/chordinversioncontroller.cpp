@@ -6,8 +6,7 @@ ChordInversionController::ChordInversionController(NotePlayer* player,
                                                        QObject *parent)
     : IChoiceExerciseController(player, PlaybackendSignal::PlaybackFinished, parent)
 {
-    answerVariants = MusicUtils::Chords::inversionNames.values();
-    description = tr("Определите обращение аккорда");
+    setDifficulty(0);
 }
 
 void ChordInversionController::generateTask() {

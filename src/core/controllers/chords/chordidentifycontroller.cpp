@@ -5,8 +5,6 @@ ChordIdentifyController::ChordIdentifyController(NotePlayer* player,
                                                        QObject *parent)
     : IChoiceExerciseController(player, PlaybackendSignal::PlaybackFinished, parent)
 {
-    setAnswerVariants();
-    description = tr("Определите тип аккорда");
 }
 
 void ChordIdentifyController::generateTask() {
@@ -17,19 +15,6 @@ void ChordIdentifyController::generateTask() {
     correctAnswer = result.type;
     log(result.desc);
     playTask();
-}
-
-void ChordIdentifyController::setAnswerVariants() {
-    answerVariants = [] (const QVector<MusicUtils::Chords::ChordType>& keys) -> QVector<QString> {
-        QVector<QString> result;
-        result.reserve(keys.size());
-        for (const auto& key : keys) {
-            if (MusicUtils::Chords::chordTypeNames.contains(key)) {
-                result.append(MusicUtils::Chords::chordTypeNames.value(key));
-            }
-        }
-        return result;
-    }(config.allowedTypes);
 }
 
 void ChordIdentifyController::playTask() {
@@ -61,7 +46,6 @@ void ChordIdentifyController::setDifficulty(int level) {
     }
     config.allowedInversions = {MusicUtils::Chords::InversionType::Root};
     replayCount = config.replayCount;
-    setAnswerVariants();
     giveAnswers();
 }
 

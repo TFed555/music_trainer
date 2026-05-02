@@ -27,6 +27,9 @@ private:
 private:
     NoteDifficultyConfig config = noteBuildDifficulty[Difficulty::Easy];
     GeneratedAudio result;
+    QString getDescription() const override {
+        return tr("Выберите нужную ноту");
+    }
 };
 
 #endif // NOTEBUILDCONTROLLER_H

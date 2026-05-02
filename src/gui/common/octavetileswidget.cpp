@@ -5,6 +5,7 @@ OctaveTilesWidget::OctaveTilesWidget(bool noteNamesVisible, QWidget *parent)
     : QWidget(parent)
 {
     QHBoxLayout* layout = new QHBoxLayout(this);
+    layout->setSpacing(0);
     layout->setContentsMargins(0, 0, 0, 0);
     setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
     for (int i = 0; i < octaveCount; i++) {

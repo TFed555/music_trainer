@@ -10,7 +10,11 @@ public:
     using IExerciseController::IExerciseController;
 public slots:
     virtual void answerSelected(const QString& answer) = 0;
-    void giveAnswers() { emit setAnswers(answerVariants); }
+    void giveAnswers() { emit setAnswers(getAnswerVariants()); }
+    void retranslate() {
+        sendDescription();
+        giveAnswers();
+    };
 signals:
     void showResult(const QString& correct);
     void setAnswers(QVector<QString>);
@@ -19,7 +23,7 @@ protected:
     QString userAnswer;
     static constexpr int firstNoteIdx = 0;
     static constexpr int secondNoteIdx = 1;
-    QVector<QString> answerVariants;
+    virtual QVector<QString> getAnswerVariants() const = 0;
 };
 
 #endif // ICHOICEEXERCISECONTROLLER_H

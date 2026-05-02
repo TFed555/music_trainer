@@ -14,10 +14,15 @@ public slots:
 private:
     void generateTask() override;
     void playTask() override;
-    void setAnswerVariants();
 private:
     MelodyDifficultyConfig config = difficultyMap<MelodyDifficultyConfig>[Difficulty::Easy];
     GeneratedAudio result;
+    QString getDescription() const override {
+        return tr("Выберите направление мелодии");
+    }
+    QVector<QString> getAnswerVariants() const override {
+        return MusicUtils::toNameVector(config.directions, MusicUtils::melodyDirectionName);
+    }
 };
 
 #endif // MELODYDIRECTIONCONTROLLER_H

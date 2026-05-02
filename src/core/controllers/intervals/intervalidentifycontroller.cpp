@@ -5,8 +5,6 @@ IntervalIdentifyController::IntervalIdentifyController(NotePlayer* player,
                                                        QObject *parent)
     : IChoiceExerciseController(player, PlaybackendSignal::PlaylistEmpty, parent)
 {
-    answerVariants = MusicUtils::Intervals::intervals;
-    description = tr("Выберите название интервала");
 }
 
 void IntervalIdentifyController::generateTask() {

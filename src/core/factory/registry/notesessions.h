@@ -14,7 +14,7 @@
 inline void registerNoteSessions(SessionFactory& factory) {
     factory.registerFactory(ExerciseType::NoteRecognise,
                             [](NotePlayer* player, StatisticsRepository* repo, QObject* parent){
-                                auto session = std::make_unique<TilesSession>("Определение ноты", parent);
+                                auto session = std::make_unique<TilesSession>(ExerciseType::NoteRecognise, parent);
                                 auto* ctrl = new NoteRecogniseController(player, session.get());
                                 auto* tilesctrl = new TilesController(player, session.get());
                                 auto* view = new ExerciseWithTilesWidget(true, nullptr);
@@ -23,7 +23,7 @@ inline void registerNoteSessions(SessionFactory& factory) {
                             });
     factory.registerFactory(ExerciseType::NoteBuild,
                             [](NotePlayer* player, StatisticsRepository* repo, QObject* parent){
-                                auto session = std::make_unique<TilesSession>("Название ноты", parent);
+                                auto session = std::make_unique<TilesSession>(ExerciseType::NoteBuild, parent);
                                 auto* ctrl = new NoteBuildController(player, session.get());
                                 auto* tilesctrl = new TilesController(player, session.get());
                                 auto* view = new ExerciseWithTilesWidget(false, nullptr);
@@ -32,7 +32,7 @@ inline void registerNoteSessions(SessionFactory& factory) {
                             });
     factory.registerFactory(ExerciseType::NoteGuess,
                             [](NotePlayer* player, StatisticsRepository* repo, QObject* parent){
-                                auto session = std::make_unique<NoTilesSession>("Определение нот в мелодии", parent);
+                                auto session = std::make_unique<NoTilesSession>(ExerciseType::NoteGuess, parent);
                                 auto* ctrl = new NoteGuessController(player, session.get());
                                 auto* view = new ExerciseNoTilesWidget(nullptr);
                                 session->setup(ctrl, view, repo);
@@ -41,7 +41,7 @@ inline void registerNoteSessions(SessionFactory& factory) {
 
     factory.registerFactory(ExerciseType::MelodyRepeat,
                             [](NotePlayer* player, StatisticsRepository* repo, QObject* parent){
-                                auto session = std::make_unique<TilesSession>("Повторение мелодии", parent);
+                                auto session = std::make_unique<TilesSession>(ExerciseType::MelodyRepeat, parent);
                                 auto* ctrl = new MelodyRepeatController(player, session.get());
                                 auto* tilesctrl = new TilesController(player, session.get());
                                 auto* view = new ExerciseWithTilesWidget(true, nullptr);
@@ -51,7 +51,7 @@ inline void registerNoteSessions(SessionFactory& factory) {
 
     factory.registerFactory(ExerciseType::MelodyDirection,
                             [](NotePlayer* player, StatisticsRepository* repo, QObject* parent){
-                                auto session = std::make_unique<NoTilesSession>("Определение направления мелодии", parent);
+                                auto session = std::make_unique<NoTilesSession>(ExerciseType::MelodyDirection, parent);
                                 auto* ctrl = new MelodyDirectionController(player, session.get());
                                 auto* view = new ExerciseNoTilesWidget(nullptr);
                                 session->setup(ctrl, view, repo);

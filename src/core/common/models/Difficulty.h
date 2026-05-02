@@ -27,11 +27,16 @@ struct IntervalDifficultyConfig {
     }();
     int midiMin = 48;
     int midiMax = 83;
+    QVector<MusicUtils::Intervals::IntervalDirection> allowedDirection =
+        {MusicUtils::Intervals::IntervalDirection::Ascending,
+        MusicUtils::Intervals::IntervalDirection::Descending};
     static IntervalDifficultyConfig easy() {
         return { .replayCount = 2,
                 .allowedSemitones = {1, 3, 4, 5, 7, 12},
                 .midiMin = 60,
-                .midiMax = 72
+                .midiMax = 72,
+                .allowedDirection = {MusicUtils::Intervals::IntervalDirection::Ascending,
+                                 MusicUtils::Intervals::IntervalDirection::Descending}
             };
     }
     static IntervalDifficultyConfig hard() {

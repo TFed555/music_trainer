@@ -6,7 +6,6 @@ IntervalBuildController::IntervalBuildController(NotePlayer* player,
                                                  QObject *parent)
     : ITilesExerciseController(player, PlaybackendSignal::PlaylistEmpty, parent)
 {
-    description = tr("Постройте интервал от \nподсвеченной ноты");
 }
 
 void IntervalBuildController::generateTask() {

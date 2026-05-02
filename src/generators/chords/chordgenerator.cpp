@@ -43,9 +43,9 @@ GeneratedChord ChordGenerator::generate() {
     std::sort(midiNotes.begin(), midiNotes.end());
 
     GeneratedChord res;
-    res.type = MusicUtils::Chords::chordTypeNames[type];
+    res.type = MusicUtils::Chords::chordName(type);
     res.midiNotes = midiNotes;
-    res.inversion = MusicUtils::Chords::inversionNames[inversion];
+    res.inversion = MusicUtils::Chords::inversionName(inversion);
     res.root = MusicUtils::midiToNote(midiNotes[1]);
     res.desc = [](const QVector<int>& midiNotes) -> QString {
         QVector<QString> res;

@@ -1,11 +1,12 @@
 #include "mainwindow.h"
-#include "./ui_mainwindow.h"
 #include "../core/common/interfaces/IExerciseWidget.h"
 #include <QPushButton>
+#include <QMenu>
+#include <QMenuBar>
+#include <QApplication>
 
 MainWindow::MainWindow(SessionFactory& factory, QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
     , sampleLoader()
     , sampleRepository(&sampleLoader)
     , audio(new AudioProcessor(this))
@@ -15,8 +16,7 @@ MainWindow::MainWindow(SessionFactory& factory, QWidget *parent)
     , statsRepository(&statsLoader)
     , sessionFactory(factory)
 {
-    // ui->setupUi(this);
-    this->window()->setWindowTitle("Music trainer");
+    this->window()->setWindowTitle(tr("Тренажер музыкального слуха"));
 
     QWidget* main = new QWidget(this);
     setCentralWidget(main);
@@ -30,6 +30,7 @@ MainWindow::MainWindow(SessionFactory& factory, QWidget *parent)
     startMenu->setFixedSize(1000,700);
 
     QPushButton* menuBtn = new QPushButton("☰", main);
+    menuBtn->setObjectName("menuBtn");
     connect(menuBtn, &QPushButton::clicked, sidebar, &SidebarWidget::toggle);
 
     stack->addWidget(startMenu);
@@ -46,11 +47,14 @@ MainWindow::MainWindow(SessionFactory& factory, QWidget *parent)
 
     QMenuBar* menu = menuBar();
 
-    QMenu* fileMenu = menu->addMenu("File");
-    QMenu* helpMenu = menu->addMenu("Help");
+    settingsMenu = menu->addMenu(tr("Настройки"));
+    helpMenu = menu->addMenu(tr("Помощь"));
+    langMenu = settingsMenu->addMenu(tr("Язык"));
+    langMenu->addAction("Русский", this, [this]() { setLanguage("ru"); });
+    langMenu->addAction("English",  this, [this]() { setLanguage("en"); });
 
-    QAction* statsAction = fileMenu->addAction("Statistics");
-    QAction* exitAction  = fileMenu->addAction("Exit");
+    statsAction = settingsMenu->addAction(tr("Статистика"));
+    exitAction  = settingsMenu->addAction(tr("Выход"));
 
     connect(statsAction, &QAction::triggered, this, &MainWindow::showStats);
     connect(exitAction,  &QAction::triggered, this, &QApplication::quit);
@@ -60,7 +64,7 @@ MainWindow::MainWindow(SessionFactory& factory, QWidget *parent)
     connect(sidebar, &SidebarWidget::blockSelected,
             this, [this]() {
             stack->setCurrentWidget(startMenu);
-            this->window()->setWindowTitle("Music trainer");
+            this->window()->setWindowTitle(tr("Тренажер музыкального слуха"));
         });
     connect(startMenu, &StartWidget::exerciseSelected,
             this, &MainWindow::startExercise);
@@ -68,7 +72,12 @@ MainWindow::MainWindow(SessionFactory& factory, QWidget *parent)
 
 MainWindow::~MainWindow()
 {
-    delete ui;
+}
+
+void MainWindow::setLanguage(const QString& lang) {
+    bool f = translator.load(QString(":/translation/app_%1").arg(lang));
+    qApp->installTranslator(&translator);
+    update();
 }
 
 void MainWindow::showStats() {
@@ -102,4 +111,20 @@ void MainWindow::startExercise(ExerciseType type){
 
     stack->addWidget(exercise);
     stack->setCurrentWidget(exercise);
+}
+
+void MainWindow::changeEvent(QEvent* event) {
+    if (event->type() == QEvent::LanguageChange) {
+        qDebug() << "changeEvent" << event->type();
+        retranslateUi();
+    }
+    QMainWindow::changeEvent(event);
+}
+
+void MainWindow::retranslateUi() {
+    this->setWindowTitle(tr("Тренажер музыкального слуха"));
+    settingsMenu->setTitle(tr("Настройки"));
+    langMenu->setTitle(tr("Язык"));
+    exitAction->setText(tr("Выход"));
+    statsAction->setText(tr("Статистика"));
 }

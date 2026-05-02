@@ -11,6 +11,9 @@ public:
     using IExerciseController::IExerciseController;
 public slots:
     virtual void noteSelected(const QString& noteName, const bool listenOnly) = 0;
+    void retranslate() {
+        sendDescription();
+    };
 signals:
     void requestSetMode(Mode);
     void showResult(QVector<QString> answer, QVector<QString> selected);

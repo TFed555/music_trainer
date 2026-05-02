@@ -31,6 +31,7 @@ ExerciseNoTilesWidget::~ExerciseNoTilesWidget()
 }
 
 void ExerciseNoTilesWidget::exercisePlayFinished() {
+    ui->difficultyBox->setEnabled(false);
     btnsEnable(true);
 }
 
@@ -47,6 +48,9 @@ void ExerciseNoTilesWidget::btnsEnable(bool status) {
 }
 
 void ExerciseNoTilesWidget::addAnswers(QVector<QString> answers) {
+    for (auto* btn : findChildren<QPushButton*>("answerBtn")) {
+        btn->deleteLater();
+    }
     ui->answersLayout->setHorizontalSpacing(10);
     ui->answersLayout->setVerticalSpacing(10);
     ui->answersLayout->setContentsMargins(20, 20, 20, 20);
@@ -81,6 +85,7 @@ void ExerciseNoTilesWidget::refreshStyle(QWidget* w) {
 }
 
 void ExerciseNoTilesWidget::showResult(const QString& correct) {
+    ui->difficultyBox->setEnabled(true);
     for (auto* btn : findChildren<QPushButton*>("answerBtn")) {
         btn->setProperty("selected", false);
         if (btn->text() == correct)
@@ -106,4 +111,22 @@ void ExerciseNoTilesWidget::resetSelection() {
 
 void ExerciseNoTilesWidget::setDescription(const QString& text) {
     ui->descriptionLabel->setText(text);
+}
+
+void ExerciseNoTilesWidget::retranslate() {
+    ui->startBtn->setText(tr("Старт"));
+    ui->stopBtn->setText(tr("Стоп"));
+    ui->replayBtn->setText(tr("Повторить"));
+    ui->backBtn->setText(tr("Назад"));
+    ui->difficultyLabel->setText(tr("Уровень сложности"));
+
+    int currentIndex = ui->difficultyBox->currentIndex();
+    ui->difficultyBox->blockSignals(true);
+    ui->difficultyBox->clear();
+    for (const auto& item : getDifficultyItems()) {
+        ui->difficultyBox->addItem(item);
+    }
+    ui->difficultyBox->setCurrentIndex(currentIndex);
+    ui->difficultyBox->blockSignals(false);
+    emit langChange();
 }

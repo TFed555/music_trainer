@@ -6,10 +6,6 @@
 #include <QPropertyAnimation>
 #include <QPushButton>
 
-namespace Ui {
-class SidebarWidget;
-}
-
 class SidebarWidget : public QWidget
 {
     Q_OBJECT
@@ -21,11 +17,17 @@ public:
     void close();
 signals:
     void blockSelected(int block);
+protected:
+    void changeEvent(QEvent* event) override;
 private:
+    void retranslate();
+    QPushButton* intervalsBtn;
+    QPushButton* chordsBtn;
+    QPushButton* notesBtn;
+    QPushButton* rhythmBtn;
+    QPushButton* melodyBtn;
     QPushButton* addNavButton(const QString& title, StartWidget::BlockCategory block);
     void setLayout();
-private:
-    Ui::SidebarWidget *ui;
     QPropertyAnimation* anim;
     bool isOpen = false;
 };

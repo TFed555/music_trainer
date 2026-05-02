@@ -63,6 +63,8 @@ add_library(core STATIC
     data/statistics/statisticssolver.h data/statistics/statisticssolver.cpp
     controllers/melody/melodyrepeatcontroller.h controllers/melody/melodyrepeatcontroller.cpp
     controllers/melody/melodydirectioncontroller.h controllers/melody/melodydirectioncontroller.cpp
+    common/models/ExerciseType.h
+    common/models/exercisestrings.h common/models/exercisestrings.cpp
 
 )
 

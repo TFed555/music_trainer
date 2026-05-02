@@ -33,10 +33,14 @@ signals:
     void resetTiles();
     void difficultyChanged(int level);
 private:
+    void retranslate() override;
     Ui::ExerciseWithTilesWidget *ui;
     OctaveTilesWidget *tiles;
     QLabel* questionLabel = nullptr;
     QLabel* descriptionLabel = nullptr;
+    QVector<QString> getModeItems() const {
+        return { tr("Попытка"), tr("Ввод") };
+    }
 };
 
 #endif // EXERCISEWITHTILESWIDGET_H

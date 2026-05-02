@@ -18,8 +18,8 @@ void StatsWidget::showEvent(QShowEvent*) {
 }
 
 void StatsWidget::buildBarChart(const QVector<CategoryStats>& stats) {
-    QBarSet *correct = new QBarSet("Правильно");
-    QBarSet *total = new QBarSet("Всего");
+    QBarSet *correct = new QBarSet(tr("Правильно"));
+    QBarSet *total = new QBarSet(tr("Всего"));
     for (auto n : stats) {
         *correct << n.correct;
         *total << n.total;
@@ -31,7 +31,7 @@ void StatsWidget::buildBarChart(const QVector<CategoryStats>& stats) {
 
     QChart *chart = new QChart();
     chart->addSeries(series);
-    chart->setTitle("Статистика выполнения");
+    chart->setTitle(tr("Статистика выполнения"));
     chart->setAnimationOptions(QChart::SeriesAnimations);
 
     QStringList categories;

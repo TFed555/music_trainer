@@ -32,6 +32,7 @@ signals:
 protected:
     void keyPressEvent(QKeyEvent* event) override;
 private:
+    void retranslate() override;
     Ui::ExerciseRhythmWidget *ui;
     RhythmCanvasWidget* canvas;
     QMap<int,int> states = {
@@ -42,6 +43,10 @@ private:
         {16, 0},
     };
     QLabel* descriptionLabel = nullptr;
+    QVector<QString> durationNames() const {
+        return MusicUtils::toNameVector(MusicUtils::Rhythm::allDurations,
+                                        MusicUtils::Rhythm::durationName);
+    }
 };
 
 #endif // EXERCISERHYTHMWIDGET_H

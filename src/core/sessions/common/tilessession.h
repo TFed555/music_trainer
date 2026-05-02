@@ -11,17 +11,14 @@ class TilesSession : public ISession
 {
     Q_OBJECT
 public:
-    explicit TilesSession(const QString& sessionTitle,
+    explicit TilesSession(ExerciseType type,
                         QObject* parent = nullptr)
-    : ISession(parent), _title(sessionTitle) {
+    : ISession(type, parent){
 
     };
 
     void setup(ITilesExerciseController* ctrl, TilesController* tilesctrl,
                ExerciseWithTilesWidget* w, StatisticsRepository* statsRepo);
-    QString title() const override { return _title;}
-private:
-    QString _title;
 };
 
 #endif // TILESSESSION_H

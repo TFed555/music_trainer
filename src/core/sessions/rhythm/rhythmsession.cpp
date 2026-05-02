@@ -37,5 +37,8 @@ void RhythmSession::setup(IRhythmExerciseController* ctrl, ExerciseRhythmWidget*
     connect(ctrl, &IRhythmExerciseController::setDescription,
             w, &ExerciseRhythmWidget::setDescription);
 
+    connect(w, &ExerciseRhythmWidget::langChange,
+            ctrl, &IRhythmExerciseController::retranslate);
+
     ctrl->sendDescription();
 }

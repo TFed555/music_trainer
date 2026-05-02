@@ -22,6 +22,9 @@ private:
     IntervalDifficultyConfig config = difficultyMap<IntervalDifficultyConfig>[Difficulty::Easy];
     static constexpr int intervalNoteCount = 2;
     GeneratedInterval result;
+    QString getDescription() const override {
+        return tr("Укажите интервал на клавиатуре");
+    }
 };
 
 #endif // INTERVALRECOGNISECONTROLLER_H

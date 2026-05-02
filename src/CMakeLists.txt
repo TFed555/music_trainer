@@ -11,6 +11,15 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
+set(Qt6LinguistTools_DIR "/home/tatyana/Qt/6.10.1/gcc_64/lib/cmake/Qt6LinguistTools")
+find_package(Qt6 COMPONENTS LinguistTools REQUIRED)
+
+qt_add_translations(${PROJECT_NAME}
+    TS_FILES
+        ${CMAKE_SOURCE_DIR}/translation/app_ru.ts
+        ${CMAKE_SOURCE_DIR}/translation/app_en.ts
+    RESOURCE_PREFIX "/translation"
+)
 
 add_subdirectory(audio)
 add_subdirectory(music)

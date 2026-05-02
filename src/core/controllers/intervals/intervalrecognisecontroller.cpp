@@ -6,7 +6,6 @@ IntervalRecogniseController::IntervalRecogniseController(NotePlayer* player,
                                                          QObject *parent)
     : ITilesExerciseController(player, PlaybackendSignal::PlaylistEmpty, parent)
 {
-    description = tr("Укажите интервал на клавиатуре");
 }
 
 void IntervalRecogniseController::generateTask() {

@@ -51,6 +51,9 @@ void TilesSession::setup(ITilesExerciseController* ctrl, TilesController* tilesc
     connect(ctrl, &ITilesExerciseController::replayAvailable,
             w, &ExerciseWithTilesWidget::onReplayAvailable);
 
+    connect(w, &ExerciseWithTilesWidget::langChange,
+            ctrl, &ITilesExerciseController::retranslate);
+
     ctrl->sendDescription();
     ctrl->setDifficulty(0);
 }

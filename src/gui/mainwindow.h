@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QStackedWidget>
+#include <QTranslator>
 #include "../core/data/samples/sampleloader.h"
 #include "../core/data/samples/samplerepository.h"
 #include "../core/data/statistics/statisticsloader.h"
@@ -15,26 +16,21 @@
 #include "./blocks/sidebarwidget.h"
 #include "./common/statswidget.h"
 
-QT_BEGIN_NAMESPACE
-namespace Ui {
-class MainWindow;
-}
-QT_END_NAMESPACE
-
-
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-QString mainTitle = "Music trainer";
+QString mainTitle = "Тренажер музыкального слуха";
 public:
     MainWindow(SessionFactory& factory, QWidget *parent = nullptr);
     ~MainWindow();
-public slots:
+private slots:
     void showStats();
+    void setLanguage(const QString& lang);
 private:
     void startExercise(ExerciseType);
+    void changeEvent(QEvent* event) override;
+    void retranslateUi();
 private:
-    Ui::MainWindow *ui;
     QStackedWidget* stack;
     QWidget* previousWidget = nullptr;
     StartWidget* startMenu;
@@ -50,5 +46,11 @@ private:
     QMetaObject::Connection sessionBackConn;
     SessionFactory& sessionFactory;
     StatsWidget* stats;
+    QTranslator translator;
+    QMenu* settingsMenu;
+    QMenu* helpMenu;
+    QMenu* langMenu;
+    QAction* statsAction;
+    QAction* exitAction;
 };
 #endif // MAINWINDOW_H

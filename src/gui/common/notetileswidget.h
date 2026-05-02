@@ -6,10 +6,6 @@
 #include <QPainter>
 #include <QMouseEvent>
 
-namespace Ui {
-class NoteTilesWidget;
-}
-
 class NoteTilesWidget : public QWidget
 {
     Q_OBJECT
@@ -43,7 +39,6 @@ signals:
     void noteSelected(const QString&, const bool);
 
 private:
-    Ui::NoteTilesWidget *ui;
     int selectedIndex = -1;
     QSet<int> highlightedIndexes;
     QSet<int> wrongIndexes;

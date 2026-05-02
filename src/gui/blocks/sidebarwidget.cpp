@@ -1,18 +1,15 @@
 #include "sidebarwidget.h"
-#include "ui_sidebarwidget.h"
+#include <QEvent>
 
 SidebarWidget::SidebarWidget(QWidget *parent)
     : QWidget(parent)
-    , ui(new Ui::SidebarWidget)
 {
-    ui->setupUi(this);
     setLayout();
     anim = new QPropertyAnimation(this, "maximumWidth");
 }
 
 SidebarWidget::~SidebarWidget()
 {
-    delete ui;
 }
 
 void SidebarWidget::setLayout() {
@@ -20,11 +17,16 @@ void SidebarWidget::setLayout() {
     layout->addStretch();
     layout->setContentsMargins(0, 0, 0, 0);
     layout->setSpacing(20);
-    layout->addWidget(addNavButton("Интервалы", StartWidget::BlockCategory::Intervals));
-    layout->addWidget(addNavButton("Аккорды", StartWidget::BlockCategory::Chords));
-    layout->addWidget(addNavButton("Ноты", StartWidget::BlockCategory::Notes));
-    layout->addWidget(addNavButton("Ритм", StartWidget::BlockCategory::Rhythm));
-    layout->addWidget(addNavButton("Мелодический слух", StartWidget::BlockCategory::Melody));
+    intervalsBtn = addNavButton(tr("Интервалы"), StartWidget::BlockCategory::Intervals);
+    chordsBtn = addNavButton(tr("Аккорды"), StartWidget::BlockCategory::Chords);
+    notesBtn = addNavButton(tr("Ноты"), StartWidget::BlockCategory::Notes);
+    rhythmBtn = addNavButton(tr("Ритм"), StartWidget::BlockCategory::Rhythm);
+    melodyBtn = addNavButton(tr("Мелодический слух"), StartWidget::BlockCategory::Melody);
+    layout->addWidget(intervalsBtn);
+    layout->addWidget(chordsBtn);
+    layout->addWidget(notesBtn);
+    layout->addWidget(rhythmBtn);
+    layout->addWidget(melodyBtn);
     layout->addStretch();
 }
 
@@ -48,4 +50,19 @@ void SidebarWidget::close() {
     if (isOpen) {
         toggle();
     }
+}
+
+void SidebarWidget::changeEvent(QEvent* event) {
+    if (event->type() == QEvent::LanguageChange) {
+        retranslate();
+    }
+    QWidget::changeEvent(event);
+}
+
+void SidebarWidget::retranslate() {
+    intervalsBtn->setText(tr("Интервалы"));
+    chordsBtn->setText(tr("Аккорды"));
+    notesBtn->setText(tr("Ноты"));
+    rhythmBtn->setText(tr("Ритм"));
+    melodyBtn->setText(tr("Мелодический слух"));
 }

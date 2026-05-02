@@ -17,6 +17,12 @@ private:
 private:
     ChordDifficultyConfig config = difficultyMap<ChordDifficultyConfig>[Difficulty::Easy];
     GeneratedChord result;
+    QString getDescription() const override {
+        return tr("Определите обращение аккорда");
+    }
+    QVector<QString> getAnswerVariants() const override {
+        return MusicUtils::toNameVector(config.allowedInversions, MusicUtils::Chords::inversionName);
+    }
 };
 
 #endif // CHORDINVERSIONCONTROLLER_H

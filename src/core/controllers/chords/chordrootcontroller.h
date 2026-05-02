@@ -17,6 +17,9 @@ private:
 private:
     ChordDifficultyConfig config = difficultyMap<ChordDifficultyConfig>[Difficulty::Easy];
     GeneratedChord result;
+    QString getDescription() const override {
+        return tr("Определите основную ноту аккорда");
+    }
 };
 
 #endif // CHORDROOTCONTROLLER_H

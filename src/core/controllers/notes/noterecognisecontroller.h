@@ -27,6 +27,9 @@ private:
 private:
     NoteDifficultyConfig config = noteRecogniseDifficulty[Difficulty::Easy];
     GeneratedAudio result;
+    QString getDescription() const override {
+        return tr("Укажите услышанную ноту \nна клавиатуре");
+    }
 };
 
 #endif // NOTERECOGNISECONTROLLER_H

@@ -50,7 +50,8 @@ public slots:
             emit replayAvailable(replayCount);
     }
     virtual void setDifficulty(int level) = 0;
-    void sendDescription() { emit setDescription(description); }
+    void sendDescription() { emit setDescription(getDescription()); }
+    virtual void retranslate() = 0;
 
 private:
     virtual void generateTask() = 0;
@@ -88,10 +89,11 @@ protected:
         emit exercisePlayFinished();
         emit replayAvailable(replayCount);
     }
+    virtual QString getDescription() const = 0;
 protected:
     NotePlayer* notePlayer;
     QVector<PlaybackLog> playbackLog;
-    QString description;
+    // QString description;
     int replayCount;
 };
 

@@ -30,8 +30,8 @@ GeneratedInterval IntervalGenerator::generate() {
 
     GeneratedInterval res;
     res.direction = realSemitones >= 0
-                        ? IntervalDirection::Ascending
-                        : IntervalDirection::Descending;
+                        ? MusicUtils::Intervals::IntervalDirection::Ascending
+                        : MusicUtils::Intervals::IntervalDirection::Descending;
     res.interval.append(MusicUtils::Intervals::semitonesToInterval(std::abs(realSemitones)));
     res.midiNotes.append(firstMidi);
     res.midiNotes.append(secondMidi);

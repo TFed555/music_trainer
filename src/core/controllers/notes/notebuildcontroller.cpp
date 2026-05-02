@@ -5,7 +5,6 @@ NoteBuildController::NoteBuildController(NotePlayer* player,
                                            QObject *parent)
     : ITilesExerciseController(player, PlaybackendSignal::PlaybackFinished, parent)
 {
-    description = tr("Выберите нужную ноту");
 }
 
 void NoteBuildController::generateTask() {

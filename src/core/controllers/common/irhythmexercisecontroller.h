@@ -14,6 +14,9 @@ public slots:
                                const QVector<int>& userTaps) = 0;
     virtual void setConfig(const QMap<int,int>& states) = 0;
     virtual void bpmChanged(const int& bpm) = 0;
+    void retranslate() {
+        sendDescription();
+    };
 signals:
     void setRhythmNotes(const QVector<MusicUtils::Rhythm::RhythmType>&, int bpm);
     void showResult(int correct, int wrong);

@@ -6,7 +6,6 @@ RhythmRecogniseController::RhythmRecogniseController(NotePlayer* player,
                                                      QObject *parent)
     : IRhythmExerciseController(player, PlaybackendSignal::BeatFinished, parent)
 {
-    description = tr("Прослушайте ритм и затем простучите \nего с помощью клавиши пробел");
     connect(notePlayer, &NotePlayer::beatFinished,
             this, &RhythmRecogniseController::onBeatFinished);
 }

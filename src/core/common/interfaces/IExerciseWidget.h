@@ -2,24 +2,7 @@
 #define IEXERCISEWIDGET_H
 
 #include <QWidget>
-#include "../models/Mode.h"
-
-enum class ExerciseType {
-    IntervalRecognise,
-    IntervalIdentify,
-    IntervalBuild,
-    IntervalDirection,
-    ChordIdentify,
-    ChordInversion,
-    ChordRoot,
-    ChordBuild,
-    NoteRecognise,
-    NoteBuild,
-    NoteGuess,
-    RhythmRecognise,
-    MelodyRepeat,
-    MelodyDirection
-};
+#include <QEvent>
 
 class IExerciseWidget : public QWidget {
     Q_OBJECT
@@ -29,11 +12,24 @@ public:
 public slots:
     virtual void exercisePlayFinished() = 0;
     virtual void setDescription(const QString& text) = 0;
+protected:
+    void changeEvent(QEvent* event) {
+        if (event->type() == QEvent::LanguageChange) {
+            retranslate();
+        }
+        QWidget::changeEvent(event);
+    }
+    QVector<QString> getDifficultyItems() const {
+        return { tr("Легко"), tr("Сложно") };
+    }
+private:
+    virtual void retranslate() = 0;
 signals:
     void startClicked();
     void stopClicked();
     void backClicked();
     void replayClicked();
+    void langChange();
 };
 
 #endif // IEXERCISEWIDGET_H

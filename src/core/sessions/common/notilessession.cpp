@@ -25,13 +25,16 @@ void NoTilesSession::setup(IChoiceExerciseController* ctrl, ExerciseNoTilesWidge
             ctrl, &IChoiceExerciseController::answerSelected);
 
     connect(ctrl, &IChoiceExerciseController::setAnswers,
-            w,    &ExerciseNoTilesWidget::addAnswers);
+            w,  &ExerciseNoTilesWidget::addAnswers);
 
     connect(ctrl, &IChoiceExerciseController::attemptDone,
             statsRepo, &StatisticsRepository::recordStatistics);
 
     connect(ctrl, &IChoiceExerciseController::setDescription,
             w, &ExerciseNoTilesWidget::setDescription);
+
+    connect(w, &ExerciseNoTilesWidget::langChange,
+            ctrl, &IChoiceExerciseController::retranslate);
 
     ctrl->giveAnswers();
     ctrl->sendDescription();

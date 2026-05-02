@@ -32,6 +32,12 @@ private:
 private:
     NoteDifficultyConfig config = noteGuessDifficulty[Difficulty::Easy];
     GeneratedAudio result;
+    QString getDescription() const override {
+        return tr("Определите одинаковые или разные \nпервая и последняя ноты в мелодии");
+    }
+    QVector<QString> getAnswerVariants() const override {
+        return MusicUtils::noteGuessName();
+    }
 };
 
 #endif // NOTEGUESSCONTROLLER_H

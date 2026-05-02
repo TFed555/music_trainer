@@ -10,16 +10,13 @@ class NoTilesSession : public ISession
 {
     Q_OBJECT
 public:
-    explicit NoTilesSession(const QString& sessionTitle,
+    explicit NoTilesSession(ExerciseType type,
                           QObject* parent = nullptr)
-        : ISession(parent), _title(sessionTitle) {
+        : ISession(type, parent) {
 
     };
 
     void setup(IChoiceExerciseController* ctrl, ExerciseNoTilesWidget* w, StatisticsRepository* statsRepo);
-    QString title() const override { return _title;}
-private:
-    QString _title;
 };
 
 #endif // NOTILESSESSION_H

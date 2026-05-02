@@ -9,17 +9,17 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 add_library(gui_module STATIC
     mainwindow.cpp
     mainwindow.h
-    mainwindow.ui
+
 
     exercises/exercisewithtileswidget.h exercises/exercisewithtileswidget.cpp exercises/exercisewithtileswidget.ui
-    common/notetileswidget.h common/notetileswidget.cpp common/notetileswidget.ui
+    common/notetileswidget.h common/notetileswidget.cpp
 
     exercises/exercisenotileswidget.h exercises/exercisenotileswidget.cpp exercises/exercisenotileswidget.ui
 
     common/octavetileswidget.h common/octavetileswidget.cpp
 
     blocks/startwidget.h blocks/startwidget.cpp
-    blocks/sidebarwidget.h blocks/sidebarwidget.cpp blocks/sidebarwidget.ui
+    blocks/sidebarwidget.h blocks/sidebarwidget.cpp
     exercises/exerciserhythmwidget.h exercises/exerciserhythmwidget.cpp exercises/exerciserhythmwidget.ui
     common/rhythmcanvaswidget.h common/rhythmcanvaswidget.cpp
     common/statswidget.h common/statswidget.cpp

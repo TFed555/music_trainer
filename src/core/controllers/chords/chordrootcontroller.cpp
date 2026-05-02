@@ -6,7 +6,6 @@ ChordRootController::ChordRootController(NotePlayer* player,
                                          QObject *parent)
     : ITilesExerciseController(player, PlaybackendSignal::PlaybackFinished, parent)
 {
-    description = tr("Определите основную ноту аккорда");
 }
 
 void ChordRootController::generateTask() {

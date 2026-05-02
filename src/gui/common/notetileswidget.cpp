@@ -1,5 +1,4 @@
 #include "notetileswidget.h"
-#include "ui_notetileswidget.h"
 #include "../../music/musicutils.h"
 
 namespace {
@@ -9,16 +8,13 @@ namespace {
 
 NoteTilesWidget::NoteTilesWidget(bool noteNamesVisible, QWidget *parent)
     : QWidget(parent)
-    , ui(new Ui::NoteTilesWidget)
     , noteNamesVisible(noteNamesVisible)
 {
-    ui->setupUi(this);
     setNotes();
 }
 
 NoteTilesWidget::~NoteTilesWidget()
 {
-    delete ui;
 }
 
 
@@ -34,8 +30,6 @@ void NoteTilesWidget::paintEvent(QPaintEvent* event) {
     if (notes.empty()) return;
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
-    // const QVector<int> blackTiles = {1,3,6,8,10};
-    // const int whiteCount = notes.size() - blackTiles.size();
     const int tileWidth = width() / whiteCount;
     const int tileHeight = height();
     int whiteIdx = 0;

@@ -2,12 +2,7 @@
 #define GENERATEDAUDIO_H
 
 #include <QVector>
-
-enum class IntervalDirection {
-    Ascending,
-    Descending
-};
-
+#include "../music/musicutils.h"
 
 struct GeneratedAudio {
     QString desc;
@@ -17,7 +12,7 @@ struct GeneratedAudio {
 
 struct GeneratedInterval : GeneratedAudio {
     QString interval;
-    IntervalDirection direction;
+    MusicUtils::Intervals::IntervalDirection direction;
 };
 
 struct GeneratedChord : GeneratedAudio {

@@ -11,7 +11,7 @@
 inline void registerChordSessions(SessionFactory& factory) {
     factory.registerFactory(ExerciseType::ChordIdentify,
                             [](NotePlayer* player, StatisticsRepository* repo, QObject* parent){
-                                auto session = std::make_unique<NoTilesSession>("Определение аккорда", parent);
+                                auto session = std::make_unique<NoTilesSession>(ExerciseType::ChordIdentify, parent);
                                 auto* ctrl = new ChordIdentifyController(player, session.get());
                                 auto* view = new ExerciseNoTilesWidget(nullptr);
                                 session->setup(ctrl, view, repo);
@@ -19,7 +19,7 @@ inline void registerChordSessions(SessionFactory& factory) {
                             });
     factory.registerFactory(ExerciseType::ChordInversion,
                             [](NotePlayer* player, StatisticsRepository* repo, QObject* parent){
-                                auto session = std::make_unique<NoTilesSession>("Обращение аккорда", parent);
+                                auto session = std::make_unique<NoTilesSession>(ExerciseType::ChordInversion, parent);
                                 auto* ctrl = new ChordInversionController(player, session.get());
                                 auto* view = new ExerciseNoTilesWidget(nullptr);
                                 session->setup(ctrl, view, repo);
@@ -27,7 +27,7 @@ inline void registerChordSessions(SessionFactory& factory) {
                             });
     factory.registerFactory(ExerciseType::ChordRoot,
                             [](NotePlayer* player, StatisticsRepository* repo, QObject* parent){
-                                auto session = std::make_unique<TilesSession>("Определение основной ноты аккорда", parent);
+                                auto session = std::make_unique<TilesSession>(ExerciseType::ChordRoot, parent);
                                 auto* ctrl = new ChordRootController(player, session.get());
                                 auto* tilesctrl = new TilesController(player, session.get());
                                 auto* view = new ExerciseWithTilesWidget(true, nullptr);
@@ -36,7 +36,7 @@ inline void registerChordSessions(SessionFactory& factory) {
                             });
     factory.registerFactory(ExerciseType::ChordBuild,
                             [](NotePlayer* player, StatisticsRepository* repo, QObject* parent){
-                                auto session = std::make_unique<TilesSession>("Построение аккорда", parent);
+                                auto session = std::make_unique<TilesSession>(ExerciseType::ChordBuild, parent);
                                 auto* ctrl = new ChordBuildController(player, session.get());
                                 auto* tilesctrl = new TilesController(player, session.get());
                                 auto* view = new ExerciseWithTilesWidget(true, nullptr);

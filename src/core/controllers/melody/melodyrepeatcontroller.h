@@ -18,6 +18,9 @@ private:
     MelodyDifficultyConfig config = difficultyMap<MelodyDifficultyConfig>[Difficulty::Easy];
     GeneratedAudio result;
     int answerSize = config.noteCount;
+    QString getDescription() const override {
+        return tr("Повторите мелодию");
+    }
 };
 
 #endif // MELODYREPEATCONTROLLER_H

@@ -5,14 +5,12 @@ IntervalDirectionController::IntervalDirectionController(NotePlayer* player,
                                                          QObject *parent)
     : IChoiceExerciseController(player, PlaybackendSignal::PlaylistEmpty, parent)
 {
-    answerVariants = directionMap.values();
-    description = tr("Укажите направление интервала");
 }
 
 void IntervalDirectionController::generateTask() {
     IntervalGenerator gen(config);
     result = gen.generate();
-    correctAnswer = directionMap[result.direction];
+    correctAnswer = intervalDirectionName(result.direction);
     log(result.desc);
     playTask();
 }

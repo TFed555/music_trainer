@@ -21,6 +21,9 @@ private:
     static constexpr int chordNoteCount = 2;
     static constexpr int thirdNoteIdx = 2;
     GeneratedChord result;
+    QString getDescription() const override {
+        return tr("Постройте аккорд нужной тональности");
+    }
 };
 
 #endif // CHORDBUILDCONTROLLER_H

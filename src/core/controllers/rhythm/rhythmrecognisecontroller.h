@@ -28,6 +28,9 @@ private:
     GeneratedRhythm lastBeats;
     GeneratedRhythm result;
     PlaybackState state = PlaybackState::Idle;
+    QString getDescription() const override {
+        return tr("Прослушайте ритм и затем простучите \nего с помощью клавиши пробел");
+    }
 };
 
 #endif // RHYTHMRECOGNISECONTROLLER_H

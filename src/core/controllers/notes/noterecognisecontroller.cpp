@@ -5,7 +5,6 @@ NoteRecogniseController::NoteRecogniseController(NotePlayer* player,
                                                  QObject *parent)
     : ITilesExerciseController(player, PlaybackendSignal::PlaylistEmpty, parent)
 {
-    description = tr("Укажите услышанную ноту \nна клавиатуре");
 }
 
 void NoteRecogniseController::generateTask() {

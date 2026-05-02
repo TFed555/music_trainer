@@ -13,39 +13,6 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QWidget" name="verticalLayoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>340</x>
-     <y>100</y>
-     <width>311</width>
-     <height>121</height>
-    </rect>
-   </property>
-   <layout class="QVBoxLayout" name="manageLayout">
-    <item>
-     <widget class="QPushButton" name="startBtn">
-      <property name="text">
-       <string>Старт</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="stopBtn">
-      <property name="text">
-       <string>Стоп</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="replayBtn">
-      <property name="text">
-       <string>Повторить</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
   <widget class="QWidget" name="horizontalLayoutWidget">
    <property name="geometry">
     <rect>
@@ -57,33 +24,7 @@
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout"/>
   </widget>
-  <widget class="QPushButton" name="backBtn">
-   <property name="geometry">
-    <rect>
-     <x>130</x>
-     <y>150</y>
-     <width>101</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Назад</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="descriptionLabel">
-   <property name="geometry">
-    <rect>
-     <x>720</x>
-     <y>120</y>
-     <width>249</width>
-     <height>91</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>TextLabel</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="modeLabel">
+  <widget class="QLabel" name="tipLabel">
    <property name="geometry">
     <rect>
      <x>320</x>
@@ -96,57 +37,104 @@
     <string/>
    </property>
   </widget>
-  <widget class="QWidget" name="verticalLayoutWidget_2">
+  <widget class="QWidget" name="horizontalLayoutWidget_2">
    <property name="geometry">
     <rect>
-     <x>690</x>
-     <y>50</y>
-     <width>160</width>
-     <height>96</height>
+     <x>120</x>
+     <y>27</y>
+     <width>771</width>
+     <height>261</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
+   <layout class="QHBoxLayout" name="horizontalLayout_2">
     <item>
-     <widget class="QLabel" name="label">
+     <layout class="QFormLayout" name="formLayout">
+      <item row="0" column="0">
+       <widget class="QPushButton" name="backBtn">
+        <property name="text">
+         <string>Назад</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <layout class="QVBoxLayout" name="manageLayout">
+        <item>
+         <widget class="QPushButton" name="startBtn">
+          <property name="text">
+           <string>Старт</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="stopBtn">
+          <property name="text">
+           <string>Стоп</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="replayBtn">
+          <property name="text">
+           <string>Повторить</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QLabel" name="descriptionLabel">
       <property name="text">
-       <string>Difficulty level</string>
+       <string>TextLabel</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QComboBox" name="difficultyBox">
+     <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <property name="text">
-        <string>Easy</string>
-       </property>
+       <widget class="QLabel" name="difficultyLabel">
+        <property name="text">
+         <string>Уровень сложности</string>
+        </property>
+       </widget>
       </item>
       <item>
-       <property name="text">
-        <string>Hard</string>
-       </property>
-      </item>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="label_2">
-      <property name="text">
-       <string>Mode</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QComboBox" name="modeBox">
-      <item>
-       <property name="text">
-        <string>Try</string>
-       </property>
+       <widget class="QComboBox" name="difficultyBox">
+        <item>
+         <property name="text">
+          <string>Легко</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Сложно</string>
+         </property>
+        </item>
+       </widget>
       </item>
       <item>
-       <property name="text">
-        <string>Input</string>
-       </property>
+       <widget class="QLabel" name="modeLabel">
+        <property name="text">
+         <string>Режим</string>
+        </property>
+       </widget>
       </item>
-     </widget>
+      <item>
+       <widget class="QComboBox" name="modeBox">
+        <item>
+         <property name="text">
+          <string>Попытка</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Ввод</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>

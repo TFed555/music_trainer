@@ -17,6 +17,12 @@ private:
 private:
     IntervalDifficultyConfig config = difficultyMap<IntervalDifficultyConfig>[Difficulty::Easy];
     GeneratedInterval result;
+    QString getDescription() const override {
+        return tr("Выберите название интервала");
+    }
+    QVector<QString> getAnswerVariants() const override {
+        return MusicUtils::Intervals::intervalNames();
+    }
 };
 
 #endif // INTERVALIDENTIFYCONTROLLER_H
