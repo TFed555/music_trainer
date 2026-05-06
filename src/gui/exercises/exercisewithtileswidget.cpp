@@ -56,7 +56,7 @@ void ExerciseWithTilesWidget::showResult(const QVector<QString>& correct, const 
     ui->difficultyBox->setEnabled(true);
     tiles->highlight(correct, selected);
     QTimer::singleShot(2000, this, [this]() {
-        setMode(Mode::Input);
+        setMode(Mode::Try);
         emit resetTiles();
     });
 }
@@ -74,7 +74,7 @@ void ExerciseWithTilesWidget::setMode(Mode m) {
             ui->tipLabel->setText("");
             break;
         case Mode::Question:
-            ui->tipLabel->setText("");
+            ui->tipLabel->setText("Слушайте");
             break;
         case Mode::Try:
             ui->tipLabel->setText("");
@@ -88,7 +88,7 @@ void ExerciseWithTilesWidget::setQuestion(const QString& question) {
         questionLabel = nullptr;
     }
     questionLabel = new QLabel(question, this);
-    ui->manageLayout->addWidget(questionLabel);
+    ui->verticalLayout->addWidget(questionLabel);
 }
 
 void ExerciseWithTilesWidget::highlightQuestion(QVector<QString> notes) {

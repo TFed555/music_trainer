@@ -1,8 +1,9 @@
 #ifndef SIDEBARWIDGET_H
 #define SIDEBARWIDGET_H
 
+#include "../../core/common/models/exercisestrings.h"
 #include <QWidget>
-#include "startwidget.h"
+#include <QVBoxLayout>
 #include <QPropertyAnimation>
 #include <QPushButton>
 
@@ -20,16 +21,14 @@ signals:
 protected:
     void changeEvent(QEvent* event) override;
 private:
+    QVBoxLayout* rootLayout = nullptr;
+    void clearButtons();
     void retranslate();
-    QPushButton* intervalsBtn;
-    QPushButton* chordsBtn;
-    QPushButton* notesBtn;
-    QPushButton* rhythmBtn;
-    QPushButton* melodyBtn;
-    QPushButton* addNavButton(const QString& title, StartWidget::BlockCategory block);
+    QPushButton* addNavButton(const QString& title, BlockCategory block);
     void setLayout();
     QPropertyAnimation* anim;
     bool isOpen = false;
+    QPushButton* activeBtn = nullptr;
 };
 
 #endif // SIDEBARWIDGET_H

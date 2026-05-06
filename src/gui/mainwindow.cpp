@@ -124,6 +124,7 @@ void MainWindow::changeEvent(QEvent* event) {
 void MainWindow::retranslateUi() {
     this->setWindowTitle(tr("Тренажер музыкального слуха"));
     settingsMenu->setTitle(tr("Настройки"));
+    helpMenu->setTitle(tr("Помощь"));
     langMenu->setTitle(tr("Язык"));
     exitAction->setText(tr("Выход"));
     statsAction->setText(tr("Статистика"));

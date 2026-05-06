@@ -1,9 +1,13 @@
 #include "sidebarwidget.h"
 #include <QEvent>
+#include <QStyle>
 
 SidebarWidget::SidebarWidget(QWidget *parent)
     : QWidget(parent)
 {
+    rootLayout = new QVBoxLayout(this);
+    rootLayout->setContentsMargins(8, 16, 8, 16);
+    rootLayout->setSpacing(20);
     setLayout();
     anim = new QPropertyAnimation(this, "maximumWidth");
 }
@@ -13,27 +17,32 @@ SidebarWidget::~SidebarWidget()
 }
 
 void SidebarWidget::setLayout() {
-    QVBoxLayout* layout = new QVBoxLayout(this);
-    layout->addStretch();
-    layout->setContentsMargins(0, 0, 0, 0);
-    layout->setSpacing(20);
-    intervalsBtn = addNavButton(tr("Интервалы"), StartWidget::BlockCategory::Intervals);
-    chordsBtn = addNavButton(tr("Аккорды"), StartWidget::BlockCategory::Chords);
-    notesBtn = addNavButton(tr("Ноты"), StartWidget::BlockCategory::Notes);
-    rhythmBtn = addNavButton(tr("Ритм"), StartWidget::BlockCategory::Rhythm);
-    melodyBtn = addNavButton(tr("Мелодический слух"), StartWidget::BlockCategory::Melody);
-    layout->addWidget(intervalsBtn);
-    layout->addWidget(chordsBtn);
-    layout->addWidget(notesBtn);
-    layout->addWidget(rhythmBtn);
-    layout->addWidget(melodyBtn);
-    layout->addStretch();
+    clearButtons();
+
+    for (const auto& block : ExerciseStrings::blockConfigs.keys()) {
+        auto btn = addNavButton(ExerciseStrings::blockName(block), block);
+        rootLayout->addWidget(btn);
+        if (block == BlockCategory::Intervals) {
+            activeBtn = btn;
+        }
+    }
+    rootLayout->addStretch();
 }
 
-QPushButton* SidebarWidget::addNavButton(const QString& title, StartWidget::BlockCategory block) {
+QPushButton* SidebarWidget::addNavButton(const QString& title, BlockCategory block) {
     QPushButton* btn = new QPushButton(title);
-    btn->setFlat(true);
-    connect(btn, &QPushButton::clicked, this, [this, block](){
+    btn->setObjectName("blockBtn");
+    connect(btn, &QPushButton::clicked, this, [this, btn, block](){
+        if (activeBtn) {
+            activeBtn->setProperty("active", false);
+            activeBtn->style()->unpolish(activeBtn);
+            activeBtn->style()->polish(activeBtn);
+        }
+
+        btn->setProperty("active", true);
+        btn->style()->unpolish(btn);
+        btn->style()->polish(btn);
+        activeBtn = btn;
         emit blockSelected(static_cast<int>(block));
     });
     return btn;
@@ -52,17 +61,26 @@ void SidebarWidget::close() {
     }
 }
 
+void SidebarWidget::clearButtons() {
+    QLayoutItem* item;
+    while ((item = rootLayout->takeAt(0)) != nullptr) {
+        if (item->widget())
+            delete item->widget();
+        delete item;
+    }
+}
+
 void SidebarWidget::changeEvent(QEvent* event) {
     if (event->type() == QEvent::LanguageChange) {
-        retranslate();
+        setLayout();
     }
     QWidget::changeEvent(event);
 }
 
 void SidebarWidget::retranslate() {
-    intervalsBtn->setText(tr("Интервалы"));
-    chordsBtn->setText(tr("Аккорды"));
-    notesBtn->setText(tr("Ноты"));
-    rhythmBtn->setText(tr("Ритм"));
-    melodyBtn->setText(tr("Мелодический слух"));
+    // intervalsBtn->setText(tr("Интервалы"));
+    // chordsBtn->setText(tr("Аккорды"));
+    // notesBtn->setText(tr("Ноты"));
+    // rhythmBtn->setText(tr("Ритм"));
+    // melodyBtn->setText(tr("Мелодический слух"));
 }

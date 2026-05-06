@@ -1,5 +1,53 @@
 #include "exercisestrings.h"
 #include <QObject>
+#include <QMap>
+#include <QVector>
+
+const QMap<BlockCategory, ExerciseStrings::BlockConfig> ExerciseStrings::blockConfigs = {
+        { BlockCategory::Intervals,
+            ExerciseStrings::BlockConfig{
+                {
+                    ExerciseType::IntervalRecognise,
+                    ExerciseType::IntervalIdentify,
+                    ExerciseType::IntervalBuild,
+                    ExerciseType::IntervalDirection
+                }
+            }
+        },
+        { BlockCategory::Chords,
+            ExerciseStrings::BlockConfig{
+                {
+                    ExerciseType::ChordBuild,
+                    ExerciseType::ChordIdentify,
+                    ExerciseType::ChordInversion,
+                    ExerciseType::ChordRoot
+                }
+            }
+        },
+        { BlockCategory::Notes,
+            ExerciseStrings::BlockConfig{
+                {
+                    ExerciseType::NoteBuild,
+                    ExerciseType::NoteGuess
+                }
+            }
+        },
+        { BlockCategory::Rhythm,
+            ExerciseStrings::BlockConfig{
+                {
+                    ExerciseType::RhythmRecognise
+                }
+            }
+        },
+        { BlockCategory::Melody,
+            ExerciseStrings::BlockConfig{
+                {
+                    ExerciseType::MelodyDirection,
+                    ExerciseType::MelodyRepeat
+                }
+            }
+        }
+};
 
 QString ExerciseStrings::displayName(ExerciseType type) {
     switch (type) {
@@ -34,4 +82,16 @@ QString ExerciseStrings::displayName(ExerciseType type) {
     default:
         return {};
     }
+}
+
+
+QString ExerciseStrings::blockName(BlockCategory category) {
+    static const QMap<BlockCategory, const char*> names = {
+        {BlockCategory::Intervals, QT_TRANSLATE_NOOP("Blocks", "Интервалы")},
+        {BlockCategory::Chords, QT_TRANSLATE_NOOP("Blocks", "Аккорды")},
+        {BlockCategory::Notes, QT_TRANSLATE_NOOP("Blocks", "Ноты")},
+        {BlockCategory::Rhythm, QT_TRANSLATE_NOOP("Blocks", "Ритм")},
+        {BlockCategory::Melody, QT_TRANSLATE_NOOP("Blocks", "Мелодический слух")}
+    };
+    return QCoreApplication::translate("Blocks", names.value(category, ""));
 }

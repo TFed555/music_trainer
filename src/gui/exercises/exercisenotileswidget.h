@@ -21,6 +21,7 @@ public slots:
     void showResult(const QString& correct);
     void exercisePlayFinished() override;
     void setDescription(const QString& text) override;
+    void onReplayAvailable(int replays);
 signals:
     void answerSelected(const QString& answer);
     void difficultyChanged(int level);

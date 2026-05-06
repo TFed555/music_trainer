@@ -19,6 +19,7 @@ ExerciseNoTilesWidget::ExerciseNoTilesWidget(QWidget *parent)
         emit backClicked();
     });
     connect(ui->replayBtn, &QPushButton::clicked, this, &ExerciseNoTilesWidget::replayClicked);
+    ui->replayBtn->setEnabled(false);
     // connect(ui->difficultyBox, &QComboBox::activated,
     //         this, &ExerciseNoTilesWidget::difficultyChanged);
     connect(ui->difficultyBox, &QComboBox::currentIndexChanged,
@@ -111,6 +112,11 @@ void ExerciseNoTilesWidget::resetSelection() {
 
 void ExerciseNoTilesWidget::setDescription(const QString& text) {
     ui->descriptionLabel->setText(text);
+}
+
+void ExerciseNoTilesWidget::onReplayAvailable(int replays) {
+    bool en = replays <= 0 ? false : true;
+    ui->replayBtn->setEnabled(en);
 }
 
 void ExerciseNoTilesWidget::retranslate() {

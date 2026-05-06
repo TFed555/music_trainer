@@ -33,6 +33,9 @@ void NoTilesSession::setup(IChoiceExerciseController* ctrl, ExerciseNoTilesWidge
     connect(ctrl, &IChoiceExerciseController::setDescription,
             w, &ExerciseNoTilesWidget::setDescription);
 
+    connect(ctrl, &IChoiceExerciseController::replayAvailable,
+            w, &ExerciseNoTilesWidget::onReplayAvailable);
+
     connect(w, &ExerciseNoTilesWidget::langChange,
             ctrl, &IChoiceExerciseController::retranslate);
 

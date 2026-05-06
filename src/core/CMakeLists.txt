@@ -65,6 +65,7 @@ add_library(core STATIC
     controllers/melody/melodydirectioncontroller.h controllers/melody/melodydirectioncontroller.cpp
     common/models/ExerciseType.h
     common/models/exercisestrings.h common/models/exercisestrings.cpp
+    common/models/BlockCategory.h
 
 )
 

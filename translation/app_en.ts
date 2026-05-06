@@ -2,6 +2,34 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="en_US">
 <context>
+    <name>Blocks</name>
+    <message>
+        <location filename="../src/core/common/models/exercisestrings.cpp" line="90"/>
+        <source>Интервалы</source>
+        <translation>Intervals</translation>
+    </message>
+    <message>
+        <location filename="../src/core/common/models/exercisestrings.cpp" line="91"/>
+        <source>Аккорды</source>
+        <translation>Chords</translation>
+    </message>
+    <message>
+        <location filename="../src/core/common/models/exercisestrings.cpp" line="92"/>
+        <source>Ноты</source>
+        <translation>Notes</translation>
+    </message>
+    <message>
+        <location filename="../src/core/common/models/exercisestrings.cpp" line="93"/>
+        <source>Ритм</source>
+        <translation>Rhythm</translation>
+    </message>
+    <message>
+        <location filename="../src/core/common/models/exercisestrings.cpp" line="94"/>
+        <source>Мелодический слух</source>
+        <translation>Musical ear</translation>
+    </message>
+</context>
+<context>
     <name>ChordBuildController</name>
     <message>
         <location filename="../src/core/controllers/chords/chordbuildcontroller.h" line="25"/>
@@ -89,47 +117,48 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/exercises/exercisenotileswidget.ui" line="26"/>
-        <location filename="../src/gui/exercises/exercisenotileswidget.cpp" line="120"/>
+        <location filename="../src/gui/exercises/exercisenotileswidget.ui" line="33"/>
+        <location filename="../src/gui/exercises/exercisenotileswidget.cpp" line="126"/>
         <source>Назад</source>
         <translation>Back</translation>
     </message>
     <message>
         <location filename="../src/gui/exercises/exercisenotileswidget.ui" line="42"/>
-        <location filename="../src/gui/exercises/exercisenotileswidget.cpp" line="117"/>
+        <location filename="../src/gui/exercises/exercisenotileswidget.cpp" line="123"/>
         <source>Старт</source>
         <translation>Start</translation>
     </message>
     <message>
         <location filename="../src/gui/exercises/exercisenotileswidget.ui" line="49"/>
-        <location filename="../src/gui/exercises/exercisenotileswidget.cpp" line="118"/>
+        <location filename="../src/gui/exercises/exercisenotileswidget.cpp" line="124"/>
         <source>Стоп</source>
         <translation>Stop</translation>
     </message>
     <message>
         <location filename="../src/gui/exercises/exercisenotileswidget.ui" line="56"/>
-        <location filename="../src/gui/exercises/exercisenotileswidget.cpp" line="119"/>
+        <location filename="../src/gui/exercises/exercisenotileswidget.cpp" line="125"/>
         <source>Повторить</source>
         <translation>Replay</translation>
     </message>
     <message>
-        <location filename="../src/gui/exercises/exercisenotileswidget.ui" line="84"/>
+        <location filename="../src/gui/exercises/exercisenotileswidget.ui" line="88"/>
         <source>Легко</source>
         <translation>Easy</translation>
     </message>
     <message>
-        <location filename="../src/gui/exercises/exercisenotileswidget.ui" line="89"/>
+        <location filename="../src/gui/exercises/exercisenotileswidget.ui" line="93"/>
         <source>Сложно</source>
         <translation>Hard</translation>
     </message>
     <message>
-        <location filename="../src/gui/exercises/exercisenotileswidget.ui" line="109"/>
-        <location filename="../src/gui/exercises/exercisenotileswidget.cpp" line="121"/>
+        <location filename="../src/gui/exercises/exercisenotileswidget.ui" line="77"/>
+        <location filename="../src/gui/exercises/exercisenotileswidget.ui" line="84"/>
+        <location filename="../src/gui/exercises/exercisenotileswidget.cpp" line="127"/>
         <source>Уровень сложности</source>
         <translation>Difficulty level</translation>
     </message>
     <message>
-        <location filename="../src/gui/exercises/exercisenotileswidget.ui" line="122"/>
+        <location filename="../src/gui/exercises/exercisenotileswidget.ui" line="129"/>
         <source>TextLabel</source>
         <translation type="unfinished"></translation>
     </message>
@@ -221,64 +250,64 @@ Number of errors: %2</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="55"/>
+        <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="33"/>
         <location filename="../src/gui/exercises/exercisewithtileswidget.cpp" line="115"/>
         <source>Назад</source>
         <translation>Back</translation>
     </message>
     <message>
-        <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="64"/>
+        <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="42"/>
         <location filename="../src/gui/exercises/exercisewithtileswidget.cpp" line="112"/>
         <source>Старт</source>
         <translation>Start</translation>
     </message>
     <message>
-        <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="71"/>
+        <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="49"/>
         <location filename="../src/gui/exercises/exercisewithtileswidget.cpp" line="113"/>
         <source>Стоп</source>
         <translation>Stop</translation>
     </message>
     <message>
-        <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="78"/>
+        <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="56"/>
         <location filename="../src/gui/exercises/exercisewithtileswidget.cpp" line="114"/>
         <source>Повторить</source>
         <translation>Replay</translation>
     </message>
     <message>
-        <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="89"/>
+        <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="158"/>
         <source>TextLabel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="98"/>
+        <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="104"/>
         <location filename="../src/gui/exercises/exercisewithtileswidget.cpp" line="116"/>
         <source>Уровень сложности</source>
         <translation>Difficulty level</translation>
     </message>
     <message>
-        <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="106"/>
+        <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="112"/>
         <source>Легко</source>
         <translation>Easy</translation>
     </message>
     <message>
-        <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="111"/>
+        <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="117"/>
         <source>Сложно</source>
         <translation>Hard</translation>
     </message>
     <message>
-        <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="119"/>
+        <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="71"/>
         <location filename="../src/gui/exercises/exercisewithtileswidget.cpp" line="127"/>
         <source>Режим</source>
         <translation>Mode</translation>
     </message>
     <message>
-        <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="127"/>
+        <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="79"/>
         <location filename="../src/gui/exercises/exercisewithtileswidget.h" line="42"/>
         <source>Попытка</source>
         <translation>Try</translation>
     </message>
     <message>
-        <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="132"/>
+        <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="84"/>
         <location filename="../src/gui/exercises/exercisewithtileswidget.h" line="42"/>
         <source>Ввод</source>
         <translation>Input</translation>
@@ -440,24 +469,25 @@ Number of errors: %2</translation>
     </message>
     <message>
         <location filename="../src/gui/mainwindow.cpp" line="51"/>
+        <location filename="../src/gui/mainwindow.cpp" line="127"/>
         <source>Помощь</source>
         <translation>Help</translation>
     </message>
     <message>
         <location filename="../src/gui/mainwindow.cpp" line="52"/>
-        <location filename="../src/gui/mainwindow.cpp" line="127"/>
+        <location filename="../src/gui/mainwindow.cpp" line="128"/>
         <source>Язык</source>
         <translation>Language</translation>
     </message>
     <message>
         <location filename="../src/gui/mainwindow.cpp" line="56"/>
-        <location filename="../src/gui/mainwindow.cpp" line="129"/>
+        <location filename="../src/gui/mainwindow.cpp" line="130"/>
         <source>Статистика</source>
         <translation>Statistics</translation>
     </message>
     <message>
         <location filename="../src/gui/mainwindow.cpp" line="57"/>
-        <location filename="../src/gui/mainwindow.cpp" line="128"/>
+        <location filename="../src/gui/mainwindow.cpp" line="129"/>
         <source>Выход</source>
         <translation>Exit</translation>
     </message>
@@ -601,72 +631,72 @@ Number of errors: %2</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/core/common/models/exercisestrings.cpp" line="7"/>
+        <location filename="../src/core/common/models/exercisestrings.cpp" line="55"/>
         <source>Определение интервала</source>
         <translation>Identify the interval</translation>
     </message>
     <message>
-        <location filename="../src/core/common/models/exercisestrings.cpp" line="9"/>
+        <location filename="../src/core/common/models/exercisestrings.cpp" line="57"/>
         <source>Название интервала</source>
         <translation>Interval name</translation>
     </message>
     <message>
-        <location filename="../src/core/common/models/exercisestrings.cpp" line="11"/>
+        <location filename="../src/core/common/models/exercisestrings.cpp" line="59"/>
         <source>Построение интервала</source>
         <translation>Defining the interval</translation>
     </message>
     <message>
-        <location filename="../src/core/common/models/exercisestrings.cpp" line="13"/>
+        <location filename="../src/core/common/models/exercisestrings.cpp" line="61"/>
         <source>Направление интервала</source>
         <translation>Interval direction</translation>
     </message>
     <message>
-        <location filename="../src/core/common/models/exercisestrings.cpp" line="15"/>
+        <location filename="../src/core/common/models/exercisestrings.cpp" line="63"/>
         <source>Построение аккорда</source>
         <translation>Building a chord</translation>
     </message>
     <message>
-        <location filename="../src/core/common/models/exercisestrings.cpp" line="17"/>
+        <location filename="../src/core/common/models/exercisestrings.cpp" line="65"/>
         <source>Определение типа аккорда</source>
         <translation>Identifying the chord type</translation>
     </message>
     <message>
-        <location filename="../src/core/common/models/exercisestrings.cpp" line="19"/>
+        <location filename="../src/core/common/models/exercisestrings.cpp" line="67"/>
         <source>Определение обращения аккорда</source>
         <translation>Definition of chord inversion</translation>
     </message>
     <message>
-        <location filename="../src/core/common/models/exercisestrings.cpp" line="21"/>
+        <location filename="../src/core/common/models/exercisestrings.cpp" line="69"/>
         <source>Определение основной ноты аккорда</source>
         <translation>Identifying the root note of a chord</translation>
     </message>
     <message>
-        <location filename="../src/core/common/models/exercisestrings.cpp" line="23"/>
+        <location filename="../src/core/common/models/exercisestrings.cpp" line="71"/>
         <source>Определение нот в мелодии</source>
         <translation>Identifying notes in a melody</translation>
     </message>
     <message>
-        <location filename="../src/core/common/models/exercisestrings.cpp" line="25"/>
+        <location filename="../src/core/common/models/exercisestrings.cpp" line="73"/>
         <source>Название ноты</source>
         <translation>Note title</translation>
     </message>
     <message>
-        <location filename="../src/core/common/models/exercisestrings.cpp" line="27"/>
+        <location filename="../src/core/common/models/exercisestrings.cpp" line="75"/>
         <source>Определение ноты</source>
         <translation>Definition of a note</translation>
     </message>
     <message>
-        <location filename="../src/core/common/models/exercisestrings.cpp" line="29"/>
+        <location filename="../src/core/common/models/exercisestrings.cpp" line="77"/>
         <source>Определение ритма</source>
         <translation>Determining the rhythm</translation>
     </message>
     <message>
-        <location filename="../src/core/common/models/exercisestrings.cpp" line="31"/>
+        <location filename="../src/core/common/models/exercisestrings.cpp" line="79"/>
         <source>Определение направления мелодии</source>
         <translation>Determining the direction of the melody</translation>
     </message>
     <message>
-        <location filename="../src/core/common/models/exercisestrings.cpp" line="33"/>
+        <location filename="../src/core/common/models/exercisestrings.cpp" line="81"/>
         <source>Повтор мелодии</source>
         <translation>Repeat the melody</translation>
     </message>
@@ -674,27 +704,27 @@ Number of errors: %2</translation>
 <context>
     <name>Rhythm</name>
     <message>
-        <location filename="../src/music/musicutils.h" line="183"/>
+        <location filename="../src/music/musicutils.h" line="190"/>
         <source>Целая</source>
         <translation>Whole</translation>
     </message>
     <message>
-        <location filename="../src/music/musicutils.h" line="184"/>
+        <location filename="../src/music/musicutils.h" line="191"/>
         <source>Половинная</source>
         <translation>Half</translation>
     </message>
     <message>
-        <location filename="../src/music/musicutils.h" line="185"/>
+        <location filename="../src/music/musicutils.h" line="192"/>
         <source>Четвертная</source>
         <translation>Quarter</translation>
     </message>
     <message>
-        <location filename="../src/music/musicutils.h" line="186"/>
+        <location filename="../src/music/musicutils.h" line="193"/>
         <source>Восьмая</source>
         <translation>Eighth</translation>
     </message>
     <message>
-        <location filename="../src/music/musicutils.h" line="187"/>
+        <location filename="../src/music/musicutils.h" line="194"/>
         <source>Шестнадцатая</source>
         <translation>Sixteenth</translation>
     </message>
@@ -716,34 +746,24 @@ Number of errors: %2</translation>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/gui/blocks/sidebarwidget.cpp" line="20"/>
-        <location filename="../src/gui/blocks/sidebarwidget.cpp" line="63"/>
         <source>Интервалы</source>
-        <translation>Intervals</translation>
+        <translation type="vanished">Intervals</translation>
     </message>
     <message>
-        <location filename="../src/gui/blocks/sidebarwidget.cpp" line="21"/>
-        <location filename="../src/gui/blocks/sidebarwidget.cpp" line="64"/>
         <source>Аккорды</source>
-        <translation>Chords</translation>
+        <translation type="vanished">Chords</translation>
     </message>
     <message>
-        <location filename="../src/gui/blocks/sidebarwidget.cpp" line="22"/>
-        <location filename="../src/gui/blocks/sidebarwidget.cpp" line="65"/>
         <source>Ноты</source>
-        <translation>Notes</translation>
+        <translation type="vanished">Notes</translation>
     </message>
     <message>
-        <location filename="../src/gui/blocks/sidebarwidget.cpp" line="23"/>
-        <location filename="../src/gui/blocks/sidebarwidget.cpp" line="66"/>
         <source>Ритм</source>
-        <translation>Rhythm</translation>
+        <translation type="vanished">Rhythm</translation>
     </message>
     <message>
-        <location filename="../src/gui/blocks/sidebarwidget.cpp" line="24"/>
-        <location filename="../src/gui/blocks/sidebarwidget.cpp" line="67"/>
         <source>Мелодический слух</source>
-        <translation>Musical ear</translation>
+        <translation type="vanished">Musical ear</translation>
     </message>
 </context>
 <context>

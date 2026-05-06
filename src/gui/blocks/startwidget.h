@@ -3,9 +3,9 @@
 
 #include <QWidget>
 #include "../../core/common/interfaces/IExerciseWidget.h"
-#include "../../core/common/models/ExerciseType.h"
+#include "../../core/common/models/exercisestrings.h"
 #include <QVBoxLayout>
-
+#include <QCoreApplication>
 
 class StartWidget : public QWidget
 {
@@ -14,16 +14,6 @@ class StartWidget : public QWidget
 public:
     explicit StartWidget(QWidget *parent = nullptr);
     ~StartWidget();
-    enum class BlockCategory {
-        Intervals,
-        Chords,
-        Notes,
-        Rhythm,
-        Melody
-    };
-    struct BlockConfig {
-        QVector<ExerciseType> exercises;
-    };
 
     void setBlock(int block);
 signals:
@@ -33,9 +23,7 @@ protected:
 private:
     void clearButtons();
     void addButton(const QString& title, ExerciseType type);
-    QVBoxLayout* layout;
-    // using BlockConfig = QVector<ExerciseType>;
-    static const QMap<BlockCategory, BlockConfig> blockConfigs;
+    QVBoxLayout* rootLayout = nullptr;
     int currentBlock;
 };
 

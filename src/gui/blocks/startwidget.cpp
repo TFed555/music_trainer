@@ -1,16 +1,17 @@
 #include "startwidget.h"
 #include <QPushButton>
 #include <QEvent>
+#include <QFrame>
+#include <QLabel>
 #include "../../core/common/models/exercisestrings.h"
 
 StartWidget::StartWidget(QWidget *parent)
     : QWidget(parent)
 {
-    layout = new QVBoxLayout(this);
-    layout->setAlignment(Qt::AlignCenter);
-    layout->setContentsMargins(0, 0, 0, 0);
-    layout->setSpacing(10);
-    layout->addStretch();
+    rootLayout = new QVBoxLayout(this);
+    rootLayout->setAlignment(Qt::AlignCenter);
+    rootLayout->setSpacing(12);
+    rootLayout->setContentsMargins(20, 20, 20, 20);
     currentBlock = 0;
     setBlock(0);
 }
@@ -19,77 +20,69 @@ StartWidget::~StartWidget()
 {
 }
 
-const QMap<StartWidget::BlockCategory, StartWidget::BlockConfig>
-    StartWidget::blockConfigs = {
-        { StartWidget::BlockCategory::Intervals,
-            BlockConfig{
-                {
-                    ExerciseType::IntervalRecognise,
-                    ExerciseType::IntervalIdentify,
-                    ExerciseType::IntervalBuild,
-                    ExerciseType::IntervalDirection
-                }
-            }
-        },
-        { StartWidget::BlockCategory::Chords,
-            BlockConfig{
-                {
-                    ExerciseType::ChordBuild,
-                    ExerciseType::ChordIdentify,
-                    ExerciseType::ChordInversion,
-                    ExerciseType::ChordRoot
-                }
-            }
-        },
-        { StartWidget::BlockCategory::Notes,
-            BlockConfig{
-                {
-                    ExerciseType::NoteBuild,
-                    ExerciseType::NoteGuess
-                }
-            }
-        },
-        { StartWidget::BlockCategory::Rhythm,
-            BlockConfig{
-                {
-                    ExerciseType::RhythmRecognise
-                }
-            }
-        },
-        { StartWidget::BlockCategory::Melody,
-            BlockConfig{
-                {
-                    ExerciseType::MelodyDirection,
-                    ExerciseType::MelodyRepeat
-                }
-            }
-        }
-};
-
 void StartWidget::addButton(const QString& title, ExerciseType type) {
     QPushButton* btn = new QPushButton();
     btn->setText(title);
-    btn->setFixedSize(300,30);
-    layout->addWidget(btn,0,Qt::AlignCenter);
+    btn->setMinimumHeight(44);
+    btn->setMaximumWidth(320);
+    btn->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    btn->setObjectName("exerciseBtn");
+
     connect(btn, &QPushButton::clicked, this, [this, type](){
         emit exerciseSelected(type);
     });
 }
 
 void StartWidget::setBlock(int block) {
-    BlockCategory category = static_cast<BlockCategory>(block);
     clearButtons();
-    for (const auto& type : blockConfigs[category].exercises) {
-        QString text = ExerciseStrings::displayName(type);
-        addButton(text, type);
+
+    QFrame* card = new QFrame();
+    card->setMaximumWidth(700);
+    card->setMaximumHeight(800);
+    card->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Maximum);
+    QVBoxLayout* cardLayout = new QVBoxLayout(card);
+    cardLayout->setSpacing(10);
+    BlockCategory category = static_cast<BlockCategory>(block);
+
+    QLabel* title = new QLabel(ExerciseStrings::blockName(category));
+    title->setObjectName("blockLabel");
+    cardLayout->addWidget(title);
+
+    QGridLayout* grid = new QGridLayout();
+    grid->setSpacing(10);
+    cardLayout->addLayout(grid);
+
+    int row = 0, col = 0;
+
+    for (const auto& type : ExerciseStrings::blockConfigs[category].exercises) {
+        QPushButton* btn = new QPushButton(ExerciseStrings::displayName(type));
+        btn->setMinimumHeight(44);
+        btn->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+        btn->setObjectName("exerciseBtn");
+
+        connect(btn, &QPushButton::clicked, this, [this, type]() {
+            emit exerciseSelected(type);
+        });
+
+        grid->addWidget(btn, row, col);
+
+        col++;
+        if (col == 2) {
+            col = 0;
+            row++;
+        }
     }
+
+    rootLayout->addWidget(card, 0, Qt::AlignHCenter);
+
     currentBlock = block;
 }
 
 void StartWidget::clearButtons() {
     QLayoutItem* item;
-    while ((item = layout->takeAt(0)) != nullptr) {
-        delete item->widget();
+    while ((item = rootLayout->takeAt(0)) != nullptr) {
+        if (item->widget())
+            delete item->widget();
         delete item;
     }
 }

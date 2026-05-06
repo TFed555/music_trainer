@@ -58,10 +58,10 @@ void RhythmCanvasWidget::paintEvent(QPaintEvent* event) {
     }
     if (mode == Mode::Input) {
         painter.drawLine(0, y, width(), y);
-        painter.setPen(Qt::black);
-        painter.drawLine((int)currentBeatX, y-10, (int)currentBeatX, y+10);
-        painter.setPen(Qt::blue);
-        painter.drawLine((int)currentUserX, y-10, (int)currentUserX, y+10);
+        // painter.setPen(Qt::black);
+        // painter.drawLine((int)currentBeatX, y-10, (int)currentBeatX, y+10);
+        // painter.setPen(Qt::blue);
+        // painter.drawLine((int)currentUserX, y-10, (int)currentUserX, y+10);
         painter.setPen(Qt::red);
         for (int tapX : userTaps) {
             painter.drawEllipse(tapX - 4, y - 4, 15, 15);

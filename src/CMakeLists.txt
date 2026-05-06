@@ -111,3 +111,4 @@ add_custom_command(TARGET trainer_1 POST_BUILD
         ${CMAKE_CURRENT_SOURCE_DIR}/../assets
         $<TARGET_FILE_DIR:trainer_1>/assets
 )
+
