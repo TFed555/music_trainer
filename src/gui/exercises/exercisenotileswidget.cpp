@@ -115,7 +115,7 @@ void ExerciseNoTilesWidget::setDescription(const QString& text) {
 }
 
 void ExerciseNoTilesWidget::onReplayAvailable(int replays) {
-    bool en = replays <= 0 ? false : true;
+    bool en = replays > 0;
     ui->replayBtn->setEnabled(en);
 }
 
@@ -125,14 +125,6 @@ void ExerciseNoTilesWidget::retranslate() {
     ui->replayBtn->setText(tr("Повторить"));
     ui->backBtn->setText(tr("Назад"));
     ui->difficultyLabel->setText(tr("Уровень сложности"));
-
-    int currentIndex = ui->difficultyBox->currentIndex();
-    ui->difficultyBox->blockSignals(true);
-    ui->difficultyBox->clear();
-    for (const auto& item : getDifficultyItems()) {
-        ui->difficultyBox->addItem(item);
-    }
-    ui->difficultyBox->setCurrentIndex(currentIndex);
-    ui->difficultyBox->blockSignals(false);
+    retranslateComboBox(ui->difficultyBox, getDifficultyItems());
     emit langChange();
 }

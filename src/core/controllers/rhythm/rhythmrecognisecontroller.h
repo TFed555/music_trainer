@@ -29,7 +29,7 @@ private:
     GeneratedRhythm result;
     PlaybackState state = PlaybackState::Idle;
     QString getDescription() const override {
-        return tr("Прослушайте ритм и затем простучите \nего с помощью клавиши пробел");
+        return tr("Прослушайте ритм и затем простучите его с помощью\n клавиши пробел");
     }
 };
 

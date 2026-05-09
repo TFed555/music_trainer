@@ -1,11 +1,12 @@
 #include "chordgenerator.h"
 #include <QDebug>
+#include <../core/common/exceptions/GeneratorException.h>
 
 ChordGenerator::ChordGenerator(ChordDifficultyConfig config)
     : config(config)
 {}
 
-GeneratedChord ChordGenerator::generate() {
+GeneratedChord ChordGenerator::doGenerate() {
 
     std::uniform_int_distribution<> midiDist(60, 71);
 
@@ -26,15 +27,19 @@ GeneratedChord ChordGenerator::generate() {
         midiNotes.append(lastMidi);
     }
 
-    while (lastMidi > config.midiMax || lastMidi < config.midiMin) {
-        midiNotes.clear();
-        firstMidi = midiDist(gen);
-        lastMidi = firstMidi;
-        for (auto i : semitones) {
-            lastMidi += i;
-            midiNotes.append(lastMidi);
-        }
+    if (lastMidi > config.midiMax || lastMidi < config.midiMin) {
+        throw GeneratorException("Midi out of range");
     }
+
+    // while (lastMidi > config.midiMax || lastMidi < config.midiMin) {
+    //     midiNotes.clear();
+    //     firstMidi = midiDist(gen);
+    //     lastMidi = firstMidi;
+    //     for (auto i : semitones) {
+    //         lastMidi += i;
+    //         midiNotes.append(lastMidi);
+    //     }
+    // }
 
     for (int i = 0; i < (int)inversion; i++) {
         midiNotes[i]+=12;
@@ -46,7 +51,7 @@ GeneratedChord ChordGenerator::generate() {
     res.type = MusicUtils::Chords::chordName(type);
     res.midiNotes = midiNotes;
     res.inversion = MusicUtils::Chords::inversionName(inversion);
-    res.root = MusicUtils::midiToNote(midiNotes[1]);
+    res.root = MusicUtils::midiToNote(midiNotes[0]);
     res.desc = [](const QVector<int>& midiNotes) -> QString {
         QVector<QString> res;
         res.reserve(midiNotes.size());

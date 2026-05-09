@@ -8,6 +8,8 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    a.setApplicationName("Music trainer");
+    Logger::info("App started");
     int fontId = QFontDatabase::addApplicationFont(":/Bravura.otf");
     if (fontId == -1) {
         qDebug() << "Failed to load Bravura font";

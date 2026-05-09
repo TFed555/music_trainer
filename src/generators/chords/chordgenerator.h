@@ -2,6 +2,7 @@
 #define CHORDGENERATOR_H
 #pragma once
 
+#include "../GeneratedAudio.h"
 #include "../IGenerator.h"
 #include <random>
 #include "../core/common/models/Difficulty.h"
@@ -17,9 +18,11 @@ inline const QMap<MusicUtils::Chords::ChordType, QVector<int>> requiredIntervals
 
 class ChordGenerator : public IGenerator<ChordGenerator, GeneratedChord>
 {
+    friend class IGenerator<ChordGenerator, GeneratedChord>;
 public:
     explicit ChordGenerator(ChordDifficultyConfig config = {});
-    GeneratedChord generate();
+protected:
+    GeneratedChord doGenerate() override;
 private:
     ChordDifficultyConfig config;
     std::mt19937 gen{std::random_device{}()};

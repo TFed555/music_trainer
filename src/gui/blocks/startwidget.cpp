@@ -20,19 +20,6 @@ StartWidget::~StartWidget()
 {
 }
 
-void StartWidget::addButton(const QString& title, ExerciseType type) {
-    QPushButton* btn = new QPushButton();
-    btn->setText(title);
-    btn->setMinimumHeight(44);
-    btn->setMaximumWidth(320);
-    btn->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-    btn->setObjectName("exerciseBtn");
-
-    connect(btn, &QPushButton::clicked, this, [this, type](){
-        emit exerciseSelected(type);
-    });
-}
-
 void StartWidget::setBlock(int block) {
     clearButtons();
 

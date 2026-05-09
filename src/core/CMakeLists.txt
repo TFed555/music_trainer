@@ -67,6 +67,12 @@ add_library(core STATIC
     common/models/exercisestrings.h common/models/exercisestrings.cpp
     common/models/BlockCategory.h
 
+    common/exceptions/AppException.h
+    common/exceptions/GeneratorException.h
+    common/recovery/RecoveryStrategy.h
+    common/recovery/RetryStrategy.h
+    common/exceptions/RecoveryFailedException.h
+
 )
 
 
@@ -85,8 +91,8 @@ target_include_directories(core PUBLIC
     ${SNDFILE_INCLUDE_DIRS}
 )
 target_link_libraries(core PUBLIC generators_module)
+target_link_libraries(core PUBLIC log_module)
 target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
-target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
-target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
+
 
 

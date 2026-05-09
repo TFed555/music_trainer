@@ -74,7 +74,7 @@ void ExerciseWithTilesWidget::setMode(Mode m) {
             ui->tipLabel->setText("");
             break;
         case Mode::Question:
-            ui->tipLabel->setText("Слушайте");
+            ui->tipLabel->setText(tr("Слушайте"));
             break;
         case Mode::Try:
             ui->tipLabel->setText("");
@@ -84,6 +84,7 @@ void ExerciseWithTilesWidget::setMode(Mode m) {
 
 void ExerciseWithTilesWidget::setQuestion(const QString& question) {
     if (questionLabel) {
+        ui->verticalLayout->removeWidget(questionLabel);
         delete questionLabel;
         questionLabel = nullptr;
     }
@@ -104,7 +105,7 @@ void ExerciseWithTilesWidget::setDescription(const QString& text) {
 }
 
 void ExerciseWithTilesWidget::onReplayAvailable(int replays) {
-    bool en = replays <= 0 ? false : true;
+    bool en = replays > 0;
     ui->replayBtn->setEnabled(en);
 }
 
@@ -114,25 +115,8 @@ void ExerciseWithTilesWidget::retranslate() {
     ui->replayBtn->setText(tr("Повторить"));
     ui->backBtn->setText(tr("Назад"));
     ui->difficultyLabel->setText(tr("Уровень сложности"));
-
-    int currentDifIndex = ui->difficultyBox->currentIndex();
-    ui->difficultyBox->blockSignals(true);
-    ui->difficultyBox->clear();
-    for (const auto& item : getDifficultyItems()) {
-        ui->difficultyBox->addItem(item);
-    }
-    ui->difficultyBox->setCurrentIndex(currentDifIndex);
-    ui->difficultyBox->blockSignals(false);
-
     ui->modeLabel->setText(tr("Режим"));
-
-    int currentModeIndex = ui->modeBox->currentIndex();
-    ui->modeBox->blockSignals(true);
-    ui->modeBox->clear();
-    for (const auto& item : getModeItems()) {
-        ui->modeBox->addItem(item);
-    }
-    ui->modeBox->setCurrentIndex(currentModeIndex);
-    ui->modeBox->blockSignals(false);
+    retranslateComboBox(ui->difficultyBox, getDifficultyItems());
+    retranslateComboBox(ui->modeBox, getModeItems());
     emit langChange();
 }

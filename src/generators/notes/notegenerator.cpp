@@ -5,7 +5,7 @@ NoteGenerator::NoteGenerator(NoteDifficultyConfig config)
     : config(config)
 {}
 
-GeneratedAudio NoteGenerator::generate() {
+GeneratedAudio NoteGenerator::doGenerate() {
     std::uniform_int_distribution<> midiDist(config.midiMin, config.midiMax);
     GeneratedAudio res;
     QVector<int>& midiNotes = res.midiNotes;

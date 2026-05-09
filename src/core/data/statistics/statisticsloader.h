@@ -12,7 +12,7 @@ public:
     void recordAttempt(const QJsonObject& attempt, const QString& exerciseId);
     QJsonObject load();
 private:
-    const QString filePath =  QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)
+    const QString filePath =  QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation)
                              + "/stats.json";
 };
 

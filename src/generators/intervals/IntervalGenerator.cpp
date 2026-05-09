@@ -1,12 +1,13 @@
 #include "IntervalGenerator.h"
 #include "../music/musicutils.h"
 #include <QDebug>
+#include <../core/common/exceptions/GeneratorException.h>
 
 IntervalGenerator::IntervalGenerator(IntervalDifficultyConfig config)
     : config(config)
 {}
 
-GeneratedInterval IntervalGenerator::generate() {
+GeneratedInterval IntervalGenerator::doGenerate() {
     std::uniform_int_distribution<> midiDist(config.midiMin, config.midiMax);
 
     int firstMidi = midiDist(gen);
@@ -20,11 +21,14 @@ GeneratedInterval IntervalGenerator::generate() {
 
     int secondMidi = firstMidi + semitones;
 
-    while (secondMidi > config.midiMax || secondMidi < config.midiMin) {
-        // semitones = intervalDist(gen);
-        semitones = config.allowedSemitones[intervalDist(gen)];
-        secondMidi = firstMidi + semitones;
+    if (secondMidi > config.midiMax || secondMidi < config.midiMin) {
+        throw GeneratorException("Midi out of range");
     }
+    // int attempts = 0;
+    // while (secondMidi > config.midiMax || secondMidi < config.midiMin) {
+    //     semitones = config.allowedSemitones[intervalDist(gen)];
+    //     secondMidi = firstMidi + semitones;
+    // }
 
     int realSemitones = secondMidi - firstMidi;
 

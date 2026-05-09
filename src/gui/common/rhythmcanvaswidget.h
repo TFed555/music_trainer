@@ -30,8 +30,6 @@ public slots:
     void exerciseStarted();
 protected:
     void paintEvent(QPaintEvent* event) override;
-    // void mousePressEvent(QMouseEvent* event) override;
-    // void keyPressEvent(QKeyEvent* event) override;
     float durationMs(MusicUtils::Rhythm::RhythmType type);
 signals:
     void inputFinished(const QVector<int>& notePoses, const QVector<int>& userTaps);

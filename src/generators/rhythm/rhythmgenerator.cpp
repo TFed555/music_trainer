@@ -22,9 +22,8 @@ bool countTact(QMap<int, int>& durations, int coef, float &count) {
 }
 
 
-GeneratedRhythm RhythmGenerator::generate() {
+GeneratedRhythm RhythmGenerator::doGenerate() {
     using namespace MusicUtils::Rhythm;
-    // std::uniform_int_distribution<> countDist(config.midiMin, config.midiMax);
     std::uniform_int_distribution<> durationDist(0,config.allowedDurations.size()-1);
     QMap<int, int> durations;
 

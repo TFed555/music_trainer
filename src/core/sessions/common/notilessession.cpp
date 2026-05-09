@@ -39,6 +39,9 @@ void NoTilesSession::setup(IChoiceExerciseController* ctrl, ExerciseNoTilesWidge
     connect(w, &ExerciseNoTilesWidget::langChange,
             ctrl, &IChoiceExerciseController::retranslate);
 
+    connect(ctrl, &IChoiceExerciseController::error,
+            w, &ExerciseNoTilesWidget::showErrorInfo);
+
     ctrl->giveAnswers();
     ctrl->sendDescription();
 }

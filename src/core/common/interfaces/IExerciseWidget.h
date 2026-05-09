@@ -3,6 +3,8 @@
 
 #include <QWidget>
 #include <QEvent>
+#include <QComboBox>
+#include <QMessageBox>
 
 class IExerciseWidget : public QWidget {
     Q_OBJECT
@@ -12,6 +14,9 @@ public:
 public slots:
     virtual void exercisePlayFinished() = 0;
     virtual void setDescription(const QString& text) = 0;
+    void showErrorInfo(const QString& err) {
+        QMessageBox::warning(this, tr("Тренажер музыкального слуха"), err, QMessageBox::Ok);
+    }
 protected:
     void changeEvent(QEvent* event) {
         if (event->type() == QEvent::LanguageChange) {
@@ -21,6 +26,15 @@ protected:
     }
     QVector<QString> getDifficultyItems() const {
         return { tr("Легко"), tr("Сложно") };
+    }
+
+    static void retranslateComboBox(QComboBox* box, const QVector<QString>& items) {
+        int idx = box->currentIndex();
+        box->blockSignals(true);
+        box->clear();
+        for (const auto& item : items) box->addItem(item);
+        box->setCurrentIndex(idx);
+        box->blockSignals(false);
     }
 private:
     virtual void retranslate() = 0;

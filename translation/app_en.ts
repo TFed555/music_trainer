@@ -241,6 +241,16 @@
         <translation>Number of hits: %1
 Number of errors: %2</translation>
     </message>
+    <message>
+        <location filename="../src/gui/exercises/exerciserhythmwidget.cpp" line="91"/>
+        <source>Слушайте</source>
+        <translation>Listen</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/exercises/exerciserhythmwidget.cpp" line="94"/>
+        <source>Введите ответ</source>
+        <translation>Enter your answer</translation>
+    </message>
 </context>
 <context>
     <name>ExerciseWithTilesWidget</name>
@@ -251,25 +261,25 @@ Number of errors: %2</translation>
     </message>
     <message>
         <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="33"/>
-        <location filename="../src/gui/exercises/exercisewithtileswidget.cpp" line="115"/>
+        <location filename="../src/gui/exercises/exercisewithtileswidget.cpp" line="116"/>
         <source>Назад</source>
         <translation>Back</translation>
     </message>
     <message>
         <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="42"/>
-        <location filename="../src/gui/exercises/exercisewithtileswidget.cpp" line="112"/>
+        <location filename="../src/gui/exercises/exercisewithtileswidget.cpp" line="113"/>
         <source>Старт</source>
         <translation>Start</translation>
     </message>
     <message>
         <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="49"/>
-        <location filename="../src/gui/exercises/exercisewithtileswidget.cpp" line="113"/>
+        <location filename="../src/gui/exercises/exercisewithtileswidget.cpp" line="114"/>
         <source>Стоп</source>
         <translation>Stop</translation>
     </message>
     <message>
         <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="56"/>
-        <location filename="../src/gui/exercises/exercisewithtileswidget.cpp" line="114"/>
+        <location filename="../src/gui/exercises/exercisewithtileswidget.cpp" line="115"/>
         <source>Повторить</source>
         <translation>Replay</translation>
     </message>
@@ -280,7 +290,7 @@ Number of errors: %2</translation>
     </message>
     <message>
         <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="104"/>
-        <location filename="../src/gui/exercises/exercisewithtileswidget.cpp" line="116"/>
+        <location filename="../src/gui/exercises/exercisewithtileswidget.cpp" line="117"/>
         <source>Уровень сложности</source>
         <translation>Difficulty level</translation>
     </message>
@@ -296,7 +306,7 @@ Number of errors: %2</translation>
     </message>
     <message>
         <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="71"/>
-        <location filename="../src/gui/exercises/exercisewithtileswidget.cpp" line="127"/>
+        <location filename="../src/gui/exercises/exercisewithtileswidget.cpp" line="118"/>
         <source>Режим</source>
         <translation>Mode</translation>
     </message>
@@ -314,6 +324,7 @@ Number of errors: %2</translation>
     </message>
     <message>
         <location filename="../src/gui/exercises/exercisewithtileswidget.cpp" line="68"/>
+        <location filename="../src/gui/exercises/exercisewithtileswidget.cpp" line="77"/>
         <source>Слушайте</source>
         <translation>Listen</translation>
     </message>
@@ -324,14 +335,27 @@ Number of errors: %2</translation>
     </message>
 </context>
 <context>
+    <name>GeneratorException</name>
+    <message>
+        <location filename="../src/core/common/exceptions/GeneratorException.h" line="13"/>
+        <source>Не удалось создать упражнение, повторите попытку</source>
+        <translation>The exercise could not be created. Try again.</translation>
+    </message>
+</context>
+<context>
     <name>IExerciseWidget</name>
     <message>
-        <location filename="../src/core/common/interfaces/IExerciseWidget.h" line="23"/>
+        <location filename="../src/core/common/interfaces/IExerciseWidget.h" line="18"/>
+        <source>Тренажер музыкального слуха</source>
+        <translation type="unfinished">Music ear training program</translation>
+    </message>
+    <message>
+        <location filename="../src/core/common/interfaces/IExerciseWidget.h" line="28"/>
         <source>Легко</source>
         <translation>Easy</translation>
     </message>
     <message>
-        <location filename="../src/core/common/interfaces/IExerciseWidget.h" line="23"/>
+        <location filename="../src/core/common/interfaces/IExerciseWidget.h" line="28"/>
         <source>Сложно</source>
         <translation>Hard</translation>
     </message>
@@ -732,10 +756,15 @@ Number of errors: %2</translation>
 <context>
     <name>RhythmRecogniseController</name>
     <message>
-        <location filename="../src/core/controllers/rhythm/rhythmrecognisecontroller.h" line="32"/>
         <source>Прослушайте ритм и затем простучите 
 его с помощью клавиши пробел</source>
-        <translation>Listen to the rhythm, and then tap it out using the space bar</translation>
+        <translation type="vanished">Listen to the rhythm, and then tap it out using the space bar</translation>
+    </message>
+    <message>
+        <location filename="../src/core/controllers/rhythm/rhythmrecognisecontroller.h" line="32"/>
+        <source>Прослушайте ритм и затем простучите его с помощью
+ клавиши пробел</source>
+        <translation></translation>
     </message>
 </context>
 <context>

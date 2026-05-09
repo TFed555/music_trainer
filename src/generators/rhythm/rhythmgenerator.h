@@ -8,9 +8,12 @@
 
 class RhythmGenerator : public IGenerator<RhythmGenerator, GeneratedRhythm>
 {
+    friend class IGenerator<RhythmGenerator, GeneratedRhythm>;
 public:
     explicit RhythmGenerator(RhythmDifficultyConfig config = {});
-    GeneratedRhythm generate();
+    // GeneratedRhythm generate();
+protected:
+    GeneratedRhythm doGenerate() override;
 private:
     std::mt19937 gen{std::random_device{}()};
     RhythmDifficultyConfig config;

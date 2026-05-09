@@ -22,7 +22,6 @@ protected:
     void changeEvent(QEvent* event) override;
 private:
     void clearButtons();
-    void addButton(const QString& title, ExerciseType type);
     QVBoxLayout* rootLayout = nullptr;
     int currentBlock;
 };

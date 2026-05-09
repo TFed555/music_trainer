@@ -5,8 +5,11 @@
 #include "../../audio/playback/noteplayer.h"
 #include "../../common/models/Difficulty.h"
 #include "../../common/models/Attempt.h"
+#include "../../common/exceptions/GeneratorException.h"
+#include "../../common/exceptions/RecoveryFailedException.h"
 #include "../../music/musicutils.h"
 #include "../../../generators/GeneratedAudio.h"
+#include "../../log/logger.h"
 
 struct PlaybackLog {
     QDateTime timestamp;
@@ -39,9 +42,17 @@ signals:
     void replayAvailable(int replays);
     void attemptDone(Attempt);
     void setDescription(const QString&);
+    void error(const QString&);
 
 public slots:
-    virtual void start() { generateTask(); };
+    virtual void start() {
+        try {
+            generateTask();
+        } catch(const RecoveryFailedException& e) {
+            emit error(e.userMsg);
+            Logger::critical(e.what());
+        }
+    };
     virtual void stop() { notePlayer->stop(); };
     virtual void replay() {
             if (replayCount <= 0) return;
@@ -93,7 +104,6 @@ protected:
 protected:
     NotePlayer* notePlayer;
     QVector<PlaybackLog> playbackLog;
-    // QString description;
     int replayCount;
 };
 

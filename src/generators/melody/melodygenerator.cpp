@@ -4,7 +4,7 @@ MelodyGenerator::MelodyGenerator(MelodyDifficultyConfig config)
     : config(config)
 {}
 
-GeneratedAudio MelodyGenerator::generate() {
+GeneratedAudio MelodyGenerator::doGenerate() {
     std::uniform_int_distribution<> midiDist(config.midiMin, config.midiMax);
     std::uniform_int_distribution<> intervalDist(0, config.allowedSemitones.size() - 1);
     std::uniform_int_distribution<> directionDist(0, config.directions.size()-1);
