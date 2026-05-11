@@ -1,4 +1,4 @@
-name: Build 
+name: Build
 
 on:
   push:
@@ -7,9 +7,8 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  build-windows:
     runs-on: windows-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -17,7 +16,7 @@ jobs:
       - name: Install Qt
         uses: jurplel/install-qt-action@v4
         with:
-          version: '6.10.1'
+          version: '6.7.0'          # понизь версию — 6.10.1 может не быть в aqt
           arch: 'win64_mingw'
 
       - name: Install dependencies
@@ -26,9 +25,10 @@ jobs:
           vcpkg install libsamplerate:x64-mingw-dynamic
 
       - name: Configure CMake
-        run: |
-          cmake -B build -DCMAKE_BUILD_TYPE=Release `
-            -DCMAKE_TOOLCHAIN_FILE=$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake
+        run: >
+          cmake -B build
+          -DCMAKE_BUILD_TYPE=Release
+          -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake
 
       - name: Build
         run: cmake --build build --config Release
@@ -43,14 +43,16 @@ jobs:
         with:
           name: trainer-windows
           path: build/src/Release/
+
   build-linux:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - uses: jurplel/install-qt-action@v4
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v4
         with:
-          version: '6.10.1'
+          version: '6.7.0'          # та же версия
           arch: 'gcc_64'
 
       - name: Install dependencies
