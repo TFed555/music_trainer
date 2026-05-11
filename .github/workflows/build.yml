@@ -24,6 +24,7 @@ jobs:
         run: |
           vcpkg install rtaudio:x64-mingw-dynamic
           vcpkg install libsamplerate:x64-mingw-dynamic
+          vcpkg install libsndfile:x64-mingw-dynamic
           C:/vcpkg/vcpkg integrate install
 
       - name: Check installed packages
@@ -64,7 +65,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y librtaudio-dev libsamplerate0-dev
+          sudo apt-get install -y librtaudio-dev libsamplerate0-dev libsndfile1-dev
 
       - name: Configure
         run: cmake -B build -DCMAKE_BUILD_TYPE=Release
