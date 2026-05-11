@@ -2,6 +2,7 @@
 #include <QFile>
 #include <QDir>
 #include <QJsonArray>
+#include <QJsonDocument>
 
 StatisticsLoader::StatisticsLoader() {}
 

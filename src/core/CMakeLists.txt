@@ -7,7 +7,7 @@ else()
     pkg_check_modules(SNDFILE REQUIRED sndfile)
 endif()
 
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Widgets)
 
 
 add_library(core STATIC
@@ -80,20 +80,16 @@ add_library(core STATIC
 target_link_libraries(core PUBLIC
     Qt${QT_VERSION_MAJOR}::Widgets
     Qt${QT_VERSION_MAJOR}::Core
-    ${SNDFILE_LIBRARIES}
+    generators_module
+    log_module
+    $<IF:$<BOOL:${WIN32}>,SndFile::sndfile,${SNDFILE_LIBRARIES}>
 )
-target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
 
 target_include_directories(core PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/data
     ${CMAKE_CURRENT_SOURCE_DIR}/factory
     ${CMAKE_CURRENT_SOURCE_DIR}/controllers
-    ${SNDFILE_INCLUDE_DIRS}
+    $<$<NOT:$<BOOL:${WIN32}>>:${SNDFILE_INCLUDE_DIRS}>
 )
-target_link_libraries(core PUBLIC generators_module)
-target_link_libraries(core PUBLIC log_module)
-target_link_libraries(core PRIVATE Qt${QT_VERSION_MAJOR}::Core)
-
-
 

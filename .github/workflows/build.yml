@@ -20,6 +20,12 @@ jobs:
           arch: 'win64_mingw'
           modules: 'qtcharts'
 
+      - name: Setup MinGW
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          install: mingw-w64-x86_64-gcc mingw-w64-x86_64-cmake
+
       - name: Install dependencies
         run: |
           vcpkg install rtaudio:x64-mingw-dynamic
@@ -36,6 +42,7 @@ jobs:
           -DCMAKE_BUILD_TYPE=Release
           -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake
           -DVCPKG_TARGET_TRIPLET=x64-mingw-dynamic
+          -G "MinGW Makefiles"
 
       - name: Build
         run: cmake --build build --config Release
