@@ -18,6 +18,7 @@ jobs:
         with:
           version: '6.7.0'
           arch: 'win64_mingw'
+          modules: 'qtcharts'
 
       - name: Install dependencies
         run: |
@@ -58,6 +59,7 @@ jobs:
         uses: jurplel/install-qt-action@v4
         with:
           version: '6.7.0'
+          modules: 'qtcharts' 
 
       - name: Install dependencies
         run: |
