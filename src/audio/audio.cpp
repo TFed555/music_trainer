@@ -1,6 +1,7 @@
 #include "audio.h"
 #include <QTimer>
 #include "../log/logger.h"
+#include <stdexcept>
 
 AudioProcessor::AudioProcessor(QObject *parent) : QObject(parent){}
 
@@ -120,8 +121,8 @@ bool AudioProcessor::playAudio(const QVector<float>& m_audioData, double sampleR
         LOG_DEBUG(QString("Playback started frames %1").arg(audioBuffer.size()));
         return true;
     }
-    catch (RtAudioError& e) {
-        emit err(QString("Audio error %1").arg(e.getMessage().c_str()));
+    catch (std::exception& e) {
+        emit err(QString("Audio error %1").arg(e.what()));
         return false;
     }
 }
@@ -176,8 +177,8 @@ void AudioProcessor::stopPlayback() {
             emit playbackStopped();
             LOG_DEBUG("Playback stopped");
         }
-        catch(RtAudioError &e) {
-            emit err(QString("error stoping audio %1").arg(e.getMessage().c_str()));
+        catch(std::exception &e) {
+            emit err(QString("error stoping audio %1").arg(e.what()));
         }
     }
 }
