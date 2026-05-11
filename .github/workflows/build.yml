@@ -16,19 +16,24 @@ jobs:
       - name: Install Qt
         uses: jurplel/install-qt-action@v4
         with:
-          version: '6.7.0'          # понизь версию — 6.10.1 может не быть в aqt
+          version: '6.7.0'
           arch: 'win64_mingw'
 
       - name: Install dependencies
         run: |
           vcpkg install rtaudio:x64-mingw-dynamic
           vcpkg install libsamplerate:x64-mingw-dynamic
+          C:/vcpkg/vcpkg integrate install
+
+      - name: Check installed packages
+        run: C:/vcpkg/vcpkg list
 
       - name: Configure CMake
         run: >
           cmake -B build
           -DCMAKE_BUILD_TYPE=Release
           -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake
+          -DVCPKG_TARGET_TRIPLET=x64-mingw-dynamic
 
       - name: Build
         run: cmake --build build --config Release
@@ -52,8 +57,7 @@ jobs:
       - name: Install Qt
         uses: jurplel/install-qt-action@v4
         with:
-          version: '6.7.0'          # та же версия
-          arch: 'gcc_64'
+          version: '6.7.0'
 
       - name: Install dependencies
         run: |
