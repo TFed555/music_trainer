@@ -1,11 +1,12 @@
 set(CORE_MODULE_NAME "core")
 
-find_package(PkgConfig REQUIRED)
+if(WIN32)
+    find_package(SndFile CONFIG REQUIRED)
+else()
+    find_package(PkgConfig REQUIRED)
+    pkg_check_modules(SNDFILE REQUIRED sndfile)
+endif()
 
-pkg_check_modules(SNDFILE REQUIRED sndfile)
-
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
 
 
