@@ -1,6 +1,6 @@
 #include "noteplayer.h"
 #include "../../music/musicutils.h"
-#include <QDebug>
+#include "../../log/logger.h"
 
 NotePlayer::NotePlayer(AudioProcessor* proc, SampleRepository* sampleRepo)
     : processor(proc), sampleRepository{sampleRepo}
@@ -26,7 +26,7 @@ QVector<float> resample(const QVector<float>& in, double ratio) {
     data.end_of_input = 1;
     int err = src_simple(&data, SRC_SINC_FASTEST, 1);
     if (err) {
-        qDebug() << src_strerror(err) ;
+        LOG_DEBUG(src_strerror(err)) ;
     }
     out.resize(data.output_frames_gen);
     return out;

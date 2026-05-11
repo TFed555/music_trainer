@@ -1,6 +1,6 @@
 #include "audio.h"
-#include <QDebug>
 #include <QTimer>
+#include "../log/logger.h"
 
 AudioProcessor::AudioProcessor(QObject *parent) : QObject(parent){}
 
@@ -117,7 +117,7 @@ bool AudioProcessor::playAudio(const QVector<float>& m_audioData, double sampleR
         audio.startStream();
         isPlaying = true;
 
-        qDebug() << "Playback started frames " << audioBuffer.size();
+        LOG_DEBUG(QString("Playback started frames %1").arg(audioBuffer.size()));
         return true;
     }
     catch (RtAudioError& e) {
@@ -174,7 +174,7 @@ void AudioProcessor::stopPlayback() {
             currentFrame = 0;
 
             emit playbackStopped();
-            qDebug() << "Playback stopped";
+            LOG_DEBUG("Playback stopped");
         }
         catch(RtAudioError &e) {
             emit err(QString("error stoping audio %1").arg(e.getMessage().c_str()));

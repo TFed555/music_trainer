@@ -19,7 +19,7 @@ void NoteGuessController::generateTask() {
 }
 
 void NoteGuessController::playTask() {
-    qDebug() << playbackLog.last().timestamp << " " << playbackLog.last().desc;
+    LOG_DEBUG(QString("%1 %2").arg(playbackLog.last().timestamp.toString(), playbackLog.last().desc));
     notePlayer->playNotes(result.midiNotes);
 }
 

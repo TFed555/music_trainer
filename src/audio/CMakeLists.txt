@@ -4,8 +4,13 @@ set(AUDIO_MODULE_NAME "audio_module")
 
 find_package(PkgConfig QUIET)
 
-pkg_check_modules(RTAUDIO REQUIRED rtaudio)
-pkg_check_modules(SAMPLERATE REQUIRED samplerate)
+if(WIN32)
+    find_package(RtAudio CONFIG REQUIRED)
+    find_package(SampleRate CONFIG REQUIRED)
+else()
+    pkg_check_modules(RTAUDIO REQUIRED rtaudio)
+    pkg_check_modules(SAMPLERATE REQUIRED samplerate)
+endif()
 
 set(AUDIO_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/audio.cpp
@@ -23,9 +28,7 @@ set(ALL_SOURCES
     ${PLAYBACK_SOURCES}
 )
 
-add_library(${AUDIO_MODULE_NAME} STATIC ${ALL_SOURCES}
-
-)
+add_library(${AUDIO_MODULE_NAME} STATIC ${ALL_SOURCES})
 
 set_target_properties(${AUDIO_MODULE_NAME} PROPERTIES
     AUTOMOC ON
@@ -34,7 +37,6 @@ set_target_properties(${AUDIO_MODULE_NAME} PROPERTIES
 
 target_include_directories(${AUDIO_MODULE_NAME} PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
-    # ${CMAKE_CURRENT_SOURCE_DIR}/generators
     ${CMAKE_CURRENT_SOURCE_DIR}/playback
     ${RTAUDIO_INCLUDE_DIRS}
     ${SAMPLERATE_INCLUDE_DIRS}
@@ -42,9 +44,17 @@ target_include_directories(${AUDIO_MODULE_NAME} PUBLIC
 
 target_link_libraries(${AUDIO_MODULE_NAME} PUBLIC
     Qt${QT_VERSION_MAJOR}::Core
-    ${RTAUDIO_LIBRARIES}
-    ${SAMPLERATE_LIBRARIES}
+    $<IF:$<BOOL:${WIN32}>,RtAudio::rtaudio,${RTAUDIO_LIBRARIES}>
+    $<IF:$<BOOL:${WIN32}>,SampleRate::samplerate,${SAMPLERATE_LIBRARIES}>
+    # ${RTAUDIO_LIBRARIES}
+    # ${SAMPLERATE_LIBRARIES}
     generators_module
 )
+
+if(WIN32)
+    target_compile_definitions(${AUDIO_MODULE_NAME} PRIVATE
+        __WINDOWS_WASAPI__
+    )
+endif()
 
 set(AUDIO_MODULE_TARGET ${AUDIO_MODULE_NAME} PARENT_SCOPE)

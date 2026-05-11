@@ -22,7 +22,7 @@ void IntervalBuildController::generateTask() {
 }
 
 void IntervalBuildController::playTask() {
-    qDebug() << playbackLog.last().timestamp << " " << playbackLog.last().desc;
+    LOG_DEBUG(QString("%1 %2").arg(playbackLog.last().timestamp.toString(), playbackLog.last().desc));
     notePlayer->playNotes({result.midiNotes[firstNoteIdx]});
 }
 
@@ -33,7 +33,7 @@ void IntervalBuildController::setDifficulty(int level) {
 }
 
 void IntervalBuildController::noteSelected(const QString& noteName, const bool listenOnly) {
-    qDebug() << "Note selected" << noteName;
+    LOG_DEBUG(QString("Note selected %1").arg(noteName));
     if (listenOnly) return;
     userAnswer.append(noteName);
     if (correctAnswer.size() > 0) {

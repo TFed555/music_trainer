@@ -16,7 +16,7 @@ void RhythmRecogniseController::generateTask() {
     result = generator.generate();
     emit requestSetMode(Mode::Wait);
     log(result.desc);
-    qDebug() << playbackLog.last().timestamp << " " << playbackLog.last().desc;
+    LOG_DEBUG(QString("%1 %2").arg(playbackLog.last().timestamp.toString(), playbackLog.last().desc));
     QVector<RhythmType> rhythmTypes;
     for (auto b : result.userBeats) {
         rhythmTypes.append(rhythmTypeNames[b.duration]);
@@ -71,13 +71,19 @@ void RhythmRecogniseController::setConfig(const QMap<int,int>& states) {
               .tact = 8.0f,
               .allowedDurations = allowedDurations,
               .bpm = 80};
-    qDebug() << allowedDurations;
+    LOG_DEBUG([](QVector<int> durations) {
+        QString res;
+        for (const auto& k : durations) {
+            res += QString::number(k);
+        }
+        return res;
+    }(allowedDurations));
 }
 
 void RhythmRecogniseController::bpmChanged(const int& bpm) {
     this->bpm = bpm;
     config.bpm = bpm;
-    qDebug() << bpm;
+    LOG_DEBUG(QString::number(bpm));
 }
 
 void RhythmRecogniseController::inputFinished(const QVector<int>& notePoses, const QVector<int>& userTaps) {

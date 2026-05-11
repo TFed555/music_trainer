@@ -16,7 +16,7 @@ void IntervalRecogniseController::generateTask() {
     IntervalGenerator generator(config);
     result = generator.generate();
     log(result.desc);
-    qDebug() << playbackLog.last().timestamp << " " << playbackLog.last().desc;
+    LOG_DEBUG(QString("%1 %2").arg(playbackLog.last().timestamp.toString(), playbackLog.last().desc));
     correctAnswer.append(MusicUtils::midiToNote(result.midiNotes[firstNoteIdx]));
     correctAnswer.append(MusicUtils::midiToNote(result.midiNotes[secondNoteIdx]));
     playTask();
@@ -33,7 +33,7 @@ void IntervalRecogniseController::setDifficulty(int level) {
 }
 
 void IntervalRecogniseController::noteSelected(const QString& noteName, const bool listenOnly) {
-    qDebug() << "Note selected" << noteName;
+    LOG_DEBUG(QString("Note selected %1").arg(noteName));
     if (listenOnly) return;
     userAnswer.append(noteName);
     noteCounter++;

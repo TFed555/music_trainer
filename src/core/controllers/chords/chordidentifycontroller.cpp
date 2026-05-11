@@ -18,7 +18,7 @@ void ChordIdentifyController::generateTask() {
 }
 
 void ChordIdentifyController::playTask() {
-    qDebug() << playbackLog.last().timestamp << " " << playbackLog.last().desc;
+    LOG_DEBUG(QString("%1 %2").arg(playbackLog.last().timestamp.toString(), playbackLog.last().desc));
     notePlayer->playChord(result.midiNotes);
 }
 
@@ -37,7 +37,6 @@ void ChordIdentifyController::answerSelected(const QString& answer){
 void ChordIdentifyController::setDifficulty(int level) {
     Difficulty dif = static_cast<Difficulty>(level);
     config = difficultyMap<ChordDifficultyConfig>[dif];
-    qDebug() << level;
     if (level > 0) {
         config.allowedTypes.append(MusicUtils::Chords::ChordType::MajorSeventhChord);
         config.allowedTypes.append(MusicUtils::Chords::ChordType::MinorSeventhChord);

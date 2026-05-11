@@ -11,7 +11,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
-set(Qt6LinguistTools_DIR "/home/tatyana/Qt/6.10.1/gcc_64/lib/cmake/Qt6LinguistTools")
+# set(Qt6LinguistTools_DIR "/home/tatyana/Qt/6.10.1/gcc_64/lib/cmake/Qt6LinguistTools")
 find_package(Qt6 COMPONENTS LinguistTools REQUIRED)
 
 qt_add_translations(${PROJECT_NAME}
@@ -70,7 +70,7 @@ set_target_properties(trainer_1 PROPERTIES
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
     MACOSX_BUNDLE TRUE
-    # WIN32_EXECUTABLE TRUE
+    WIN32_EXECUTABLE TRUE
 )
 
 include(GNUInstallDirs)

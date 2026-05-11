@@ -9,6 +9,7 @@
 #include "../../common/exceptions/RecoveryFailedException.h"
 #include "../../music/musicutils.h"
 #include "../../../generators/GeneratedAudio.h"
+#include <QFileInfo>
 #include "../../log/logger.h"
 
 struct PlaybackLog {
@@ -50,7 +51,7 @@ public slots:
             generateTask();
         } catch(const RecoveryFailedException& e) {
             emit error(e.userMsg);
-            Logger::critical(e.what());
+            LOG_CRITICAL(e.what());
         }
     };
     virtual void stop() { notePlayer->stop(); };
@@ -71,10 +72,10 @@ private:
     void connectPlayer(PlaybackendSignal endSignal)
     {
         connect(notePlayer, &NotePlayer::playbackFinished,
-                this, [] { qDebug() << "Playback finished"; });
+                this, [] { LOG_DEBUG("Playback finished"); });
 
         connect(notePlayer, &NotePlayer::error,
-                this, [](const QString& msg) { qDebug() << "Error:" << msg; });
+                this, [](const QString& msg) { LOG_DEBUG(QString("Error: %1").arg(msg)); });
 
         switch(endSignal) {
             case PlaybackendSignal::PlaybackFinished:

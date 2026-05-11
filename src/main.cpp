@@ -9,7 +9,12 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     a.setApplicationName("Music trainer");
-    Logger::info("App started");
+#ifdef QT_DEBUG
+    Logger::setLevel(Logger::Level::Debug);
+#else
+    Logger::setLevel(Logger::Level::Warning);
+#endif
+    LOG_INFO("App started");
     int fontId = QFontDatabase::addApplicationFont(":/Bravura.otf");
     if (fontId == -1) {
         qDebug() << "Failed to load Bravura font";

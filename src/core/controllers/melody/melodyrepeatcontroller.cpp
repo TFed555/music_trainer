@@ -26,7 +26,7 @@ void MelodyRepeatController::generateTask() {
 }
 
 void MelodyRepeatController::playTask() {
-    qDebug() << playbackLog.last().timestamp << " " << playbackLog.last().desc;
+    LOG_DEBUG(QString("%1 %2").arg(playbackLog.last().timestamp.toString(), playbackLog.last().desc));
     notePlayer->playNotes(result.midiNotes);
 }
 
@@ -39,7 +39,7 @@ void MelodyRepeatController::setDifficulty(int level) {
 }
 
 void MelodyRepeatController::noteSelected(const QString& noteName, const bool listenOnly) {
-    qDebug() << "Note selected" << noteName;
+    LOG_DEBUG(QString("Note selected %1").arg(noteName));
     if (listenOnly) return;
     userAnswer.append(noteName);
     if (userAnswer.size() == config.noteCount && correctAnswer.size() > 0) {

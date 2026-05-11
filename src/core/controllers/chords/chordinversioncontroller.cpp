@@ -20,7 +20,7 @@ void ChordInversionController::generateTask() {
 }
 
 void ChordInversionController::playTask() {
-    qDebug() << playbackLog.last().timestamp << " " << playbackLog.last().desc;
+    LOG_DEBUG(QString("%1 %2").arg(playbackLog.last().timestamp.toString(), playbackLog.last().desc));
     notePlayer->playChord(result.midiNotes);
 }
 

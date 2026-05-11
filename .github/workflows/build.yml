@@ -1,0 +1,70 @@
+name: Build 
+
+on:
+  push:
+    branches: [ main, dev ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: '6.10.1'
+          arch: 'win64_mingw'
+
+      - name: Install dependencies
+        run: |
+          vcpkg install rtaudio:x64-mingw-dynamic
+          vcpkg install libsamplerate:x64-mingw-dynamic
+
+      - name: Configure CMake
+        run: |
+          cmake -B build -DCMAKE_BUILD_TYPE=Release `
+            -DCMAKE_TOOLCHAIN_FILE=$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake
+
+      - name: Build
+        run: cmake --build build --config Release
+
+      - name: Deploy
+        run: |
+          cd build/src/Release
+          windeployqt trainer_1.exe
+
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: trainer-windows
+          path: build/src/Release/
+build-linux:
+    runs-on: ubuntu-latest
+    steps:
+        - uses: actions/checkout@v4
+
+        - uses: jurplel/install-qt-action@v4
+        with:
+          version: '6.10.1'
+          arch: 'gcc_64'
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y librtaudio-dev libsamplerate0-dev
+
+      - name: Configure
+        run: cmake -B build -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build
+        run: cmake --build build
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: trainer-linux
+          path: build/src/trainer_1

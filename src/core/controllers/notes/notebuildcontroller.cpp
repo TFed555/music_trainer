@@ -20,7 +20,7 @@ void NoteBuildController::generateTask() {
 }
 
 void NoteBuildController::playTask() {
-    qDebug() << playbackLog.last().timestamp << " " << playbackLog.last().desc;
+    LOG_DEBUG(QString("%1 %2").arg(playbackLog.last().timestamp.toString(), playbackLog.last().desc));
     notePlayer->playNotes({result.midiNotes[0]});
 }
 
@@ -32,8 +32,7 @@ void NoteBuildController::setDifficulty(int level) {
 }
 
 void NoteBuildController::noteSelected(const QString& noteName, const bool listenOnly) {
-    qDebug() << "Note selected" << noteName;
-    if (listenOnly) return;
+    LOG_DEBUG(QString("Note selected %1").arg(noteName));    if (listenOnly) return;
     userAnswer.append(noteName);
     if (correctAnswer.size() > 0) {
             emit attemptDone({

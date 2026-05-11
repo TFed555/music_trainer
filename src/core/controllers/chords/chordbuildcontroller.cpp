@@ -24,7 +24,7 @@ void ChordBuildController::generateTask() {
 }
 
 void ChordBuildController::playTask() {
-    qDebug() << playbackLog.last().timestamp << " " << playbackLog.last().desc;
+    LOG_DEBUG(QString("%1 %2").arg(playbackLog.last().timestamp.toString(), playbackLog.last().desc));
     notePlayer->playNotes({result.midiNotes[firstNoteIdx]});
 }
 
@@ -36,7 +36,7 @@ void ChordBuildController::setDifficulty(int level) {
 }
 
 void ChordBuildController::noteSelected(const QString& noteName, const bool listenOnly) {
-    qDebug() << "Note selected" << noteName;
+    LOG_DEBUG(QString("Note selected %1").arg(noteName));
     if (listenOnly) return;
     userAnswer.append(noteName);
     noteCounter++;
