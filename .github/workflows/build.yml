@@ -13,6 +13,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Setup MinGW 
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          update: true
+          install: >-
+            mingw-w64-x86_64-gcc
+            mingw-w64-x86_64-cmake
+            mingw-w64-x86_64-ninja
+
       - name: Install Qt
         uses: jurplel/install-qt-action@v4
         with:
@@ -20,43 +30,38 @@ jobs:
           arch: 'win64_mingw'
           modules: 'qtcharts'
 
-      - name: Setup MinGW
-        uses: msys2/setup-msys2@v2
-        with:
-          msystem: MINGW64
-          install: mingw-w64-x86_64-gcc mingw-w64-x86_64-cmake
-
       - name: Install dependencies
         run: |
-          vcpkg install rtaudio:x64-mingw-dynamic
-          vcpkg install libsamplerate:x64-mingw-dynamic
-          vcpkg install libsndfile:x64-mingw-dynamic
+          C:/vcpkg/vcpkg install rtaudio:x64-mingw-dynamic
+          C:/vcpkg/vcpkg install libsamplerate:x64-mingw-dynamic
+          C:/vcpkg/vcpkg install libsndfile:x64-mingw-dynamic
           C:/vcpkg/vcpkg integrate install
 
-      - name: Check installed packages
-        run: C:/vcpkg/vcpkg list
-
       - name: Configure CMake
+        shell: msys2 {0}           
         run: >
           cmake -B build
           -DCMAKE_BUILD_TYPE=Release
           -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake
           -DVCPKG_TARGET_TRIPLET=x64-mingw-dynamic
-          -G "MinGW Makefiles"
+          -G "Ninja"
+          -DCMAKE_C_COMPILER=x86_64-w64-mingw32-gcc
+          -DCMAKE_CXX_COMPILER=x86_64-w64-mingw32-g++
 
       - name: Build
-        run: cmake --build build --config Release
+        shell: msys2 {0}
+        run: cmake --build build
 
       - name: Deploy
         run: |
-          cd build/src/Release
+          cd build/src
           windeployqt trainer_1.exe
 
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
           name: trainer-windows
-          path: build/src/Release/
+          path: build/src/
 
   build-linux:
     runs-on: ubuntu-latest
