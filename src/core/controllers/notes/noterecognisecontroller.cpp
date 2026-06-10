@@ -27,6 +27,7 @@ void NoteRecogniseController::setDifficulty(int level) {
     Difficulty dif = static_cast<Difficulty>(level);
     config = noteRecogniseDifficulty[dif];
     replayCount = config.replayCount;
+    emit setOctaveCount(config.octaveCount);
 }
 
 void NoteRecogniseController::noteSelected(const QString& noteName, const bool listenOnly) {

@@ -345,9 +345,8 @@ Number of errors: %2</translation>
 <context>
     <name>IExerciseWidget</name>
     <message>
-        <location filename="../src/core/common/interfaces/IExerciseWidget.h" line="18"/>
         <source>Тренажер музыкального слуха</source>
-        <translation type="unfinished">Music ear training program</translation>
+        <translation type="obsolete">Music ear training program</translation>
     </message>
     <message>
         <location filename="../src/core/common/interfaces/IExerciseWidget.h" line="28"/>
@@ -479,41 +478,76 @@ Number of errors: %2</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="19"/>
-        <location filename="../src/gui/mainwindow.cpp" line="67"/>
-        <location filename="../src/gui/mainwindow.cpp" line="125"/>
         <source>Тренажер музыкального слуха</source>
-        <translation>Music ear training program</translation>
+        <translation type="vanished">Music ear training program</translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="50"/>
-        <location filename="../src/gui/mainwindow.cpp" line="126"/>
+        <location filename="../src/gui/mainwindow.cpp" line="52"/>
+        <location filename="../src/gui/mainwindow.cpp" line="148"/>
         <source>Настройки</source>
         <translation>Settings</translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="51"/>
-        <location filename="../src/gui/mainwindow.cpp" line="127"/>
+        <location filename="../src/gui/mainwindow.cpp" line="53"/>
+        <location filename="../src/gui/mainwindow.cpp" line="149"/>
         <source>Помощь</source>
         <translation>Help</translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="52"/>
-        <location filename="../src/gui/mainwindow.cpp" line="128"/>
+        <location filename="../src/gui/mainwindow.cpp" line="54"/>
+        <location filename="../src/gui/mainwindow.cpp" line="150"/>
         <source>Язык</source>
         <translation>Language</translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="56"/>
-        <location filename="../src/gui/mainwindow.cpp" line="130"/>
+        <location filename="../src/gui/mainwindow.cpp" line="57"/>
+        <location filename="../src/gui/mainwindow.cpp" line="82"/>
+        <location filename="../src/gui/mainwindow.cpp" line="153"/>
+        <source>Как пользоваться</source>
+        <translation>How to use</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/mainwindow.cpp" line="58"/>
+        <location filename="../src/gui/mainwindow.cpp" line="92"/>
+        <location filename="../src/gui/mainwindow.cpp" line="154"/>
+        <source>О программе</source>
+        <translation>About</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/mainwindow.cpp" line="60"/>
+        <location filename="../src/gui/mainwindow.cpp" line="152"/>
         <source>Статистика</source>
         <translation>Statistics</translation>
     </message>
     <message>
-        <location filename="../src/gui/mainwindow.cpp" line="57"/>
-        <location filename="../src/gui/mainwindow.cpp" line="129"/>
+        <location filename="../src/gui/mainwindow.cpp" line="61"/>
+        <location filename="../src/gui/mainwindow.cpp" line="151"/>
         <source>Выход</source>
         <translation>Exit</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/mainwindow.cpp" line="83"/>
+        <source>1. Выберите категорию упражнений в меню слева
+2. Нажмите на нужное упражнение
+3. Прослушайте задание
+4. Выберите правильный ответ
+5. После ввода отобразится результат</source>
+        <translation>1. Select an exercise category from the menu on the left
+2. Click on the exercise you want
+3. Listen to the instructions
+4. Select the correct answer
+5. Your result will be displayed after you submit your answer</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/mainwindow.cpp" line="93"/>
+        <source>Music Trainer
+Версия 1.0
+Приложение для развития музыкального слуха
+Разработано с использованием Qt Framework</source>
+        <translation>Music Trainer
+Version 1.0
+An app for training musical ear
+Developed using the Qt Framework</translation>
     </message>
 </context>
 <context>
@@ -764,7 +798,7 @@ Number of errors: %2</translation>
         <location filename="../src/core/controllers/rhythm/rhythmrecognisecontroller.h" line="32"/>
         <source>Прослушайте ритм и затем простучите его с помощью
  клавиши пробел</source>
-        <translation></translation>
+        <translation>Listen to the rhythm, and then tap it out using the space bar</translation>
     </message>
 </context>
 <context>

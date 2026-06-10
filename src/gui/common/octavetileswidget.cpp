@@ -8,11 +8,22 @@ OctaveTilesWidget::OctaveTilesWidget(bool noteNamesVisible, QWidget *parent)
     layout->setSpacing(0);
     layout->setContentsMargins(0, 0, 0, 0);
     setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
+
+    btnMinus = new QPushButton("-", this);
+    btnPlus = new QPushButton("+", this);
+
+    for (auto* btn : {btnMinus, btnPlus}) {
+        btn->setFixedSize(28, 28);
+        btn->setObjectName("octBtn");
+    }
+
+    layout->addWidget(btnMinus, 0, Qt::AlignVCenter);
+
     for (int i = 0; i < octaveCount; i++) {
         NoteTilesWidget* tiles = new NoteTilesWidget(noteNamesVisible, this);
         tiles->show();
         tiles->setFixedWidth(parent->width()/octaveCount);
-        layout->addWidget(tiles);
+        layout->addWidget(tiles, 1);
         connect(tiles, &NoteTilesWidget::noteSelected,
                 this, [this, i] (QString noteName, bool listenOnly) {
             QString note = QString("%1 %2").arg(noteName).arg(QString::number(i+octaveOffset));
@@ -21,6 +32,15 @@ OctaveTilesWidget::OctaveTilesWidget(bool noteNamesVisible, QWidget *parent)
         });
         octaves.append(tiles);
     }
+
+    layout->addWidget(btnPlus, 0, Qt::AlignVCenter);
+    connect(btnMinus, &QPushButton::clicked, this, [this]() {
+        setVisibleOctaves(visibleCount - 1);
+    });
+    connect(btnPlus, &QPushButton::clicked, this, [this]() {
+        setVisibleOctaves(visibleCount + 1);
+    });
+    setVisibleOctaves(3);
 }
 
 OctaveTilesWidget::~OctaveTilesWidget() {}
@@ -68,8 +88,14 @@ void OctaveTilesWidget::resetTiles() {
 }
 
 void OctaveTilesWidget::setVisibleOctaves(int count) {
+    visibleCount = count;
     int firstIdx = (count == 1) ? 1 : 0;
     for (int i = 0; i < octaves.size(); i++) {
         octaves[i]->setVisible(i>=firstIdx && i<firstIdx+count);
     }
+    btnMinus->setEnabled(count > 1);
+    btnPlus->setEnabled(count < 3);
+    int firstOctave = count == 1 ? firstIdx : 0;
+    int lastOctave = firstOctave + count - 1;
+    emit octaveCountChanged(firstOctave, lastOctave);
 }

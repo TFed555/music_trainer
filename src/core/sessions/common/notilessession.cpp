@@ -44,4 +44,5 @@ void NoTilesSession::setup(IChoiceExerciseController* ctrl, ExerciseNoTilesWidge
 
     ctrl->giveAnswers();
     ctrl->sendDescription();
+    ctrl->setDifficulty(0);
 }

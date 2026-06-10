@@ -57,6 +57,9 @@ void TilesSession::setup(ITilesExerciseController* ctrl, TilesController* tilesc
     connect(ctrl, &ITilesExerciseController::error,
             w, &ExerciseWithTilesWidget::showErrorInfo);
 
+    connect(w, &ExerciseWithTilesWidget::octaveCountChanged,
+            ctrl, &ITilesExerciseController::onOctaveCountChanged);
+
     ctrl->sendDescription();
     ctrl->setDifficulty(0);
 }

@@ -1,5 +1,6 @@
 #include "statswidget.h"
 #include <QtCharts>
+#include "../../core/common/models/exercisestrings.h"
 
 StatsWidget::StatsWidget(StatisticsRepository* statsRepo, QWidget *parent)
     : QWidget(parent)
@@ -36,7 +37,7 @@ void StatsWidget::buildBarChart(const QVector<CategoryStats>& stats) {
 
     QStringList categories;
     for (auto n : stats) {
-        categories << n.name;
+        categories << ExerciseStrings::blockName(n.category);
     }
 
     QBarCategoryAxis *axisX = new QBarCategoryAxis();
@@ -55,4 +56,11 @@ void StatsWidget::buildBarChart(const QVector<CategoryStats>& stats) {
     chartView = new QChartView(chart, this);
     chartView->setRenderHint(QPainter::Antialiasing);
     layout->addWidget(chartView);
+}
+
+void StatsWidget::changeEvent(QEvent* event) {
+    if (event->type() == QEvent::LanguageChange) {
+        showEvent(nullptr);
+    }
+    QWidget::changeEvent(event);
 }

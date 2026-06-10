@@ -21,6 +21,11 @@ public:
 public slots:
     void noteSelected(const QString& noteName, const bool listenOnly) override;
     void setDifficulty(int level) override;
+    void onOctaveCountChanged(int firstOctave, int lastOctave) override {
+        config.octaveCount = lastOctave;
+        config.midiMax = 48+lastOctave*12+11;
+        config.midiMin = 48+firstOctave*12;
+    };
 private:
     void generateTask() override;
     void playTask() override;

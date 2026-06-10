@@ -4,18 +4,21 @@
 StatisticsSolver::StatisticsSolver() {}
 
 QVector<CategoryStats> StatisticsSolver::byCategory(const QMap<QString, QJsonArray>& data) {
-    QVector<CategoryStats> res;
+    QMap<BlockCategory, CategoryStats> grouped;
+
     for (auto it = data.begin(); it != data.end(); it++) {
-        CategoryStats stats;
-        stats.name = it.key();
-        stats.total = it.value().size();
-        stats.correct = 0;
+        BlockCategory cat = jsonToCategory[it.key().split(".")[0]];
+
+        auto& stats = grouped[cat];
+        stats.category = cat;
+        stats.total += it.value().size();
+
         for (auto j : it.value()) {
             if (j.toObject()["correct"].toBool()) {
-                stats.correct ++;
+                stats.correct++;
             }
         }
-        res.append(stats);
     }
-    return res;
+
+    return grouped.values().toVector();
 }

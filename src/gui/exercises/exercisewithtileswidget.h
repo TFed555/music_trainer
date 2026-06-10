@@ -32,6 +32,7 @@ signals:
     void noteSelected(const QString& noteName, const bool listenOnly);
     void resetTiles();
     void difficultyChanged(int level);
+    void octaveCountChanged(int firstOctave, int lastOctave);
 private:
     void retranslate() override;
     Ui::ExerciseWithTilesWidget *ui;

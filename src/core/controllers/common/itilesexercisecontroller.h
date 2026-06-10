@@ -14,6 +14,7 @@ public slots:
     void retranslate() {
         sendDescription();
     };
+    virtual void onOctaveCountChanged(int firstOctave, int lastOctave) = 0;
 signals:
     void requestSetMode(Mode);
     void showResult(QVector<QString> answer, QVector<QString> selected);

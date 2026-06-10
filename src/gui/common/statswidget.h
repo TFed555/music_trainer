@@ -10,12 +10,14 @@
 
 class StatsWidget : public QWidget
 {
+    Q_OBJECT
 public:
     explicit StatsWidget(StatisticsRepository* statsRepo, QWidget *parent = nullptr);
     ~StatsWidget();
-    void showEvent(QShowEvent*);
+    void showEvent(QShowEvent*) override;
 private:
     void buildBarChart(const QVector<CategoryStats>& stats);
+    void changeEvent(QEvent* event) override;
     StatisticsRepository* statsRepo;
     StatisticsSolver solver;
     QVBoxLayout* layout;

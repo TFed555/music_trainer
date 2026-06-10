@@ -32,6 +32,7 @@ ExerciseWithTilesWidget::ExerciseWithTilesWidget(bool noteNamesVisible, QWidget 
         Mode mode = static_cast<Mode>(m);
         setMode(mode);
     });
+    connect(tiles, &OctaveTilesWidget::octaveCountChanged, this, &ExerciseWithTilesWidget::octaveCountChanged);
 }
 
 ExerciseWithTilesWidget::~ExerciseWithTilesWidget()
@@ -40,7 +41,7 @@ ExerciseWithTilesWidget::~ExerciseWithTilesWidget()
 }
 
 void ExerciseWithTilesWidget::exercisePlayFinished() {
-    ui->difficultyBox->setEnabled(false);
+    // ui->difficultyBox->setEnabled(false);
     int m = ui->modeBox->currentIndex();
     switch(m){
     case 0:
@@ -48,6 +49,7 @@ void ExerciseWithTilesWidget::exercisePlayFinished() {
         break;
     case 1:
         setMode(Mode::Input);
+        ui->difficultyBox->setEnabled(false);
         break;
     }
 }
@@ -57,6 +59,7 @@ void ExerciseWithTilesWidget::showResult(const QVector<QString>& correct, const 
     tiles->highlight(correct, selected);
     QTimer::singleShot(2000, this, [this]() {
         setMode(Mode::Try);
+        ui->modeBox->setCurrentIndex(0);
         emit resetTiles();
     });
 }

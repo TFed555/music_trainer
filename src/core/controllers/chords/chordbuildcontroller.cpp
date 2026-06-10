@@ -33,6 +33,7 @@ void ChordBuildController::setDifficulty(int level) {
     config = difficultyMap<ChordDifficultyConfig>[dif];
     config.allowedInversions = {MusicUtils::Chords::InversionType::Root};
     replayCount = config.replayCount;
+    emit setOctaveCount(config.octaveCount);
 }
 
 void ChordBuildController::noteSelected(const QString& noteName, const bool listenOnly) {
@@ -51,6 +52,7 @@ void ChordBuildController::noteSelected(const QString& noteName, const bool list
             });
             emit showResult(correctAnswer, userAnswer);
             emit requestSetMode(Mode::Result);
+            emit replayAvailable(replayCount);
             correctAnswer.clear();
         }
     }

@@ -30,6 +30,7 @@ void IntervalBuildController::setDifficulty(int level) {
     Difficulty dif = static_cast<Difficulty>(level);
     config = difficultyMap<IntervalDifficultyConfig>[dif];
     replayCount = config.replayCount;
+    emit setOctaveCount(config.octaveCount);
 }
 
 void IntervalBuildController::noteSelected(const QString& noteName, const bool listenOnly) {

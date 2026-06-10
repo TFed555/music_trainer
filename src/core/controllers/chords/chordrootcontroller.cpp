@@ -28,6 +28,7 @@ void ChordRootController::setDifficulty(int level) {
     Difficulty dif = static_cast<Difficulty>(level);
     config = difficultyMap<ChordDifficultyConfig>[dif];
     replayCount = config.replayCount;
+    emit setOctaveCount(config.octaveCount);
 }
 
 void ChordRootController::noteSelected(const QString& noteName, const bool listenOnly){

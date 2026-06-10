@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "notetileswidget.h"
+#include <QPushButton>
 
 namespace Ui {
 class OctaveTilesWidget;
@@ -22,9 +23,12 @@ public slots:
     void resetTiles();
 signals:
     void noteSelected(const QString&, const bool);
+    void octaveCountChanged(int firstOctave, int lastOctave);
 private:
     void resetSelection(int octIdx);
-private:
+    QPushButton* btnMinus;
+    QPushButton* btnPlus;
+    int visibleCount;
     QVector<NoteTilesWidget*> octaves;
     static constexpr int octaveCount = 3;
     static constexpr int octaveOffset = 3;

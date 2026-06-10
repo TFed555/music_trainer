@@ -27,6 +27,7 @@ struct IntervalDifficultyConfig {
     }();
     int midiMin = 48;
     int midiMax = 83;
+    int octaveCount = 3;
     QVector<MusicUtils::Intervals::IntervalDirection> allowedDirection =
         {MusicUtils::Intervals::IntervalDirection::Ascending,
         MusicUtils::Intervals::IntervalDirection::Descending};
@@ -34,7 +35,8 @@ struct IntervalDifficultyConfig {
         return { .replayCount = 2,
                 .allowedSemitones = {1, 3, 4, 5, 7, 12},
                 .midiMin = 60,
-                .midiMax = 72,
+                .midiMax = 71,
+                .octaveCount = 1,
                 .allowedDirection = {MusicUtils::Intervals::IntervalDirection::Ascending,
                                  MusicUtils::Intervals::IntervalDirection::Descending}
             };
@@ -48,6 +50,7 @@ struct ChordDifficultyConfig {
     int replayCount = 1;
     int midiMin = 48;
     int midiMax = 83;
+    int octaveCount = 3;
     QVector<MusicUtils::Chords::ChordType> allowedTypes = {
         MusicUtils::Chords::ChordType::Major,
         MusicUtils::Chords::ChordType::Minor
@@ -59,6 +62,7 @@ struct ChordDifficultyConfig {
         return {.replayCount = 2,
                 .midiMin = 48,
                 .midiMax = 83,
+                .octaveCount = 3,
                 .allowedTypes = {MusicUtils::Chords::ChordType::Major, MusicUtils::Chords::ChordType::Minor},
                 .allowedInversions = { MusicUtils::Chords::InversionType::Root}
                 };
@@ -67,6 +71,7 @@ struct ChordDifficultyConfig {
         return {.replayCount = 1,
                 .midiMin = 48,
                 .midiMax = 83,
+                .octaveCount = 3,
                 .allowedTypes = {MusicUtils::Chords::ChordType::Major, MusicUtils::Chords::ChordType::Minor},
                 .allowedInversions = {MusicUtils::Chords::InversionType::Root,
                                          MusicUtils::Chords::InversionType::First,

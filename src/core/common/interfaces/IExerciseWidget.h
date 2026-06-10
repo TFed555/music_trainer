@@ -15,7 +15,7 @@ public slots:
     virtual void exercisePlayFinished() = 0;
     virtual void setDescription(const QString& text) = 0;
     void showErrorInfo(const QString& err) {
-        QMessageBox::warning(this, tr("Тренажер музыкального слуха"), err, QMessageBox::Ok);
+        QMessageBox::warning(this, "Music Trainer", err, QMessageBox::Ok);
     }
 protected:
     void changeEvent(QEvent* event) {

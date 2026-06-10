@@ -4,6 +4,7 @@
 #include <QMenu>
 #include <QMenuBar>
 #include <QApplication>
+#include <QMessageBox>
 
 MainWindow::MainWindow(SessionFactory& factory, QWidget *parent)
     : QMainWindow(parent)
@@ -16,7 +17,8 @@ MainWindow::MainWindow(SessionFactory& factory, QWidget *parent)
     , statsRepository(&statsLoader)
     , sessionFactory(factory)
 {
-    this->window()->setWindowTitle(tr("Тренажер музыкального слуха"));
+    this->window()->setWindowTitle("Music Trainer");
+    this->window()->setFixedSize(1150,800);
 
     QWidget* main = new QWidget(this);
     setCentralWidget(main);
@@ -52,6 +54,8 @@ MainWindow::MainWindow(SessionFactory& factory, QWidget *parent)
     langMenu = settingsMenu->addMenu(tr("Язык"));
     langMenu->addAction("Русский", this, [this]() { setLanguage("ru"); });
     langMenu->addAction("English",  this, [this]() { setLanguage("en"); });
+    instructionAction = helpMenu->addAction(tr("Как пользоваться"), this, [this]() { showInstruction();});
+    aboutAction = helpMenu->addAction(tr("О программе"), this, [this]() { showAbout(); });
 
     statsAction = settingsMenu->addAction(tr("Статистика"));
     exitAction  = settingsMenu->addAction(tr("Выход"));
@@ -64,7 +68,7 @@ MainWindow::MainWindow(SessionFactory& factory, QWidget *parent)
     connect(sidebar, &SidebarWidget::blockSelected,
             this, [this]() {
             stack->setCurrentWidget(startMenu);
-            this->window()->setWindowTitle(tr("Тренажер музыкального слуха"));
+            this->window()->setWindowTitle("Music Trainer");
         });
     connect(startMenu, &StartWidget::exerciseSelected,
             this, &MainWindow::startExercise);
@@ -72,6 +76,25 @@ MainWindow::MainWindow(SessionFactory& factory, QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+}
+
+void MainWindow::showInstruction() {
+    QMessageBox::information(this, tr("Как пользоваться"),
+            tr("1. Выберите категорию упражнений в меню слева\n"
+                "2. Нажмите на нужное упражнение\n"
+                "3. Прослушайте задание\n"
+                "4. Выберите правильный ответ\n"
+                "5. После ввода отобразится результат"),
+                QMessageBox::Ok);
+}
+
+void MainWindow::showAbout() {
+    QMessageBox::information(this, tr("О программе"),
+                             tr("Music Trainer\n"
+                                "Версия 1.0\n"
+                                "Приложение для развития музыкального слуха\n"
+                                "Разработано с использованием Qt Framework"),
+                             QMessageBox::Ok);
 }
 
 void MainWindow::setLanguage(const QString& lang) {
@@ -122,10 +145,11 @@ void MainWindow::changeEvent(QEvent* event) {
 }
 
 void MainWindow::retranslateUi() {
-    this->setWindowTitle(tr("Тренажер музыкального слуха"));
     settingsMenu->setTitle(tr("Настройки"));
     helpMenu->setTitle(tr("Помощь"));
     langMenu->setTitle(tr("Язык"));
     exitAction->setText(tr("Выход"));
     statsAction->setText(tr("Статистика"));
+    instructionAction->setText(tr("Как пользоваться"));
+    aboutAction->setText(tr("О программе"));
 }

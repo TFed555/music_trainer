@@ -26,6 +26,8 @@ public:
 private slots:
     void showStats();
     void setLanguage(const QString& lang);
+    void showInstruction();
+    void showAbout();
 private:
     void startExercise(ExerciseType);
     void changeEvent(QEvent* event) override;
@@ -52,5 +54,7 @@ private:
     QMenu* langMenu;
     QAction* statsAction;
     QAction* exitAction;
+    QAction* instructionAction;
+    QAction* aboutAction;
 };
 #endif // MAINWINDOW_H

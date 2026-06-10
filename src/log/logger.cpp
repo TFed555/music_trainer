@@ -41,12 +41,12 @@ void Logger::log(Level level, const char* src, int line, const char* func, const
         break;
     }
     QString log = QString("%1 %2 %3:%4 (%5) %6")
-            .arg(QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss")
+            .arg(QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss"))
             .arg(prefix)
             .arg(src)
             .arg(line)
             .arg(func)
-            .arg(msg));
+            .arg(msg);
 
     qDebug().noquote() << log;
     writeToFile(log);
