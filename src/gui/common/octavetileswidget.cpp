@@ -65,6 +65,7 @@ void OctaveTilesWidget::highlight(const QVector<QString>& noteNames, const QVect
     }
     for (const QString& name : selected) {
         auto list = name.split(" ");
+        qDebug() << list;
         int oct = list[1].toInt();
         selectedByOctave[oct].append(list[0]);
     }
@@ -73,6 +74,14 @@ void OctaveTilesWidget::highlight(const QVector<QString>& noteNames, const QVect
         octaves[i]->highlight(groupByOctave[i+3], selectedByOctave[i+3]);
         qDebug() << "octave" << i+3;
     }
+}
+
+void OctaveTilesWidget::setSelectedNote(const QString& note) {
+    auto list = note.split(" ");
+    int oct = list[1].toInt() - 3;
+    qDebug() << oct;
+    if (oct > octaves.size()) return;
+    octaves[oct]->setSelectedNote(list[0]);
 }
 
 void OctaveTilesWidget::setMode(Mode m) {

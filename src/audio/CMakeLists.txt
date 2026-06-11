@@ -6,9 +6,11 @@ find_package(PkgConfig QUIET)
 
 if(WIN32)
     find_package(RtAudio CONFIG REQUIRED)
+    find_package(RtMidi CONFIG REQUIRED)
     find_package(SampleRate CONFIG REQUIRED)
 else()
     pkg_check_modules(RTAUDIO REQUIRED rtaudio)
+    pkg_check_modules(RTMIDI REQUIRED rtmidi)
     pkg_check_modules(SAMPLERATE REQUIRED samplerate)
 endif()
 
@@ -28,7 +30,12 @@ set(ALL_SOURCES
     ${PLAYBACK_SOURCES}
 )
 
-add_library(${AUDIO_MODULE_NAME} STATIC ${ALL_SOURCES})
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
+
+add_library(${AUDIO_MODULE_NAME} STATIC ${ALL_SOURCES}
+    midinputmanager.h midinputmanager.cpp)
+
+target_link_libraries(audio_module PRIVATE Qt${QT_VERSION_MAJOR}::Core)
 
 set_target_properties(${AUDIO_MODULE_NAME} PROPERTIES
     AUTOMOC ON
@@ -45,6 +52,7 @@ target_include_directories(${AUDIO_MODULE_NAME} PUBLIC
 target_link_libraries(${AUDIO_MODULE_NAME} PUBLIC
     Qt${QT_VERSION_MAJOR}::Core
     $<IF:$<BOOL:${WIN32}>,RtAudio::rtaudio,${RTAUDIO_LIBRARIES}>
+    $<IF:$<BOOL:${WIN32}>,RtMidi::rtmidi,${RTMIDI_LIBRARIES}>
     $<IF:$<BOOL:${WIN32}>,SampleRate::samplerate,${SAMPLERATE_LIBRARIES}>
     # ${RTAUDIO_LIBRARIES}
     # ${SAMPLERATE_LIBRARIES}

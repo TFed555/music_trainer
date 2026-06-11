@@ -112,6 +112,11 @@ void NoteTilesWidget::mousePressEvent(QMouseEvent* event) {
     }
 }
 
+void NoteTilesWidget::setSelectedNote(const QString& note) {
+    selectedIndex = notes.indexOf(note);
+    update();
+}
+
 void NoteTilesWidget::highlight(const QVector<QString>& noteNames, const QVector<QString>& selected) {
     selectedIndex = -1;
     wrongIndexes.clear();

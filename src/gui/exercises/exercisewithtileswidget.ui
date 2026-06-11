@@ -86,6 +86,16 @@
           </item>
          </widget>
         </item>
+        <item>
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Midi устройство</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="midiBox"/>
+        </item>
        </layout>
       </item>
       <item>

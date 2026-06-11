@@ -14,6 +14,7 @@ public:
     explicit NoteTilesWidget(bool noteNamesVisible = true, QWidget *parent = nullptr);
     ~NoteTilesWidget();
 
+    void setSelectedNote(const QString& note);
     void highlight(const QVector<QString>& noteNames, const QVector<QString>& selected);
     void setMode(Mode m);
     void resetTiles();

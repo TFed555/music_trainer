@@ -6,6 +6,7 @@
 
 #include "../../core/common/interfaces/IExerciseWidget.h"
 #include "../common/octavetileswidget.h"
+#include "../../audio/midinputmanager.h"
 
 namespace Ui {
 class ExerciseWithTilesWidget;
@@ -42,6 +43,8 @@ private:
     QVector<QString> getModeItems() const {
         return { tr("Попытка"), tr("Ввод") };
     }
+    void setMidiBox();
+    MidiInputManager* midiManager;
 };
 
 #endif // EXERCISEWITHTILESWIDGET_H

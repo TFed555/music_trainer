@@ -1,11 +1,13 @@
 #include "exercisewithtileswidget.h"
 #include "ui_exercisewithtileswidget.h"
+#include "../../music/musicutils.h"
 #include <QTimer>
 
 ExerciseWithTilesWidget::ExerciseWithTilesWidget(bool noteNamesVisible, QWidget *parent)
     : IExerciseWidget(parent)
     , ui(new Ui::ExerciseWithTilesWidget)
     , tiles(new OctaveTilesWidget(noteNamesVisible, this))
+    , midiManager(new MidiInputManager(this))
 {
     ui->setupUi(this);
     ui->horizontalLayout->addWidget(tiles);
@@ -14,6 +16,7 @@ ExerciseWithTilesWidget::ExerciseWithTilesWidget(bool noteNamesVisible, QWidget 
     ui->startBtn->setObjectName("startBtn");
     ui->backBtn->setObjectName("backBtn");
     ui->replayBtn->setObjectName("replayBtn");
+    setMidiBox();
 
     connect(ui->startBtn, &QPushButton::clicked, this, [this] {
             emit startClicked();
@@ -122,4 +125,18 @@ void ExerciseWithTilesWidget::retranslate() {
     retranslateComboBox(ui->difficultyBox, getDifficultyItems());
     retranslateComboBox(ui->modeBox, getModeItems());
     emit langChange();
+}
+
+void ExerciseWithTilesWidget::setMidiBox() {
+    QStringList devices = midiManager->availableDevices();
+    ui->midiBox->addItems(devices);
+    connect(ui->midiBox, &QComboBox::currentIndexChanged, this, [this](int idx){
+        midiManager->openDevice(idx);
+    });
+    connect(midiManager, &MidiInputManager::notePressed, tiles, [this](int midi) {
+        QString note = MusicUtils::midiToNote(midi);
+        qDebug() << "note =" << note;
+        tiles->setSelectedNote(note);
+        emit noteSelected(note, false);
+    });
 }
