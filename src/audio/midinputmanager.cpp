@@ -27,9 +27,8 @@ QStringList MidiInputManager::availableDevices() {
     unsigned int portsCount = midiIn->getPortCount();
     QStringList ports;
     for (unsigned int i = 0; i < portsCount; i++) {
-        std::string name = midiIn->getPortName(i);
-        ports.append(QString::fromStdString(name));
-        qDebug() << i;
+        QString name = QString::fromStdString(midiIn->getPortName(i));
+        ports.append(name);
     }
     return ports;
 }

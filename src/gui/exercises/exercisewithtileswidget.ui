@@ -60,6 +60,16 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_4">
         <item>
+         <widget class="QLabel" name="midiLabel">
+          <property name="text">
+           <string>Midi устройство</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="midiBox"/>
+        </item>
+        <item>
          <widget class="QLabel" name="modeLabel">
           <property name="maximumSize">
            <size>
@@ -85,16 +95,6 @@
            </property>
           </item>
          </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="label">
-          <property name="text">
-           <string>Midi устройство</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QComboBox" name="midiBox"/>
         </item>
        </layout>
       </item>

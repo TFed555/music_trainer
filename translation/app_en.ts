@@ -32,7 +32,7 @@
 <context>
     <name>ChordBuildController</name>
     <message>
-        <location filename="../src/core/controllers/chords/chordbuildcontroller.h" line="25"/>
+        <location filename="../src/core/controllers/chords/chordbuildcontroller.h" line="30"/>
         <source>Постройте аккорд нужной тональности</source>
         <translation>Play a chord in the desired key</translation>
     </message>
@@ -56,7 +56,7 @@
 <context>
     <name>ChordRootController</name>
     <message>
-        <location filename="../src/core/controllers/chords/chordrootcontroller.h" line="21"/>
+        <location filename="../src/core/controllers/chords/chordrootcontroller.h" line="26"/>
         <source>Определите основную ноту аккорда</source>
         <translation>Identify the root note of the chord</translation>
     </message>
@@ -261,77 +261,94 @@ Number of errors: %2</translation>
     </message>
     <message>
         <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="33"/>
-        <location filename="../src/gui/exercises/exercisewithtileswidget.cpp" line="116"/>
+        <location filename="../src/gui/exercises/exercisewithtileswidget.cpp" line="122"/>
         <source>Назад</source>
         <translation>Back</translation>
     </message>
     <message>
         <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="42"/>
-        <location filename="../src/gui/exercises/exercisewithtileswidget.cpp" line="113"/>
+        <location filename="../src/gui/exercises/exercisewithtileswidget.cpp" line="119"/>
         <source>Старт</source>
         <translation>Start</translation>
     </message>
     <message>
         <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="49"/>
-        <location filename="../src/gui/exercises/exercisewithtileswidget.cpp" line="114"/>
+        <location filename="../src/gui/exercises/exercisewithtileswidget.cpp" line="120"/>
         <source>Стоп</source>
         <translation>Stop</translation>
     </message>
     <message>
         <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="56"/>
-        <location filename="../src/gui/exercises/exercisewithtileswidget.cpp" line="115"/>
+        <location filename="../src/gui/exercises/exercisewithtileswidget.cpp" line="121"/>
         <source>Повторить</source>
         <translation>Replay</translation>
     </message>
     <message>
-        <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="158"/>
+        <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="65"/>
+        <location filename="../src/gui/exercises/exercisewithtileswidget.cpp" line="125"/>
+        <source>Midi устройство</source>
+        <translation>Midi device</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="168"/>
         <source>TextLabel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="104"/>
-        <location filename="../src/gui/exercises/exercisewithtileswidget.cpp" line="117"/>
+        <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="114"/>
+        <location filename="../src/gui/exercises/exercisewithtileswidget.cpp" line="123"/>
         <source>Уровень сложности</source>
         <translation>Difficulty level</translation>
     </message>
     <message>
-        <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="112"/>
+        <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="122"/>
         <source>Легко</source>
         <translation>Easy</translation>
     </message>
     <message>
-        <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="117"/>
+        <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="127"/>
         <source>Сложно</source>
         <translation>Hard</translation>
     </message>
     <message>
-        <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="71"/>
-        <location filename="../src/gui/exercises/exercisewithtileswidget.cpp" line="118"/>
+        <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="81"/>
+        <location filename="../src/gui/exercises/exercisewithtileswidget.cpp" line="124"/>
         <source>Режим</source>
         <translation>Mode</translation>
     </message>
     <message>
-        <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="79"/>
-        <location filename="../src/gui/exercises/exercisewithtileswidget.h" line="42"/>
+        <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="89"/>
+        <location filename="../src/gui/exercises/exercisewithtileswidget.h" line="44"/>
         <source>Попытка</source>
         <translation>Try</translation>
     </message>
     <message>
-        <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="84"/>
-        <location filename="../src/gui/exercises/exercisewithtileswidget.h" line="42"/>
+        <location filename="../src/gui/exercises/exercisewithtileswidget.ui" line="94"/>
+        <location filename="../src/gui/exercises/exercisewithtileswidget.h" line="44"/>
         <source>Ввод</source>
         <translation>Input</translation>
     </message>
     <message>
-        <location filename="../src/gui/exercises/exercisewithtileswidget.cpp" line="68"/>
-        <location filename="../src/gui/exercises/exercisewithtileswidget.cpp" line="77"/>
+        <location filename="../src/gui/exercises/exercisewithtileswidget.cpp" line="74"/>
+        <location filename="../src/gui/exercises/exercisewithtileswidget.cpp" line="83"/>
         <source>Слушайте</source>
         <translation>Listen</translation>
     </message>
     <message>
-        <location filename="../src/gui/exercises/exercisewithtileswidget.cpp" line="71"/>
+        <location filename="../src/gui/exercises/exercisewithtileswidget.cpp" line="77"/>
         <source>Введите ответ</source>
         <translation>Enter your answer</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/exercises/exercisewithtileswidget.cpp" line="142"/>
+        <source>Выберите устройство</source>
+        <translation>Choose device</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/exercises/exercisewithtileswidget.cpp" line="130"/>
+        <location filename="../src/gui/exercises/exercisewithtileswidget.cpp" line="138"/>
+        <source>Нет MIDI устройств</source>
+        <translation>No MIDI devices</translation>
     </message>
 </context>
 <context>
@@ -362,7 +379,7 @@ Number of errors: %2</translation>
 <context>
     <name>IntervalBuildController</name>
     <message>
-        <location filename="../src/core/controllers/intervals/intervalbuildcontroller.h" line="23"/>
+        <location filename="../src/core/controllers/intervals/intervalbuildcontroller.h" line="28"/>
         <source>Постройте интервал от 
 подсвеченной ноты</source>
         <translation>Construct the interval from \nthe highlighted note</translation>
@@ -387,7 +404,7 @@ Number of errors: %2</translation>
 <context>
     <name>IntervalRecogniseController</name>
     <message>
-        <location filename="../src/core/controllers/intervals/intervalrecognisecontroller.h" line="26"/>
+        <location filename="../src/core/controllers/intervals/intervalrecognisecontroller.h" line="30"/>
         <source>Укажите интервал на клавиатуре</source>
         <translation>Enter the interval using the keyboard</translation>
     </message>
@@ -579,7 +596,7 @@ Developed using the Qt Framework</translation>
 <context>
     <name>MelodyRepeatController</name>
     <message>
-        <location filename="../src/core/controllers/melody/melodyrepeatcontroller.h" line="22"/>
+        <location filename="../src/core/controllers/melody/melodyrepeatcontroller.h" line="27"/>
         <source>Повторите мелодию</source>
         <translation>Repeat the melody</translation>
     </message>
@@ -642,7 +659,7 @@ Developed using the Qt Framework</translation>
 <context>
     <name>NoteBuildController</name>
     <message>
-        <location filename="../src/core/controllers/notes/notebuildcontroller.h" line="31"/>
+        <location filename="../src/core/controllers/notes/notebuildcontroller.h" line="36"/>
         <source>Выберите нужную ноту</source>
         <translation>Select the desired note</translation>
     </message>
@@ -659,7 +676,7 @@ Developed using the Qt Framework</translation>
 <context>
     <name>NoteRecogniseController</name>
     <message>
-        <location filename="../src/core/controllers/notes/noterecognisecontroller.h" line="31"/>
+        <location filename="../src/core/controllers/notes/noterecognisecontroller.h" line="36"/>
         <source>Укажите услышанную ноту 
 на клавиатуре</source>
         <translation>Enter the note you heard \non the keyboard</translation>
@@ -891,17 +908,17 @@ Developed using the Qt Framework</translation>
 <context>
     <name>StatsWidget</name>
     <message>
-        <location filename="../src/gui/common/statswidget.cpp" line="21"/>
+        <location filename="../src/gui/common/statswidget.cpp" line="22"/>
         <source>Правильно</source>
         <translation>Correct</translation>
     </message>
     <message>
-        <location filename="../src/gui/common/statswidget.cpp" line="22"/>
+        <location filename="../src/gui/common/statswidget.cpp" line="23"/>
         <source>Всего</source>
         <translation>All</translation>
     </message>
     <message>
-        <location filename="../src/gui/common/statswidget.cpp" line="34"/>
+        <location filename="../src/gui/common/statswidget.cpp" line="35"/>
         <source>Статистика выполнения</source>
         <translation>Performance statistics</translation>
     </message>

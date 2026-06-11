@@ -122,21 +122,43 @@ void ExerciseWithTilesWidget::retranslate() {
     ui->backBtn->setText(tr("Назад"));
     ui->difficultyLabel->setText(tr("Уровень сложности"));
     ui->modeLabel->setText(tr("Режим"));
+    ui->midiLabel->setText(tr("Midi устройство"));
     retranslateComboBox(ui->difficultyBox, getDifficultyItems());
     retranslateComboBox(ui->modeBox, getModeItems());
+    ui->midiBox->clear();
+    if (devices.isEmpty()) {
+        ui->midiBox->addItem(tr("Нет MIDI устройств"));
+    }
+    else {
+        ui->midiBox->addItem(tr("Выберите устройство"));
+        ui->midiBox->addItems(devices);
+    }
     emit langChange();
 }
 
 void ExerciseWithTilesWidget::setMidiBox() {
-    QStringList devices = midiManager->availableDevices();
+    devices = midiManager->availableDevices();
+    if (devices.isEmpty()) {
+        ui->midiBox->addItem(tr("Нет MIDI устройств"));
+        ui->midiBox->setEnabled(false);
+        return;
+    }
+    ui->midiBox->addItem(tr("Выберите устройство"));
     ui->midiBox->addItems(devices);
-    connect(ui->midiBox, &QComboBox::currentIndexChanged, this, [this](int idx){
-        midiManager->openDevice(idx);
+    connect(ui->midiBox,
+            &QComboBox::currentIndexChanged,
+            this,
+            [this](int idx)
+            {
+                if (idx == 0)
+                    return;
+
+                midiManager->openDevice(idx - 1);
     });
     connect(midiManager, &MidiInputManager::notePressed, tiles, [this](int midi) {
         QString note = MusicUtils::midiToNote(midi);
         qDebug() << "note =" << note;
         tiles->setSelectedNote(note);
-        emit noteSelected(note, false);
+        // emit noteSelected(note, false);
     });
 }

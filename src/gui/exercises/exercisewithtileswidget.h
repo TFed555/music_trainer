@@ -45,6 +45,7 @@ private:
     }
     void setMidiBox();
     MidiInputManager* midiManager;
+    QStringList devices;
 };
 
 #endif // EXERCISEWITHTILESWIDGET_H

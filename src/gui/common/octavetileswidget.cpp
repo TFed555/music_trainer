@@ -80,8 +80,9 @@ void OctaveTilesWidget::setSelectedNote(const QString& note) {
     auto list = note.split(" ");
     int oct = list[1].toInt() - 3;
     qDebug() << oct;
-    if (oct > octaves.size()) return;
+    if (oct < 0 || oct >= octaves.size()) return;
     octaves[oct]->setSelectedNote(list[0]);
+    emit noteSelected(note, false);
 }
 
 void OctaveTilesWidget::setMode(Mode m) {
