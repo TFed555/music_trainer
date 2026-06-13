@@ -12,6 +12,7 @@ MainWindow::MainWindow(SessionFactory& factory, QWidget *parent)
     , sampleRepository(&sampleLoader)
     , audio(new AudioProcessor(this))
     , notePlayer(new NotePlayer(audio, &sampleRepository))
+    , midiManager(new MidiInputManager(this))
     , session(nullptr)
     , statsLoader()
     , statsRepository(&statsLoader)
@@ -109,13 +110,15 @@ void MainWindow::showStats() {
 
 void MainWindow::startExercise(ExerciseType type){
     if (session) {
+        notePlayer->stop();
         IExerciseWidget* oldView = session->getWidget();
         if (oldView) {
             stack->removeWidget(oldView);
+            delete oldView;
         }
         session.reset();
     }
-    auto newSession = sessionFactory.create(type, notePlayer, &statsRepository, this);
+    auto newSession = sessionFactory.create(type, notePlayer, midiManager, &statsRepository, this);
     if (!newSession) return;
     session.reset(newSession.release());
 
@@ -127,6 +130,7 @@ void MainWindow::startExercise(ExerciseType type){
 
     sessionBackConn = connect(session.get(), &ISession::back,
                               this, [=]() {
+        notePlayer->stop();
         stack->setCurrentWidget(startMenu);
         this->setWindowTitle(mainTitle);  });
 

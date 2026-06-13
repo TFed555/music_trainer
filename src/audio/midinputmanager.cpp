@@ -11,6 +11,8 @@ MidiInputManager::~MidiInputManager() {
 void MidiInputManager::openDevice(int index) {
     closeDevice();
     midiIn->openPort(index);
+    selectedIdx = index;
+    qDebug()<<"Opened device"<<selectedIdx;
     midiIn->setCallback(&MidiInputManager::callBack, this);
     midiIn->ignoreTypes(false, false, false);
 }
@@ -18,6 +20,7 @@ void MidiInputManager::openDevice(int index) {
 void MidiInputManager::closeDevice() {
     if (midiIn->isPortOpen())
     {
+        qDebug()<<"Closed port";
         midiIn->cancelCallback();
         midiIn->closePort();
     }

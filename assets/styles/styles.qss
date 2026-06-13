@@ -230,9 +230,9 @@ QPushButton#octBtn {
        border: 1px solid #aaa;
        border-radius: 14px;
        background: #f5f5f5;
-       font-size: 18px;
+       font-size: 22px;
        font-weight: bold;
 }
-QPushButton#octBtn:hover  { background: #e0e0e0; }
+QPushButton#octBtn:hover  { background: #b0e0e6; }
 QPushButton#octBtn:pressed{ background: #ccc; }
 QPushButton#octBtn:disabled{ color: #ccc; border-color: #ddd; }

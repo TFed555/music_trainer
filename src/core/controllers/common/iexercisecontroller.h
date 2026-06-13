@@ -37,6 +37,9 @@ public:
     {
         connectPlayer(endSignal);
     };
+    ~IExerciseController() override {
+        notePlayer->stop();
+    }
 
 signals:
     void exercisePlayFinished();
@@ -71,27 +74,33 @@ private:
 
     void connectPlayer(PlaybackendSignal endSignal)
     {
-        connect(notePlayer, &NotePlayer::playbackFinished,
-                this, [] { LOG_DEBUG("Playback finished"); });
+        disconnect(logFinishedConn);
+        disconnect(logErrorConn);
+        disconnect(playbackEndConn);
 
-        connect(notePlayer, &NotePlayer::error,
-                this, [](const QString& msg) { LOG_DEBUG(QString("Error: %1").arg(msg)); });
+        logFinishedConn = connect(notePlayer, &NotePlayer::playbackFinished,
+                                  this, [] { LOG_DEBUG("Playback finished"); });
+        logErrorConn = connect(notePlayer, &NotePlayer::error,
+                               this, [](const QString& msg) { LOG_DEBUG(QString("Error: %1").arg(msg)); });
 
         switch(endSignal) {
-            case PlaybackendSignal::PlaybackFinished:
-                connect(notePlayer, &NotePlayer::playbackFinished,
-                       this, [this]() { onPlaybackFinished(); });
-                break;
-            case PlaybackendSignal::PlaylistEmpty:
-                connect(notePlayer, &NotePlayer::playlistEmpty,
-                    this, [this]() { onPlaybackFinished(); });
-                break;
-            case PlaybackendSignal::BeatFinished:
-                connect(notePlayer, &NotePlayer::beatFinished,
-                        this, [this]() {  });
-                break;
+        case PlaybackendSignal::PlaybackFinished:
+            playbackEndConn = connect(notePlayer, &NotePlayer::playbackFinished,
+                                      this, [this]() { onPlaybackFinished(); });
+            break;
+        case PlaybackendSignal::PlaylistEmpty:
+            playbackEndConn = connect(notePlayer, &NotePlayer::playlistEmpty,
+                                      this, [this]() { onPlaybackFinished(); });
+            break;
+        case PlaybackendSignal::BeatFinished:
+            playbackEndConn = connect(notePlayer, &NotePlayer::beatFinished,
+                                      this, [this]() { });
+            break;
         }
     }
+    QMetaObject::Connection playbackEndConn;
+    QMetaObject::Connection logFinishedConn;
+    QMetaObject::Connection logErrorConn;
 
 protected:
     void log(const QString& desc) {

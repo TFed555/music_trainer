@@ -9,6 +9,7 @@
 #include "../core/data/statistics/statisticsloader.h"
 #include "../core/data/statistics/statisticsrepository.h"
 #include "../audio/audio.h"
+#include "../audio/midinputmanager.h"
 #include "../audio/playback/noteplayer.h"
 #include "../../core/sessions/common/isession.h"
 #include "../core/factory/sessionfactory.h"
@@ -41,6 +42,7 @@ private:
     SampleRepository sampleRepository;
     AudioProcessor* audio;
     NotePlayer* notePlayer;
+    MidiInputManager* midiManager;
     QScopedPointer<ISession> session;
     IExerciseWidget* exercise;
     StatisticsLoader statsLoader;

@@ -17,7 +17,8 @@ class ExerciseWithTilesWidget : public IExerciseWidget
     Q_OBJECT
 
 public:
-    explicit ExerciseWithTilesWidget(bool noteNamesVisible = true, QWidget *parent = nullptr);
+    explicit ExerciseWithTilesWidget(bool noteNamesVisible = true,
+                                     MidiInputManager* midiManager = nullptr, QWidget *parent = nullptr);
     ~ExerciseWithTilesWidget();
 
 public slots:
@@ -44,8 +45,10 @@ private:
         return { tr("Попытка"), tr("Ввод") };
     }
     void setMidiBox();
-    MidiInputManager* midiManager;
     QStringList devices;
+    MidiInputManager* midiManager = nullptr;
+    QMetaObject::Connection midiNoteConn;
+    QMetaObject::Connection midiBoxConn;
 };
 
 #endif // EXERCISEWITHTILESWIDGET_H

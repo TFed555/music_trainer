@@ -5,6 +5,7 @@
 #include <QObject>
 #include <QVector>
 #include <QTime>
+#include <QTimer>
 #include "../core/data/samples/sample.h"
 #include <memory>
 
@@ -32,6 +33,7 @@ signals:
     void playlistEmpty();
 private slots:
     void playNextSample();
+    void onBufferFinished();
 private:
     static int playbackCallback(void *outputBuffer, void *inputBuffer, unsigned int nBufferFrames,
                                 double streamTime, RtAudioStreamStatus status, void *userData);
@@ -43,6 +45,8 @@ private:
     int sampleRate = 44100;
     QVector<Sample> playlist;
     int playlistIdx = 0;
+    QTimer* pendingPlayTimer = nullptr;
+    void stopStream();
 };
 
 #endif // AUDIO_H

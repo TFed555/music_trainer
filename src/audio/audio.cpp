@@ -73,9 +73,17 @@ void AudioProcessor::playNextSample() {
         return;
     }
     Sample s = playlist[playlistIdx++];
-    QTimer::singleShot(s.delayms, this, [this, s]() {
+    if (pendingPlayTimer) {
+        pendingPlayTimer->stop();
+        pendingPlayTimer->deleteLater();
+    }
+    pendingPlayTimer = new QTimer(this);
+    pendingPlayTimer->setSingleShot(true);
+    connect(pendingPlayTimer, &QTimer::timeout, this, [this, s]() {
+        pendingPlayTimer = nullptr;
         playAudio(s.data, s.sampleRate);
     });
+    pendingPlayTimer->start(s.delayms);
 }
 
 void AudioProcessor::playSample(Sample sample) {
@@ -84,7 +92,7 @@ void AudioProcessor::playSample(Sample sample) {
 
 bool AudioProcessor::playAudio(const QVector<float>& m_audioData, double sampleRate)
 {
-    stopPlayback();
+    stopStream();
 
     if (m_audioData.isEmpty()) {
         emit err("Audio data is empty");
@@ -113,8 +121,8 @@ bool AudioProcessor::playAudio(const QVector<float>& m_audioData, double sampleR
 
     try {
         audio.openStream(&parameters, nullptr, RTAUDIO_FLOAT32,
-                          static_cast<unsigned int>(sampleRate),
-                          &bufferFrames, &AudioProcessor::playbackCallback, this);
+                         static_cast<unsigned int>(sampleRate),
+                         &bufferFrames, &AudioProcessor::playbackCallback, this);
         audio.startStream();
         isPlaying = true;
 
@@ -128,7 +136,7 @@ bool AudioProcessor::playAudio(const QVector<float>& m_audioData, double sampleR
 }
 
 int AudioProcessor::playbackCallback(void *outputBuffer, void *inputBuffer, unsigned int nBufferFrames,
-                            double streamTime, RtAudioStreamStatus status, void *userData) {
+                                     double streamTime, RtAudioStreamStatus status, void *userData) {
     AudioProcessor* processor = static_cast<AudioProcessor*>(userData);
 
     float* buffer = static_cast<float*>(outputBuffer);
@@ -155,30 +163,47 @@ int AudioProcessor::playbackCallback(void *outputBuffer, void *inputBuffer, unsi
     } else {
         std::fill(buffer, buffer + nBufferFrames, 0.0f);
 
-        QMetaObject::invokeMethod(processor, "stopPlayback", Qt::QueuedConnection);
+        QMetaObject::invokeMethod(processor, "onBufferFinished", Qt::QueuedConnection);
     }
 
     return 0;
 }
 
+void AudioProcessor::onBufferFinished() {
+    stopStream();
+    emit playbackStopped();
+}
+
 void AudioProcessor::stopPlayback() {
+    if (pendingPlayTimer) {
+        pendingPlayTimer->stop();
+        pendingPlayTimer->deleteLater();
+        pendingPlayTimer = nullptr;
+    }
+
+    playlist.clear();
+    playlistIdx = 0;
+
+    disconnect(this, &AudioProcessor::playbackStopped,
+               this, &AudioProcessor::playNextSample);
+
+    stopStream();
+    // emit playbackStopped();
+}
+
+void AudioProcessor::stopStream() {
     if (isPlaying) {
         try {
-            if (audio.isStreamOpen()) {
-                audio.stopStream();
-            }
-            if (audio.isStreamOpen()) {
-                audio.closeStream();
-            }
+            if (audio.isStreamOpen()) audio.stopStream();
+            if (audio.isStreamOpen()) audio.closeStream();
             isPlaying = false;
             audioBuffer.clear();
             currentFrame = 0;
-
-            emit playbackStopped();
-            LOG_DEBUG("Playback stopped");
+            // emit playbackStopped();
+            LOG_DEBUG("Stream stopped");
         }
         catch(std::exception &e) {
-            emit err(QString("error stoping audio %1").arg(e.what()));
+            emit err(QString("error stopping audio %1").arg(e.what()));
         }
     }
 }

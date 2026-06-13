@@ -7,7 +7,7 @@
 
 inline void registerRhythmSessions(SessionFactory& factory) {
     factory.registerFactory(ExerciseType::RhythmRecognise,
-                            [](NotePlayer* player, StatisticsRepository* repo, QObject* parent){
+                            [](NotePlayer* player, MidiInputManager* midi, StatisticsRepository* repo, QObject* parent){
                                 auto session = std::make_unique<RhythmSession>(ExerciseType::RhythmRecognise, parent);
                                 auto* ctrl = new RhythmRecogniseController(player, session.get());
                                 auto* view = new ExerciseRhythmWidget(nullptr);

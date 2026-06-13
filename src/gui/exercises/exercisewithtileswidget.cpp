@@ -3,11 +3,11 @@
 #include "../../music/musicutils.h"
 #include <QTimer>
 
-ExerciseWithTilesWidget::ExerciseWithTilesWidget(bool noteNamesVisible, QWidget *parent)
+ExerciseWithTilesWidget::ExerciseWithTilesWidget(bool noteNamesVisible, MidiInputManager* midiManager, QWidget *parent)
     : IExerciseWidget(parent)
     , ui(new Ui::ExerciseWithTilesWidget)
     , tiles(new OctaveTilesWidget(noteNamesVisible, this))
-    , midiManager(new MidiInputManager(this))
+    , midiManager(midiManager)
 {
     ui->setupUi(this);
     ui->horizontalLayout->addWidget(tiles);
@@ -137,6 +137,11 @@ void ExerciseWithTilesWidget::retranslate() {
 }
 
 void ExerciseWithTilesWidget::setMidiBox() {
+    disconnect(midiNoteConn);
+    disconnect(midiBoxConn);
+
+    ui->midiBox->clear();
+
     devices = midiManager->availableDevices();
     if (devices.isEmpty()) {
         ui->midiBox->addItem(tr("Нет MIDI устройств"));
@@ -145,20 +150,22 @@ void ExerciseWithTilesWidget::setMidiBox() {
     }
     ui->midiBox->addItem(tr("Выберите устройство"));
     ui->midiBox->addItems(devices);
-    connect(ui->midiBox,
-            &QComboBox::currentIndexChanged,
-            this,
-            [this](int idx)
-            {
-                if (idx == 0)
-                    return;
 
-                midiManager->openDevice(idx - 1);
-    });
-    connect(midiManager, &MidiInputManager::notePressed, tiles, [this](int midi) {
-        QString note = MusicUtils::midiToNote(midi);
-        qDebug() << "note =" << note;
-        tiles->setSelectedNote(note);
-        // emit noteSelected(note, false);
-    });
+    ui->midiBox->blockSignals(true);
+    int chosenDevice = midiManager->getChosenDevice();
+    qDebug() << "Chosen device" << chosenDevice;
+    ui->midiBox->setCurrentIndex(chosenDevice);
+    ui->midiBox->blockSignals(false);
+
+    midiBoxConn = connect(ui->midiBox, &QComboBox::currentIndexChanged,
+                          this, [this](int idx) {
+                              if (idx == 0) return;
+                              midiManager->openDevice(idx - 1);
+                          });
+
+    midiNoteConn = connect(midiManager, &MidiInputManager::notePressed,
+                           this, [this](int midi) {
+                               QString note = MusicUtils::midiToNote(midi);
+                               tiles->setSelectedNote(note);
+                           });
 }
